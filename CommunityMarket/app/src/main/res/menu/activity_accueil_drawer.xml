@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+        <item
+            android:id="@+id/ic_user"
+            android:icon="@drawable/ic_user"
+            android:title="profil" />
+        <item
+            android:id="@+id/ic_cadi"
+            android:icon="@drawable/ic_cadi"
+            android:title="cadi" />
+        <item
+            android:id="@+id/ic_marque"
+            android:icon="@drawable/ic_marque"
+            android:title="marques" />
+        <item
+            android:id="@+id/setting"
+            android:icon="@drawable/setting"
+            android:title="parametre" />
+        <item
+            android:id="@+id/nous_contacter"
+            android:icon="@drawable/ic_contacter_nixxon"
+            android:title="publicite" />
+        <item
+            android:id="@+id/ic_logout"
+            android:icon="@drawable/ic_exit"
+            android:title="deconnexion" />
+
+
+
+
+</menu>
