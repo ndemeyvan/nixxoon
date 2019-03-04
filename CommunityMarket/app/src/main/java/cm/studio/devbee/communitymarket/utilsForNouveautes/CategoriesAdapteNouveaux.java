@@ -30,6 +30,7 @@ import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
 import cm.studio.devbee.communitymarket.postActivity.PostActivityFinal;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -61,10 +62,10 @@ public class CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAda
         String desc =categoriesModelNouveauxList.get ( i).getDecription_du_produit();
         String nvxPrix=categoriesModelNouveauxList.get(i).getPrix_du_produit();
         String imageproduit=categoriesModelNouveauxList.get ( i ).getImage_du_produit ();
-        String nom_id=categoriesModelNouveauxList.get ( i ).getUtilisateur ();
+        final String nom_id=categoriesModelNouveauxList.get ( i ).getUtilisateur ();
         String tempsdepub=categoriesModelNouveauxList.get ( i ).getDate_de_publication ();
         String produinom=categoriesModelNouveauxList.get ( i ).getNom_du_produit ();
-        String postId=categoriesModelNouveauxList.get ( i ).PostId;
+        final String postId=categoriesModelNouveauxList.get ( i ).PostId;
         final String current_user=firebaseAuth.getCurrentUser ().getUid ();
         final String idDuPost=categoriesModelNouveauxList.get ( i ).PostId;
         viewHolder.imageproduitxi ( imageproduit );
@@ -72,6 +73,16 @@ public class CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAda
         viewHolder.setPrix(nvxPrix);
         viewHolder.temps ( tempsdepub );
         viewHolder.nomproduit ( produinom );
+        viewHolder.imageDuproduit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent gotoDetail =new Intent(context,DetailActivity.class);
+                    gotoDetail.putExtra("id du post",idDuPost);
+                    gotoDetail.putExtra("id de l'utilisateur",nom_id);
+                    context.startActivity(gotoDetail);
+
+                }
+            });
         firebaseFirestore.collection("mes donnees utilisateur").document(nom_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -188,7 +199,13 @@ public class CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAda
             likeCount.setText(lelike+"");
         }
         public void imageproduitxi(String image){
-
+            /*itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent gotoDetail =new Intent(itemView.getContext(),DetailActivity.class);
+                    itemView.getContext().startActivity(gotoDetail);
+                }
+            });*/
             Picasso.with(context).load(image).into (imageDuproduit );
         }
         public void setuserData(String name,String image){

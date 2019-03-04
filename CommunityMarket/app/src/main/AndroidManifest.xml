@@ -35,7 +35,8 @@
         <activity android:name=".profile.ProfileActivity" />
         <activity android:name=".postActivity.PostActivity" />
         <activity android:name=".postActivity.PostActivityFinal" />
-        <activity android:name=".a_propos.AproposActivity"></activity>
+        <activity android:name=".a_propos.AproposActivity" />
+        <activity android:name=".postActivity.DetailActivity"></activity>
     </application>
 
 </manifest>
