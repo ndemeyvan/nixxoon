@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket.postActivity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailActivity extends AppCompatActivity {
@@ -56,12 +58,14 @@ public class DetailActivity extends AppCompatActivity {
         detail_prix_produit=findViewById(R.id.detail_prix_produit);
         detail_profil_image=findViewById(R.id.detail_image_du_profil);
         vendeur_button=findViewById(R.id.vendeur_button);
-        detail_like_image=findViewById(R.id.detail_likeImage);
-        nmbre_de_like=findViewById(R.id.detail_nombre_de_likes);
+        /*detail_like_image=findViewById(R.id.detail_likeImage);
+        nmbre_de_like=findViewById(R.id.detail_nombre_de_likes);*/
         detail_user_name=findViewById(R.id.detail_user_name);
         detail_description=findViewById(R.id.detail_description);
         date_de_publication=findViewById(R.id.date_de_publication);
         firebaseAuth=FirebaseAuth.getInstance();
+        //likez();
+        vendeurActivity();
         ///////////no
         firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -100,7 +104,7 @@ public class DetailActivity extends AppCompatActivity {
                         String prenom=task.getResult ().getString ( "user_prenom" );
                         String name_user= task.getResult ().getString ( "user_name" );
                         String image_user=task.getResult ().getString ( "user_profil_image" );
-                        detail_user_name.setText(name_user+""+prenom);
+                        detail_user_name.setText(name_user+" "+prenom);
                         Picasso.with(DetailActivity.this).load(image_user).into(detail_profil_image);
                     }
                 }else {
@@ -110,6 +114,67 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
     }
+   /* public void likez(){
+        detail_like_image.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+
+
+                firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).collection ( "likes" ).document (iddupost).addSnapshotListener ( new EventListener<DocumentSnapshot> () {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                        if (documentSnapshot.exists ()){
+                            detail_like_image.setImageDrawable ( getDrawable ( R.mipmap.ic_like_accent ));
+                        }else {
+                            detail_like_image.setImageDrawable ( getDrawable ( R.mipmap.ic_like_gray));
+
+                        }
+                    }
+                } );
+                firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).collection ( "likes" ).addSnapshotListener ( new EventListener<QuerySnapshot> () {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                        if (!queryDocumentSnapshots.isEmpty ()){
+                            int i=queryDocumentSnapshots.size ();
+                            nmbre_de_like.setText(i+"");
+
+                        }else{
+                            nmbre_de_like.setText(0+"");
+
+                        }
+                    }
+                } );
+
+                firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).collection ( "likes" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (!task.getResult ().exists ()){
+                            Map<String,String>likesMaps=new HashMap<> (  );
+                            likesMaps.put ("lol" ,"lol" );
+                            firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).collection ( "likes" ).document (current_user_id).set ( likesMaps );
+
+                        }else {
+                            firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).collection ( "likes" ).document (current_user_id).delete ();
+
+                        }
+                    }
+                } );
+
+
+            }
+        } );
+    }*/
+   public void vendeurActivity(){
+       vendeur_button.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent vendeur=new Intent(DetailActivity.this,VendeurActivity.class);
+               vendeur.putExtra("id du post",iddupost);
+               vendeur.putExtra("id de l'utilisateur",current_user_id);
+               startActivity(vendeur);
+           }
+       });
+   }
 
 
 }
