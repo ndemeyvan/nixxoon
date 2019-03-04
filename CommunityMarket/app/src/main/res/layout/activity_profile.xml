@@ -40,7 +40,6 @@
                 android:layout_marginBottom="8dp"
                 android:outlineAmbientShadowColor="@color/orange"
                 android:outlineSpotShadowColor="@color/orange"
-                android:src="@drawable/t_shirt"
                 app:civ_border_color="@color/orange"
                 app:civ_circle_background_color="@color/orange"
                 app:layout_constraintBottom_toBottomOf="parent"
