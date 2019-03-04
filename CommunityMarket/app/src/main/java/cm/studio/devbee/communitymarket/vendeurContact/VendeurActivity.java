@@ -67,7 +67,7 @@ public class VendeurActivity extends AppCompatActivity {
                         vendeur_residence.setText(residence_user);
                         vendeur_user_name.setText(name_user+" "+prenom);
                         Picasso.with(VendeurActivity.this).load(image_user).into(vendeur_image);
-                        getSupportActionBar().setTitle(name_user+" "+prenom;
+                        getSupportActionBar().setTitle(name_user+" "+prenom);
                     }
                 }else {
                     String error=task.getException().getMessage();
