@@ -74,6 +74,7 @@ public class VendeurActivity extends AppCompatActivity {
         vendeur_recyclerView.setAdapter(gridViewAdapter);
         vendeur_recyclerView.setLayoutManager(new GridLayoutManager(VendeurActivity.this,2));
         nomEtImageProfil();
+        vendeur_produit();
     }
     public void nomEtImageProfil(){
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -101,16 +102,14 @@ public class VendeurActivity extends AppCompatActivity {
             }
         });
     }
-    public void vendeurp_produit(){
+    public void vendeur_produit(){
 
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
                         ModelGridView modelGridView =doc.getDocument().toObject(ModelGridView.class);
                         modelGridViewList.add(modelGridView);
                         gridViewAdapter.notifyDataSetChanged();

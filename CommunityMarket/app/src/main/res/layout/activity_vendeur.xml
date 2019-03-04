@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".vendeurContact.VendeurActivity"
-    android:background="@color/colorPrimary">
+    android:background="@color/blanc">
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toolbarVendeur"
-        app:titleTextColor="@color/blanc"/>
+        app:titleTextColor="@color/black"
+        />
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
@@ -18,7 +19,8 @@
         android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarVendeur">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarVendeur"
+        android:elevation="5dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
