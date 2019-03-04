@@ -35,6 +35,7 @@ public class VendeurActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendeur);
+        vendeur_toolbar=findViewById(R.id.toolbarVendeur);
         setSupportActionBar(vendeur_toolbar);
         vendeur_image=findViewById(R.id.vendeur_image);
         vendeur_user_name=findViewById(R.id.vendeur_user_name);
@@ -46,7 +47,7 @@ public class VendeurActivity extends AppCompatActivity {
         iddupost =getIntent().getExtras().getString("id du post");
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
         firebaseFirestore=FirebaseFirestore.getInstance();
-        vendeur_toolbar=findViewById(R.id.toolbarVendeur);
+
         nomEtImageProfil();
     }
     public void nomEtImageProfil(){
@@ -66,7 +67,7 @@ public class VendeurActivity extends AppCompatActivity {
                         vendeur_residence.setText(residence_user);
                         vendeur_user_name.setText(name_user+" "+prenom);
                         Picasso.with(VendeurActivity.this).load(image_user).into(vendeur_image);
-                        getSupportActionBar().setTitle(prenom);
+                        getSupportActionBar().setTitle(name_user+" "+prenom;
                     }
                 }else {
                     String error=task.getException().getMessage();
