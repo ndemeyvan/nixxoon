@@ -48,8 +48,12 @@ import cm.studio.devbee.communitymarket.login.LoginActivity;
 import cm.studio.devbee.communitymarket.postActivity.PostActivity;
 import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 import cm.studio.devbee.communitymarket.profile.ProfileActivity;
+import cm.studio.devbee.communitymarket.utilForJupe.CategoriesAdapteJupe;
+import cm.studio.devbee.communitymarket.utilForJupe.CategoriesModelJupe;
 import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesAdapte;
 import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesModel;
+import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesAdapteChaussure;
+import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesModelChaussure;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouveaux;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -72,8 +76,14 @@ public class Accueil extends AppCompatActivity
     private ViewFlipper viewFlipper;
     private CategoriesAdapteNouveaux categoriesAdapteNouveaux;
     private RecyclerView nouveauxRecyclerView;
+    private RecyclerView chaussureRecyclerView;
+    private CategoriesAdapteChaussure categoriesAdapteChaussure;
+    private List<CategoriesModelChaussure> categoriesAdapteChaussureList;
     private List<CategoriesModelNouveaux> categoriesModelNouveauxList;
-
+    private RecyclerView jupesRecyclerView;
+    private CategoriesAdapteJupe categoriesAdapteJupe;
+    private CategoriesModelJupe categoriesModelJupe;
+    private List<CategoriesModelJupe> categoriesModelJupeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +92,13 @@ public class Accueil extends AppCompatActivity
         Toolbar toolbar =findViewById ( R.id.toolbar );
         setSupportActionBar ( toolbar );
         NavigationView navigationView =findViewById ( R.id.nav_view );
+        ////////chaussure
+        categoriesAdapteChaussureList=new ArrayList<> (  );
+        chaussureRecyclerView=findViewById ( R.id.chaussureRecyclerView );
+        categoriesAdapteChaussure=new CategoriesAdapteChaussure (categoriesAdapteChaussureList,Accueil.this);
+        chaussureRecyclerView.setAdapter ( categoriesAdapteChaussure );
+        chaussureRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        /////chaussure
         ////////nouveaux
         categoriesModelNouveauxList=new ArrayList<>();
         nouveauxRecyclerView=findViewById(R.id.nouveautes_recyclerView);
@@ -89,6 +106,14 @@ public class Accueil extends AppCompatActivity
         nouveauxRecyclerView.setAdapter(categoriesAdapteNouveaux);
         nouveauxRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         ////nouveaux
+        ///////jupes
+        jupesRecyclerView=findViewById ( R.id.jupesRecyclerView );
+        categoriesModelJupeList=new ArrayList<> (  );
+        categoriesAdapteJupe=new CategoriesAdapteJupe (categoriesModelJupeList,Accueil.this);
+        jupesRecyclerView.setAdapter ( categoriesAdapteJupe );
+        jupesRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
+        ///////fin jupes
         mAuth=FirebaseAuth.getInstance ();
         viewFlipper=findViewById(R.id.viewFlipper);
         storageReference=FirebaseStorage.getInstance ().getReference ();
@@ -131,8 +156,11 @@ public class Accueil extends AppCompatActivity
         content_recyclerView.setAdapter ( categoriesAdapte );
         content_recyclerView.setLayoutManager ( new LinearLayoutManager ( this,LinearLayoutManager.HORIZONTAL,false ) );
         ///////fin recyclerview
+
         vaTopost ();
         nouveautes();
+        chaussuresRecycler ();
+        juperecycler ();
 
     }
     public void recup(){
@@ -285,6 +313,43 @@ public class Accueil extends AppCompatActivity
                         CategoriesModelNouveaux categoriesModelNouveaux =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesModelNouveauxList.add(categoriesModelNouveaux);
                         categoriesAdapteNouveaux.notifyDataSetChanged();
+                    }
+                }
+
+            }
+        });
+    }
+    public void chaussuresRecycler(){
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Chaussures" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    if (doc.getType()==DocumentChange.Type.ADDED){
+                        String idupost=doc.getDocument ().getId ();
+                        CategoriesModelChaussure categoriesModelChaussure =doc.getDocument().toObject(CategoriesModelChaussure.class).withId ( idupost );
+                        categoriesAdapteChaussureList.add(categoriesModelChaussure);
+                        categoriesAdapteChaussure.notifyDataSetChanged();
+                    }
+                }
+
+            }
+        });
+
+    }
+    public void juperecycler(){
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "jupes" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    if (doc.getType()==DocumentChange.Type.ADDED){
+                        String idupost=doc.getDocument ().getId ();
+                        CategoriesModelJupe categoriesModelJupe =doc.getDocument().toObject(CategoriesModelJupe.class).withId ( idupost );
+                        categoriesModelJupeList.add(categoriesModelJupe);
+                        categoriesAdapteJupe.notifyDataSetChanged();
                     }
                 }
 

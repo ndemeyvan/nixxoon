@@ -147,7 +147,7 @@ public class PostActivityFinal extends AppCompatActivity {
     public void stocker(){
                     File newImageFile= new File(mImageUri.getPath ());
                     try {
-                        compressedImageFile = new Compressor(PostActivityFinal.this).setQuality ( 10 ).compressToBitmap (newImageFile);
+                        compressedImageFile = new Compressor(PostActivityFinal.this).setQuality ( 5 ).compressToBitmap (newImageFile);
                     } catch (IOException e) {
                         e.printStackTrace ();
                     }
@@ -155,7 +155,9 @@ public class PostActivityFinal extends AppCompatActivity {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] data = baos.toByteArray();
-                    UploadTask uploadTask=storageReference.child ( "image_des_produits_compresse" ).child ( "image_compresse" ).child ( random +".jpg" ).putBytes ( data );
+
+                    UploadTask uploadTask=storageReference.child ( "image_des_produits_compresse" ).child ( random +".jpg" ).putBytes ( data );
+
                     uploadTask.addOnFailureListener(new OnFailureListener () {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
@@ -169,7 +171,7 @@ public class PostActivityFinal extends AppCompatActivity {
                             saveCurrentDate=currentDate.format ( calendar.getTime () );
                             randomKey=saveCurrentDate;
                             String random =random ();
-                            final StorageReference image_product_post=storageReference.child ( "image_des_produits" ).child ( random+".jpg" );
+                            final StorageReference image_product_post=storageReference.child ( "image_des_produits_compresse" ).child ( random+".jpg" );
                             UploadTask uploadTask =image_product_post.putFile ( mImageUri );
                             Task<Uri> urlTask = uploadTask.continueWithTask( new Continuation<UploadTask.TaskSnapshot, Task<Uri>> () {
                                 @Override

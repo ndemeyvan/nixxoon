@@ -114,56 +114,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
     }
-   /* public void likez(){
-        detail_like_image.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
 
-
-                firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).collection ( "likes" ).document (iddupost).addSnapshotListener ( new EventListener<DocumentSnapshot> () {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                        if (documentSnapshot.exists ()){
-                            detail_like_image.setImageDrawable ( getDrawable ( R.mipmap.ic_like_accent ));
-                        }else {
-                            detail_like_image.setImageDrawable ( getDrawable ( R.mipmap.ic_like_gray));
-
-                        }
-                    }
-                } );
-                firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).collection ( "likes" ).addSnapshotListener ( new EventListener<QuerySnapshot> () {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        if (!queryDocumentSnapshots.isEmpty ()){
-                            int i=queryDocumentSnapshots.size ();
-                            nmbre_de_like.setText(i+"");
-
-                        }else{
-                            nmbre_de_like.setText(0+"");
-
-                        }
-                    }
-                } );
-
-                firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).collection ( "likes" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (!task.getResult ().exists ()){
-                            Map<String,String>likesMaps=new HashMap<> (  );
-                            likesMaps.put ("lol" ,"lol" );
-                            firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).collection ( "likes" ).document (current_user_id).set ( likesMaps );
-
-                        }else {
-                            firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).collection ( "likes" ).document (current_user_id).delete ();
-
-                        }
-                    }
-                } );
-
-
-            }
-        } );
-    }*/
    public void vendeurActivity(){
        vendeur_button.setOnClickListener(new View.OnClickListener() {
            @Override

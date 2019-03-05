@@ -380,8 +380,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    android:text="NOUVEAUXTES"
+                    android:text="N O U V E A U X"
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -406,7 +405,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -414,13 +412,14 @@
 
 
                 <TextView
+                    android:id="@+id/textChausure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="CHAUSSURES"
+                    android:text="C H A U S S U R E S"
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -428,6 +427,62 @@
                     app:layout_constraintHorizontal_bias="0.031"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/nouveautes_recyclerView" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/chaussureRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/blanc"
+                    android:padding="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textChausure"></android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/jupes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="J U P E S"
+                    android:textColor="@color/blanc"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.049"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chaussureRecyclerView" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/jupesRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/jupes"></android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/textUtilisaeur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="U T I L I S A T E U R S"
+                    android:textColor="@color/blanc"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/jupesRecyclerView" />
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/textUtilisaeur"
+                    ></android.support.v7.widget.RecyclerView>
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
