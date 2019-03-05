@@ -2,6 +2,8 @@ package cm.studio.devbee.communitymarket.postActivity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -31,6 +35,9 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -40,6 +47,7 @@ import java.util.Random;
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
+import id.zelory.compressor.Compressor;
 
 public class PostActivityFinal extends AppCompatActivity {
     private static  final int MAX_LENGTH =100;
@@ -57,6 +65,7 @@ public class PostActivityFinal extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private StorageReference storageReference;
     private FirebaseAuth firebaseAuth;
+    private Bitmap compressedImageFile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
@@ -114,6 +123,7 @@ public class PostActivityFinal extends AppCompatActivity {
             }
         }
     }
+
     public void prendreDonner(){
         vendreButton.setOnClickListener ( new View.OnClickListener () {
             @Override
@@ -126,10 +136,11 @@ public class PostActivityFinal extends AppCompatActivity {
     public void prendreDonnerDevente(){
         nom_du_produit=nomProduit.getText ().toString ();
         decription_du_produit=descriptionProduit.getText ().toString ();
-        prix_du_produit=prixPorduit.getText ().toString ();
+        prix_du_produit=(prixPorduit.getText ().toString ()+" fcfa");
         if (!TextUtils.isEmpty ( nom_du_produit )&&!TextUtils.isEmpty ( decription_du_produit )&&!TextUtils.isEmpty ( prix_du_produit )&&mImageUri!=null){
             stocker();
         }else{
+            progressBar_post.setVisibility (View.INVISIBLE);
             Toast.makeText ( PostActivityFinal.this,"Veuillez remplir tous les champs",Toast.LENGTH_LONG ).show ();
         }
     }
@@ -137,8 +148,6 @@ public class PostActivityFinal extends AppCompatActivity {
         Calendar calendar=Calendar.getInstance ();
         SimpleDateFormat currentDate=new SimpleDateFormat (" MMM dd,yyyy" );
         saveCurrentDate=currentDate.format ( calendar.getTime () );
-        /*SimpleDateFormat curntTime=new SimpleDateFormat (" HH:mm" );
-        saveCurrentTime=curntTime.format ( calendar.getTime () );*/
         randomKey=saveCurrentDate;
         String random =random ();
         final StorageReference image_product_post=storageReference.child ( "image_des_produits" ).child ( random+".jpg" );
@@ -157,6 +166,33 @@ public class PostActivityFinal extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
+                    File newImageFile= new File(mImageUri.getPath ());
+                    try {
+                        compressedImageFile = new Compressor(PostActivityFinal.this).setQuality ( 20 ).compressToBitmap (newImageFile);
+                    } catch (IOException e) {
+                        e.printStackTrace ();
+                    }
+/////////////////////////////////////
+                    String random2 =random ();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data = baos.toByteArray();
+
+                    UploadTask uploadTask=storageReference.child ( "image_des_produits" ).child ( "image_compresse" ).child ( random2 +".jpg" ).putBytes ( data );
+
+                    uploadTask.addOnFailureListener(new OnFailureListener () {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            Toast.makeText ( PostActivityFinal.this,"un probleme est survenue,reessayer plus tard svp" ,Toast.LENGTH_LONG).show ();
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot> () {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                            // ...
+                        }
+                    });
+//////////////////////////////////////////////////////////////////////////////////////////
                     Uri downloadUri = task.getResult();
                     progressBar_post.setVisibility (View.INVISIBLE);
                     Map <String,Object> user_post = new HashMap ();
@@ -166,6 +202,7 @@ public class PostActivityFinal extends AppCompatActivity {
                     user_post.put ( "date_de_publication",randomKey );
                     user_post.put ( "utilisateur",current_user_id );
                     user_post.put ( "image_du_produit",downloadUri.toString() );
+                    user_post.put ( "image_du_produit_compresse",downloadUri.toString() );
                     firebaseFirestore.collection ( "publication" ).document ("categories").collection ( categoryName ).add(user_post).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -202,6 +239,8 @@ public class PostActivityFinal extends AppCompatActivity {
                             }
                         }
                     });
+////////////////////////////////////////////////////////////////////////////
+
 
                 } else {
 

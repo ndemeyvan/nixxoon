@@ -36,6 +36,8 @@ public class PostActivity extends AppCompatActivity {
         categoriesModelPostList.add ( new CategoriesModelPost ( "Pantalons",R.drawable.pantalons ) );
         categoriesModelPostList.add ( new CategoriesModelPost ( "T-shirts",R.drawable.t_shirt ) );
         categoriesModelPostList.add ( new CategoriesModelPost ( "Chemises",R.drawable.chemise ) );
+        categoriesModelPostList.add ( new CategoriesModelPost ( "robe",R.drawable.robe ) );
+
         categoriesAdaptePost=new CategoriesAdaptePost (categoriesModelPostList,PostActivity.this );
         post_cat_recycler.setAdapter ( categoriesAdaptePost );
         post_cat_recycler.setLayoutManager ( new LinearLayoutManager ( this,LinearLayoutManager.VERTICAL ,false) );

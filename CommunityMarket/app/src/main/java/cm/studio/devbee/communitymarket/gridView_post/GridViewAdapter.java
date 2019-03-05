@@ -37,6 +37,8 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
     String produit_image =modelGridViewList.get(i).getImage_du_produit();
     String nom=modelGridViewList.get(i).getNom_du_produit();
     String prix_produit=modelGridViewList.get(i).getPrix_du_produit();
+    String image_profil=modelGridViewList.get ( i ).getImage_profil ();
+    viewHolder.profil_post ( image_profil );
     viewHolder.prix_produit(prix_produit);
     viewHolder.image_produit(produit_image);
     viewHolder.nom_produit(nom);
@@ -49,6 +51,7 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView produit;
+        ImageView post_image_profil;
         TextView post_titre_produit_description;
         TextView prix_post;
 
@@ -57,6 +60,7 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
            produit=itemView.findViewById(R.id.post_image);
            post_titre_produit_description=itemView.findViewById(R.id.post_titre_produit_description);
            prix_post=itemView.findViewById(R.id.prix_post);
+           post_image_profil=itemView.findViewById ( R.id.post_image_profil );
        }
        public void image_produit(String image){
            Picasso.with(context).load(image).into (produit );
@@ -66,6 +70,9 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
         }
         public void prix_produit(String prix){
             prix_post.setText(prix);
+        }
+        public void profil_post(String profil){
+            Picasso.with(context).load(profil).into (post_image_profil);
         }
    }
 }

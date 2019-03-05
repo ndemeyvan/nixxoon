@@ -125,6 +125,8 @@ public class Accueil extends AppCompatActivity
         categoriesModelList.add ( new CategoriesModel ( "Pantalons",R.drawable.pantalons ) );
         categoriesModelList.add ( new CategoriesModel ( "T-shirts",R.drawable.t_shirt ) );
         categoriesModelList.add ( new CategoriesModel ( "Chemises",R.drawable.chemise ) );
+        categoriesModelList.add ( new CategoriesModel ( "robe",R.drawable.robe ) );
+
         categoriesAdapte=new CategoriesAdapte ( categoriesModelList,Accueil.this );
         content_recyclerView.setAdapter ( categoriesAdapte );
         content_recyclerView.setLayoutManager ( new LinearLayoutManager ( this,LinearLayoutManager.HORIZONTAL,false ) );
