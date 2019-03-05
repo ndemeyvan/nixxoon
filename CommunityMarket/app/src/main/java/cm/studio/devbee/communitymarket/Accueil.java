@@ -56,6 +56,8 @@ import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesAdapteChauss
 import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesModelChaussure;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouveaux;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
+import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
+import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Accueil extends AppCompatActivity
@@ -84,6 +86,9 @@ public class Accueil extends AppCompatActivity
     private CategoriesAdapteJupe categoriesAdapteJupe;
     private CategoriesModelJupe categoriesModelJupe;
     private List<CategoriesModelJupe> categoriesModelJupeList;
+    private RecyclerView user_recyclerView;
+    private UserAdapter userAdapter;
+    private List<UserModel> userList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +119,14 @@ public class Accueil extends AppCompatActivity
         jupesRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
         ///////fin jupes
+        ///////:utilisateur
+        user_recyclerView=findViewById ( R.id.user_recyclerView );
+        userList=new ArrayList<> (  );
+        userAdapter=new UserAdapter (userList,Accueil.this);
+        user_recyclerView.setAdapter ( userAdapter );
+        user_recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
+        //////fin utilisateur
         mAuth=FirebaseAuth.getInstance ();
         viewFlipper=findViewById(R.id.viewFlipper);
         storageReference=FirebaseStorage.getInstance ().getReference ();
@@ -161,6 +174,7 @@ public class Accueil extends AppCompatActivity
         nouveautes();
         chaussuresRecycler ();
         juperecycler ();
+        utilisateurREcycler ();
 
     }
     public void recup(){
@@ -350,6 +364,23 @@ public class Accueil extends AppCompatActivity
                         CategoriesModelJupe categoriesModelJupe =doc.getDocument().toObject(CategoriesModelJupe.class).withId ( idupost );
                         categoriesModelJupeList.add(categoriesModelJupe);
                         categoriesAdapteJupe.notifyDataSetChanged();
+                    }
+                }
+
+            }
+        });
+    }
+    public void utilisateurREcycler(){
+        Query firstQuery =firebaseFirestore.collection ( "mes donnees utilisateur" ).orderBy ( "user_telephone",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    if (doc.getType()==DocumentChange.Type.ADDED){
+                        UserModel userModel =doc.getDocument().toObject(UserModel.class);
+                        userList.add(userModel);
+                        userAdapter.notifyDataSetChanged();
                     }
                 }
 

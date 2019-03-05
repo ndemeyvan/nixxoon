@@ -470,6 +470,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="U T I L I S A T E U R S"
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
@@ -478,11 +479,15 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/jupesRecyclerView" />
+
                 <android.support.v7.widget.RecyclerView
+                    android:id="@+id/user_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/textUtilisaeur"
-                    ></android.support.v7.widget.RecyclerView>
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textUtilisaeur"></android.support.v7.widget.RecyclerView>
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
