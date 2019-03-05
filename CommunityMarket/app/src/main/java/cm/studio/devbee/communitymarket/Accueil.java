@@ -122,7 +122,6 @@ public class Accueil extends AppCompatActivity
         categoriesAdapteJupe=new CategoriesAdapteJupe (categoriesModelJupeList,Accueil.this);
         jupesRecyclerView.setAdapter ( categoriesAdapteJupe );
         jupesRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-
         ///////fin jupes
         ///////:utilisateur
         user_recyclerView=findViewById ( R.id.user_recyclerView );
@@ -401,7 +400,7 @@ public class Accueil extends AppCompatActivity
 
     }
     public void tshirt(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "T-shirts" ).orderBy ( "user_telephone",Query.Direction.DESCENDING );
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "T-shirts" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {

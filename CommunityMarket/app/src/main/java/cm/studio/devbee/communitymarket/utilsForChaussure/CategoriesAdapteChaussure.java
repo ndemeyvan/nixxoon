@@ -80,6 +80,7 @@ public class CategoriesAdapteChaussure extends RecyclerView.Adapter<CategoriesAd
 
                 }
             });
+
         firebaseFirestore.collection("mes donnees utilisateur").document(nom_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

@@ -80,7 +80,7 @@ public class TshirtAdapter extends RecyclerView.Adapter<TshirtAdapter.ViewHolder
 
                 }
             });
-        firebaseFirestore.collection("mes donnees utilisateur").document(nom_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+       /* firebaseFirestore.collection("mes donnees utilisateur").document(nom_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
@@ -142,7 +142,7 @@ public class TshirtAdapter extends RecyclerView.Adapter<TshirtAdapter.ViewHolder
 
 
             }
-        } );
+        } );*/
     }
 
     @Override
