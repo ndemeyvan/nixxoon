@@ -147,17 +147,15 @@ public class PostActivityFinal extends AppCompatActivity {
     public void stocker(){
                     File newImageFile= new File(mImageUri.getPath ());
                     try {
-                        compressedImageFile = new Compressor(PostActivityFinal.this).setQuality ( 20 ).compressToBitmap (newImageFile);
+                        compressedImageFile = new Compressor(PostActivityFinal.this).setQuality ( 10 ).compressToBitmap (newImageFile);
                     } catch (IOException e) {
                         e.printStackTrace ();
                     }
-                    String random2 =random ();
+                    String random =random ();
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] data = baos.toByteArray();
-
-                    UploadTask uploadTask=storageReference.child ( "image_des_produits_compresse" ).child ( "image_compresse" ).child ( random2 +".jpg" ).putBytes ( data );
-
+                    UploadTask uploadTask=storageReference.child ( "image_des_produits_compresse" ).child ( "image_compresse" ).child ( random +".jpg" ).putBytes ( data );
                     uploadTask.addOnFailureListener(new OnFailureListener () {
                         @Override
                         public void onFailure(@NonNull Exception exception) {

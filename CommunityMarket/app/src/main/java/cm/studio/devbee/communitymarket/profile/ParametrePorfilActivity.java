@@ -190,40 +190,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
                         }
                     });
                     ////////fin de l'nvoie
-                    /*image_de_profil.putFile ( mImageUri ).addOnCompleteListener ( new OnCompleteListener<UploadTask.TaskSnapshot> () {
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if (task.isSuccessful ()){
-                                Uri profil_sur_la_base_de_donnee_firebasefirestore =task.getResult ().getUploadSessionUri ();
-                                Map<String,String> donnees_utilisateur =new HashMap<> (  );
-                                donnees_utilisateur.put ( "user_name",user_name );
-                                donnees_utilisateur.put ( "user_prenom",user_premon );
-                                donnees_utilisateur.put ( "user_telephone",user_telephone );
-                                donnees_utilisateur.put ( "user_residence",user_residence );
-                                donnees_utilisateur.put ( "user_mail",user_email);
-                                donnees_utilisateur.put ( "user_profil_image",profil_sur_la_base_de_donnee_firebasefirestore.toString () );
-                                firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful ()){
-                                            Intent intent =new Intent ( ParametrePorfilActivity.this,Accueil.class );
-                                            startActivity ( intent );
-                                            finish ();
-                                            Toast.makeText ( ParametrePorfilActivity.this,"compte enregistre",Toast.LENGTH_LONG ).show ();
-                                        }else{
-                                            String error =task.getException ().getMessage ();
-                                            Toast.makeText ( ParametrePorfilActivity.this,error,Toast.LENGTH_LONG ).show ();
-                                            parametre_progressbar.setVisibility ( View.INVISIBLE );
-                                        }
-                                    }
-                                } );
-                            }else {
-                                String error =task.getException ().getMessage ();
-                                Toast.makeText ( ParametrePorfilActivity.this,error,Toast.LENGTH_LONG ).show ();
-                                parametre_progressbar.setVisibility ( View.INVISIBLE );
-                            }
-                        }
-                    } );*/
+
                 }else {
                     Toast.makeText ( ParametrePorfilActivity.this,"remplir tous les champs svp",Toast.LENGTH_LONG ).show ();
                     parametre_progressbar.setVisibility ( View.INVISIBLE );
