@@ -145,40 +145,18 @@ public class PostActivityFinal extends AppCompatActivity {
         }
     }
     public void stocker(){
-        Calendar calendar=Calendar.getInstance ();
-        SimpleDateFormat currentDate=new SimpleDateFormat (" MMM dd,yyyy" );
-        saveCurrentDate=currentDate.format ( calendar.getTime () );
-        randomKey=saveCurrentDate;
-        String random =random ();
-        final StorageReference image_product_post=storageReference.child ( "image_des_produits" ).child ( random+".jpg" );
-        UploadTask uploadTask =image_product_post.putFile ( mImageUri );
-        Task<Uri> urlTask = uploadTask.continueWithTask( new Continuation<UploadTask.TaskSnapshot, Task<Uri>> () {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
-                }
-
-                // Continue with the task to get the download URL
-                return image_product_post.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri> () {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
                     File newImageFile= new File(mImageUri.getPath ());
                     try {
                         compressedImageFile = new Compressor(PostActivityFinal.this).setQuality ( 20 ).compressToBitmap (newImageFile);
                     } catch (IOException e) {
                         e.printStackTrace ();
                     }
-/////////////////////////////////////
                     String random2 =random ();
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] data = baos.toByteArray();
 
-                    UploadTask uploadTask=storageReference.child ( "image_des_produits" ).child ( "image_compresse" ).child ( random2 +".jpg" ).putBytes ( data );
+                    UploadTask uploadTask=storageReference.child ( "image_des_produits_compresse" ).child ( "image_compresse" ).child ( random2 +".jpg" ).putBytes ( data );
 
                     uploadTask.addOnFailureListener(new OnFailureListener () {
                         @Override
@@ -188,65 +166,82 @@ public class PostActivityFinal extends AppCompatActivity {
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot> () {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                            // ...
-                        }
-                    });
-//////////////////////////////////////////////////////////////////////////////////////////
-                    Uri downloadUri = task.getResult();
-                    progressBar_post.setVisibility (View.INVISIBLE);
-                    Map <String,Object> user_post = new HashMap ();
-                    user_post.put ( "nom_du_produit",nom_du_produit );
-                    user_post.put ( "decription_du_produit",decription_du_produit );
-                    user_post.put ( "prix_du_produit",prix_du_produit );
-                    user_post.put ( "date_de_publication",randomKey );
-                    user_post.put ( "utilisateur",current_user_id );
-                    user_post.put ( "image_du_produit",downloadUri.toString() );
-                    user_post.put ( "image_du_produit_compresse",downloadUri.toString() );
-                    firebaseFirestore.collection ( "publication" ).document ("categories").collection ( categoryName ).add(user_post).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                            if (task.isSuccessful()){
+                            Calendar calendar=Calendar.getInstance ();
+                            SimpleDateFormat currentDate=new SimpleDateFormat (" MMM dd,yyyy" );
+                            saveCurrentDate=currentDate.format ( calendar.getTime () );
+                            randomKey=saveCurrentDate;
+                            String random =random ();
+                            final StorageReference image_product_post=storageReference.child ( "image_des_produits" ).child ( random+".jpg" );
+                            UploadTask uploadTask =image_product_post.putFile ( mImageUri );
+                            Task<Uri> urlTask = uploadTask.continueWithTask( new Continuation<UploadTask.TaskSnapshot, Task<Uri>> () {
+                                @Override
+                                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                    if (!task.isSuccessful()) {
+                                        throw task.getException();
+                                    }
+                                    // Continue with the task to get the download URL
+                                    return image_product_post.getDownloadUrl();
+                                }
+                            }).addOnCompleteListener(new OnCompleteListener<Uri> () {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        Uri downloadUri = task.getResult();
+                                        progressBar_post.setVisibility (View.INVISIBLE);
+                                        Map <String,Object> user_post = new HashMap ();
+                                        user_post.put ( "nom_du_produit",nom_du_produit );
+                                        user_post.put ( "decription_du_produit",decription_du_produit );
+                                        user_post.put ( "prix_du_produit",prix_du_produit );
+                                        user_post.put ( "date_de_publication",randomKey );
+                                        user_post.put ( "utilisateur",current_user_id );
+                                        user_post.put ( "image_du_produit",downloadUri.toString() );
+                                        firebaseFirestore.collection ( "publication" ).document ("categories").collection ( categoryName ).add(user_post).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                if (task.isSuccessful()){
 
-                            }else{
-                                String error = task.getException().getMessage();
-                                Toast.makeText(PostActivityFinal.this,error,Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-                    firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).add(user_post).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                            if (task.isSuccessful()){
+                                                }else{
+                                                    String error = task.getException().getMessage();
+                                                    Toast.makeText(PostActivityFinal.this,error,Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        });
+                                        firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).add(user_post).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                if (task.isSuccessful()){
 
-                            }else{
-                                String error = task.getException().getMessage();
-                                Toast.makeText(PostActivityFinal.this,error,Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-                    firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).add(user_post).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                            if (task.isSuccessful()){
-                                Intent gotoRecherche=new Intent(PostActivityFinal.this,Accueil.class);
-                                startActivity(gotoRecherche);
-                                finish();
-                                Toast.makeText(PostActivityFinal.this,"envoie effectuer",Toast.LENGTH_LONG).show();
-                            }else{
-                                String error = task.getException().getMessage();
-                                Toast.makeText(PostActivityFinal.this,error,Toast.LENGTH_LONG).show();
-                            }
+                                                }else{
+                                                    String error = task.getException().getMessage();
+                                                    Toast.makeText(PostActivityFinal.this,error,Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        });
+                                        firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).add(user_post).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                if (task.isSuccessful()){
+                                                    Intent gotoRecherche=new Intent(PostActivityFinal.this,Accueil.class);
+                                                    startActivity(gotoRecherche);
+                                                    finish();
+                                                    Toast.makeText(PostActivityFinal.this,"envoie effectuer",Toast.LENGTH_LONG).show();
+                                                }else{
+                                                    String error = task.getException().getMessage();
+                                                    Toast.makeText(PostActivityFinal.this,error,Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        });
+                                    } else {
+
+                                    }
+                                }
+                            });
                         }
                     });
 ////////////////////////////////////////////////////////////////////////////
 
 
-                } else {
 
-                }
-            }
-        });
 
     }
     public static String random(){
