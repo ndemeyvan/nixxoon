@@ -145,9 +145,14 @@ public class PostActivityFinal extends AppCompatActivity {
         }
     }
     public void stocker(){
+
                     File newImageFile= new File(mImageUri.getPath ());
                     try {
-                        compressedImageFile = new Compressor(PostActivityFinal.this).setQuality ( 5 ).compressToBitmap (newImageFile);
+                        compressedImageFile = new Compressor(PostActivityFinal.this)
+                                .setMaxWidth(200)
+                                .setMaxHeight(200)
+                                .setQuality(10)
+                                .compressToBitmap (newImageFile);
                     } catch (IOException e) {
                         e.printStackTrace ();
                     }

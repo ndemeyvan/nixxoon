@@ -50,6 +50,8 @@ import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 import cm.studio.devbee.communitymarket.profile.ProfileActivity;
 import cm.studio.devbee.communitymarket.utilForJupe.CategoriesAdapteJupe;
 import cm.studio.devbee.communitymarket.utilForJupe.CategoriesModelJupe;
+import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesAdapteTshirt;
+import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesModelTshirt;
 import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesAdapte;
 import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesModel;
 import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesAdapteChaussure;
@@ -91,9 +93,11 @@ public class Accueil extends AppCompatActivity
     private RecyclerView user_recyclerView;
     private UserAdapter userAdapter;
     private List<UserModel> userList;
-    private TshirtAdapter tshirtAdapter;
+    //////////tshirt
+    private CategoriesAdapteTshirt categoriesAdapteTshirt;
+    private List<CategoriesModelTshirt> categoriesModelTshirtList;
     private RecyclerView tshirtRecycler;
-    private List<TshitModel> tshitModelList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,9 +136,9 @@ public class Accueil extends AppCompatActivity
         //////fin utilisateur
         //////tshirt
         tshirtRecycler=findViewById ( R.id.tshirtRecycler );
-        tshitModelList=new ArrayList<> (  );
-        tshirtAdapter=new TshirtAdapter (tshitModelList,Accueil.this);
-        tshirtRecycler.setAdapter ( tshirtAdapter );
+        categoriesModelTshirtList=new ArrayList<> (  );
+        categoriesAdapteTshirt=new CategoriesAdapteTshirt (categoriesModelTshirtList,Accueil.this);
+        tshirtRecycler.setAdapter ( categoriesAdapteTshirt );
         tshirtRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         ///fin tshirt
         mAuth=FirebaseAuth.getInstance ();
@@ -185,7 +189,8 @@ public class Accueil extends AppCompatActivity
         chaussuresRecycler ();
         juperecycler ();
         utilisateurREcycler ();
-        tshirt ();
+        tshirtRecyclerView();
+
 
     }
     public void recup(){
@@ -399,7 +404,7 @@ public class Accueil extends AppCompatActivity
         });
 
     }
-    public void tshirt(){
+    public void tshirtRecyclerView(){
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "T-shirts" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -407,13 +412,15 @@ public class Accueil extends AppCompatActivity
 
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
-                        TshitModel tshitModel =doc.getDocument().toObject(TshitModel.class);
-                        tshitModelList.add(tshitModel);
-                        tshirtAdapter.notifyDataSetChanged();
+                        String idupost=doc.getDocument ().getId ();
+                        CategoriesModelTshirt categoriesModelTshirt =doc.getDocument().toObject(CategoriesModelTshirt.class).withId ( idupost );
+                        categoriesModelTshirtList.add(categoriesModelTshirt);
+                        categoriesAdapteTshirt.notifyDataSetChanged();
                     }
                 }
 
             }
         });
     }
+
 }

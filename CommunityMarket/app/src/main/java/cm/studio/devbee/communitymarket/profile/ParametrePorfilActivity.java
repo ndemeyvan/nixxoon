@@ -2,6 +2,7 @@ package cm.studio.devbee.communitymarket.profile;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,12 +31,17 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.postActivity.PostActivityFinal;
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 public class ParametrePorfilActivity extends AppCompatActivity {
     private android.support.v7.widget.Toolbar parametre_toolbar;
@@ -50,6 +58,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private String current_user_id;
     private ProgressBar parametre_progressbar;
+    private Bitmap compressedImageFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,67 +145,111 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         button_enregister.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                final String user_name=nom.getText ().toString ();
-                final String user_premon=premon.getText ().toString ();
-                final String user_telephone=telephone.getText ().toString ();
-                final String user_residence=residence.getText ().toString ();
-                final String user_email=email.getText ().toString ();
-                /////////// envoi des fichier dans la base de donnee
-                if (!TextUtils.isEmpty ( user_name )&&!TextUtils.isEmpty ( user_telephone )&&!TextUtils.isEmpty ( user_premon )&&!TextUtils.isEmpty ( user_residence )&&mImageUri!=null&&!TextUtils.isEmpty ( user_email )){
-                    parametre_progressbar.setVisibility ( View.VISIBLE );
-                    final StorageReference image_de_profil =storageReference.child ( "image_de_profil" ).child ( current_user_id+ " .jpg" );
-                    UploadTask uploadTask=image_de_profil.putFile ( mImageUri );
-
-                    Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>> () {
-                        @Override
-                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                            if (!task.isSuccessful()) {
-                                throw task.getException();
-                            }
-
-                            // Continue with the task to get the download URL
-                            return image_de_profil.getDownloadUrl();
-                        }
-                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            if (task.isSuccessful()) {
-                                Uri downloadUri = task.getResult();
-                                Map<String,String> donnees_utilisateur =new HashMap<> (  );
-                                donnees_utilisateur.put ( "user_name",user_name );
-                                donnees_utilisateur.put ( "user_prenom",user_premon );
-                                donnees_utilisateur.put ( "user_telephone",user_telephone );
-                                donnees_utilisateur.put ( "user_residence",user_residence );
-                                donnees_utilisateur.put ( "user_mail",user_email);
-                                donnees_utilisateur.put ( "user_profil_image",downloadUri.toString () );
-                                firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful ()){
-                                            Intent intent =new Intent ( ParametrePorfilActivity.this,Accueil.class );
-                                            startActivity ( intent );
-                                            finish ();
-                                            Toast.makeText ( ParametrePorfilActivity.this,"compte enregistre",Toast.LENGTH_LONG ).show ();
-                                        }else{
-                                            String error =task.getException ().getMessage ();
-                                            Toast.makeText ( ParametrePorfilActivity.this,error,Toast.LENGTH_LONG ).show ();
-                                            parametre_progressbar.setVisibility ( View.INVISIBLE );
-                                        }
-                                    }
-                                } );
-                            } else {
-
-                            }
-                        }
-                    });
-                    ////////fin de l'nvoie
-
-                }else {
-                    Toast.makeText ( ParametrePorfilActivity.this,"remplir tous les champs svp",Toast.LENGTH_LONG ).show ();
-                    parametre_progressbar.setVisibility ( View.INVISIBLE );
+                parametre_progressbar.setVisibility ( View.VISIBLE );
+                File newImageFile= new File(mImageUri.getPath ());
+                try {
+                    compressedImageFile = new Compressor(ParametrePorfilActivity.this)
+                            .setMaxWidth(200)
+                            .setMaxHeight(200)
+                            .setQuality(10)
+                            .compressToBitmap (newImageFile);
+                } catch (IOException e) {
+                    e.printStackTrace ();
                 }
-            }
-        } );
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+                UploadTask uploadTask=storageReference.child ("image_de_profil"  ).child ( current_user_id+ " .jpg" ).putBytes ( data );
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+
+                        Toast.makeText(ParametrePorfilActivity.this,"une erreur , veillez reesayer svp.",Toast.LENGTH_LONG).show();
+
+
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        final String user_name=nom.getText ().toString ();
+                        final String user_premon=premon.getText ().toString ();
+                        final String user_telephone=telephone.getText ().toString ();
+                        final String user_residence=residence.getText ().toString ();
+                        final String user_email=email.getText ().toString ();
+                        /////////// envoi des fichier dans la base de donnee
+                        if (!TextUtils.isEmpty ( user_name )&&!TextUtils.isEmpty ( user_telephone )&&!TextUtils.isEmpty ( user_premon )&&!TextUtils.isEmpty ( user_residence )&&mImageUri!=null&&!TextUtils.isEmpty ( user_email )){
+                            parametre_progressbar.setVisibility ( View.VISIBLE );
+                            final StorageReference image_de_profil =storageReference.child ( "image_de_profil" ).child ( current_user_id+ " .jpg" );
+                            UploadTask uploadTask=image_de_profil.putFile ( mImageUri );
+
+                            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>> () {
+                                @Override
+                                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                    if (!task.isSuccessful()) {
+                                        throw task.getException();
+                                    }
+
+                                    // Continue with the task to get the download URL
+                                    return image_de_profil.getDownloadUrl();
+                                }
+                            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        Uri downloadUri = task.getResult();
+                                        Map<String,String> donnees_utilisateur =new HashMap<> (  );
+                                        donnees_utilisateur.put ( "user_name",user_name );
+                                        donnees_utilisateur.put ( "user_prenom",user_premon );
+                                        donnees_utilisateur.put ( "user_telephone",user_telephone );
+                                        donnees_utilisateur.put ( "user_residence",user_residence );
+                                        donnees_utilisateur.put ( "user_mail",user_email);
+                                        donnees_utilisateur.put ( "user_profil_image",downloadUri.toString () );
+                                        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful ()){
+                                                    Intent intent =new Intent ( ParametrePorfilActivity.this,Accueil.class );
+                                                    startActivity ( intent );
+                                                    finish ();
+                                                    Toast.makeText ( ParametrePorfilActivity.this,"compte enregistre",Toast.LENGTH_LONG ).show ();
+                                                }else{
+                                                    String error =task.getException ().getMessage ();
+                                                    Toast.makeText ( ParametrePorfilActivity.this,error,Toast.LENGTH_LONG ).show ();
+                                                    parametre_progressbar.setVisibility ( View.INVISIBLE );
+                                                }
+                                            }
+                                        } );
+                                    } else {
+                                        String error =task.getException ().getMessage ();
+                                        Toast.makeText ( ParametrePorfilActivity.this,error,Toast.LENGTH_LONG ).show ();
+                                        parametre_progressbar.setVisibility ( View.INVISIBLE );
+                                    }
+                                }
+                            });
+                            ////////fin de l'nvoie
+
+                        }else {
+                            Toast.makeText ( ParametrePorfilActivity.this,"remplir tous les champs svp",Toast.LENGTH_LONG ).show ();
+                            parametre_progressbar.setVisibility ( View.INVISIBLE );
+                        }
+                    }
+                } );
+
+
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     public void recuperation(){

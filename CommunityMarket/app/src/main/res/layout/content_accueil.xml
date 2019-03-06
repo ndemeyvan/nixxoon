@@ -373,7 +373,24 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/explorer"></android.support.v7.widget.RecyclerView>-->
-
+                <Button
+                    android:id="@+id/nouveaux_bouton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/voir_tout_background"
+                    android:text="voir tout"
+                    android:textColor="@color/blanc"
+                    android:textSize="13sp"
+                    app:fontFamily="sans-serif-condensed"
+                    app:layout_constraintBottom_toTopOf="@+id/nouveautes_recyclerView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView16"
+                    app:layout_constraintTop_toBottomOf="@+id/viewFlipper"
+                    app:layout_constraintVertical_bias="0.761" />
                 <TextView
                     android:id="@+id/textView16"
                     android:layout_width="wrap_content"
@@ -410,6 +427,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView16"></android.support.v7.widget.RecyclerView>
 
+                <Button
+                    android:id="@+id/chaussure_bouton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/voir_tout_background"
+                    android:text="voir tout"
+                    android:textColor="@color/blanc"
+                    android:textSize="13sp"
+                    app:fontFamily="sans-serif-condensed"
+                    app:layout_constraintBottom_toTopOf="@+id/chaussureRecyclerView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/textChausure"
+                    app:layout_constraintTop_toBottomOf="@+id/nouveautes_recyclerView"
+                    app:layout_constraintVertical_bias="0.76" />
 
                 <TextView
                     android:id="@+id/textChausure"
@@ -439,6 +474,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textChausure"></android.support.v7.widget.RecyclerView>
 
+                <Button
+                    android:id="@+id/jupes_bouton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/voir_tout_background"
+                    android:text="voir tout"
+                    android:textColor="@color/blanc"
+                    android:textSize="13sp"
+                    app:fontFamily="sans-serif-condensed"
+                    app:layout_constraintBottom_toTopOf="@+id/jupesRecyclerView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/jupes"
+                    app:layout_constraintTop_toBottomOf="@+id/chaussureRecyclerView"
+                    app:layout_constraintVertical_bias="0.761" />
                 <TextView
                     android:id="@+id/jupes"
                     android:layout_width="wrap_content"
@@ -490,6 +543,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textUtilisaeur"></android.support.v7.widget.RecyclerView>
 
+                <Button
+                    android:id="@+id/tshirt_bouton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/voir_tout_background"
+                    android:text="voir tout"
+                    android:textColor="@color/blanc"
+                    android:textSize="13sp"
+                    app:fontFamily="sans-serif-condensed"
+                    app:layout_constraintBottom_toTopOf="@+id/tshirtRecycler"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/tshirt"
+                    app:layout_constraintTop_toBottomOf="@+id/user_recyclerView"
+                    app:layout_constraintVertical_bias="0.761" />
                 <TextView
                     android:id="@+id/tshirt"
                     android:layout_width="wrap_content"
@@ -517,6 +588,21 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tshirt"></android.support.v7.widget.RecyclerView>
 
+                <Button
+                    android:id="@+id/pull_bouton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/voir_tout_background"
+                    android:text="voir tout"
+                    android:textColor="@color/blanc"
+                    android:textSize="13sp"
+                    app:fontFamily="sans-serif-condensed"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/tshirt"
+                    app:layout_constraintTop_toBottomOf="@+id/tshirtRecycler" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -525,6 +611,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="P U L L"
+                    android:id="@+id/pull"
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
