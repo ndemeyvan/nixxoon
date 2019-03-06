@@ -58,8 +58,6 @@ import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesAdapteChauss
 import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesModelChaussure;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouveaux;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
-import cm.studio.devbee.communitymarket.utilsForTshirt.TshirtAdapter;
-import cm.studio.devbee.communitymarket.utilsForTshirt.TshitModel;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;

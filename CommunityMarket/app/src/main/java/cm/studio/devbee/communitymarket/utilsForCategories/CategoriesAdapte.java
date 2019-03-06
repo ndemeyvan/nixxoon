@@ -1,6 +1,10 @@
 package cm.studio.devbee.communitymarket.utilsForCategories;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
@@ -50,4 +56,5 @@ public class CategoriesAdapte extends RecyclerView.Adapter<CategoriesAdapte.View
         }
 
     }
+
 }
