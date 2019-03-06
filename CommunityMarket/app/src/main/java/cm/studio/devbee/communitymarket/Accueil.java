@@ -97,6 +97,8 @@ public class Accueil extends AppCompatActivity
     private CategoriesAdapteTshirt categoriesAdapteTshirt;
     private List<CategoriesModelTshirt> categoriesModelTshirtList;
     private RecyclerView tshirtRecycler;
+    //////chargement
+    private DocumentSnapshot lastVisible;
 
 
     @Override
@@ -119,6 +121,20 @@ public class Accueil extends AppCompatActivity
         categoriesAdapteNouveaux=new CategoriesAdapteNouveaux(categoriesModelNouveauxList,Accueil.this);
         nouveauxRecyclerView.setAdapter(categoriesAdapteNouveaux);
         nouveauxRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        nouveauxRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                Boolean arriveOcoin = !nouveauxRecyclerView.canScrollHorizontally(1);
+                if (arriveOcoin){
+                    Toast.makeText(Accueil.this,"chargement",Toast.LENGTH_LONG).show();
+                    chargerPlus();
+                }else{
+
+                }
+
+            }
+        });
         ////nouveaux
         ///////jupes
         jupesRecyclerView=findViewById ( R.id.jupesRecyclerView );
@@ -332,11 +348,13 @@ public class Accueil extends AppCompatActivity
         } );
     }
     public void nouveautes(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING )
+                .limit(3);
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
+                lastVisible = queryDocumentSnapshots.getDocuments()
+                        .get(queryDocumentSnapshots.size() -1);
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
@@ -417,6 +435,35 @@ public class Accueil extends AppCompatActivity
                         categoriesModelTshirtList.add(categoriesModelTshirt);
                         categoriesAdapteTshirt.notifyDataSetChanged();
                     }
+                }
+
+            }
+        });
+    }
+
+    public void chargerPlus(){
+
+        Query prochain =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING )
+                .startAfter(lastVisible)
+                .limit(3);
+
+
+        prochain.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    lastVisible = queryDocumentSnapshots.getDocuments()
+                            .get(queryDocumentSnapshots.size() - 1);
+                    for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
+                        if (doc.getType() == DocumentChange.Type.ADDED) {
+                            String idupost = doc.getDocument().getId();
+                            CategoriesModelNouveaux categoriesModelNouveaux = doc.getDocument().toObject(CategoriesModelNouveaux.class).withId(idupost);
+                            categoriesModelNouveauxList.add(categoriesModelNouveaux);
+                            categoriesAdapteNouveaux.notifyDataSetChanged();
+                        }
+                    }
+                }else {
+                   
                 }
 
             }
