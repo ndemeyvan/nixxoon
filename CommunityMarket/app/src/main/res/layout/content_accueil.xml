@@ -783,6 +783,99 @@
 
 
 
+
+                <TextView
+                    android:id="@+id/chemise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="C H E M I S E S"
+                    android:textColor="@color/blanc"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerpantalons" />
+                <Button
+                    android:id="@+id/chemise_bouton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/voir_tout_background"
+                    android:text="voir tout"
+                    android:textColor="@color/blanc"
+                    android:textSize="13sp"
+                    app:fontFamily="sans-serif-condensed"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerpantalons"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.945"
+                    app:layout_constraintStart_toEndOf="@+id/chemise"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerpantalons"
+                    app:layout_constraintVertical_bias="0.0"></Button>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerchemise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chemise"></android.support.v7.widget.RecyclerView>
+
+
+                <TextView
+                    android:id="@+id/robe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="R O B E S"
+                    android:textColor="@color/blanc"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerchemise" />
+
+                <Button
+                    android:id="@+id/robe_bouton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/voir_tout_background"
+                    android:text="voir tout"
+                    android:textColor="@color/blanc"
+                    android:textSize="13sp"
+                    app:fontFamily="sans-serif-condensed"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerrobe"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.895"
+                    app:layout_constraintStart_toEndOf="@+id/robe"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerchemise"
+                    app:layout_constraintVertical_bias="0.511"></Button>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerrobe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/robe"></android.support.v7.widget.RecyclerView>
+
+
+
+
+
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

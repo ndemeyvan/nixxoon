@@ -63,6 +63,8 @@ import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesAdapte;
 import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesModel;
 import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesAdapteChaussure;
 import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesModelChaussure;
+import cm.studio.devbee.communitymarket.utilsForChemise.CategoriesAdapteChemise;
+import cm.studio.devbee.communitymarket.utilsForChemise.CategoriesModelChemise;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouveaux;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
 import cm.studio.devbee.communitymarket.utilsForPull.CategoriesAdaptePull;
@@ -124,6 +126,10 @@ public class Accueil extends AppCompatActivity
     private  RecyclerView recyclerpantalons;
     private CategoriesAdaptePantalons categoriesAdaptePantalons;
     List<CategoriesModelPantalons> categoriesModelPantalonsList;
+    ///chemise
+    private RecyclerView recyclerchemise;
+    private CategoriesAdapteChemise categoriesAdapteChemise;
+    private List<CategoriesModelChemise> categoriesModelChemiseList;
 
 
     @Override
@@ -210,6 +216,13 @@ public class Accueil extends AppCompatActivity
         recyclerpantalons.setAdapter ( categoriesAdaptePantalons );
         recyclerpantalons.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         //pantalons
+        ////chemise
+        recyclerchemise=findViewById ( R.id. recyclerchemise );
+        categoriesModelChemiseList=new ArrayList<> (  );
+        categoriesAdapteChemise=new CategoriesAdapteChemise(categoriesModelChemiseList,Accueil.this);
+        recyclerchemise.setAdapter ( categoriesAdapteChemise );
+        recyclerchemise.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        //chemise
         mAuth=FirebaseAuth.getInstance ();
         viewFlipper=findViewById(R.id.viewFlipper);
         storageReference=FirebaseStorage.getInstance ().getReference ();
@@ -266,6 +279,7 @@ public class Accueil extends AppCompatActivity
         imagePub();
         recyclerCullote();
         recyclerpantalons();
+        recyclerChemise();
 
     }
     public void recup(){
@@ -617,6 +631,24 @@ public class Accueil extends AppCompatActivity
                         CategoriesModelPantalons categoriesModelPantalons =doc.getDocument().toObject(CategoriesModelPantalons.class).withId ( idupost );
                         categoriesModelPantalonsList.add(categoriesModelPantalons);
                         categoriesAdaptePantalons.notifyDataSetChanged();
+                    }
+                }
+
+            }
+        });
+    }
+    public void recyclerChemise(){
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Chemises" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    if (doc.getType()==DocumentChange.Type.ADDED){
+                        String idupost=doc.getDocument ().getId ();
+                        CategoriesModelChemise categoriesModelChemise=doc.getDocument().toObject(CategoriesModelChemise.class).withId ( idupost );
+                        categoriesModelChemiseList.add(categoriesModelChemise);
+                        categoriesAdapteChemise.notifyDataSetChanged();
                     }
                 }
 
