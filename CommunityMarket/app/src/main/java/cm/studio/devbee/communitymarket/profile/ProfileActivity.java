@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView residence;
     private TextView email;
     private TextView operation;
-    private CircleImageView profilImage;
+    private ImageView profilImage;
     private ProgressBar progressBar;
     private android.support.v7.widget.Toolbar profil_toolbar;
 
