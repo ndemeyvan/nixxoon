@@ -863,6 +863,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/recyclerchemise"
                     app:layout_constraintVertical_bias="0.511"></Button>
                 <android.support.v7.widget.RecyclerView
+                    android:background="@color/blanc"
+                    android:padding="15dp"
                     android:id="@+id/recyclerrobe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
