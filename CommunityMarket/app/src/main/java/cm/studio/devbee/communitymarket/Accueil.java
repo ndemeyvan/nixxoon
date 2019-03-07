@@ -207,7 +207,7 @@ public class Accueil extends AppCompatActivity
         recyclerpantalons=findViewById ( R.id. recyclerpantalons );
         categoriesModelPantalonsList=new ArrayList<> (  );
         categoriesAdaptePantalons=new CategoriesAdaptePantalons (categoriesModelPantalonsList,Accueil.this);
-        recyclerpantalons.setAdapter ( categoriesAdapteCullote );
+        recyclerpantalons.setAdapter ( categoriesAdaptePantalons );
         recyclerpantalons.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         //pantalons
         mAuth=FirebaseAuth.getInstance ();
