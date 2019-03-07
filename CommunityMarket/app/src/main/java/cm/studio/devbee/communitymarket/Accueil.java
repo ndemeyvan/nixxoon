@@ -43,6 +43,8 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesAdaptePantalons;
+import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesModelPantalons;
 import cm.studio.devbee.communitymarket.a_propos.AproposActivity;
 import cm.studio.devbee.communitymarket.login.LoginActivity;
 import cm.studio.devbee.communitymarket.postActivity.PostActivity;
@@ -118,6 +120,10 @@ public class Accueil extends AppCompatActivity
     private RecyclerView recyclercullote;
     private CategoriesAdapteCullote categoriesAdapteCullote;
     private List<CategoriesModelCullote> categoriesModelCulloteList;
+    ////pantaloos
+    private  RecyclerView recyclerpantalons;
+    private CategoriesAdaptePantalons categoriesAdaptePantalons;
+    List<CategoriesModelPantalons> categoriesModelPantalonsList;
 
 
     @Override
@@ -197,6 +203,13 @@ public class Accueil extends AppCompatActivity
         recyclercullote.setAdapter ( categoriesAdapteCullote );
         recyclercullote.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         //culotte
+        ///pantalos
+        recyclerpantalons=findViewById ( R.id. recyclerpantalons );
+        categoriesModelPantalonsList=new ArrayList<> (  );
+        categoriesAdaptePantalons=new CategoriesAdaptePantalons (categoriesModelPantalonsList,Accueil.this);
+        recyclerpantalons.setAdapter ( categoriesAdapteCullote );
+        recyclerpantalons.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        //pantalons
         mAuth=FirebaseAuth.getInstance ();
         viewFlipper=findViewById(R.id.viewFlipper);
         storageReference=FirebaseStorage.getInstance ().getReference ();
@@ -252,6 +265,7 @@ public class Accueil extends AppCompatActivity
         recyclerAccessoire();
         imagePub();
         recyclerCullote();
+        recyclerpantalons();
 
     }
     public void recup(){
@@ -585,6 +599,24 @@ public class Accueil extends AppCompatActivity
                         CategoriesModelCullote categoriesModelCullote =doc.getDocument().toObject(CategoriesModelCullote.class).withId ( idupost );
                         categoriesModelCulloteList.add(categoriesModelCullote);
                         categoriesAdapteCullote.notifyDataSetChanged();
+                    }
+                }
+
+            }
+        });
+    }
+    public void recyclerpantalons(){
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Pantalons" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    if (doc.getType()==DocumentChange.Type.ADDED){
+                        String idupost=doc.getDocument ().getId ();
+                        CategoriesModelPantalons categoriesModelPantalons =doc.getDocument().toObject(CategoriesModelPantalons.class).withId ( idupost );
+                        categoriesModelPantalonsList.add(categoriesModelPantalons);
+                        categoriesAdaptePantalons.notifyDataSetChanged();
                     }
                 }
 
