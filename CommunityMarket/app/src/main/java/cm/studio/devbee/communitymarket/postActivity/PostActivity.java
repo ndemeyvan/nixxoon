@@ -28,15 +28,15 @@ public class PostActivity extends AppCompatActivity {
         getSupportActionBar ().setTitle ( "choisissez une categorie de vente" );
         post_cat_recycler=findViewById ( R.id.post_cat_recycler );
         categoriesModelPostList=new ArrayList<> (  );
-        categoriesModelPostList.add ( new CategoriesModelPost ( "Marques",R.drawable.logo ) );
         categoriesModelPostList.add ( new CategoriesModelPost ( "Chaussures",R.drawable.chaussure ) );
         categoriesModelPostList.add ( new CategoriesModelPost ( "jupes",R.drawable.jupes ) );
-        categoriesModelPostList.add ( new CategoriesModelPost ( "accesoires",R.drawable.accessoires ) );
+        categoriesModelPostList.add ( new CategoriesModelPost ( "accessoires",R.drawable.accessoires ) );
         categoriesModelPostList.add ( new CategoriesModelPost ( "Cullotes",R.drawable.cullotes ) );
         categoriesModelPostList.add ( new CategoriesModelPost ( "Pantalons",R.drawable.pantalons ) );
         categoriesModelPostList.add ( new CategoriesModelPost ( "T-shirts",R.drawable.t_shirt ) );
         categoriesModelPostList.add ( new CategoriesModelPost ( "Chemises",R.drawable.chemise ) );
         categoriesModelPostList.add ( new CategoriesModelPost ( "robe",R.drawable.robe ) );
+        categoriesModelPostList.add ( new CategoriesModelPost ( "pull",R.drawable.robe ) );
 
         categoriesAdaptePost=new CategoriesAdaptePost (categoriesModelPostList,PostActivity.this );
         post_cat_recycler.setAdapter ( categoriesAdaptePost );

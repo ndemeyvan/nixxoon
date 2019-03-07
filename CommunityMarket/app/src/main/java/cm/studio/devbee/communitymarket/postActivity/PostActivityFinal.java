@@ -170,7 +170,7 @@ public class PostActivityFinal extends AppCompatActivity {
                         }
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot> () {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                             Calendar calendar=Calendar.getInstance ();
                             SimpleDateFormat currentDate=new SimpleDateFormat (" MMM dd,yyyy" );
                             saveCurrentDate=currentDate.format ( calendar.getTime () );
@@ -192,6 +192,7 @@ public class PostActivityFinal extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
                                         Uri downloadUri = task.getResult();
+                                        String download= taskSnapshot.getUploadSessionUri().toString();
                                         progressBar_post.setVisibility (View.INVISIBLE);
                                         Map <String,Object> user_post = new HashMap ();
                                         user_post.put ( "nom_du_produit",nom_du_produit );

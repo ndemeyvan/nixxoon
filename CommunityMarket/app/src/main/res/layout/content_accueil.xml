@@ -593,16 +593,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/voir_tout_background"
                     android:text="voir tout"
                     android:textColor="@color/blanc"
                     android:textSize="13sp"
                     app:fontFamily="sans-serif-condensed"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerpull"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.952"
                     app:layout_constraintStart_toEndOf="@+id/tshirt"
-                    app:layout_constraintTop_toBottomOf="@+id/tshirtRecycler" />
+                    app:layout_constraintTop_toBottomOf="@+id/tshirtRecycler"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -618,6 +622,123 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tshirtRecycler" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerpull"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pull"></android.support.v7.widget.RecyclerView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="A C C E S S O I R E"
+                    android:id="@+id/accessoire"
+                    android:textColor="@color/blanc"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerpull" />
+                <Button
+                    android:id="@+id/accessoire_bouton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/voir_tout_background"
+                    android:text="voir tout"
+                    android:textColor="@color/blanc"
+                    android:textSize="13sp"
+                    app:fontFamily="sans-serif-condensed"
+                    app:layout_constraintBottom_toTopOf="@+id/recycleraccessoire"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.952"
+                    app:layout_constraintStart_toEndOf="@+id/accessoire"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerpull"
+                    app:layout_constraintVertical_bias="0.0" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleraccessoire"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/accessoire"></android.support.v7.widget.RecyclerView>
+
+
+                <ImageView
+                    android:id="@+id/pubImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycleraccessoire" />
+                <TextView
+                    android:id="@+id/pubImageText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/cullote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="C U L O T T E S"
+                    android:textColor="@color/blanc"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pubImage" />
+
+                <Button
+                    android:id="@+id/cullote_bouton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/voir_tout_background"
+                    android:text="voir tout"
+                    android:textColor="@color/blanc"
+                    android:textSize="13sp"
+                    app:fontFamily="sans-serif-condensed"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclercullote"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.945"
+                    app:layout_constraintStart_toEndOf="@+id/cullote"
+                    app:layout_constraintTop_toBottomOf="@+id/pubImage"
+                    app:layout_constraintVertical_bias="0.0"></Button>
+                <android.support.v7.widget.RecyclerView
+                    android:background="@color/blanc"
+                    android:padding="15dp"
+                    android:id="@+id/recyclercullote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cullote"></android.support.v7.widget.RecyclerView>
+
 
 
             </android.support.constraint.ConstraintLayout>

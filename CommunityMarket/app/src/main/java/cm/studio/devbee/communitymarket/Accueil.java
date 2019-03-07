@@ -48,16 +48,23 @@ import cm.studio.devbee.communitymarket.login.LoginActivity;
 import cm.studio.devbee.communitymarket.postActivity.PostActivity;
 import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 import cm.studio.devbee.communitymarket.profile.ProfileActivity;
+import cm.studio.devbee.communitymarket.utilForCullotes.CategoriesAdapteCullote;
+import cm.studio.devbee.communitymarket.utilForCullotes.CategoriesModelCullote;
 import cm.studio.devbee.communitymarket.utilForJupe.CategoriesAdapteJupe;
 import cm.studio.devbee.communitymarket.utilForJupe.CategoriesModelJupe;
+import cm.studio.devbee.communitymarket.utilForPost.CategoriesModelPost;
 import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesAdapteTshirt;
 import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesModelTshirt;
+import cm.studio.devbee.communitymarket.utilsForAccessoire.CategoriesAdapteAccessoire;
+import cm.studio.devbee.communitymarket.utilsForAccessoire.CategoriesModelAccessoire;
 import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesAdapte;
 import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesModel;
 import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesAdapteChaussure;
 import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesModelChaussure;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouveaux;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
+import cm.studio.devbee.communitymarket.utilsForPull.CategoriesAdaptePull;
+import cm.studio.devbee.communitymarket.utilsForPull.CategoriesModelPull;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -97,6 +104,20 @@ public class Accueil extends AppCompatActivity
     private RecyclerView tshirtRecycler;
     //////chargement
     private DocumentSnapshot lastVisible;
+    private  RecyclerView recyclerpull;
+    private CategoriesAdaptePull categoriesAdaptePull;
+    List<CategoriesModelPull> categoriesModelPullList;
+    ////accesoire
+    private  List<CategoriesModelAccessoire> categoriesModelAccessoireList;
+    private CategoriesAdapteAccessoire categoriesAdapteAccessoire;
+    private RecyclerView recycleraccessoire;
+    /////pubfixe
+    private ImageView imagePubFixe;
+    private TextView imagePubText;
+    //cullote
+    private RecyclerView recyclercullote;
+    private CategoriesAdapteCullote categoriesAdapteCullote;
+    private List<CategoriesModelCullote> categoriesModelCulloteList;
 
 
     @Override
@@ -155,6 +176,27 @@ public class Accueil extends AppCompatActivity
         tshirtRecycler.setAdapter ( categoriesAdapteTshirt );
         tshirtRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         ///fin tshirt
+        //////pull
+        recyclerpull=findViewById ( R.id.recyclerpull );
+        categoriesModelPullList=new ArrayList<> (  );
+        categoriesAdaptePull=new CategoriesAdaptePull (categoriesModelPullList,Accueil.this);
+        recyclerpull.setAdapter ( categoriesAdaptePull );
+        recyclerpull.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        /////pull
+        ///accessoire
+        recycleraccessoire=findViewById ( R.id.recycleraccessoire );
+        categoriesModelAccessoireList=new ArrayList<> (  );
+        categoriesAdapteAccessoire=new CategoriesAdapteAccessoire (categoriesModelAccessoireList,Accueil.this);
+        recycleraccessoire.setAdapter ( categoriesAdapteAccessoire );
+        recycleraccessoire.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        //accessoire
+        ///cullote
+        recyclercullote=findViewById ( R.id.recyclercullote );
+        categoriesModelCulloteList=new ArrayList<> (  );
+        categoriesAdapteCullote=new CategoriesAdapteCullote (categoriesModelCulloteList,Accueil.this);
+        recyclercullote.setAdapter ( categoriesAdapteCullote );
+        recyclercullote.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        //culotte
         mAuth=FirebaseAuth.getInstance ();
         viewFlipper=findViewById(R.id.viewFlipper);
         storageReference=FirebaseStorage.getInstance ().getReference ();
@@ -186,17 +228,19 @@ public class Accueil extends AppCompatActivity
         categoriesModelList.add ( new CategoriesModel ( "Marques",R.drawable.logo ) );
         categoriesModelList.add ( new CategoriesModel ( "Chaussures",R.drawable.chaussure ) );
         categoriesModelList.add ( new CategoriesModel ( "jupes",R.drawable.jupes ) );
-        categoriesModelList.add ( new CategoriesModel ( "accesoires",R.drawable.accessoires ) );
+        categoriesModelList.add ( new CategoriesModel ( "accessoires",R.drawable.accessoires ) );
         categoriesModelList.add ( new CategoriesModel ( "Cullotes",R.drawable.cullotes ) );
         categoriesModelList.add ( new CategoriesModel ( "Pantalons",R.drawable.pantalons ) );
         categoriesModelList.add ( new CategoriesModel ( "T-shirts",R.drawable.t_shirt ) );
         categoriesModelList.add ( new CategoriesModel ( "Chemises",R.drawable.chemise ) );
         categoriesModelList.add ( new CategoriesModel ( "robe",R.drawable.robe ) );
-
+        categoriesModelList.add ( new CategoriesModel( "pull",R.drawable.robe ) );
         categoriesAdapte=new CategoriesAdapte ( categoriesModelList,Accueil.this );
         content_recyclerView.setAdapter ( categoriesAdapte );
         content_recyclerView.setLayoutManager ( new LinearLayoutManager ( this,LinearLayoutManager.HORIZONTAL,false ) );
         ///////fin recyclerview
+        imagePubFixe=findViewById(R.id.pubImage);
+        imagePubText=findViewById(R.id.pubImageText);
 
         vaTopost ();
         nouveautes();
@@ -204,7 +248,10 @@ public class Accueil extends AppCompatActivity
         juperecycler ();
         utilisateurREcycler ();
         tshirtRecyclerView();
-
+        recyclerPull();
+        recyclerAccessoire();
+        imagePub();
+        recyclerCullote();
 
     }
     public void recup(){
@@ -272,6 +319,29 @@ public class Accueil extends AppCompatActivity
             }
         });
 
+    }
+    public void imagePub(){
+        DocumentReference user = firebaseFirestore.collection("publicit").document("imageFixe");
+        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()){
+                    DocumentSnapshot doc =task.getResult();
+                    StringBuilder imagePub=new StringBuilder("");
+                    imagePub.append(doc.get("pub"));
+                    imagePubText.setText(imagePub.toString());
+                    String lien = imagePubText.getText().toString();
+                    Picasso.with(Accueil.this).load(lien).into(imagePubFixe);
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Accueil.this,"erreur lors du chargement du slider",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -462,6 +532,60 @@ public class Accueil extends AppCompatActivity
                     }
                 }else {
 
+                }
+
+            }
+        });
+    }
+    public void recyclerPull(){
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "pull" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    if (doc.getType()==DocumentChange.Type.ADDED){
+                        String idupost=doc.getDocument ().getId ();
+                        CategoriesModelPull categoriesModelPull =doc.getDocument().toObject(CategoriesModelPull.class).withId ( idupost );
+                        categoriesModelPullList.add(categoriesModelPull);
+                        categoriesAdaptePull.notifyDataSetChanged();
+                    }
+                }
+
+            }
+        });
+    }
+    public void recyclerAccessoire(){
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "accessoires" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    if (doc.getType()==DocumentChange.Type.ADDED){
+                        String idupost=doc.getDocument ().getId ();
+                        CategoriesModelAccessoire categoriesModelAccessoire =doc.getDocument().toObject(CategoriesModelAccessoire.class).withId ( idupost );
+                        categoriesModelAccessoireList.add(categoriesModelAccessoire);
+                        categoriesAdapteAccessoire.notifyDataSetChanged();
+                    }
+                }
+
+            }
+        });
+    }
+    public void recyclerCullote(){
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Cullotes" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    if (doc.getType()==DocumentChange.Type.ADDED){
+                        String idupost=doc.getDocument ().getId ();
+                        CategoriesModelCullote categoriesModelCullote =doc.getDocument().toObject(CategoriesModelCullote.class).withId ( idupost );
+                        categoriesModelCulloteList.add(categoriesModelCullote);
+                        categoriesAdapteCullote.notifyDataSetChanged();
+                    }
                 }
 
             }
