@@ -69,6 +69,8 @@ import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouve
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
 import cm.studio.devbee.communitymarket.utilsForPull.CategoriesAdaptePull;
 import cm.studio.devbee.communitymarket.utilsForPull.CategoriesModelPull;
+import cm.studio.devbee.communitymarket.utilsForRobe.CategoriesAdapteRobe;
+import cm.studio.devbee.communitymarket.utilsForRobe.CategoriesModelRobe;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -130,6 +132,10 @@ public class Accueil extends AppCompatActivity
     private RecyclerView recyclerchemise;
     private CategoriesAdapteChemise categoriesAdapteChemise;
     private List<CategoriesModelChemise> categoriesModelChemiseList;
+    ///robe
+    private List<CategoriesModelRobe> categoriesModelRobeList;
+    private CategoriesAdapteRobe categoriesAdapteRobe;
+    private RecyclerView recyclerrobe;
 
 
     @Override
@@ -223,6 +229,13 @@ public class Accueil extends AppCompatActivity
         recyclerchemise.setAdapter ( categoriesAdapteChemise );
         recyclerchemise.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         //chemise
+        ////robe
+        recyclerrobe=findViewById(R.id.recyclerrobe);
+        categoriesModelRobeList=new ArrayList<> (  );
+        categoriesAdapteRobe=new CategoriesAdapteRobe(categoriesModelRobeList,Accueil.this);
+        recyclerrobe.setAdapter ( categoriesAdapteRobe );
+        recyclerrobe.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        //robe
         mAuth=FirebaseAuth.getInstance ();
         viewFlipper=findViewById(R.id.viewFlipper);
         storageReference=FirebaseStorage.getInstance ().getReference ();
@@ -280,6 +293,7 @@ public class Accueil extends AppCompatActivity
         recyclerCullote();
         recyclerpantalons();
         recyclerChemise();
+        recyclerRobe();
 
     }
     public void recup(){
@@ -649,6 +663,24 @@ public class Accueil extends AppCompatActivity
                         CategoriesModelChemise categoriesModelChemise=doc.getDocument().toObject(CategoriesModelChemise.class).withId ( idupost );
                         categoriesModelChemiseList.add(categoriesModelChemise);
                         categoriesAdapteChemise.notifyDataSetChanged();
+                    }
+                }
+
+            }
+        });
+    }
+    public void recyclerRobe(){
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "robe" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    if (doc.getType()==DocumentChange.Type.ADDED){
+                        String idupost=doc.getDocument ().getId ();
+                        CategoriesModelRobe categoriesModelRobe=doc.getDocument().toObject(CategoriesModelRobe.class).withId ( idupost );
+                        categoriesModelRobeList.add(categoriesModelRobe);
+                        categoriesAdapteRobe.notifyDataSetChanged();
                     }
                 }
 
