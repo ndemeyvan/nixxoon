@@ -249,26 +249,12 @@ public class HomeFragment extends Fragment {
         img4=v.findViewById(R.id.img4);
         ///////fin slider
         content_progresbar=v.findViewById ( R.id.content_progresbar );
-        ////////////recyclerView
-        content_recyclerView=v.findViewById ( R.id.content_recyclerView );
-        categoriesModelList=new ArrayList<> (  );
-        categoriesModelList.add ( new CategoriesModel ( "Marques",R.drawable.logo ) );
-        categoriesModelList.add ( new CategoriesModel ( "Chaussures",R.drawable.chaussure ) );
-        categoriesModelList.add ( new CategoriesModel ( "jupes",R.drawable.jupes ) );
-        categoriesModelList.add ( new CategoriesModel ( "accessoires",R.drawable.accessoires ) );
-        categoriesModelList.add ( new CategoriesModel ( "Cullotes",R.drawable.cullotes ) );
-        categoriesModelList.add ( new CategoriesModel ( "Pantalons",R.drawable.pantalons ) );
-        categoriesModelList.add ( new CategoriesModel ( "T-shirts",R.drawable.t_shirt ) );
-        categoriesModelList.add ( new CategoriesModel ( "Chemises",R.drawable.chemise ) );
-        categoriesModelList.add ( new CategoriesModel ( "robe",R.drawable.robe ) );
-        categoriesModelList.add ( new CategoriesModel( "pull",R.drawable.robe ) );
-        categoriesAdapte=new CategoriesAdapte ( categoriesModelList,getActivity());
-        content_recyclerView.setAdapter ( categoriesAdapte );
-        content_recyclerView.setLayoutManager ( new LinearLayoutManager ( getActivity(),LinearLayoutManager.HORIZONTAL,false ) );
-        ///////fin recyclerview
         imagePubFixe=v.findViewById(R.id.pubImage);
         imagePubText=v.findViewById(R.id.pubImageText);
-       /*uptdate();
+        viewFlipper=v.findViewById(R.id.viewFlipper);
+        storageReference=FirebaseStorage.getInstance().getReference();
+        firebaseFirestore=FirebaseFirestore.getInstance();
+       uptdate();
         nouveautes();
         chaussuresRecycler ();
         juperecycler ();
@@ -280,12 +266,13 @@ public class HomeFragment extends Fragment {
         recyclerCullote();
         recyclerpantalons();
         recyclerChemise();
-        recyclerRobe();*/
+        recyclerRobe();
+        //imagePub();
         return v;
     }
 
-    /*public void uptdate(){
-        viewFlipper=v.findViewById(R.id.viewFlipper);
+    public void uptdate(){
+
         DocumentReference user = firebaseFirestore.collection("sliders").document("images");
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -329,7 +316,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-    }*/
+    }
     public void imagePub(){
         DocumentReference user = firebaseFirestore.collection("publicit").document("imageFixe");
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -354,7 +341,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-   /* public void nouveautes(){
+ public void nouveautes(){
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING )
                 .limit(3);
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -373,8 +360,8 @@ public class HomeFragment extends Fragment {
 
             }
         });
-    }*/
-   /* public void chaussuresRecycler(){
+    }
+   public void chaussuresRecycler(){
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Chaussures" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -582,6 +569,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-    }*/
+    }
 
 }
