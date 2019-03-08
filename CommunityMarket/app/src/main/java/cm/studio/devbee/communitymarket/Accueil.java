@@ -51,6 +51,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.Fragments.HomeFragment;
+import cm.studio.devbee.communitymarket.Fragments.TshirtFragment;
 import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesAdaptePantalons;
 import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesModelPantalons;
 import cm.studio.devbee.communitymarket.a_propos.AproposActivity;
@@ -184,7 +185,7 @@ public class Accueil extends AppCompatActivity
     public void setupViewPager(ViewPager viewPager){
         TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
         tabsAdapter.addFragment(new HomeFragment(),"Home");
-        tabsAdapter.addFragment(new HomeFragment(),"T_shirt");
+        tabsAdapter.addFragment(new TshirtFragment(),"T_shirt");
         tabsAdapter.addFragment(new HomeFragment(),"chaussure");
         tabsAdapter.addFragment(new HomeFragment(),"jupes");
         tabsAdapter.addFragment(new HomeFragment(),"accessoire");
