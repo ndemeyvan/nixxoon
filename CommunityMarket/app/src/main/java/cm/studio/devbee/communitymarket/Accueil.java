@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -48,6 +50,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import cm.studio.devbee.communitymarket.Fragments.HomeFragment;
 import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesAdaptePantalons;
 import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesModelPantalons;
 import cm.studio.devbee.communitymarket.a_propos.AproposActivity;
@@ -141,6 +144,9 @@ public class Accueil extends AppCompatActivity
     private List<CategoriesModelRobe> categoriesModelRobeList;
     private CategoriesAdapteRobe categoriesAdapteRobe;
     private RecyclerView recyclerrobe;
+    private TabLayout tabLayout;
+    private ViewPager tabsviewpager;
+    private TabsAdapter tabsAdapter;
 
 
     @Override
@@ -150,97 +156,12 @@ public class Accueil extends AppCompatActivity
         Toolbar toolbar =findViewById ( R.id.toolbar );
         setSupportActionBar ( toolbar );
         NavigationView navigationView =findViewById ( R.id.nav_view );
-        ////////chaussure
-        categoriesAdapteChaussureList=new ArrayList<> (  );
-        chaussureRecyclerView=findViewById ( R.id.chaussureRecyclerView );
-        categoriesAdapteChaussure=new CategoriesAdapteChaussure (categoriesAdapteChaussureList,Accueil.this);
-        chaussureRecyclerView.setAdapter ( categoriesAdapteChaussure );
-        chaussureRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        /////chaussure
-        ////////nouveaux
-        categoriesModelNouveauxList=new ArrayList<>();
-        nouveauxRecyclerView=findViewById(R.id.nouveautes_recyclerView);
-        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux(categoriesModelNouveauxList,Accueil.this);
-        nouveauxRecyclerView.setAdapter(categoriesAdapteNouveaux);
-        nouveauxRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        nouveauxRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                Boolean arriveOcoin = !nouveauxRecyclerView.canScrollHorizontally(1);
-                if (arriveOcoin){
-                    Toast.makeText(Accueil.this,"chargement",Toast.LENGTH_LONG).show();
-                    chargerPlus();
-                }else{
 
-                }
-
-            }
-        });
-        ////nouveaux
-        ///////jupes
-        jupesRecyclerView=findViewById ( R.id.jupesRecyclerView );
-        categoriesModelJupeList=new ArrayList<> (  );
-        categoriesAdapteJupe=new CategoriesAdapteJupe (categoriesModelJupeList,Accueil.this);
-        jupesRecyclerView.setAdapter ( categoriesAdapteJupe );
-        jupesRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        ///////fin jupes
-        ///////:utilisateur
-        user_recyclerView=findViewById ( R.id.user_recyclerView );
-        userList=new ArrayList<> (  );
-        userAdapter=new UserAdapter (userList,Accueil.this);
-        user_recyclerView.setAdapter ( userAdapter );
-        user_recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        //////fin utilisateur
-        //////tshirt
-        tshirtRecycler=findViewById ( R.id.tshirtRecycler );
-        categoriesModelTshirtList=new ArrayList<> (  );
-        categoriesAdapteTshirt=new CategoriesAdapteTshirt (categoriesModelTshirtList,Accueil.this);
-        tshirtRecycler.setAdapter ( categoriesAdapteTshirt );
-        tshirtRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        ///fin tshirt
-        //////pull
-        recyclerpull=findViewById ( R.id.recyclerpull );
-        categoriesModelPullList=new ArrayList<> (  );
-        categoriesAdaptePull=new CategoriesAdaptePull (categoriesModelPullList,Accueil.this);
-        recyclerpull.setAdapter ( categoriesAdaptePull );
-        recyclerpull.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        /////pull
-        ///accessoire
-        recycleraccessoire=findViewById ( R.id.recycleraccessoire );
-        categoriesModelAccessoireList=new ArrayList<> (  );
-        categoriesAdapteAccessoire=new CategoriesAdapteAccessoire (categoriesModelAccessoireList,Accueil.this);
-        recycleraccessoire.setAdapter ( categoriesAdapteAccessoire );
-        recycleraccessoire.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        //accessoire
-        ///cullote
-        recyclercullote=findViewById ( R.id.recyclercullote );
-        categoriesModelCulloteList=new ArrayList<> (  );
-        categoriesAdapteCullote=new CategoriesAdapteCullote (categoriesModelCulloteList,Accueil.this);
-        recyclercullote.setAdapter ( categoriesAdapteCullote );
-        recyclercullote.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        //culotte
-        ///pantalos
-        recyclerpantalons=findViewById ( R.id. recyclerpantalons );
-        categoriesModelPantalonsList=new ArrayList<> (  );
-        categoriesAdaptePantalons=new CategoriesAdaptePantalons (categoriesModelPantalonsList,Accueil.this);
-        recyclerpantalons.setAdapter ( categoriesAdaptePantalons );
-        recyclerpantalons.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        //pantalons
-        ////chemise
-        recyclerchemise=findViewById ( R.id. recyclerchemise );
-        categoriesModelChemiseList=new ArrayList<> (  );
-        categoriesAdapteChemise=new CategoriesAdapteChemise(categoriesModelChemiseList,Accueil.this);
-        recyclerchemise.setAdapter ( categoriesAdapteChemise );
-        recyclerchemise.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        //chemise
-        ////robe
-        recyclerrobe=findViewById(R.id.recyclerrobe);
-        categoriesModelRobeList=new ArrayList<> (  );
-        categoriesAdapteRobe=new CategoriesAdapteRobe(categoriesModelRobeList,Accueil.this);
-        recyclerrobe.setAdapter ( categoriesAdapteRobe );
-        recyclerrobe.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        //robe
+        tabLayout=findViewById(R.id.tabslayout);
+        tabsviewpager=findViewById(R.id.tabsview);
+        tabsAdapter =new TabsAdapter(getSupportFragmentManager());
+        setupViewPager(tabsviewpager);
+        tabLayout.setupWithViewPager(tabsviewpager);
         mAuth=FirebaseAuth.getInstance ();
         viewFlipper=findViewById(R.id.viewFlipper);
         storageReference=FirebaseStorage.getInstance ().getReference ();
@@ -254,51 +175,17 @@ public class Accueil extends AppCompatActivity
         toggle.syncState ();
         navigationView.setNavigationItemSelectedListener ( this );
         recup();
-        //////////////slider
-        imageOne=findViewById(R.id.imageSlideOne);
-        imageTwo=findViewById(R.id.imageSlideTwo);
-        imageThree=findViewById(R.id.imageSlideThree);
-        imageFour=findViewById(R.id.imageSlideFour);
-        img1=findViewById(R.id.img1);
-        img2=findViewById(R.id.img2);
-        img3=findViewById(R.id.img3);
-        img4=findViewById(R.id.img4);
-        ///////fin slider
-        content_progresbar=findViewById ( R.id.content_progresbar );
-        uptdate();
-        ////////////recyclerView
-        content_recyclerView=findViewById ( R.id.content_recyclerView );
-        categoriesModelList=new ArrayList<> (  );
-        categoriesModelList.add ( new CategoriesModel ( "Marques",R.drawable.logo ) );
-        categoriesModelList.add ( new CategoriesModel ( "Chaussures",R.drawable.chaussure ) );
-        categoriesModelList.add ( new CategoriesModel ( "jupes",R.drawable.jupes ) );
-        categoriesModelList.add ( new CategoriesModel ( "accessoires",R.drawable.accessoires ) );
-        categoriesModelList.add ( new CategoriesModel ( "Cullotes",R.drawable.cullotes ) );
-        categoriesModelList.add ( new CategoriesModel ( "Pantalons",R.drawable.pantalons ) );
-        categoriesModelList.add ( new CategoriesModel ( "T-shirts",R.drawable.t_shirt ) );
-        categoriesModelList.add ( new CategoriesModel ( "Chemises",R.drawable.chemise ) );
-        categoriesModelList.add ( new CategoriesModel ( "robe",R.drawable.robe ) );
-        categoriesModelList.add ( new CategoriesModel( "pull",R.drawable.robe ) );
-        categoriesAdapte=new CategoriesAdapte ( categoriesModelList,Accueil.this );
-        content_recyclerView.setAdapter ( categoriesAdapte );
-        content_recyclerView.setLayoutManager ( new LinearLayoutManager ( this,LinearLayoutManager.HORIZONTAL,false ) );
-        ///////fin recyclerview
-        imagePubFixe=findViewById(R.id.pubImage);
-        imagePubText=findViewById(R.id.pubImageText);
-
         vaTopost ();
-        nouveautes();
-        chaussuresRecycler ();
-        juperecycler ();
-        utilisateurREcycler ();
-        tshirtRecyclerView();
-        recyclerPull();
-        recyclerAccessoire();
-        imagePub();
-        recyclerCullote();
-        recyclerpantalons();
-        recyclerChemise();
-        recyclerRobe();
+
+
+
+
+    }
+    public void setupViewPager(ViewPager viewPager){
+        TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
+        tabsAdapter.addFragment(new HomeFragment(),"Home");
+        viewPager.setAdapter(tabsAdapter);
+
 
     }
     public void recup(){
@@ -322,74 +209,7 @@ public class Accueil extends AppCompatActivity
             }
         } );
     }
-    public void uptdate(){
-        DocumentReference user = firebaseFirestore.collection("sliders").document("images");
-        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                if (task.isSuccessful()){
-                    viewFlipper.setOutAnimation(Accueil.this,android.R.anim.slide_out_right);
-                    viewFlipper.setInAnimation(Accueil.this,android.R.anim.slide_in_left);
-                    content_progresbar.setVisibility ( View.INVISIBLE );
-                    DocumentSnapshot doc =task.getResult();
-                    StringBuilder image=new StringBuilder("");
-                    image.append(doc.get("imageOne"));
-                    img1.setText(image.toString());
-                    String lien = img1.getText().toString();
-                    Picasso.with(Accueil.this).load(lien).into(imageOne);
-                    //////////image deux
-                    StringBuilder image2=new StringBuilder("");
-                    image2.append(doc.get("imageTwo"));
-                    img1.setText(image.toString());
-                    String lien2 = img1.getText().toString();
-                    Picasso.with(Accueil.this).load(lien2).into(imageTwo);
-                    //////image trois
-                    StringBuilder image3=new StringBuilder("");
-                    image3.append(doc.get("imageThree"));
-                    img1.setText(image3.toString());
-                    String lien3 = img1.getText().toString();
-                    Picasso.with(Accueil.this).load(lien3).into(imageThree);
-                    //////////image quatre
-                    StringBuilder image4=new StringBuilder("");
-                    image4.append(doc.get("imageFour"));
-                    img1.setText(image4.toString());
-                    String lien4 = img1.getText().toString();
-                    Picasso.with(Accueil.this).load(lien4).into(imageFour);
-
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Accueil.this,"erreur lors du chargement du slider",Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-    public void imagePub(){
-        DocumentReference user = firebaseFirestore.collection("publicit").document("imageFixe");
-        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                if (task.isSuccessful()){
-                    DocumentSnapshot doc =task.getResult();
-                    StringBuilder imagePub=new StringBuilder("");
-                    imagePub.append(doc.get("pub"));
-                    imagePubText.setText(imagePub.toString());
-                    String lien = imagePubText.getText().toString();
-                    Picasso.with(Accueil.this).load(lien).into(imagePubFixe);
-
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Accueil.this,"erreur lors du chargement du slider",Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 
     @Override
     public void onBackPressed() {
@@ -462,236 +282,14 @@ public class Accueil extends AppCompatActivity
             }
         } );
     }
-    public void nouveautes(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING )
-                .limit(3);
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                lastVisible = queryDocumentSnapshots.getDocuments()
-                        .get(queryDocumentSnapshots.size() -1);
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
-                        CategoriesModelNouveaux categoriesModelNouveaux =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
-                        categoriesModelNouveauxList.add(categoriesModelNouveaux);
-                        categoriesAdapteNouveaux.notifyDataSetChanged();
-                    }
-                }
-
-            }
-        });
-    }
-    public void chaussuresRecycler(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Chaussures" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
-                        CategoriesModelChaussure categoriesModelChaussure =doc.getDocument().toObject(CategoriesModelChaussure.class).withId ( idupost );
-                        categoriesAdapteChaussureList.add(categoriesModelChaussure);
-                        categoriesAdapteChaussure.notifyDataSetChanged();
-                    }
-                }
-
-            }
-        });
-
-    }
-    public void juperecycler(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "jupes" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
-                        CategoriesModelJupe categoriesModelJupe =doc.getDocument().toObject(CategoriesModelJupe.class).withId ( idupost );
-                        categoriesModelJupeList.add(categoriesModelJupe);
-                        categoriesAdapteJupe.notifyDataSetChanged();
-                    }
-                }
-
-            }
-        });
-    }
-    public void utilisateurREcycler(){
-        Query firstQuery =firebaseFirestore.collection ( "mes donnees utilisateur" ).orderBy ( "user_telephone",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        UserModel userModel =doc.getDocument().toObject(UserModel.class);
-                        userList.add(userModel);
-                        userAdapter.notifyDataSetChanged();
-                    }
-                }
-
-            }
-        });
-
-    }
-    public void tshirtRecyclerView(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "T-shirts" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
-                        CategoriesModelTshirt categoriesModelTshirt =doc.getDocument().toObject(CategoriesModelTshirt.class).withId ( idupost );
-                        categoriesModelTshirtList.add(categoriesModelTshirt);
-                        categoriesAdapteTshirt.notifyDataSetChanged();
-                    }
-                }
-
-            }
-        });
-    }
-
-    public void chargerPlus(){
-
-        Query prochain =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING )
-                .startAfter(lastVisible)
-                .limit(3);
 
 
-        prochain.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    lastVisible = queryDocumentSnapshots.getDocuments()
-                            .get(queryDocumentSnapshots.size() - 1);
-                    for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-                        if (doc.getType() == DocumentChange.Type.ADDED) {
-                            String idupost = doc.getDocument().getId();
-                            CategoriesModelNouveaux categoriesModelNouveaux = doc.getDocument().toObject(CategoriesModelNouveaux.class).withId(idupost);
-                            categoriesModelNouveauxList.add(categoriesModelNouveaux);
-                            categoriesAdapteNouveaux.notifyDataSetChanged();
-                        }
-                    }
-                }else {
 
-                }
 
-            }
-        });
-    }
-    public void recyclerPull(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "pull" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
-                        CategoriesModelPull categoriesModelPull =doc.getDocument().toObject(CategoriesModelPull.class).withId ( idupost );
-                        categoriesModelPullList.add(categoriesModelPull);
-                        categoriesAdaptePull.notifyDataSetChanged();
-                    }
-                }
 
-            }
-        });
-    }
-    public void recyclerAccessoire(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "accessoires" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
-                        CategoriesModelAccessoire categoriesModelAccessoire =doc.getDocument().toObject(CategoriesModelAccessoire.class).withId ( idupost );
-                        categoriesModelAccessoireList.add(categoriesModelAccessoire);
-                        categoriesAdapteAccessoire.notifyDataSetChanged();
-                    }
-                }
 
-            }
-        });
-    }
-    public void recyclerCullote(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Cullotes" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
-                        CategoriesModelCullote categoriesModelCullote =doc.getDocument().toObject(CategoriesModelCullote.class).withId ( idupost );
-                        categoriesModelCulloteList.add(categoriesModelCullote);
-                        categoriesAdapteCullote.notifyDataSetChanged();
-                    }
-                }
-
-            }
-        });
-    }
-    public void recyclerpantalons(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Pantalons" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
-                        CategoriesModelPantalons categoriesModelPantalons =doc.getDocument().toObject(CategoriesModelPantalons.class).withId ( idupost );
-                        categoriesModelPantalonsList.add(categoriesModelPantalons);
-                        categoriesAdaptePantalons.notifyDataSetChanged();
-                    }
-                }
-
-            }
-        });
-    }
-    public void recyclerChemise(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Chemises" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
-                        CategoriesModelChemise categoriesModelChemise=doc.getDocument().toObject(CategoriesModelChemise.class).withId ( idupost );
-                        categoriesModelChemiseList.add(categoriesModelChemise);
-                        categoriesAdapteChemise.notifyDataSetChanged();
-                    }
-                }
-
-            }
-        });
-    }
-    public void recyclerRobe(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "robe" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
-                        CategoriesModelRobe categoriesModelRobe=doc.getDocument().toObject(CategoriesModelRobe.class).withId ( idupost );
-                        categoriesModelRobeList.add(categoriesModelRobe);
-                        categoriesAdapteRobe.notifyDataSetChanged();
-                    }
-                }
-
-            }
-        });
-    }
     public class CircleTransform implements Transformation {
         @Override
         public Bitmap transform(Bitmap source) {
@@ -730,3 +328,4 @@ public class Accueil extends AppCompatActivity
     }
 
 }
+
