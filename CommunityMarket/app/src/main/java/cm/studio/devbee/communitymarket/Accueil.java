@@ -184,6 +184,15 @@ public class Accueil extends AppCompatActivity
     public void setupViewPager(ViewPager viewPager){
         TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
         tabsAdapter.addFragment(new HomeFragment(),"Home");
+        tabsAdapter.addFragment(new HomeFragment(),"T_shirt");
+        tabsAdapter.addFragment(new HomeFragment(),"chaussure");
+        tabsAdapter.addFragment(new HomeFragment(),"jupes");
+        tabsAdapter.addFragment(new HomeFragment(),"accessoire");
+        tabsAdapter.addFragment(new HomeFragment(),"cullotes");
+        tabsAdapter.addFragment(new HomeFragment(),"pantalons");
+        tabsAdapter.addFragment(new HomeFragment(),"chemises");
+        tabsAdapter.addFragment(new HomeFragment(),"robe");
+        tabsAdapter.addFragment(new HomeFragment(),"pull");
         viewPager.setAdapter(tabsAdapter);
 
 
