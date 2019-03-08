@@ -1,6 +1,8 @@
 package cm.studio.devbee.communitymarket.gridView_post;
 
-public class ModelGridView {
+import cm.studio.devbee.communitymarket.utilsForNouveautes.PostId;
+
+public class ModelGridView extends cm.studio.devbee.communitymarket.utilsForNouveautes.PostId {
     private String nom_du_produit;
     private  String image_du_produit;
     private String prix_du_produit;

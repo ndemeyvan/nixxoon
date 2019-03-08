@@ -24,6 +24,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.gridView_post.GridViewAdapter;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
 import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesAdapteTshirt;
 import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesModelTshirt;
@@ -36,8 +37,8 @@ public class TshirtFragment extends Fragment {
     private FirebaseFirestore firebaseFirestore;
     private RecyclerView tshirtRecyclerView;
     private View v;
-    private CategoriesAdapteTshirt categoriesAdapteTshirt;
-    List<CategoriesModelTshirt> categoriesModelTshirtList;
+    private GridViewAdapter categoriesAdapteTshirt;
+    List<ModelGridView> categoriesModelTshirtList;
 
     public TshirtFragment() {
         // Required empty public constructor
@@ -52,7 +53,7 @@ public class TshirtFragment extends Fragment {
         tshirtRecyclerView=v.findViewById ( R.id.tshirtRecyclerView );
         firebaseFirestore=FirebaseFirestore.getInstance();
         categoriesModelTshirtList=new ArrayList<>(  );
-        categoriesAdapteTshirt=new CategoriesAdapteTshirt (categoriesModelTshirtList,getActivity());
+        categoriesAdapteTshirt=new GridViewAdapter (categoriesModelTshirtList,getActivity());
         tshirtRecyclerView.setAdapter ( categoriesAdapteTshirt );
         tshirtRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
          tshirtRecyclerView();
@@ -67,7 +68,7 @@ public class TshirtFragment extends Fragment {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        CategoriesModelTshirt categoriesModelTshirt =doc.getDocument().toObject(CategoriesModelTshirt.class).withId ( idupost );
+                        ModelGridView categoriesModelTshirt =doc.getDocument().toObject(ModelGridView.class).withId ( idupost );
                         categoriesModelTshirtList.add(categoriesModelTshirt);
                         categoriesAdapteTshirt.notifyDataSetChanged();
                     }
