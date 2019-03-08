@@ -186,7 +186,6 @@ public class Accueil extends AppCompatActivity
         TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
         tabsAdapter.addFragment(new HomeFragment(),"Home");
         tabsAdapter.addFragment(new TshirtFragment(),"T_shirt");
-
         viewPager.setAdapter(tabsAdapter);
 
 
