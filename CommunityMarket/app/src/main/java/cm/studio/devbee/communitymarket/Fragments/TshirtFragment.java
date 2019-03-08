@@ -1,6 +1,7 @@
 package cm.studio.devbee.communitymarket.Fragments;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -47,13 +48,13 @@ public class TshirtFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         v=inflater.inflate(R.layout.fragment_tshirt, container, false);
+        v=inflater.inflate(R.layout.fragment_tshirt, container, false);
         tshirtRecyclerView=v.findViewById ( R.id.tshirtRecyclerView );
+        firebaseFirestore=FirebaseFirestore.getInstance();
         categoriesModelTshirtList=new ArrayList<>(  );
         categoriesAdapteTshirt=new CategoriesAdapteTshirt (categoriesModelTshirtList,getActivity());
         tshirtRecyclerView.setAdapter ( categoriesAdapteTshirt );
         tshirtRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
-
          tshirtRecyclerView();
          return v;
     }
@@ -75,5 +76,8 @@ public class TshirtFragment extends Fragment {
             }
         });
     }
+
+
+
 
 }
