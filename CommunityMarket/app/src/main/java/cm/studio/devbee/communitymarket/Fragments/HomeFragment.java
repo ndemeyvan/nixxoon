@@ -1,6 +1,7 @@
 package cm.studio.devbee.communitymarket.Fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -133,6 +134,7 @@ public class HomeFragment extends Fragment {
     private List<CategoriesModelRobe> categoriesModelRobeList;
     private CategoriesAdapteRobe categoriesAdapteRobe;
     private RecyclerView recyclerrobe;
+    ProgressDialog progressDialog;
     private View v;
 
 
@@ -159,7 +161,7 @@ public class HomeFragment extends Fragment {
         categoriesAdapteNouveaux=new CategoriesAdapteNouveaux(categoriesModelNouveauxList,getActivity());
         nouveauxRecyclerView.setAdapter(categoriesAdapteNouveaux);
         nouveauxRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        nouveauxRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+     /*   nouveauxRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -172,7 +174,7 @@ public class HomeFragment extends Fragment {
                 }
 
             }
-        });
+        }); */
         ////nouveaux
         ///////jupes
         jupesRecyclerView=v.findViewById ( R.id.jupesRecyclerView );
@@ -254,20 +256,8 @@ public class HomeFragment extends Fragment {
         viewFlipper=v.findViewById(R.id.viewFlipper);
         storageReference=FirebaseStorage.getInstance().getReference();
         firebaseFirestore=FirebaseFirestore.getInstance();
-       uptdate();
-        nouveautes();
-        chaussuresRecycler ();
-        juperecycler ();
-        utilisateurREcycler ();
-        tshirtRecyclerView();
-        recyclerPull();
-        recyclerAccessoire();
-        imagePub();
-        recyclerCullote();
-        recyclerpantalons();
-        recyclerChemise();
-        recyclerRobe();
-        //imagePub();
+        AsyncTask asyncTask=new AsyncTask ();
+        asyncTask.execute (  );
         return v;
     }
 
@@ -342,8 +332,8 @@ public class HomeFragment extends Fragment {
     }
 
  public void nouveautes(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING )
-                .limit(3);
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+               // .limit(3);
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -434,7 +424,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-    public void chargerPlus(){
+   /* public void chargerPlus(){
 
         Query prochain =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING )
                 .startAfter(lastVisible)
@@ -461,7 +451,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
-    }
+    }*/
     public void recyclerPull(){
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "pull" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -569,6 +559,42 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+    public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog (getActivity ());
+            progressDialog.setTitle("chargement"); // Setting Title
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+            progressDialog.show(); // Display Progress Dialog
+            progressDialog.setCancelable(false);
+            super.onPreExecute ();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            uptdate();
+            nouveautes();
+            chaussuresRecycler ();
+            juperecycler ();
+            utilisateurREcycler ();
+            tshirtRecyclerView();
+            recyclerPull();
+            recyclerAccessoire();
+            imagePub();
+            recyclerCullote();
+            recyclerpantalons();
+            recyclerChemise();
+            recyclerRobe();
+            imagePub();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute ( aVoid );
+            progressDialog.dismiss();
+        }
     }
 
 }

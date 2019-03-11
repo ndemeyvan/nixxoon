@@ -1,8 +1,10 @@
 package cm.studio.devbee.communitymarket.Fragments;
 
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,13 +12,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +50,9 @@ public class TshirtFragment extends Fragment {
     private View v;
     private GridViewAdapter categoriesAdapteTshirt;
     List<ModelGridView> categoriesModelTshirtList;
+    private ImageView imagePubTshirt;
+    private TextView textPubTshirt;
+    ProgressDialog progressDialog;
 
     public TshirtFragment() {
         // Required empty public constructor
@@ -56,10 +70,14 @@ public class TshirtFragment extends Fragment {
         categoriesAdapteTshirt=new GridViewAdapter (categoriesModelTshirtList,getActivity());
         tshirtRecyclerView.setAdapter ( categoriesAdapteTshirt );
         tshirtRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
-         tshirtRecyclerView();
+        imagePubTshirt=v.findViewById ( R.id.pubImag_tshire );
+        textPubTshirt=v.findViewById ( R.id.pubImageText_tshirt );
+        AsyncTask asyncTask=new AsyncTask ();
+        asyncTask.execute (  );
          return v;
     }
     public void tshirtRecyclerView(){
+
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "T-shirts" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -76,6 +94,53 @@ public class TshirtFragment extends Fragment {
 
             }
         });
+    }
+    public void imagePub_t_shirt(){
+        DocumentReference user = firebaseFirestore.collection("publicit").document("imageFixe");
+        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()){
+                    DocumentSnapshot doc =task.getResult();
+                    StringBuilder imagePub=new StringBuilder("");
+                    imagePub.append(doc.get("pub_tshirt"));
+                    textPubTshirt.setText(imagePub.toString());
+                    String lien = textPubTshirt.getText().toString();
+                    Picasso.with(getActivity()).load(lien).into(imagePubTshirt);
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener () {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(),"erreur lors du chargement du slider",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog (getActivity ());
+            progressDialog.setTitle("chargement"); // Setting Title
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+            progressDialog.show(); // Display Progress Dialog
+            progressDialog.setCancelable(false);
+            super.onPreExecute ();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            tshirtRecyclerView();
+            imagePub_t_shirt ();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute ( aVoid );
+            progressDialog.dismiss();
+        }
     }
 
 

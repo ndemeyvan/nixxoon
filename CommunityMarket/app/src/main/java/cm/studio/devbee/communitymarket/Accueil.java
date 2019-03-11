@@ -51,6 +51,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.Fragments.HomeFragment;
+import cm.studio.devbee.communitymarket.Fragments.PullFragment;
 import cm.studio.devbee.communitymarket.Fragments.TshirtFragment;
 import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesAdaptePantalons;
 import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesModelPantalons;
@@ -87,67 +88,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Accueil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth mAuth;
-    private StorageReference storageReference;
     private FirebaseFirestore firebaseFirestore;
     private String current_user_id;
     private ImageView acceuille_image;
     private TextView drawer_user_name;
-    private ImageView imageOne,imageTwo,imageThree,imageFour;
-    private TextView img1,img2,img3,img4;
-    private ProgressBar content_progresbar;
-    private RecyclerView content_recyclerView;
-    private CategoriesAdapte categoriesAdapte;
-    private List<CategoriesModel> categoriesModelList;
     private FloatingActionButton content_floating_action_btn;
-    private ViewFlipper viewFlipper;
-    private CategoriesAdapteNouveaux categoriesAdapteNouveaux;
-    private RecyclerView nouveauxRecyclerView;
-    private RecyclerView chaussureRecyclerView;
-    private CategoriesAdapteChaussure categoriesAdapteChaussure;
-    private List<CategoriesModelChaussure> categoriesAdapteChaussureList;
-    private List<CategoriesModelNouveaux> categoriesModelNouveauxList;
-    private RecyclerView jupesRecyclerView;
-    private CategoriesAdapteJupe categoriesAdapteJupe;
-    private CategoriesModelJupe categoriesModelJupe;
-    private List<CategoriesModelJupe> categoriesModelJupeList;
-    private RecyclerView user_recyclerView;
-    private UserAdapter userAdapter;
-    private List<UserModel> userList;
-    //////////tshirt
-    private CategoriesAdapteTshirt categoriesAdapteTshirt;
-    private List<CategoriesModelTshirt> categoriesModelTshirtList;
-    private RecyclerView tshirtRecycler;
-    //////chargement
-    private DocumentSnapshot lastVisible;
-    private  RecyclerView recyclerpull;
-    private CategoriesAdaptePull categoriesAdaptePull;
-    List<CategoriesModelPull> categoriesModelPullList;
-    ////accesoire
-    private  List<CategoriesModelAccessoire> categoriesModelAccessoireList;
-    private CategoriesAdapteAccessoire categoriesAdapteAccessoire;
-    private RecyclerView recycleraccessoire;
-    /////pubfixe
-    private ImageView imagePubFixe;
-    private TextView imagePubText;
-    //cullote
-    private RecyclerView recyclercullote;
-    private CategoriesAdapteCullote categoriesAdapteCullote;
-    private List<CategoriesModelCullote> categoriesModelCulloteList;
-    ////pantaloos
-    private  RecyclerView recyclerpantalons;
-    private CategoriesAdaptePantalons categoriesAdaptePantalons;
-    List<CategoriesModelPantalons> categoriesModelPantalonsList;
-    ///chemise
-    private RecyclerView recyclerchemise;
-    private CategoriesAdapteChemise categoriesAdapteChemise;
-    private List<CategoriesModelChemise> categoriesModelChemiseList;
-    ///robe
-    private List<CategoriesModelRobe> categoriesModelRobeList;
-    private CategoriesAdapteRobe categoriesAdapteRobe;
-    private RecyclerView recyclerrobe;
     private TabLayout tabLayout;
     private ViewPager tabsviewpager;
-    private TabsAdapter tabsAdapter;
+
 
 
     @Override
@@ -160,12 +108,9 @@ public class Accueil extends AppCompatActivity
 
         tabLayout=findViewById(R.id.tabslayout);
         tabsviewpager=findViewById(R.id.tabsview);
-        tabsAdapter =new TabsAdapter(getSupportFragmentManager());
         setupViewPager(tabsviewpager);
         tabLayout.setupWithViewPager(tabsviewpager);
         mAuth=FirebaseAuth.getInstance ();
-        viewFlipper=findViewById(R.id.viewFlipper);
-        storageReference=FirebaseStorage.getInstance ().getReference ();
         firebaseFirestore=FirebaseFirestore.getInstance ();
         acceuille_image=navigationView.getHeaderView(0).findViewById(R.id.acceuille_image);
         drawer_user_name=navigationView.getHeaderView(0).findViewById(R.id.drawer_user_name);
@@ -186,6 +131,7 @@ public class Accueil extends AppCompatActivity
         TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
         tabsAdapter.addFragment(new HomeFragment(),"Home");
         tabsAdapter.addFragment(new TshirtFragment(),"T_shirt");
+        tabsAdapter.addFragment(new PullFragment () ,"Pull");
         viewPager.setAdapter(tabsAdapter);
 
 
