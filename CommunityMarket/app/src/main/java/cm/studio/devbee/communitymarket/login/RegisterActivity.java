@@ -43,7 +43,8 @@ private ProgressBar login_progressBar;
         register_text=findViewById ( R.id.register_text );
         login_progressBar=findViewById ( R.id.login_progressBarRegister );
         mAuth = FirebaseAuth.getInstance();
-
+    AsyncTask asyncTask=new AsyncTask();
+    asyncTask.execute();
         register_text.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
