@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         registerText.setOnClickListener ( new View.OnClickListener () {
            @Override
            public void onClick(View v) {
-               Intent intent=new Intent ( LoginActivity.this,RegisterActivity.class );
+               Intent intent=new Intent ( getApplicationContext(),RegisterActivity.class );
                startActivity ( intent );
                finish ();
            }
@@ -65,20 +65,20 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful ()){
-                                    Intent intent=new Intent ( LoginActivity.this,Accueil.class );
+                                    Intent intent=new Intent ( getApplicationContext(),Accueil.class );
                                     startActivity ( intent );
                                     finish ();
                                 }   else {
                                     login_progressBar.setVisibility ( View.INVISIBLE );
                                     String error =task.getException ().getMessage ();
-                                    Toast.makeText ( LoginActivity.this,error,Toast.LENGTH_LONG ).show ();
+                                    Toast.makeText ( getApplicationContext(),error,Toast.LENGTH_LONG ).show ();
                                 }
                             }
                         } );
 
                 }else{
                     login_progressBar.setVisibility ( View.INVISIBLE );
-                    Toast.makeText ( LoginActivity.this,"Veuillez remplir tous les champs svp !!",Toast.LENGTH_LONG ).show ();
+                    Toast.makeText ( getApplicationContext(),"Veuillez remplir tous les champs svp !!",Toast.LENGTH_LONG ).show ();
                     }
             }
         }

@@ -2,12 +2,10 @@ package cm.studio.devbee.communitymarket.Fragments;
 
 
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,10 +35,6 @@ import javax.annotation.Nullable;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.gridView_post.GridViewAdapter;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
-import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesAdapteTshirt;
-import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesModelTshirt;
-import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
-
 /**
  * A simple {@link Fragment} subclass.
  */

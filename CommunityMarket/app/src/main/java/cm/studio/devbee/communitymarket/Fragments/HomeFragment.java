@@ -2,19 +2,13 @@ package cm.studio.devbee.communitymarket.Fragments;
 
 
 import android.app.ProgressDialog;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +17,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -39,37 +32,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Nullable;
-
-import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
-import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesAdaptePantalons;
-import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesModelPantalons;
-import cm.studio.devbee.communitymarket.postActivity.PostActivity;
-import cm.studio.devbee.communitymarket.utilForCullotes.CategoriesAdapteCullote;
-import cm.studio.devbee.communitymarket.utilForCullotes.CategoriesModelCullote;
-import cm.studio.devbee.communitymarket.utilForJupe.CategoriesAdapteJupe;
-import cm.studio.devbee.communitymarket.utilForJupe.CategoriesModelJupe;
-import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesAdapteTshirt;
-import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesModelTshirt;
-import cm.studio.devbee.communitymarket.utilsForAccessoire.CategoriesAdapteAccessoire;
-import cm.studio.devbee.communitymarket.utilsForAccessoire.CategoriesModelAccessoire;
-import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesAdapte;
-import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesModel;
-import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesAdapteChaussure;
-import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesModelChaussure;
-import cm.studio.devbee.communitymarket.utilsForChemise.CategoriesAdapteChemise;
-import cm.studio.devbee.communitymarket.utilsForChemise.CategoriesModelChemise;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouveaux;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
-import cm.studio.devbee.communitymarket.utilsForPull.CategoriesAdaptePull;
-import cm.studio.devbee.communitymarket.utilsForPull.CategoriesModelPull;
-import cm.studio.devbee.communitymarket.utilsForRobe.CategoriesAdapteRobe;
-import cm.studio.devbee.communitymarket.utilsForRobe.CategoriesModelRobe;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 
@@ -77,62 +45,47 @@ import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-    private FirebaseAuth mAuth;
-    private StorageReference storageReference;
     private FirebaseFirestore firebaseFirestore;
-    private String current_user_id;
     private ImageView imageOne,imageTwo,imageThree,imageFour;
     private TextView img1,img2,img3,img4;
     private ProgressBar content_progresbar;
     private RecyclerView content_recyclerView;
-    private CategoriesAdapte categoriesAdapte;
-    private List<CategoriesModel> categoriesModelList;
-    private FloatingActionButton content_floating_action_btn;
+    private CategoriesAdapteNouveaux categoriesAdapte;
+    private List<CategoriesModelNouveaux> categoriesModelList;
     private ViewFlipper viewFlipper;
     private CategoriesAdapteNouveaux categoriesAdapteNouveaux;
     private RecyclerView nouveauxRecyclerView;
     private RecyclerView chaussureRecyclerView;
-    private CategoriesAdapteChaussure categoriesAdapteChaussure;
-    private List<CategoriesModelChaussure> categoriesAdapteChaussureList;
-    private List<CategoriesModelNouveaux> categoriesModelNouveauxList;
     private RecyclerView jupesRecyclerView;
-    private CategoriesAdapteJupe categoriesAdapteJupe;
-    private CategoriesModelJupe categoriesModelJupe;
-    private List<CategoriesModelJupe> categoriesModelJupeList;
+    private List<CategoriesModelNouveaux> categoriesAdapteChaussureList;
+    private List<CategoriesModelNouveaux> categoriesModelJupeList;
     private RecyclerView user_recyclerView;
     private UserAdapter userAdapter;
     private List<UserModel> userList;
     //////////tshirt
-    private CategoriesAdapteTshirt categoriesAdapteTshirt;
-    private List<CategoriesModelTshirt> categoriesModelTshirtList;
+    private List<CategoriesModelNouveaux> categoriesModelTshirtList;
     private RecyclerView tshirtRecycler;
     //////chargement
     private DocumentSnapshot lastVisible;
     private  RecyclerView recyclerpull;
-    private CategoriesAdaptePull categoriesAdaptePull;
-    List<CategoriesModelPull> categoriesModelPullList;
+    List<CategoriesModelNouveaux> categoriesModelPullList;
     ////accesoire
-    private  List<CategoriesModelAccessoire> categoriesModelAccessoireList;
-    private CategoriesAdapteAccessoire categoriesAdapteAccessoire;
+    private  List<CategoriesModelNouveaux> categoriesModelAccessoireList;
     private RecyclerView recycleraccessoire;
     /////pubfixe
     private ImageView imagePubFixe;
     private TextView imagePubText;
     //cullote
     private RecyclerView recyclercullote;
-    private CategoriesAdapteCullote categoriesAdapteCullote;
-    private List<CategoriesModelCullote> categoriesModelCulloteList;
+    private List<CategoriesModelNouveaux> categoriesModelCulloteList;
     ////pantaloos
     private  RecyclerView recyclerpantalons;
-    private CategoriesAdaptePantalons categoriesAdaptePantalons;
-    List<CategoriesModelPantalons> categoriesModelPantalonsList;
+    List<CategoriesModelNouveaux> categoriesModelPantalonsList;
     ///chemise
     private RecyclerView recyclerchemise;
-    private CategoriesAdapteChemise categoriesAdapteChemise;
-    private List<CategoriesModelChemise> categoriesModelChemiseList;
+    private List<CategoriesModelNouveaux> categoriesModelChemiseList;
     ///robe
-    private List<CategoriesModelRobe> categoriesModelRobeList;
-    private CategoriesAdapteRobe categoriesAdapteRobe;
+    private List<CategoriesModelNouveaux> categoriesModelRobeList;
     private RecyclerView recyclerrobe;
     ProgressDialog progressDialog;
     private View v;
@@ -151,36 +104,22 @@ public class HomeFragment extends Fragment {
         ////////chaussure
         categoriesAdapteChaussureList=new ArrayList<>(  );
         chaussureRecyclerView=v.findViewById ( R.id.chaussureRecyclerView );
-        categoriesAdapteChaussure=new CategoriesAdapteChaussure (categoriesAdapteChaussureList,getActivity());
-        chaussureRecyclerView.setAdapter ( categoriesAdapteChaussure );
+        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux (categoriesAdapteChaussureList,getContext().getApplicationContext());
+        chaussureRecyclerView.setAdapter ( categoriesAdapteNouveaux );
         chaussureRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         /////chaussure
         ////////nouveaux
-        categoriesModelNouveauxList=new ArrayList<>();
+        categoriesModelList= new ArrayList<>();
         nouveauxRecyclerView=v.findViewById(R.id.nouveautes_recyclerView);
-        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux(categoriesModelNouveauxList,getActivity());
+        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux(categoriesModelList,getActivity());
         nouveauxRecyclerView.setAdapter(categoriesAdapteNouveaux);
         nouveauxRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-     /*   nouveauxRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                Boolean arriveOcoin = !nouveauxRecyclerView.canScrollHorizontally(1);
-                if (arriveOcoin){
-                    Toast.makeText(getActivity(),"chargement",Toast.LENGTH_LONG).show();
-                    //chargerPlus();
-                }else{
-
-                }
-
-            }
-        }); */
         ////nouveaux
         ///////jupes
         jupesRecyclerView=v.findViewById ( R.id.jupesRecyclerView );
         categoriesModelJupeList=new ArrayList<> (  );
-        categoriesAdapteJupe=new CategoriesAdapteJupe (categoriesModelJupeList,getActivity());
-        jupesRecyclerView.setAdapter ( categoriesAdapteJupe );
+        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux (categoriesModelJupeList,getActivity());
+        jupesRecyclerView.setAdapter ( categoriesAdapteNouveaux );
         jupesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         ///////fin jupes
         ///////:utilisateur
@@ -193,51 +132,51 @@ public class HomeFragment extends Fragment {
         //////tshirt
         tshirtRecycler=v.findViewById ( R.id.tshirtRecycler );
         categoriesModelTshirtList=new ArrayList<> (  );
-        categoriesAdapteTshirt=new CategoriesAdapteTshirt (categoriesModelTshirtList,getActivity());
-        tshirtRecycler.setAdapter ( categoriesAdapteTshirt );
+        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux (categoriesModelTshirtList,getActivity());
+        tshirtRecycler.setAdapter ( categoriesAdapteNouveaux );
         tshirtRecycler.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         ///fin tshirt
         //////pull
         recyclerpull=v.findViewById ( R.id.recyclerpull );
         categoriesModelPullList=new ArrayList<> (  );
-        categoriesAdaptePull=new CategoriesAdaptePull (categoriesModelPullList,getActivity());
-        recyclerpull.setAdapter ( categoriesAdaptePull );
+        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux (categoriesModelPullList,getActivity());
+        recyclerpull.setAdapter ( categoriesAdapteNouveaux );
         recyclerpull.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         /////pull
 
         ///accessoire
         recycleraccessoire=v.findViewById ( R.id.recycleraccessoire );
         categoriesModelAccessoireList=new ArrayList<> (  );
-        categoriesAdapteAccessoire=new CategoriesAdapteAccessoire (categoriesModelAccessoireList,getActivity());
-        recycleraccessoire.setAdapter ( categoriesAdapteAccessoire );
+        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux (categoriesModelAccessoireList,getActivity());
+        recycleraccessoire.setAdapter ( categoriesAdapteNouveaux );
         recycleraccessoire.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         //accessoire
         ///cullote
         recyclercullote=v.findViewById ( R.id.recyclercullote );
         categoriesModelCulloteList=new ArrayList<> (  );
-        categoriesAdapteCullote=new CategoriesAdapteCullote (categoriesModelCulloteList,getActivity());
-        recyclercullote.setAdapter ( categoriesAdapteCullote );
+        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux (categoriesModelCulloteList,getActivity());
+        recyclercullote.setAdapter ( categoriesAdapteNouveaux );
         recyclercullote.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         //culotte
         ///pantalos
         recyclerpantalons=v.findViewById ( R.id. recyclerpantalons );
         categoriesModelPantalonsList=new ArrayList<> (  );
-        categoriesAdaptePantalons=new CategoriesAdaptePantalons (categoriesModelPantalonsList,getActivity());
-        recyclerpantalons.setAdapter ( categoriesAdaptePantalons );
+        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux (categoriesModelPantalonsList,getActivity());
+        recyclerpantalons.setAdapter ( categoriesAdapteNouveaux );
         recyclerpantalons.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         //pantalons
         ////chemise
         recyclerchemise=v.findViewById ( R.id. recyclerchemise );
         categoriesModelChemiseList=new ArrayList<> (  );
-        categoriesAdapteChemise=new CategoriesAdapteChemise(categoriesModelChemiseList,getActivity());
-        recyclerchemise.setAdapter ( categoriesAdapteChemise );
+        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux(categoriesModelChemiseList,getActivity());
+        recyclerchemise.setAdapter ( categoriesAdapteNouveaux );
         recyclerchemise.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         //chemise
         ////robe
         recyclerrobe=v.findViewById(R.id.recyclerrobe);
         categoriesModelRobeList=new ArrayList<> (  );
-        categoriesAdapteRobe=new CategoriesAdapteRobe(categoriesModelRobeList,getActivity());
-        recyclerrobe.setAdapter ( categoriesAdapteRobe );
+        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux(categoriesModelRobeList,getActivity());
+        recyclerrobe.setAdapter ( categoriesAdapteNouveaux );
         recyclerrobe.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         //robe
         //////////////slider
@@ -254,7 +193,6 @@ public class HomeFragment extends Fragment {
         imagePubFixe=v.findViewById(R.id.pubImage);
         imagePubText=v.findViewById(R.id.pubImageText);
         viewFlipper=v.findViewById(R.id.viewFlipper);
-        storageReference=FirebaseStorage.getInstance().getReference();
         firebaseFirestore=FirebaseFirestore.getInstance();
         AsyncTask asyncTask=new AsyncTask ();
         asyncTask.execute (  );
@@ -337,13 +275,11 @@ public class HomeFragment extends Fragment {
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                lastVisible = queryDocumentSnapshots.getDocuments()
-                        .get(queryDocumentSnapshots.size() -1);
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
                         CategoriesModelNouveaux categoriesModelNouveaux =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
-                        categoriesModelNouveauxList.add(categoriesModelNouveaux);
+                        categoriesModelList.add(categoriesModelNouveaux);
                         categoriesAdapteNouveaux.notifyDataSetChanged();
                     }
                 }
@@ -360,9 +296,9 @@ public class HomeFragment extends Fragment {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        CategoriesModelChaussure categoriesModelChaussure =doc.getDocument().toObject(CategoriesModelChaussure.class).withId ( idupost );
+                        CategoriesModelNouveaux categoriesModelChaussure =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesAdapteChaussureList.add(categoriesModelChaussure);
-                        categoriesAdapteChaussure.notifyDataSetChanged();
+                        categoriesAdapteNouveaux.notifyDataSetChanged();
                     }
                 }
 
@@ -379,9 +315,9 @@ public class HomeFragment extends Fragment {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        CategoriesModelJupe categoriesModelJupe =doc.getDocument().toObject(CategoriesModelJupe.class).withId ( idupost );
+                        CategoriesModelNouveaux categoriesModelJupe =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesModelJupeList.add(categoriesModelJupe);
-                        categoriesAdapteJupe.notifyDataSetChanged();
+                        categoriesAdapteNouveaux.notifyDataSetChanged();
                     }
                 }
 
@@ -415,43 +351,16 @@ public class HomeFragment extends Fragment {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        CategoriesModelTshirt categoriesModelTshirt =doc.getDocument().toObject(CategoriesModelTshirt.class).withId ( idupost );
+                        CategoriesModelNouveaux categoriesModelTshirt =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesModelTshirtList.add(categoriesModelTshirt);
-                        categoriesAdapteTshirt.notifyDataSetChanged();
+                        categoriesAdapteNouveaux.notifyDataSetChanged();
                     }
                 }
 
             }
         });
     }
-   /* public void chargerPlus(){
 
-        Query prochain =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING )
-                .startAfter(lastVisible)
-                .limit(3);
-
-
-        prochain.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    lastVisible = queryDocumentSnapshots.getDocuments()
-                            .get(queryDocumentSnapshots.size() - 1);
-                    for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-                        if (doc.getType() == DocumentChange.Type.ADDED) {
-                            String idupost = doc.getDocument().getId();
-                            CategoriesModelNouveaux categoriesModelNouveaux = doc.getDocument().toObject(CategoriesModelNouveaux.class).withId(idupost);
-                            categoriesModelNouveauxList.add(categoriesModelNouveaux);
-                            categoriesAdapteNouveaux.notifyDataSetChanged();
-                        }
-                    }
-                }else {
-
-                }
-
-            }
-        });
-    }*/
     public void recyclerPull(){
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "pull" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -461,9 +370,9 @@ public class HomeFragment extends Fragment {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        CategoriesModelPull categoriesModelPull =doc.getDocument().toObject(CategoriesModelPull.class).withId ( idupost );
+                        CategoriesModelNouveaux categoriesModelPull =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesModelPullList.add(categoriesModelPull);
-                        categoriesAdaptePull.notifyDataSetChanged();
+                        categoriesAdapteNouveaux.notifyDataSetChanged();
                     }
                 }
 
@@ -479,9 +388,9 @@ public class HomeFragment extends Fragment {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        CategoriesModelAccessoire categoriesModelAccessoire =doc.getDocument().toObject(CategoriesModelAccessoire.class).withId ( idupost );
+                        CategoriesModelNouveaux categoriesModelAccessoire =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesModelAccessoireList.add(categoriesModelAccessoire);
-                        categoriesAdapteAccessoire.notifyDataSetChanged();
+                        categoriesAdapteNouveaux.notifyDataSetChanged();
                     }
                 }
 
@@ -497,9 +406,9 @@ public class HomeFragment extends Fragment {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        CategoriesModelCullote categoriesModelCullote =doc.getDocument().toObject(CategoriesModelCullote.class).withId ( idupost );
+                        CategoriesModelNouveaux categoriesModelCullote =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesModelCulloteList.add(categoriesModelCullote);
-                        categoriesAdapteCullote.notifyDataSetChanged();
+                        categoriesAdapteNouveaux.notifyDataSetChanged();
                     }
                 }
 
@@ -515,9 +424,9 @@ public class HomeFragment extends Fragment {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        CategoriesModelPantalons categoriesModelPantalons =doc.getDocument().toObject(CategoriesModelPantalons.class).withId ( idupost );
+                        CategoriesModelNouveaux categoriesModelPantalons =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesModelPantalonsList.add(categoriesModelPantalons);
-                        categoriesAdaptePantalons.notifyDataSetChanged();
+                        categoriesAdapteNouveaux.notifyDataSetChanged();
                     }
                 }
 
@@ -533,9 +442,9 @@ public class HomeFragment extends Fragment {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        CategoriesModelChemise categoriesModelChemise=doc.getDocument().toObject(CategoriesModelChemise.class).withId ( idupost );
+                        CategoriesModelNouveaux categoriesModelChemise=doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesModelChemiseList.add(categoriesModelChemise);
-                        categoriesAdapteChemise.notifyDataSetChanged();
+                        categoriesAdapteNouveaux.notifyDataSetChanged();
                     }
                 }
 
@@ -551,9 +460,9 @@ public class HomeFragment extends Fragment {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        CategoriesModelRobe categoriesModelRobe=doc.getDocument().toObject(CategoriesModelRobe.class).withId ( idupost );
+                        CategoriesModelNouveaux categoriesModelRobe=doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesModelRobeList.add(categoriesModelRobe);
-                        categoriesAdapteRobe.notifyDataSetChanged();
+                        categoriesAdapteNouveaux.notifyDataSetChanged();
                     }
                 }
 

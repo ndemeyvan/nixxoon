@@ -98,7 +98,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
                       telephone.setText ( telephone_user );
                       residence.setText ( residence_user );
                       email.setText ( email_user );
-                      Picasso.with ( ParametrePorfilActivity.this ).load ( image_profil_user ).placeholder(R.drawable.use).into ( parametreImage );
+                      Picasso.with ( getApplicationContext()).load ( image_profil_user ).placeholder(R.drawable.use).into ( parametreImage );
                   }
                }else{
 
@@ -148,7 +148,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
                 parametre_progressbar.setVisibility ( View.VISIBLE );
                 File newImageFile= new File(mImageUri.getPath ());
                 try {
-                    compressedImageFile = new Compressor(ParametrePorfilActivity.this)
+                    compressedImageFile = new Compressor(getApplicationContext())
                             .setMaxWidth(200)
                             .setMaxHeight(200)
                             .setQuality(10)
@@ -164,7 +164,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
 
-                        Toast.makeText(ParametrePorfilActivity.this,"une erreur , veillez reesayer svp.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"une erreur , veillez reesayer svp.",Toast.LENGTH_LONG).show();
 
 
                     }
@@ -208,20 +208,20 @@ public class ParametrePorfilActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful ()){
-                                                    Intent intent =new Intent ( ParametrePorfilActivity.this,Accueil.class );
+                                                    Intent intent =new Intent ( getApplicationContext(),Accueil.class );
                                                     startActivity ( intent );
                                                     finish ();
-                                                    Toast.makeText ( ParametrePorfilActivity.this,"compte enregistre",Toast.LENGTH_LONG ).show ();
+                                                    Toast.makeText ( getApplicationContext(),"compte enregistre",Toast.LENGTH_LONG ).show ();
                                                 }else{
                                                     String error =task.getException ().getMessage ();
-                                                    Toast.makeText ( ParametrePorfilActivity.this,error,Toast.LENGTH_LONG ).show ();
+                                                    Toast.makeText ( getApplicationContext(),error,Toast.LENGTH_LONG ).show ();
                                                     parametre_progressbar.setVisibility ( View.INVISIBLE );
                                                 }
                                             }
                                         } );
                                     } else {
                                         String error =task.getException ().getMessage ();
-                                        Toast.makeText ( ParametrePorfilActivity.this,error,Toast.LENGTH_LONG ).show ();
+                                        Toast.makeText ( getApplicationContext(),error,Toast.LENGTH_LONG ).show ();
                                         parametre_progressbar.setVisibility ( View.INVISIBLE );
                                     }
                                 }
@@ -229,7 +229,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
                             ////////fin de l'nvoie
 
                         }else {
-                            Toast.makeText ( ParametrePorfilActivity.this,"remplir tous les champs svp",Toast.LENGTH_LONG ).show ();
+                            Toast.makeText ( getApplicationContext(),"remplir tous les champs svp",Toast.LENGTH_LONG ).show ();
                             parametre_progressbar.setVisibility ( View.INVISIBLE );
                         }
                     }

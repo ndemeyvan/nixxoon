@@ -4,15 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.utilForPost.CategoriesAdaptePost;
 import cm.studio.devbee.communitymarket.utilForPost.CategoriesModelPost;
-import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesModel;
+
 
 public class PostActivity extends AppCompatActivity {
     private android.support.v7.widget.Toolbar toolbar_post;
@@ -38,8 +35,8 @@ public class PostActivity extends AppCompatActivity {
         categoriesModelPostList.add ( new CategoriesModelPost ( "robe",R.drawable.robe ) );
         categoriesModelPostList.add ( new CategoriesModelPost ( "pull",R.drawable.robe ) );
 
-        categoriesAdaptePost=new CategoriesAdaptePost (categoriesModelPostList,PostActivity.this );
+        categoriesAdaptePost=new CategoriesAdaptePost (categoriesModelPostList,getApplicationContext() );
         post_cat_recycler.setAdapter ( categoriesAdaptePost );
-        post_cat_recycler.setLayoutManager ( new LinearLayoutManager ( this,LinearLayoutManager.VERTICAL ,false) );
+        post_cat_recycler.setLayoutManager ( new LinearLayoutManager ( getApplicationContext(),LinearLayoutManager.VERTICAL ,false) );
     }
 }

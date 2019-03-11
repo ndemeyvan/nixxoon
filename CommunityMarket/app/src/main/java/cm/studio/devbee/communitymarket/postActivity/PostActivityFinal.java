@@ -83,7 +83,7 @@ public class PostActivityFinal extends AppCompatActivity {
         setSupportActionBar ( postfinaltoolbar );
         progressBar_post=findViewById ( R.id.progressBar_post );
         categoryName=getIntent ().getExtras ().get ( "categoryName" ).toString ();
-        Toast.makeText ( PostActivityFinal.this,categoryName,Toast.LENGTH_LONG ).show ();
+        Toast.makeText ( getApplicationContext(),categoryName,Toast.LENGTH_LONG ).show ();
         setimage ();
         prendreDonner ();
        /* ActionBar ab=getSupportActionBar ();
@@ -141,14 +141,14 @@ public class PostActivityFinal extends AppCompatActivity {
             stocker();
         }else{
             progressBar_post.setVisibility (View.INVISIBLE);
-            Toast.makeText ( PostActivityFinal.this,"Veuillez remplir tous les champs",Toast.LENGTH_LONG ).show ();
+            Toast.makeText ( getApplicationContext(),"Veuillez remplir tous les champs",Toast.LENGTH_LONG ).show ();
         }
     }
     public void stocker(){
 
                     File newImageFile= new File(mImageUri.getPath ());
                     try {
-                        compressedImageFile = new Compressor(PostActivityFinal.this)
+                        compressedImageFile = new Compressor(getApplicationContext())
                                 .setMaxWidth(200)
                                 .setMaxHeight(200)
                                 .setQuality(10)
@@ -166,7 +166,7 @@ public class PostActivityFinal extends AppCompatActivity {
                     uploadTask.addOnFailureListener(new OnFailureListener () {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
-                            Toast.makeText ( PostActivityFinal.this,"un probleme est survenue,reessayer plus tard svp" ,Toast.LENGTH_LONG).show ();
+                            Toast.makeText ( getApplicationContext(),"un probleme est survenue,reessayer plus tard svp" ,Toast.LENGTH_LONG).show ();
                         }
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot> () {
                         @Override
@@ -208,7 +208,7 @@ public class PostActivityFinal extends AppCompatActivity {
 
                                                 }else{
                                                     String error = task.getException().getMessage();
-                                                    Toast.makeText(PostActivityFinal.this,error,Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getApplicationContext(),error,Toast.LENGTH_LONG).show();
                                                 }
                                             }
                                         });
@@ -219,7 +219,7 @@ public class PostActivityFinal extends AppCompatActivity {
 
                                                 }else{
                                                     String error = task.getException().getMessage();
-                                                    Toast.makeText(PostActivityFinal.this,error,Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getApplicationContext(),error,Toast.LENGTH_LONG).show();
                                                 }
                                             }
                                         });
@@ -227,13 +227,13 @@ public class PostActivityFinal extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentReference> task) {
                                                 if (task.isSuccessful()){
-                                                    Intent gotoRecherche=new Intent(PostActivityFinal.this,Accueil.class);
+                                                    Intent gotoRecherche=new Intent(getApplicationContext(),Accueil.class);
                                                     startActivity(gotoRecherche);
                                                     finish();
-                                                    Toast.makeText(PostActivityFinal.this,"envoie effectuer",Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getApplicationContext(),"envoie effectuer",Toast.LENGTH_LONG).show();
                                                 }else{
                                                     String error = task.getException().getMessage();
-                                                    Toast.makeText(PostActivityFinal.this,error,Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getApplicationContext(),error,Toast.LENGTH_LONG).show();
                                                 }
                                             }
                                         });

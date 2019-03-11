@@ -30,7 +30,7 @@ public class ChoiceActivity extends AppCompatActivity {
         gotoLogin.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                Intent gotoLogin=new Intent ( ChoiceActivity.this,LoginActivity.class );
+                Intent gotoLogin=new Intent ( getApplicationContext(),LoginActivity.class );
                 startActivity ( gotoLogin );
                 finish ();
             }
@@ -40,7 +40,7 @@ public class ChoiceActivity extends AppCompatActivity {
         gotoRegister.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                Intent gotoRegister=new Intent ( ChoiceActivity.this,RegisterActivity.class );
+                Intent gotoRegister=new Intent ( getApplicationContext(),RegisterActivity.class );
                 startActivity ( gotoRegister );
                 finish ();
             }
@@ -50,7 +50,7 @@ public class ChoiceActivity extends AppCompatActivity {
         devant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent go = new Intent(ChoiceActivity.this,Accueil.class);
+                Intent go = new Intent(getApplicationContext(),Accueil.class);
                 startActivity(go);
                 finish();
             }

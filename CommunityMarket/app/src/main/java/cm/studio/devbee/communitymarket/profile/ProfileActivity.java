@@ -23,8 +23,6 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import cm.studio.devbee.communitymarket.R;
-import cm.studio.devbee.communitymarket.utilsForAccessoire.CategoriesAdapteAccessoire;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -79,7 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
                         email.setText ( email_user );
                         operation.setText("0");
                         getSupportActionBar().setTitle(prenomuser);
-                        Picasso.with ( ProfileActivity.this ).load ( image_profil_user ).transform(new CircleTransform()).placeholder(R.drawable.use).into ( profilImage );
+                        Picasso.with ( getApplicationContext() ).load ( image_profil_user ).transform(new CircleTransform()).placeholder(R.drawable.use).into ( profilImage );
                         progressBar.setVisibility(View.INVISIBLE);
                     }
                 }else{

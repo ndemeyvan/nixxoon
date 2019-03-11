@@ -10,8 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,68 +21,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
-
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import cm.studio.devbee.communitymarket.Fragments.HomeFragment;
 import cm.studio.devbee.communitymarket.Fragments.PullFragment;
 import cm.studio.devbee.communitymarket.Fragments.TshirtFragment;
-import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesAdaptePantalons;
-import cm.studio.devbee.communitymarket.Utilpantalons.CategoriesModelPantalons;
 import cm.studio.devbee.communitymarket.a_propos.AproposActivity;
 import cm.studio.devbee.communitymarket.login.LoginActivity;
 import cm.studio.devbee.communitymarket.postActivity.PostActivity;
 import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 import cm.studio.devbee.communitymarket.profile.ProfileActivity;
-import cm.studio.devbee.communitymarket.utilForCullotes.CategoriesAdapteCullote;
-import cm.studio.devbee.communitymarket.utilForCullotes.CategoriesModelCullote;
-import cm.studio.devbee.communitymarket.utilForJupe.CategoriesAdapteJupe;
-import cm.studio.devbee.communitymarket.utilForJupe.CategoriesModelJupe;
-import cm.studio.devbee.communitymarket.utilForPost.CategoriesModelPost;
-import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesAdapteTshirt;
-import cm.studio.devbee.communitymarket.utilForT_shirt.CategoriesModelTshirt;
-import cm.studio.devbee.communitymarket.utilsForAccessoire.CategoriesAdapteAccessoire;
-import cm.studio.devbee.communitymarket.utilsForAccessoire.CategoriesModelAccessoire;
-import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesAdapte;
-import cm.studio.devbee.communitymarket.utilsForCategories.CategoriesModel;
-import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesAdapteChaussure;
-import cm.studio.devbee.communitymarket.utilsForChaussure.CategoriesModelChaussure;
-import cm.studio.devbee.communitymarket.utilsForChemise.CategoriesAdapteChemise;
-import cm.studio.devbee.communitymarket.utilsForChemise.CategoriesModelChemise;
-import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouveaux;
-import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
-import cm.studio.devbee.communitymarket.utilsForPull.CategoriesAdaptePull;
-import cm.studio.devbee.communitymarket.utilsForPull.CategoriesModelPull;
-import cm.studio.devbee.communitymarket.utilsForRobe.CategoriesAdapteRobe;
-import cm.studio.devbee.communitymarket.utilsForRobe.CategoriesModelRobe;
-import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
-import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class Accueil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth mAuth;
@@ -95,8 +47,6 @@ public class Accueil extends AppCompatActivity
     private FloatingActionButton content_floating_action_btn;
     private TabLayout tabLayout;
     private ViewPager tabsviewpager;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,9 +73,6 @@ public class Accueil extends AppCompatActivity
         recup();
         vaTopost ();
 
-
-
-
     }
     public void setupViewPager(ViewPager viewPager){
         TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
@@ -148,7 +95,7 @@ public class Accueil extends AppCompatActivity
                         String prenomuser =task.getResult ().getString ("user_prenom");
                         drawer_user_name.setText ( nom_user + " " + prenomuser);
                         Log.d("cle",image_profil_user);
-                        Picasso.with ( Accueil.this ).load ( image_profil_user ).transform(new CircleTransform()).placeholder(R.drawable.use).into ( acceuille_image );
+                        Picasso.with ( getApplicationContext()).load ( image_profil_user ).transform(new CircleTransform()).placeholder(R.drawable.use).into ( acceuille_image );
                     }
                 }else{
 
@@ -195,18 +142,18 @@ public class Accueil extends AppCompatActivity
         int id = item.getItemId ();
 
         if (id == R.id.ic_user) {
-            Intent intent = new Intent ( Accueil.this,ProfileActivity.class );
+            Intent intent = new Intent ( getApplicationContext(),ProfileActivity.class );
             startActivity ( intent );
         } else if (id == R.id.ic_logout) {
-            Intent intenttwo = new Intent ( Accueil.this,LoginActivity.class );
+            Intent intenttwo = new Intent ( getApplicationContext(),LoginActivity.class );
             startActivity ( intenttwo );
             finish ();
         }else if (id == R.id.setting) {
-            Intent parametre=new Intent(Accueil.this,ParametrePorfilActivity.class);
+            Intent parametre=new Intent(getApplicationContext(),ParametrePorfilActivity.class);
             startActivity(parametre);
         }
         else if (id == R.id.nous_contacter) {
-            Intent nous_contacter=new Intent(Accueil.this,AproposActivity.class);
+            Intent nous_contacter=new Intent(getApplicationContext(),AproposActivity.class);
             startActivity(nous_contacter);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById ( R.id.drawer_layout );
@@ -225,18 +172,11 @@ public class Accueil extends AppCompatActivity
         content_floating_action_btn.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                Intent vaTopost =new Intent ( Accueil.this,PostActivity.class );
+                Intent vaTopost =new Intent ( getApplicationContext(),PostActivity.class );
                 startActivity ( vaTopost );
             }
         } );
     }
-
-
-
-
-
-
-
 
     public class CircleTransform implements Transformation {
         @Override

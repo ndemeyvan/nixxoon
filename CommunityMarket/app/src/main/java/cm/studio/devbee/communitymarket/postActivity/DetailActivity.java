@@ -85,7 +85,7 @@ public class DetailActivity extends AppCompatActivity {
                         detail_prix_produit.setText(prixduproduit);
                         detail_description.setText(description);
                         date_de_publication.setText(datedepublication);
-                        Picasso.with(DetailActivity.this).load(imageduproduit).into(detail_image_post);
+                        Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
                     }
                 }else {
                     String error=task.getException().getMessage();
@@ -105,7 +105,7 @@ public class DetailActivity extends AppCompatActivity {
                         String name_user= task.getResult ().getString ( "user_name" );
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         detail_user_name.setText(name_user+" "+prenom);
-                        Picasso.with(DetailActivity.this).load(image_user).into(detail_profil_image);
+                        Picasso.with(getApplicationContext()).load(image_user).into(detail_profil_image);
                     }
                 }else {
                     String error=task.getException().getMessage();
@@ -119,7 +119,7 @@ public class DetailActivity extends AppCompatActivity {
        vendeur_button.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent vendeur=new Intent(DetailActivity.this,VendeurActivity.class);
+               Intent vendeur=new Intent(getApplicationContext(),VendeurActivity.class);
                vendeur.putExtra("id du post",iddupost);
                vendeur.putExtra("id de l'utilisateur",current_user_id);
                startActivity(vendeur);
