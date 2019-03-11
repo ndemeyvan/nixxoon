@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -42,7 +43,7 @@ private ProgressBar login_progressBar;
         register_text=findViewById ( R.id.register_text );
         login_progressBar=findViewById ( R.id.login_progressBarRegister );
         mAuth = FirebaseAuth.getInstance();
-        createAccount ();
+
         register_text.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
@@ -88,6 +89,23 @@ private ProgressBar login_progressBar;
             }
 
         } );
+    }public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute ();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            createAccount ();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute ( aVoid );
+
+        }
     }
 
 }
