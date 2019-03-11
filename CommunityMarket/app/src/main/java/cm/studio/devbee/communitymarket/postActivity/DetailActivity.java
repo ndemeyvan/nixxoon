@@ -34,11 +34,8 @@ public class DetailActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private ImageView detail_image_post;
     private TextView detail_post_titre_produit;
-    private TextView detail_like_produit;
     private CircleImageView detail_profil_image;
     private Button vendeur_button;
-    private ImageView detail_like_image;
-    private TextView nmbre_de_like;
     private TextView detail_user_name;
     private TextView detail_prix_produit;
     private TextView detail_description;
@@ -52,14 +49,11 @@ public class DetailActivity extends AppCompatActivity {
         firebaseFirestore=FirebaseFirestore.getInstance();
         iddupost =getIntent().getExtras().getString("id du post");
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
-        //Toast.makeText(DetailActivity.this,iddupost,Toast.LENGTH_LONG).show();
         detail_image_post=findViewById(R.id.detail_image_post);
         detail_post_titre_produit=findViewById(R.id.detail_titre_produit);
         detail_prix_produit=findViewById(R.id.detail_prix_produit);
         detail_profil_image=findViewById(R.id.detail_image_du_profil);
         vendeur_button=findViewById(R.id.vendeur_button);
-        /*detail_like_image=findViewById(R.id.detail_likeImage);
-        nmbre_de_like=findViewById(R.id.detail_nombre_de_likes);*/
         detail_user_name=findViewById(R.id.detail_user_name);
         detail_description=findViewById(R.id.detail_description);
         date_de_publication=findViewById(R.id.date_de_publication);

@@ -46,7 +46,7 @@ private ProgressBar login_progressBar;
         register_text.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                Intent login=new Intent ( RegisterActivity.this,LoginActivity.class );
+                Intent login=new Intent ( getApplicationContext(),LoginActivity.class );
                 startActivity ( login );
                 finish ();
             }
@@ -67,22 +67,22 @@ private ProgressBar login_progressBar;
                            @Override
                            public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful ()){
-                                Intent intent=new Intent ( RegisterActivity.this,ParametrePorfilActivity.class );
+                                Intent intent=new Intent ( getApplicationContext(),ParametrePorfilActivity.class );
                                 startActivity ( intent );
                                 finish ();
                             }   else {
                                 login_progressBar.setVisibility ( View.INVISIBLE );
                                 String error =task.getException ().getMessage ();
-                                Toast.makeText ( RegisterActivity.this,error,Toast.LENGTH_LONG ).show ();
+                                Toast.makeText ( getApplicationContext(),error,Toast.LENGTH_LONG ).show ();
                             }
                            }
                        } );
                    }else{
-                     Toast.makeText ( RegisterActivity.this,"les mots de passe ne correspondent pas !!!",Toast.LENGTH_LONG ).show ();
+                     Toast.makeText ( getApplicationContext(),"les mots de passe ne correspondent pas !!!",Toast.LENGTH_LONG ).show ();
                    }
                }else{
                    login_progressBar.setVisibility ( View.INVISIBLE );
-                    Toast.makeText ( RegisterActivity.this,"Veuillez remplir tous les champs svp !!",Toast.LENGTH_LONG ).show ();
+                    Toast.makeText ( getApplicationContext(),"Veuillez remplir tous les champs svp !!",Toast.LENGTH_LONG ).show ();
                }
 
             }
