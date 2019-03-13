@@ -25,6 +25,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +41,14 @@ import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
 public class PullFragment extends Fragment {
 
 private View v;
-    private GridViewAdapter gridViewAdapter;
-    List<ModelGridView> modelGridViewList;
-    private ImageView imagePubpull;
-    private TextView textPubpull;
-    private FirebaseFirestore firebaseFirestore;
-    ProgressDialog progressDialog;
+    private static GridViewAdapter gridViewAdapter;
+    private static List<ModelGridView> modelGridViewList;
+    private static ImageView imagePubpull;
+    private static TextView textPubpull;
+    private static FirebaseFirestore firebaseFirestore;
+    private static ProgressDialog progressDialog;
+    private static AsyncTask asyncTask;
+    private static WeakReference<PullFragment> pullFragmentWeakReference;
     public PullFragment() {
         // Required empty public constructor
     }
@@ -61,30 +64,14 @@ private View v;
         textPubpull=v.findViewById ( R.id.pubImageText_pull );
         modelGridViewList=new ArrayList<> (  );
         gridViewAdapter=new GridViewAdapter ( modelGridViewList,getActivity () );
-        pullRecyclerView ();
-        imagePub_pull ();
-
+        pullFragmentWeakReference=new WeakReference<>(this);
+        asyncTask=new AsyncTask();
+        asyncTask.execute();
 
 
         return v;
     }
-    public void imagePub_pull(){
-        progressDialog = new ProgressDialog (getActivity ());
-        progressDialog.setMessage("Loading..."); // Setting Message
-        progressDialog.setTitle("chargement"); // Setting Title
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-        progressDialog.show(); // Display Progress Dialog
-        progressDialog.setCancelable(false);
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Thread.sleep(500);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                progressDialog.dismiss();
-            }
-        }).start();
+    public  void imagePub_pull(){
         DocumentReference user = firebaseFirestore.collection("publicit").document("imageFixe");
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
@@ -107,7 +94,7 @@ private View v;
             }
         });
     }
-    public void pullRecyclerView(){
+    public  void pullRecyclerView(){
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "pull" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot> () {
             @Override
@@ -125,5 +112,36 @@ private View v;
             }
         });
     }
+    public  class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute ();
+        }
 
+        @Override
+        protected Void doInBackground(Void... voids) {
+            pullRecyclerView ();
+            imagePub_pull ();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute ( aVoid );
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        asyncTask.cancel(true);
+        super.onDestroy();
+        asyncTask.cancel(true);
+        gridViewAdapter=null;
+        modelGridViewList=null;
+        imagePubpull=null;
+        textPubpull=null;
+        firebaseFirestore=null;
+        progressDialog=null;
+    }
 }

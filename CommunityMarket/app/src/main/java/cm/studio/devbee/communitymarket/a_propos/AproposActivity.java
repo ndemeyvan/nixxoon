@@ -8,11 +8,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import java.lang.ref.WeakReference;
+
 import cm.studio.devbee.communitymarket.R;
 
 public class AproposActivity extends AppCompatActivity {
-    private Button call_button;
-    private Toolbar aporpos_toolbar;
+    private static Button call_button;
+    private static Toolbar aporpos_toolbar;
+    private static WeakReference<AproposActivity> aproposActivityWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +24,8 @@ public class AproposActivity extends AppCompatActivity {
         aporpos_toolbar=findViewById(R.id.aporpos_toolbar);
         setSupportActionBar(aporpos_toolbar);
         getSupportActionBar().setTitle("publiciter");
+        aproposActivityWeakReference=new WeakReference<>(this);
+
 
         call_button.setOnClickListener ( new View.OnClickListener () {
             @Override
@@ -31,5 +36,12 @@ public class AproposActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         } );
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        call_button=null;
+        aporpos_toolbar=null;
     }
 }

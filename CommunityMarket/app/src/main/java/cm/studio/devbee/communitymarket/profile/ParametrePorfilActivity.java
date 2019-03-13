@@ -1,6 +1,7 @@
 package cm.studio.devbee.communitymarket.profile;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -34,6 +35,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,27 +46,28 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
 
 public class ParametrePorfilActivity extends AppCompatActivity {
-    private android.support.v7.widget.Toolbar parametre_toolbar;
-    private EditText nom;
-    private EditText premon;
-    private EditText telephone;
-    private EditText residence;
-    private EditText email;
-    private Button button_enregister;
-    private Uri mImageUri;
-    private CircleImageView parametreImage;
-    private FirebaseAuth mAuth;
-    private StorageReference storageReference;
-    private FirebaseFirestore firebaseFirestore;
-    private String current_user_id;
-    private ProgressBar parametre_progressbar;
-    private Bitmap compressedImageFile;
+    private static android.support.v7.widget.Toolbar parametre_toolbar;
+    private static EditText nom;
+    private static EditText premon;
+    private static EditText telephone;
+    private static EditText residence;
+    private static EditText email;
+    private static Button button_enregister;
+    private static Uri mImageUri;
+    private static CircleImageView parametreImage;
+    private static FirebaseAuth mAuth;
+    private static StorageReference storageReference;
+    private static FirebaseFirestore firebaseFirestore;
+    private static String current_user_id;
+    private static ProgressBar parametre_progressbar;
+    private static Bitmap compressedImageFile;
+    private static AsyncTask asyncTask;
+    private static WeakReference<ParametrePorfilActivity> parametrePorfilActivityWeakReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_parametre_porfil );
-        parametre_toolbar=findViewById (R.id.parametre_toolbar  );
         setSupportActionBar ( parametre_toolbar );
         getSupportActionBar ().setTitle ( "Parametre du compte" );
         nom=findViewById ( R.id.param_nom );
@@ -79,32 +82,9 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         firebaseFirestore=FirebaseFirestore.getInstance ();
         current_user_id=mAuth.getCurrentUser ().getUid ();
         parametre_progressbar=findViewById ( R.id.parametre_progressbar );
-        setimage();
-        getuserdata ();
-        recuperation ();
-        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-               if (task.isSuccessful ()){
-                  if (task.getResult ().exists ()){
-                      String nom_user = task.getResult ().getString ("user_name");
-                      String prenomuser =task.getResult ().getString ("user_prenom");
-                      String telephone_user =task.getResult ().getString ("user_telephone");
-                      String residence_user  =task.getResult ().getString ("user_residence");
-                      String image_profil_user =task.getResult ().getString ("user_profil_image");
-                      String email_user =task.getResult ().getString ("user_mail");
-                      nom.setText ( nom_user );
-                      premon.setText ( prenomuser );
-                      telephone.setText ( telephone_user );
-                      residence.setText ( residence_user );
-                      email.setText ( email_user );
-                      Picasso.with ( getApplicationContext()).load ( image_profil_user ).placeholder(R.drawable.use).into ( parametreImage );
-                  }
-               }else{
-
-               }
-            }
-        } );
+        parametrePorfilActivityWeakReference=new WeakReference<>(this);
+        asyncTask=new AsyncTask();
+       asyncTask.execute();
 
     }
     public void setimage(){
@@ -238,18 +218,6 @@ public class ParametrePorfilActivity extends AppCompatActivity {
 
                     }
                 });
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public void recuperation(){
@@ -265,5 +233,70 @@ public class ParametrePorfilActivity extends AppCompatActivity {
             }
         } );
     }
+    public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
 
+            super.onPreExecute ();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            setimage();
+            getuserdata ();
+            recuperation ();
+            firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful ()){
+                        if (task.getResult ().exists ()){
+                            String nom_user = task.getResult ().getString ("user_name");
+                            String prenomuser =task.getResult ().getString ("user_prenom");
+                            String telephone_user =task.getResult ().getString ("user_telephone");
+                            String residence_user  =task.getResult ().getString ("user_residence");
+                            String image_profil_user =task.getResult ().getString ("user_profil_image");
+                            String email_user =task.getResult ().getString ("user_mail");
+                            nom.setText ( nom_user );
+                            premon.setText ( prenomuser );
+                            telephone.setText ( telephone_user );
+                            residence.setText ( residence_user );
+                            email.setText ( email_user );
+                            Picasso.with ( getApplicationContext()).load ( image_profil_user ).placeholder(R.drawable.use).into ( parametreImage );
+                        }
+                    }else{
+
+                    }
+                }
+            } );
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute ( aVoid );
+
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        asyncTask.cancel(true);
+        super.onDestroy();
+        asyncTask.cancel(true);
+        parametre_toolbar=null;
+        nom=null;
+        premon=null;
+        telephone=null;
+       residence=null;
+        email=null;
+        button_enregister=null;
+        mImageUri=null;
+        parametreImage=null;
+        mAuth=null;
+       storageReference=null;
+       firebaseFirestore=null;
+       current_user_id=null;
+        parametre_progressbar=null;
+        compressedImageFile=null;
+    }
 }

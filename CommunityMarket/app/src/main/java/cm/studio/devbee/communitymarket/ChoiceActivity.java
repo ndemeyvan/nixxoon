@@ -7,13 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.lang.ref.WeakReference;
+
 import cm.studio.devbee.communitymarket.login.LoginActivity;
 import cm.studio.devbee.communitymarket.login.RegisterActivity;
 
 public class ChoiceActivity extends AppCompatActivity {
-        private Button gotoLogin;
-        private Button gotoRegister;
-        private ImageView devant;
+        private static Button gotoLogin;
+        private static Button gotoRegister;
+        private static ImageView devant;
+        private static WeakReference<ChoiceActivity> choiceActivityWeakReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,7 @@ public class ChoiceActivity extends AppCompatActivity {
         gotoLogin=findViewById ( R.id.gotoLogin );
         gotoRegister=findViewById ( R.id.gotoRegister );
         devant=findViewById(R.id.devant);
+        choiceActivityWeakReference=new WeakReference<>(this);
         login ();
         register ();
         va();
@@ -55,5 +59,13 @@ public class ChoiceActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gotoLogin=null;
+      gotoRegister=null;
+         devant=null;
     }
 }

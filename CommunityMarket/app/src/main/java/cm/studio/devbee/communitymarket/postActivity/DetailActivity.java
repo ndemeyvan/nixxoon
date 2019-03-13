@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket.postActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,18 +32,20 @@ import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailActivity extends AppCompatActivity {
-    private  String iddupost;
-    private FirebaseFirestore firebaseFirestore;
-    private ImageView detail_image_post;
-    private TextView detail_post_titre_produit;
-    private CircleImageView detail_profil_image;
-    private Button vendeur_button;
-    private TextView detail_user_name;
-    private TextView detail_prix_produit;
-    private TextView detail_description;
-    private TextView date_de_publication;
-    private FirebaseAuth firebaseAuth;
-    private String current_user_id;
+    private  static String iddupost;
+    private static FirebaseFirestore firebaseFirestore;
+    private static ImageView detail_image_post;
+    private static TextView detail_post_titre_produit;
+    private static CircleImageView detail_profil_image;
+    private static Button vendeur_button;
+    private static TextView detail_user_name;
+    private static TextView detail_prix_produit;
+    private static TextView detail_description;
+    private static TextView date_de_publication;
+    private static FirebaseAuth firebaseAuth;
+    private static String current_user_id;
+    private AsyncTask asyncTask;
+    private static WeakReference<DetailActivity> detailActivityWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,36 +62,10 @@ public class DetailActivity extends AppCompatActivity {
         detail_description=findViewById(R.id.detail_description);
         date_de_publication=findViewById(R.id.date_de_publication);
         firebaseAuth=FirebaseAuth.getInstance();
-        //likez();
-        vendeurActivity();
-        ///////////no
-        firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
-                    if (task.getResult ().exists ()){
-                        String postLike= task.getResult ().getString ( "user_name" );
-                        String image_user=task.getResult ().getString ( "user_profil_image" );
+        detailActivityWeakReference=new WeakReference<>(this);
+        asyncTask=new AsyncTask();
+        asyncTask.execute();
 
-                        ////sockelerie a faire after
-                        String titreDuProduit=task.getResult().getString("nom_du_produit");
-                        String description= task.getResult ().getString ( "decription_du_produit" );
-                        String imageduproduit=task.getResult ().getString ( "image_du_produit" );
-                        String prixduproduit= task.getResult ().getString ( "prix_du_produit" );
-                        String datedepublication=task.getResult ().getString ( "date_de_publication" );
-                        detail_post_titre_produit.setText(titreDuProduit);
-                        detail_prix_produit.setText(prixduproduit);
-                        detail_description.setText(description);
-                        date_de_publication.setText(datedepublication);
-                        Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
-                    }
-                }else {
-                    String error=task.getException().getMessage();
-
-                }
-            }
-        });
-        nomEtImageProfil();
     }
     public void nomEtImageProfil(){
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -120,6 +98,69 @@ public class DetailActivity extends AppCompatActivity {
            }
        });
    }
+    public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute ();
+        }
 
+        @Override
+        protected Void doInBackground(Void... voids) {
+            firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()){
+                        if (task.getResult ().exists ()){
+                            String postLike= task.getResult ().getString ( "user_name" );
+                            String image_user=task.getResult ().getString ( "user_profil_image" );
 
+                            ////sockelerie a faire after
+                            String titreDuProduit=task.getResult().getString("nom_du_produit");
+                            String description= task.getResult ().getString ( "decription_du_produit" );
+                            String imageduproduit=task.getResult ().getString ( "image_du_produit" );
+                            String prixduproduit= task.getResult ().getString ( "prix_du_produit" );
+                            String datedepublication=task.getResult ().getString ( "date_de_publication" );
+                            detail_post_titre_produit.setText(titreDuProduit);
+                            detail_prix_produit.setText(prixduproduit);
+                            detail_description.setText(description);
+                            date_de_publication.setText(datedepublication);
+                            Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
+                        }
+                    }else {
+                        String error=task.getException().getMessage();
+
+                    }
+                }
+            });
+            vendeurActivity();
+            nomEtImageProfil();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute ( aVoid );
+
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        asyncTask.cancel(true);
+        super.onDestroy();
+        asyncTask.cancel(true);
+        iddupost=null;
+        firebaseFirestore=null;
+        detail_image_post=null;
+         detail_post_titre_produit=null;
+        detail_profil_image=null;
+        vendeur_button=null;
+        detail_user_name=null;
+        detail_prix_produit=null;
+         detail_description=null;
+        date_de_publication=null;
+         firebaseAuth=null;
+         current_user_id=null;
+
+    }
 }

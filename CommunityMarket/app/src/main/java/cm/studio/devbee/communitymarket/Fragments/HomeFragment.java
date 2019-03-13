@@ -28,6 +28,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
+
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -41,50 +43,51 @@ import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-    private FirebaseFirestore firebaseFirestore;
-    private ImageView imageOne,imageTwo,imageThree,imageFour;
-    private TextView img1,img2,img3,img4;
-    private ProgressBar content_progresbar;
-    private RecyclerView content_recyclerView;
-    private CategoriesAdapteNouveaux categoriesAdapte;
-    private List<CategoriesModelNouveaux> categoriesModelList;
-    private ViewFlipper viewFlipper;
-    private CategoriesAdapteNouveaux categoriesAdapteNouveaux;
-    private RecyclerView nouveauxRecyclerView;
-    private RecyclerView chaussureRecyclerView;
-    private RecyclerView jupesRecyclerView;
-    private List<CategoriesModelNouveaux> categoriesAdapteChaussureList;
-    private List<CategoriesModelNouveaux> categoriesModelJupeList;
-    private RecyclerView user_recyclerView;
-    private UserAdapter userAdapter;
-    private List<UserModel> userList;
+    private static FirebaseFirestore firebaseFirestore;
+    private static ImageView imageOne,imageTwo,imageThree,imageFour;
+    private static TextView img1,img2,img3,img4;
+    private static ProgressBar content_progresbar;
+    private static RecyclerView content_recyclerView;
+    private static CategoriesAdapteNouveaux categoriesAdapte;
+    private static List<CategoriesModelNouveaux> categoriesModelList;
+    private static ViewFlipper viewFlipper;
+    private static CategoriesAdapteNouveaux categoriesAdapteNouveaux;
+    private static RecyclerView nouveauxRecyclerView;
+    private static RecyclerView chaussureRecyclerView;
+    private static RecyclerView jupesRecyclerView;
+    private static List<CategoriesModelNouveaux> categoriesAdapteChaussureList;
+    private static List<CategoriesModelNouveaux> categoriesModelJupeList;
+    private static RecyclerView user_recyclerView;
+    private static UserAdapter userAdapter;
+    private static List<UserModel> userList;
     //////////tshirt
-    private List<CategoriesModelNouveaux> categoriesModelTshirtList;
-    private RecyclerView tshirtRecycler;
+    private static List<CategoriesModelNouveaux> categoriesModelTshirtList;
+    private static RecyclerView tshirtRecycler;
     //////chargement
-    private DocumentSnapshot lastVisible;
-    private  RecyclerView recyclerpull;
-    List<CategoriesModelNouveaux> categoriesModelPullList;
+    private static DocumentSnapshot lastVisible;
+    private  static RecyclerView recyclerpull;
+    private static List<CategoriesModelNouveaux> categoriesModelPullList;
     ////accesoire
-    private  List<CategoriesModelNouveaux> categoriesModelAccessoireList;
-    private RecyclerView recycleraccessoire;
+    private  static List<CategoriesModelNouveaux> categoriesModelAccessoireList;
+    private static RecyclerView recycleraccessoire;
     /////pubfixe
-    private ImageView imagePubFixe;
-    private TextView imagePubText;
+    private static ImageView imagePubFixe;
+    private static TextView imagePubText;
     //cullote
-    private RecyclerView recyclercullote;
-    private List<CategoriesModelNouveaux> categoriesModelCulloteList;
+    private static RecyclerView recyclercullote;
+    private static List<CategoriesModelNouveaux> categoriesModelCulloteList;
     ////pantaloos
-    private  RecyclerView recyclerpantalons;
-    List<CategoriesModelNouveaux> categoriesModelPantalonsList;
+    private  static RecyclerView recyclerpantalons;
+    private static List<CategoriesModelNouveaux> categoriesModelPantalonsList;
     ///chemise
-    private RecyclerView recyclerchemise;
-    private List<CategoriesModelNouveaux> categoriesModelChemiseList;
+    private static RecyclerView recyclerchemise;
+    private static List<CategoriesModelNouveaux> categoriesModelChemiseList;
     ///robe
-    private List<CategoriesModelNouveaux> categoriesModelRobeList;
-    private RecyclerView recyclerrobe;
-    ProgressDialog progressDialog;
-    private View v;
+    private static List<CategoriesModelNouveaux> categoriesModelRobeList;
+    private static RecyclerView recyclerrobe;
+    private static ProgressDialog progressDialog;
+    private static View v;
+    private  static WeakReference<HomeFragment> homeFragmentWeakReference;
 
 
     public HomeFragment() {
@@ -192,6 +195,7 @@ public class HomeFragment extends Fragment {
         firebaseFirestore=FirebaseFirestore.getInstance();
         AsyncTask asyncTask=new AsyncTask ();
         asyncTask.execute (  );
+        homeFragmentWeakReference=new WeakReference<>(this);
         return v;
     }
 
@@ -502,4 +506,67 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+       firebaseFirestore=null;
+        imageFour=null;
+        imageThree=null;
+        imageTwo=null;
+        imageOne=null;
+      img1=null;
+      img2=null;
+      img3=null;
+      img4=null;
+        content_progresbar=null;
+      content_recyclerView=null;
+        categoriesAdapte=null;
+       categoriesModelList=null;
+        viewFlipper=null;
+         categoriesAdapteNouveaux=null;
+        nouveauxRecyclerView=null;
+        chaussureRecyclerView=null;
+        jupesRecyclerView=null;
+        categoriesAdapteChaussureList=null;
+         categoriesModelJupeList=null;
+        user_recyclerView=null;
+        userAdapter=null;
+      userList=null;
+        //////////tshirt
+         categoriesModelTshirtList=null;
+         tshirtRecycler=null;
+        //////chargement
+     lastVisible=null;
+       recyclerpull=null;
+       categoriesModelPullList=null;
+        ////accesoire
+         categoriesModelAccessoireList=null;
+       recycleraccessoire=null;
+        /////pubfixe
+        imagePubFixe=null;
+          imagePubText=null;
+        //cullote
+          recyclercullote=null;
+        categoriesModelCulloteList=null;
+        ////pantaloos
+          recyclerpantalons=null;
+        categoriesModelPantalonsList=null;
+        ///chemise
+     recyclerchemise=null;
+       categoriesModelChemiseList=null;
+        ///robe
+        categoriesModelRobeList=null;
+         recyclerrobe=null;
+          progressDialog=null;
+       v=null;
+
+
+
+
+
+
+
+
+
+    }
 }

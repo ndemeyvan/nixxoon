@@ -27,8 +27,10 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.WeakHashMap;
 
 import javax.annotation.Nullable;
 
@@ -39,14 +41,16 @@ import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
  * A simple {@link Fragment} subclass.
  */
 public class TshirtFragment extends Fragment {
-    private FirebaseFirestore firebaseFirestore;
-    private RecyclerView tshirtRecyclerView;
-    private View v;
-    private GridViewAdapter categoriesAdapteTshirt;
-    List<ModelGridView> categoriesModelTshirtList;
-    private ImageView imagePubTshirt;
-    private TextView textPubTshirt;
-    ProgressDialog progressDialog;
+    private static FirebaseFirestore firebaseFirestore;
+    private static RecyclerView tshirtRecyclerView;
+    private static View v;
+    private static GridViewAdapter categoriesAdapteTshirt;
+    private static List<ModelGridView> categoriesModelTshirtList;
+    private static ImageView imagePubTshirt;
+    private static TextView textPubTshirt;
+    private static ProgressDialog progressDialog;
+    private static WeakReference<TshirtFragment> tshirtFragmentWeakReference;
+    private  AsyncTask asyncTask;
 
     public TshirtFragment() {
         // Required empty public constructor
@@ -66,9 +70,11 @@ public class TshirtFragment extends Fragment {
         tshirtRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
         imagePubTshirt=v.findViewById ( R.id.pubImag_tshire );
         textPubTshirt=v.findViewById ( R.id.pubImageText_tshirt );
-        AsyncTask asyncTask=new AsyncTask ();
+         asyncTask=new AsyncTask ();
         asyncTask.execute (  );
-         return v;
+        tshirtFragmentWeakReference=new WeakReference<>(this);
+
+        return v;
     }
     public void tshirtRecyclerView(){
 
@@ -137,7 +143,18 @@ public class TshirtFragment extends Fragment {
         }
     }
 
-
-
-
+    @Override
+    public void onDestroy() {
+        asyncTask.cancel(true);
+        super.onDestroy();
+        asyncTask.cancel(true);
+        firebaseFirestore=null;
+        tshirtRecyclerView=null;
+         v=null;
+         categoriesAdapteTshirt=null;
+         categoriesModelTshirtList=null;
+         imagePubTshirt=null;
+        textPubTshirt=null;
+        progressDialog=null;
+    }
 }

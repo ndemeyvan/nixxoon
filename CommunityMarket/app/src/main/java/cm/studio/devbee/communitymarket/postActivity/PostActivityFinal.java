@@ -27,17 +27,20 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -51,21 +54,23 @@ import id.zelory.compressor.Compressor;
 
 public class PostActivityFinal extends AppCompatActivity {
     private static  final int MAX_LENGTH =100;
-    private Toolbar postfinaltoolbar;
-    private EditText nomProduit;
-    private EditText descriptionProduit;
-    private EditText prixPorduit;
-    private ImageView imageProduit;
-    private String categoryName ,nom_du_produit,decription_du_produit,prix_du_produit,saveCurrentTime,saveCurrentDate;
-    private Button vendreButton;
-    private ProgressBar progressBar_post;
-    private Uri mImageUri;
-    private String randomKey;
-    private String current_user_id;
-    private FirebaseFirestore firebaseFirestore;
-    private StorageReference storageReference;
-    private FirebaseAuth firebaseAuth;
-    private Bitmap compressedImageFile;
+    private static Toolbar postfinaltoolbar;
+    private static EditText nomProduit;
+    private static EditText descriptionProduit;
+    private static EditText prixPorduit;
+    private static ImageView imageProduit;
+    private static String categoryName ,nom_du_produit,decription_du_produit,prix_du_produit,saveCurrentTime,saveCurrentDate;
+    private static Button vendreButton;
+    private static ProgressBar progressBar_post;
+    private static Uri mImageUri;
+    private static String randomKey;
+    private static String current_user_id;
+    private static FirebaseFirestore firebaseFirestore;
+    private static StorageReference storageReference;
+    private static FirebaseAuth firebaseAuth;
+    private static Bitmap compressedImageFile;
+    private static AsyncTask asyncTask;
+    private static WeakReference<PostActivityFinal> postActivityWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
@@ -84,8 +89,9 @@ public class PostActivityFinal extends AppCompatActivity {
         progressBar_post=findViewById ( R.id.progressBar_post );
         categoryName=getIntent ().getExtras ().get ( "categoryName" ).toString ();
         Toast.makeText ( getApplicationContext(),categoryName,Toast.LENGTH_LONG ).show ();
-        setimage ();
-        prendreDonner ();
+        asyncTask=new AsyncTask();
+       asyncTask.execute();
+        postActivityWeakReference=new WeakReference<>(this);
        /* ActionBar ab=getSupportActionBar ();
         ab.setDisplayHomeAsUpEnabled ( true );*/
 
@@ -260,5 +266,52 @@ public class PostActivityFinal extends AppCompatActivity {
             randomStringBuilder.append(tempChar);
         }
         return randomStringBuilder.toString();
+    }
+    public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute ();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            setimage ();
+            prendreDonner ();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute ( aVoid );
+
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        asyncTask.cancel(true);
+        super.onDestroy();
+        asyncTask.cancel(true);
+        postfinaltoolbar=null;;
+        nomProduit=null;;
+        descriptionProduit=null;;
+        prixPorduit=null;;
+        imageProduit=null;;
+         categoryName=null;
+         nom_du_produit=null;
+        decription_du_produit=null;
+        prix_du_produit=null;
+        saveCurrentTime=null;
+        saveCurrentDate=null;;
+         vendreButton=null;;
+         progressBar_post=null;;
+         mImageUri=null;;
+        randomKey=null;;
+        current_user_id=null;
+         firebaseFirestore=null;;
+        storageReference=null;;
+        firebaseAuth=null;;
+       compressedImageFile=null;;
     }
 }

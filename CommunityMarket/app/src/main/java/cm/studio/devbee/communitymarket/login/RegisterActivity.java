@@ -18,18 +18,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.lang.ref.WeakReference;
+
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 
 public class RegisterActivity extends AppCompatActivity {
-private EditText email;
-private  EditText password;
-private  EditText confirm_password;
-private Button enregister;
-private TextView textView5;
-private Button register_text;
-private FirebaseAuth mAuth;
-private ProgressBar login_progressBar;
+private static EditText email;
+private static  EditText password;
+private static EditText confirm_password;
+private static  Button enregister;
+private static TextView textView5;
+private static Button register_text;
+private static FirebaseAuth mAuth;
+private static ProgressBar login_progressBar;
+private static  AsyncTask asyncTask;
+private WeakReference<RegisterActivity> registerActivityWeakReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +47,9 @@ private ProgressBar login_progressBar;
         register_text=findViewById ( R.id.register_text );
         login_progressBar=findViewById ( R.id.login_progressBarRegister );
         mAuth = FirebaseAuth.getInstance();
-    AsyncTask asyncTask=new AsyncTask();
-    asyncTask.execute();
+        registerActivityWeakReference=new WeakReference<>(this);
+        asyncTask=new AsyncTask();
+        asyncTask.execute();
         register_text.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
@@ -104,8 +109,17 @@ private ProgressBar login_progressBar;
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            asyncTask.cancel(true);
             super.onPostExecute ( aVoid );
-
+            asyncTask.cancel(true);
+            email=null;
+           password=null;
+             confirm_password=null;
+            enregister=null;
+           textView5=null;
+            register_text=null;
+           mAuth=null;
+            login_progressBar=null;
         }
     }
 

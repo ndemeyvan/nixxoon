@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket.profile;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -22,21 +23,25 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import java.lang.ref.WeakReference;
+
 import cm.studio.devbee.communitymarket.R;
 
 public class ProfileActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
-    private StorageReference storageReference;
-    private FirebaseFirestore firebaseFirestore;
-    private String current_user_id;
-    private TextView nom;
-    private TextView telephone;
-    private TextView residence;
-    private TextView email;
-    private TextView operation;
-    private ImageView profilImage;
-    private ProgressBar progressBar;
-    private android.support.v7.widget.Toolbar profil_toolbar;
+    private static FirebaseAuth mAuth;
+    private static StorageReference storageReference;
+    private static FirebaseFirestore firebaseFirestore;
+    private static String current_user_id;
+    private static TextView nom;
+    private static TextView telephone;
+    private static TextView residence;
+    private static TextView email;
+    private static TextView operation;
+    private static ImageView profilImage;
+    private static ProgressBar progressBar;
+    private static android.support.v7.widget.Toolbar profil_toolbar;
+    private WeakReference<ProfileActivity> profileActivityWeakReference;
+    private static AsyncTask asyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +61,10 @@ public class ProfileActivity extends AppCompatActivity {
         firebaseFirestore=FirebaseFirestore.getInstance ();
         profilImage=findViewById(R.id.circleImageView_profil);
         progressBar.setVisibility(View.VISIBLE);
-        recupererDonne();
+        profileActivityWeakReference=new WeakReference<>(this);
+        asyncTask=new AsyncTask();
+        asyncTask.execute();
+
     }
     public void recupererDonne(){
         current_user_id=mAuth.getCurrentUser ().getUid ();
@@ -121,5 +129,43 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
 
+    }
+    public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute ();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            recupererDonne();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute ( aVoid );
+
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        asyncTask.cancel(true);
+        super.onDestroy();
+        asyncTask.cancel(true);
+        mAuth=null;
+        storageReference=null;
+         firebaseFirestore=null;
+        current_user_id=null;
+       nom=null;
+        telephone=null;
+        residence=null;
+        email=null;
+         operation=null;
+         profilImage=null;
+        progressBar=null;
+        profil_toolbar=null;
     }
 }

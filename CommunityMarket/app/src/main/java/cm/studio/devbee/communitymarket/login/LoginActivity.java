@@ -18,17 +18,21 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.lang.ref.WeakReference;
+
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText loginEdit;
-    private EditText registerEdit;
-    private Button loginButton;
-    private Button registerText;
-    private TextView textView4;
-    private ProgressBar login_progressBar;
-    private FirebaseAuth mAuth;
+    private static EditText loginEdit;
+    private static EditText registerEdit;
+    private static Button loginButton;
+    private static Button registerText;
+    private static TextView textView4;
+    private static ProgressBar login_progressBar;
+    private static FirebaseAuth mAuth;
+    private static WeakReference<LoginActivity> loginActivityWeakReference;
+    private static   AsyncTask asyncTask;
 
 
 
@@ -43,8 +47,9 @@ public class LoginActivity extends AppCompatActivity {
         textView4=findViewById ( R.id.text_connexion );
         login_progressBar=findViewById ( R.id.login_progressBar );
         mAuth = FirebaseAuth.getInstance();
-        AsyncTask asyncTask=new AsyncTask();
+         asyncTask=new AsyncTask();
         asyncTask.execute();
+        loginActivityWeakReference=new WeakReference<>(this);
         registerText.setOnClickListener ( new View.OnClickListener () {
            @Override
            public void onClick(View v) {
@@ -103,5 +108,19 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute ( aVoid );
 
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        asyncTask.cancel(true);
+        super.onDestroy();
+        asyncTask.cancel(true);
+        loginEdit=null;
+       registerEdit=null;
+        loginButton=null;
+        registerText=null;
+        textView4=null;
+         login_progressBar=null;
+        mAuth=null;
     }
 }

@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -29,6 +30,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
+
+import java.lang.ref.WeakReference;
+
 import cm.studio.devbee.communitymarket.Fragments.HomeFragment;
 import cm.studio.devbee.communitymarket.Fragments.PullFragment;
 import cm.studio.devbee.communitymarket.Fragments.TshirtFragment;
@@ -47,6 +51,8 @@ public class Accueil extends AppCompatActivity
     private FloatingActionButton content_floating_action_btn;
     private TabLayout tabLayout;
     private ViewPager tabsviewpager;
+    private static AsyncTask asyncTask;
+    private static WeakReference<Accueil> accueilWeakReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +61,13 @@ public class Accueil extends AppCompatActivity
         Toolbar toolbar =findViewById ( R.id.toolbar );
         setSupportActionBar ( toolbar );
         NavigationView navigationView =findViewById ( R.id.nav_view );
-
         tabLayout=findViewById(R.id.tabslayout);
         tabsviewpager=findViewById(R.id.tabsview);
         setupViewPager(tabsviewpager);
         tabLayout.setupWithViewPager(tabsviewpager);
         mAuth=FirebaseAuth.getInstance ();
         firebaseFirestore=FirebaseFirestore.getInstance ();
+        accueilWeakReference=new WeakReference<>(this);
         acceuille_image=navigationView.getHeaderView(0).findViewById(R.id.acceuille_image);
         drawer_user_name=navigationView.getHeaderView(0).findViewById(R.id.drawer_user_name);
         DrawerLayout drawer =findViewById ( R.id.drawer_layout );
@@ -70,8 +76,8 @@ public class Accueil extends AppCompatActivity
         drawer.addDrawerListener ( toggle );
         toggle.syncState ();
         navigationView.setNavigationItemSelectedListener ( this );
-        recup();
-        vaTopost ();
+        asyncTask=new AsyncTask();
+        asyncTask.execute();
 
     }
     public void setupViewPager(ViewPager viewPager){
@@ -214,6 +220,41 @@ public class Accueil extends AppCompatActivity
 
 
     }
+    public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
 
+            super.onPreExecute ();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            recup();
+            vaTopost ();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute ( aVoid );
+
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        asyncTask.cancel(true);
+        super.onDestroy();
+        asyncTask.cancel(true);
+        mAuth=null;
+        firebaseFirestore=null;
+        current_user_id=null;
+       acceuille_image=null;
+       drawer_user_name=null;
+       content_floating_action_btn=null;
+      tabLayout=null;
+        tabsviewpager=null;
+         accueilWeakReference=null;
+    }
 }
 

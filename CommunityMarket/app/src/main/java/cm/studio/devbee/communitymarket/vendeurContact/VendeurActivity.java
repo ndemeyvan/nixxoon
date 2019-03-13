@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket.vendeurContact;
 
+import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,20 +39,22 @@ import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouvea
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class VendeurActivity extends AppCompatActivity {
-    private CircleImageView vendeur_image;
-    private TextView vendeur_user_name;
-    private TextView vendeur_residence;
-    private TextView vendeur_phone;
-    private TextView vendeur_email;
-    private Button message_button_vendeur;
-    private ProgressBar  vendeur_progressbar;
-    private  String iddupost;
-    private String current_user_id;
-    private FirebaseFirestore firebaseFirestore;
-    private Toolbar vendeur_toolbar;
-    private RecyclerView vendeur_recyclerView;
-    private GridViewAdapter gridViewAdapter;
-    private List<ModelGridView> modelGridViewList;
+    private static CircleImageView vendeur_image;
+    private static TextView vendeur_user_name;
+    private static TextView vendeur_residence;
+    private static TextView vendeur_phone;
+    private static TextView vendeur_email;
+    private static Button message_button_vendeur;
+    private static ProgressBar  vendeur_progressbar;
+    private  static String iddupost;
+    private static String current_user_id;
+    private static FirebaseFirestore firebaseFirestore;
+    private static Toolbar vendeur_toolbar;
+    private static RecyclerView vendeur_recyclerView;
+    private static GridViewAdapter gridViewAdapter;
+    private static List<ModelGridView> modelGridViewList;
+    private WeakReference<VendeurActivity> vendeurActivityWeakReference;
+    private  AsyncTask asyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +77,10 @@ public class VendeurActivity extends AppCompatActivity {
         vendeur_recyclerView=findViewById(R.id.vendeur_recyclerView);
         vendeur_recyclerView.setAdapter(gridViewAdapter);
         vendeur_recyclerView.setLayoutManager(new GridLayoutManager(VendeurActivity.this,2));
-        nomEtImageProfil();
-        vendeur_produit();
+        vendeurActivityWeakReference=new WeakReference<>(this);
+        asyncTask=new AsyncTask();
+        asyncTask.execute();
+
     }
     public void nomEtImageProfil(){
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -120,5 +126,46 @@ public class VendeurActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute ();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            nomEtImageProfil();
+            vendeur_produit();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute ( aVoid );
+
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        asyncTask.cancel(true);
+        super.onDestroy();
+        asyncTask.cancel(true);
+        vendeur_image=null;
+       vendeur_user_name=null;
+        vendeur_residence=null;
+        vendeur_phone=null;
+        vendeur_email=null;
+         message_button_vendeur=null;
+        vendeur_progressbar=null;
+       iddupost=null;
+        current_user_id=null;
+       firebaseFirestore=null;
+        vendeur_toolbar=null;
+         vendeur_recyclerView=null;
+        gridViewAdapter=null;
+        modelGridViewList=null;
     }
 }
