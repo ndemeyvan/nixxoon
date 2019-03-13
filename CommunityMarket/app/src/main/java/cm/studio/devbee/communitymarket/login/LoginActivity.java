@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private static FirebaseAuth mAuth;
     private static WeakReference<LoginActivity> loginActivityWeakReference;
     private static   AsyncTask asyncTask;
+    private static TextView home;
 
 
 
@@ -46,8 +47,9 @@ public class LoginActivity extends AppCompatActivity {
         registerText=findViewById ( R.id.login_register );
         textView4=findViewById ( R.id.text_connexion );
         login_progressBar=findViewById ( R.id.login_progressBar );
+        home=findViewById(R.id.home);
         mAuth = FirebaseAuth.getInstance();
-         asyncTask=new AsyncTask();
+        asyncTask=new AsyncTask();
         asyncTask.execute();
         loginActivityWeakReference=new WeakReference<>(this);
         registerText.setOnClickListener ( new View.OnClickListener () {
@@ -58,6 +60,14 @@ public class LoginActivity extends AppCompatActivity {
                finish ();
            }
        } );
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent home=new Intent ( getApplicationContext(),Accueil.class );
+                startActivity ( home );
+                finish ();
+            }
+        });
     }
     public void register(){
         loginButton.setOnClickListener ( new View.OnClickListener () {
