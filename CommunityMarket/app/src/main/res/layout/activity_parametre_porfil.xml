@@ -34,9 +34,8 @@
         android:hint="nom"
         android:inputType="textPersonName"
         android:padding="15dp"
-        android:textColor="@color/black"
-
-        android:textColorHint="@color/black"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/parametre_image" />
@@ -55,8 +54,8 @@
         android:hint="prenom"
         android:inputType="textPersonName"
         android:padding="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/param_nom" />
@@ -75,8 +74,8 @@
         android:hint="telephone (exple : +237 xxxxxxxxxx)"
         android:inputType="number"
         android:padding="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/param_premon" />
@@ -95,8 +94,8 @@
         android:hint="lieu de residence(exple : Douala/akwa...)"
         android:inputType="textPersonName"
         android:padding="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/param_telephone" />
@@ -115,8 +114,8 @@
         android:hint="email"
         android:inputType="textPersonName"
         android:padding="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/param_residence" />
@@ -134,6 +133,7 @@
         android:text="enregistrer"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
+        android:textColorHint="@color/blanc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -151,6 +152,9 @@ public class PostActivityFinal extends AppCompatActivity {
         }
     }
     public void stocker(){
+        Date date=new Date();
+        SimpleDateFormat sdf= new SimpleDateFormat("d/MM/y H:mm:ss");
+        final String date_avec_seconde=sdf.format(date);
 
                     File newImageFile= new File(mImageUri.getPath ());
                     try {
@@ -207,6 +211,7 @@ public class PostActivityFinal extends AppCompatActivity {
                                         user_post.put ( "date_de_publication",randomKey );
                                         user_post.put ( "utilisateur",current_user_id );
                                         user_post.put ( "image_du_produit",downloadUri.toString() );
+                                        user_post.put ( "dete-en-seconde",date_avec_seconde );
                                         firebaseFirestore.collection ( "publication" ).document ("categories").collection ( categoryName ).add(user_post).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentReference> task) {

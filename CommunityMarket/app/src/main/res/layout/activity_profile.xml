@@ -67,7 +67,7 @@
                 android:fontFamily="@font/abril_fatface"
                 android:text="xxxxxxxxx"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.042"
