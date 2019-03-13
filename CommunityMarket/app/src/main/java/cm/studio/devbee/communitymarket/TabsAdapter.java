@@ -14,13 +14,11 @@ import cm.studio.devbee.communitymarket.Fragments.HomeFragment;
 
 public class TabsAdapter extends FragmentPagerAdapter {
 
-
     List fragmentList =new ArrayList();
     List fragmentTitleList=new ArrayList();
    public void addFragment(Fragment fragment,String title){
         fragmentList.add(fragment);
         fragmentTitleList.add(title);
-
    }
     public TabsAdapter(FragmentManager fm) {
         super(fm);
@@ -47,4 +45,6 @@ public class TabsAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return fragmentList.size();
     }
+
+
 }
