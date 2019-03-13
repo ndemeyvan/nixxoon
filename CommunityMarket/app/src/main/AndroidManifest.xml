@@ -43,6 +43,10 @@
         <activity android:name=".a_propos.AproposActivity" />
         <activity android:name=".postActivity.DetailActivity" />
         <activity android:name=".vendeurContact.VendeurActivity"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -6,43 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".ChoiceActivity"
     android:background="@color/colorPrimary">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/t_shirt"></LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:alpha="0.6"></LinearLayout>
+
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="124dp"
-        android:text="N I X X ON"
+        android:text="N i x x o N "
         android:textColor="@color/orange"
-        android:textSize="30dp"
-        app:fontFamily="sans-serif-condensed"
+        android:textSize="35dp"
+        app:fontFamily="@font/caveat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/gotoLogin"
-        android:elevation="3dp"
-        android:background="@drawable/button_background"
-        android:textAllCaps="false"
-        android:textColor="@color/blanc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="168dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:background="@drawable/button_background"
+        android:elevation="3dp"
+        android:fontFamily="@font/acme"
         android:text="connexion"
+        android:textAllCaps="false"
+        android:textColor="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,19 +41,18 @@
 
     <Button
         android:id="@+id/gotoRegister"
-        android:elevation="3dp"
-
-        android:background="@drawable/second_button_background"
-        android:textAllCaps="false"
-        android:textColor="@color/blanc"
         android:layout_width="0dp"
+
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:background="@drawable/second_button_background"
+        android:elevation="3dp"
+        android:fontFamily="@font/acme"
         android:text="m'enregistrer"
+        android:textAllCaps="false"
+        android:textColor="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,19 +60,17 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="Vendez vos articles sans frais sur nixxon"
         android:textAlignment="center"
-        android:textColor="@color/blanc"
-        android:textSize="20sp"
-        app:fontFamily="sans-serif-condensed"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:fontFamily="@font/abril_fatface"
         app:layout_constraintBottom_toTopOf="@+id/gotoLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

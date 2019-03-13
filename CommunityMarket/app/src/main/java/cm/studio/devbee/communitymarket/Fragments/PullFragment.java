@@ -128,7 +128,7 @@ private View v;
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute ( aVoid );
-            progressDialog.dismiss();
+
         }
     }
 
