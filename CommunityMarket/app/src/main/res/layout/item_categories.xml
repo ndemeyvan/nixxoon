@@ -41,9 +41,9 @@
         android:text="marques"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:textStyle="bold"
-        app:fontFamily="sans-serif-condensed"
+        app:fontFamily="@font/abril_fatface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2" />
