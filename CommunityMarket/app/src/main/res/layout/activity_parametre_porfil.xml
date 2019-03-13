@@ -6,27 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".profile.ParametrePorfilActivity"
     android:background="@color/colorPrimary">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/parametre_toolbar"
-        app:titleTextColor="@color/blanc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.Toolbar>
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/parametre_image"
-        android:src="@drawable/use"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:src="@drawable/use"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parametre_toolbar" />
+        />
 
     <EditText
+        android:background="@drawable/edit_text_background"
+        android:padding="15dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:elevation="1dp"
         android:id="@+id/param_nom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,8 +37,7 @@
         android:ems="10"
         android:hint="nom"
         android:inputType="textPersonName"
-        android:textColorHint="@color/blanc"
-        android:textColor="@color/blanc"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/parametre_image" />
@@ -56,8 +54,11 @@
         android:ems="10"
         android:hint="prenom"
         android:inputType="textPersonName"
-        android:textColor="@color/blanc"
-        android:textColorHint="@color/blanc"
+        android:background="@drawable/edit_text_background"
+        android:padding="15dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:elevation="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/param_nom" />
@@ -72,16 +73,22 @@
         android:ems="10"
         android:hint="telephone (exple : +237 xxxxxxxxxx)"
         android:inputType="number"
-        android:textColor="@color/blanc"
-        android:textColorHint="@color/blanc"
+        android:background="@drawable/edit_text_background"
+        android:padding="15dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:elevation="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/param_premon" />
 
     <EditText
         android:id="@+id/param_residence"
-        android:textColor="@color/blanc"
-        android:textColorHint="@color/blanc"
+        android:background="@drawable/edit_text_background"
+        android:padding="15dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:elevation="1dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -108,8 +115,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="email"
-        android:textColor="@color/blanc"
-        android:textColorHint="@color/blanc"
+        android:background="@drawable/edit_text_background"
+        android:padding="15dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:elevation="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/param_residence" />
@@ -124,8 +134,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/button2_background"
+        android:background="@drawable/second_button_background"
         android:text="enregistrer"
+        android:textAllCaps="false"
         android:textColor="@color/blanc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

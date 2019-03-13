@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#151C25</color>
-    <color name="colorPrimaryDark">#151C25</color>
+
     <color name="colorAccent">#ff9800</color>
-    <color name="black">#000</color>
-    <color name="blanc">#fff</color>
     <color name="orange">#ff9800</color>
     <color name="likegris">#747474</color>
     <color name="likerouge">#ff4336</color>
     <color name="doux">#FFEB3B</color>
+    <color name="colorPrimary">#fff</color>
+    <color name="black">#000</color>
+    <color name="blanc">#fff</color>
 </resources>

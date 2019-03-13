@@ -34,7 +34,7 @@
         android:elevation="3dp"
         android:background="@drawable/button_background"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/blanc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -52,7 +52,7 @@
         android:id="@+id/gotoRegister"
         android:elevation="3dp"
 
-        android:background="@drawable/button2_background"
+        android:background="@drawable/second_button_background"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
         android:layout_width="0dp"
