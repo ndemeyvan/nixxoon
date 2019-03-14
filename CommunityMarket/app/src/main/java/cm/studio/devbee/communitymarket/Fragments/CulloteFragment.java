@@ -67,7 +67,7 @@ public class CulloteFragment extends Fragment {
         imagePubcullote=v.findViewById ( R.id.pubImag_cullote);
         textPubcullote=v.findViewById ( R.id.pubImageText_cullote);
         //////////
-        culloteRecyclerView=v.findViewById ( R.id.pantalonRecyclerView );
+        culloteRecyclerView=v.findViewById ( R.id.culloteRecyclerView );
         categoriesModelculloteList=new ArrayList<> (  );
         categoriesAdaptecullote=new GridViewAdapter (categoriesModelculloteList,getActivity () );
         culloteRecyclerView.setAdapter ( categoriesAdaptecullote );
