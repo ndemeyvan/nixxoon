@@ -79,7 +79,7 @@
         android:hint="prix ( la valeur est le fcfa )"
         android:inputType="number"
         android:padding="15dp"
-        android:textColor="@color/blanc"
+        android:textColor="@color/colorAccent"
         android:textColorHint="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
