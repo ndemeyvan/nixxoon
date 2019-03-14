@@ -68,8 +68,6 @@ public class ParametrePorfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_parametre_porfil );
-        setSupportActionBar ( parametre_toolbar );
-        getSupportActionBar ().setTitle ( "Parametre du compte" );
         nom=findViewById ( R.id.param_nom );
         premon=findViewById ( R.id.param_premon );
         telephone=findViewById ( R.id.param_telephone );

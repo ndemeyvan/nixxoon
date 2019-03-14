@@ -47,8 +47,8 @@ public class PostActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         toolbar_post=null;
-       post_cat_recycler=null;
+        post_cat_recycler=null;
         categoriesAdaptePost=null;
-       categoriesModelPostList=null;
+        categoriesModelPostList=null;
     }
 }

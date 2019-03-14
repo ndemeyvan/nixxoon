@@ -42,8 +42,8 @@ import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
  */
 public class TshirtFragment extends Fragment {
     private static FirebaseFirestore firebaseFirestore;
-    private static RecyclerView tshirtRecyclerView;
     private static View v;
+    private static RecyclerView tshirtRecyclerView;
     private static GridViewAdapter categoriesAdapteTshirt;
     private static List<ModelGridView> categoriesModelTshirtList;
     private static ImageView imagePubTshirt;

@@ -33,8 +33,15 @@ import com.squareup.picasso.Transformation;
 
 import java.lang.ref.WeakReference;
 
+import cm.studio.devbee.communitymarket.Fragments.AccesoireFragment;
+import cm.studio.devbee.communitymarket.Fragments.ChaussureFragment;
+import cm.studio.devbee.communitymarket.Fragments.ChemiseFragment;
+import cm.studio.devbee.communitymarket.Fragments.CulloteFragment;
 import cm.studio.devbee.communitymarket.Fragments.HomeFragment;
+import cm.studio.devbee.communitymarket.Fragments.JupesFragment;
+import cm.studio.devbee.communitymarket.Fragments.PantalonFragment;
 import cm.studio.devbee.communitymarket.Fragments.PullFragment;
+import cm.studio.devbee.communitymarket.Fragments.RobeFragment;
 import cm.studio.devbee.communitymarket.Fragments.TshirtFragment;
 import cm.studio.devbee.communitymarket.a_propos.AproposActivity;
 import cm.studio.devbee.communitymarket.login.LoginActivity;
@@ -82,9 +89,16 @@ public class Accueil extends AppCompatActivity
     }
     public void setupViewPager(ViewPager viewPager){
         TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
-        tabsAdapter.addFragment(new HomeFragment(),"Home");
-        tabsAdapter.addFragment(new TshirtFragment(),"T_shirt");
-        tabsAdapter.addFragment(new PullFragment () ,"Pull");
+        tabsAdapter.addFragment(new HomeFragment(),"Decouvrir");
+        tabsAdapter.addFragment(new TshirtFragment(),"T_shirts");
+        tabsAdapter.addFragment(new PullFragment () ,"Pulls");
+        tabsAdapter.addFragment(new JupesFragment () ,"jupes");
+        tabsAdapter.addFragment(new ChaussureFragment (),"chaussures");
+        tabsAdapter.addFragment(new PantalonFragment (),"pantalons");
+        tabsAdapter.addFragment(new CulloteFragment (),"cullotes");
+        tabsAdapter.addFragment(new ChemiseFragment (),"chemises");
+        tabsAdapter.addFragment(new RobeFragment (),"robes");
+        tabsAdapter.addFragment(new AccesoireFragment (),"accessoire");
         viewPager.setAdapter(tabsAdapter);
 
 

@@ -40,19 +40,19 @@ import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PullFragment extends Fragment {
-
-    private View v;
-    private static RecyclerView pullRecyclerView;
-    private static ImageView imagePubpull;
-    private static TextView textPubpull;
+public class AccesoireFragment extends Fragment {
+    private  static View v;
+    private static RecyclerView acessoireRecyclerView;
+    private static ImageView imagePubacessoire;
+    private static TextView textPubacessoire;
     private static FirebaseFirestore firebaseFirestore;
     private static ProgressDialog progressDialog;
     private static AsyncTask asyncTask;
-    private static GridViewAdapter categoriesAdaptepull;
-    private static List<ModelGridView> categoriesModelpullList;
-    private static WeakReference<PullFragment> pullFragmentWeakReference;
-    public PullFragment() {
+    private static GridViewAdapter categoriesAdapteacessoire;
+    private static List<ModelGridView> categoriesModelacessoireList;
+    private static WeakReference<AccesoireFragment> acessoireFragmentWeakReference;
+
+    public AccesoireFragment() {
         // Required empty public constructor
     }
 
@@ -61,27 +61,26 @@ public class PullFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v= inflater.inflate ( R.layout.fragment_pull, container, false );
+        v= inflater.inflate ( R.layout.fragment_accesoire, container, false );
         firebaseFirestore=FirebaseFirestore.getInstance ();
-        imagePubpull=v.findViewById ( R.id.pubImag_pull );
-        textPubpull=v.findViewById ( R.id.pubImageText_pull );
-
+        imagePubacessoire=v.findViewById ( R.id.pubImag_accessoires);
+        textPubacessoire=v.findViewById ( R.id.pubImageText_accessoires);
         //////////
-        pullRecyclerView=v.findViewById ( R.id.pullRecyclerView );
-        categoriesModelpullList=new ArrayList<> (  );
-        categoriesAdaptepull=new GridViewAdapter ( categoriesModelpullList,getActivity () );
-        pullRecyclerView.setAdapter ( categoriesAdaptepull );
-        pullRecyclerView.setLayoutManager(new GridLayoutManager (getActivity(),2));
+        acessoireRecyclerView=v.findViewById ( R.id.accessoiresRecyclerView );
+        categoriesModelacessoireList=new ArrayList<> (  );
+        categoriesAdapteacessoire=new GridViewAdapter (categoriesModelacessoireList,getActivity () );
+        acessoireRecyclerView.setAdapter ( categoriesAdapteacessoire );
+        acessoireRecyclerView.setLayoutManager(new GridLayoutManager (getActivity(),2));
         ////////pull
-        pullFragmentWeakReference=new WeakReference<>(this);
-        asyncTask=new AsyncTask();
+        asyncTask=new AsyncTask ();
         asyncTask.execute();
+        acessoireFragmentWeakReference=new WeakReference<> ( this );
         return v;
     }
-    public void pullRecyclerView(){
+    public void RecyclerView(){
 
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "pull" ).orderBy ( "dete-en-seconde",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "accessoires" ).orderBy ( "dete-en-seconde",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot> () {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
@@ -89,28 +88,25 @@ public class PullFragment extends Fragment {
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
                         ModelGridView categoriesModelpull =doc.getDocument().toObject(ModelGridView.class).withId ( idupost );
-                        categoriesModelpullList.add(categoriesModelpull);
-                        categoriesAdaptepull.notifyDataSetChanged();
+                        categoriesModelacessoireList.add(categoriesModelpull);
+                        categoriesAdapteacessoire.notifyDataSetChanged();
                     }
                 }
-
             }
         });
     }
-    public  void imagePub_pull(){
+    public  void imagePub(){
         DocumentReference user = firebaseFirestore.collection("publicit").document("imageFixe");
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
                 if (task.isSuccessful()){
                     DocumentSnapshot doc =task.getResult();
                     StringBuilder imagePub=new StringBuilder("");
-                    imagePub.append(doc.get("pub_tshirt"));
-                    textPubpull.setText(imagePub.toString());
-                    String lien = textPubpull.getText().toString();
-                    Picasso.with(getActivity()).load(lien).into(imagePubpull);
-
+                    imagePub.append(doc.get("pub_accessoire"));
+                    textPubacessoire.setText(imagePub.toString());
+                    String lien = textPubacessoire.getText().toString();
+                    Picasso.with(getActivity()).load(lien).into(imagePubacessoire);
                 }
             }
         }).addOnFailureListener(new OnFailureListener () {
@@ -120,7 +116,6 @@ public class PullFragment extends Fragment {
             }
         });
     }
-
     public  class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -129,8 +124,8 @@ public class PullFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            pullRecyclerView ();
-            imagePub_pull ();
+            RecyclerView ();
+            imagePub ();
             return null;
         }
 
@@ -140,19 +135,18 @@ public class PullFragment extends Fragment {
 
         }
     }
-
     @Override
     public void onDestroy() {
         asyncTask.cancel(true);
         super.onDestroy();
         asyncTask.cancel(true);
-        pullRecyclerView=null;
-        imagePubpull=null;
-        textPubpull=null;
+        acessoireRecyclerView =null;
+        imagePubacessoire=null;
+        textPubacessoire=null;
         firebaseFirestore=null;
         progressDialog=null;
-        pullRecyclerView=null;
-        categoriesAdaptepull=null;
-        categoriesModelpullList=null;
+        categoriesAdapteacessoire=null;
+        categoriesModelacessoireList=null;
     }
+
 }

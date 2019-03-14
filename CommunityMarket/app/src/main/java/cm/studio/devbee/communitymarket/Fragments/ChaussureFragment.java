@@ -40,19 +40,19 @@ import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PullFragment extends Fragment {
-
-    private View v;
-    private static RecyclerView pullRecyclerView;
-    private static ImageView imagePubpull;
-    private static TextView textPubpull;
+public class ChaussureFragment extends Fragment {
     private static FirebaseFirestore firebaseFirestore;
+    private static View v;
+    private static RecyclerView chaussuresRecyclerView;
+    private static GridViewAdapter categoriesAdaptechaussures;
+    private static List<ModelGridView> categoriesModelchaussuresList;
+    private static ImageView imagePubchaussures;
+    private static TextView textPubchaussures;
     private static ProgressDialog progressDialog;
-    private static AsyncTask asyncTask;
-    private static GridViewAdapter categoriesAdaptepull;
-    private static List<ModelGridView> categoriesModelpullList;
-    private static WeakReference<PullFragment> pullFragmentWeakReference;
-    public PullFragment() {
+    private static WeakReference<ChaussureFragment> chaussuresFragmentWeakReference;
+    private AsyncTask asyncTask;
+
+    public ChaussureFragment() {
         // Required empty public constructor
     }
 
@@ -61,43 +61,44 @@ public class PullFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v= inflater.inflate ( R.layout.fragment_pull, container, false );
-        firebaseFirestore=FirebaseFirestore.getInstance ();
-        imagePubpull=v.findViewById ( R.id.pubImag_pull );
-        textPubpull=v.findViewById ( R.id.pubImageText_pull );
+        v= inflater.inflate ( R.layout.fragment_chaussure, container, false );
+        textPubchaussures=v.findViewById ( R.id.pubImageText_chaussure );
+        imagePubchaussures=v.findViewById ( R.id.pubImag_chaussure );
+        chaussuresFragmentWeakReference=new WeakReference<> ( this );
+        chaussuresRecyclerView=v.findViewById ( R.id.chaussureRecyclerView );
+        firebaseFirestore=FirebaseFirestore.getInstance();
+        categoriesModelchaussuresList=new ArrayList<> (  );
+        categoriesAdaptechaussures=new GridViewAdapter (categoriesModelchaussuresList,getActivity());
+        chaussuresRecyclerView.setAdapter ( categoriesAdaptechaussures );
+        chaussuresRecyclerView.setLayoutManager(new GridLayoutManager (getActivity(),2));
+        chaussuresRecyclerView=v.findViewById ( R.id.pubImag_tshire );
+        chaussuresRecyclerView=v.findViewById ( R.id.pubImageText_tshirt );
+        asyncTask=new AsyncTask ();
+        asyncTask.execute (  );
 
-        //////////
-        pullRecyclerView=v.findViewById ( R.id.pullRecyclerView );
-        categoriesModelpullList=new ArrayList<> (  );
-        categoriesAdaptepull=new GridViewAdapter ( categoriesModelpullList,getActivity () );
-        pullRecyclerView.setAdapter ( categoriesAdaptepull );
-        pullRecyclerView.setLayoutManager(new GridLayoutManager (getActivity(),2));
-        ////////pull
-        pullFragmentWeakReference=new WeakReference<>(this);
-        asyncTask=new AsyncTask();
-        asyncTask.execute();
+
         return v;
     }
-    public void pullRecyclerView(){
+    public void chaussureRecyclerView(){
 
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "pull" ).orderBy ( "dete-en-seconde",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Chaussures" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot> () {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        ModelGridView categoriesModelpull =doc.getDocument().toObject(ModelGridView.class).withId ( idupost );
-                        categoriesModelpullList.add(categoriesModelpull);
-                        categoriesAdaptepull.notifyDataSetChanged();
+                        ModelGridView categoriesModelTshirt =doc.getDocument().toObject(ModelGridView.class).withId ( idupost );
+                        categoriesModelchaussuresList.add(categoriesModelTshirt);
+                        categoriesAdaptechaussures.notifyDataSetChanged();
                     }
                 }
 
             }
         });
     }
-    public  void imagePub_pull(){
+    public void imagePub_chaussure(){
         DocumentReference user = firebaseFirestore.collection("publicit").document("imageFixe");
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
@@ -106,10 +107,10 @@ public class PullFragment extends Fragment {
                 if (task.isSuccessful()){
                     DocumentSnapshot doc =task.getResult();
                     StringBuilder imagePub=new StringBuilder("");
-                    imagePub.append(doc.get("pub_tshirt"));
-                    textPubpull.setText(imagePub.toString());
-                    String lien = textPubpull.getText().toString();
-                    Picasso.with(getActivity()).load(lien).into(imagePubpull);
+                    imagePub.append(doc.get("pub_chaussure"));
+                    textPubchaussures.setText(imagePub.toString());
+                    String lien = textPubchaussures.getText().toString();
+                    Picasso.with(getActivity()).load(lien).into(imagePubchaussures);
 
                 }
             }
@@ -120,39 +121,45 @@ public class PullFragment extends Fragment {
             }
         });
     }
-
-    public  class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+    public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
+            progressDialog = new ProgressDialog (getActivity ());
+            progressDialog.setTitle("chargement"); // Setting Title
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+            progressDialog.show(); // Display Progress Dialog
+            progressDialog.setCancelable(false);
             super.onPreExecute ();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            pullRecyclerView ();
-            imagePub_pull ();
+           chaussureRecyclerView ();
+           imagePub_chaussure ();
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute ( aVoid );
-
+            progressDialog.dismiss();
         }
     }
-
     @Override
     public void onDestroy() {
         asyncTask.cancel(true);
         super.onDestroy();
         asyncTask.cancel(true);
-        pullRecyclerView=null;
-        imagePubpull=null;
-        textPubpull=null;
         firebaseFirestore=null;
+        chaussuresRecyclerView=null;
+        v=null;
+        categoriesAdaptechaussures=null;
+        categoriesModelchaussuresList=null;
+        imagePubchaussures=null;
+        textPubchaussures=null;
         progressDialog=null;
-        pullRecyclerView=null;
-        categoriesAdaptepull=null;
-        categoriesModelpullList=null;
     }
+
 }
+
+//Chaussures
