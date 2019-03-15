@@ -58,17 +58,16 @@ public class ProfileActivity extends AppCompatActivity {
     private static AsyncTask asyncTask;
     private static GridViewAdapter gridViewAdapter;
     private static List<ModelGridView> modelGridViewList;
-    private static RecyclerView profilRecycler;
+    private static RecyclerView Recycler;
 
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         profil_toolbar=findViewById(R.id.profil_de_la_toolbar);
         setSupportActionBar(profil_toolbar);
+        Recycler=findViewById(R.id.profilRecycler);
         //////////////////
-        modelGridViewList=new ArrayList<>();
         progressBar=findViewById(R.id.progressBar);
         mAuth=FirebaseAuth.getInstance();
         nom=findViewById(R.id.profil_user_name);
@@ -81,11 +80,10 @@ public class ProfileActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         profileActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
-        profilRecycler=findViewById(R.id.profilRecycler);
         modelGridViewList=new ArrayList<>();
         gridViewAdapter=new GridViewAdapter(modelGridViewList,getApplicationContext());
-        profilRecycler.setAdapter(gridViewAdapter);
-        profilRecycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        Recycler.setAdapter(gridViewAdapter);
+        Recycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         asyncTask.execute();
 
     }
@@ -210,7 +208,7 @@ public class ProfileActivity extends AppCompatActivity {
         profilImage=null;
         progressBar=null;
         profil_toolbar=null;
-        profilRecycler=null;
+        Recycler=null;
         gridViewAdapter=null;
         modelGridViewList=null;
     }

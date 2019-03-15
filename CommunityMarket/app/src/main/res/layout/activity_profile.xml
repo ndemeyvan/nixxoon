@@ -201,7 +201,7 @@
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
-    <GridView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/profilRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
