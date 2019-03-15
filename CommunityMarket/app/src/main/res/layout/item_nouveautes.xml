@@ -73,7 +73,7 @@
                 app:fontFamily="@font/abril_fatface"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.335"
+                app:layout_constraintHorizontal_bias="0.367"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
@@ -83,11 +83,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="xxxxxxxxx"
-                android:textSize="13sp"
-                app:fontFamily="@font/abril_fatface"
+                android:textSize="14sp"
+                app:fontFamily="sans-serif-condensed"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.32"
+                app:layout_constraintHorizontal_bias="0.34"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
@@ -146,7 +146,7 @@
                 android:fontFamily="@font/abril_fatface"
                 android:lines="1"
                 android:text="xxxxxxxxx"
-                android:textColor="@color/orange"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/nouveaux_image_profile"
