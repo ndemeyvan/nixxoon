@@ -283,4 +283,5 @@ public class CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAda
 
 
     }
+
 }
