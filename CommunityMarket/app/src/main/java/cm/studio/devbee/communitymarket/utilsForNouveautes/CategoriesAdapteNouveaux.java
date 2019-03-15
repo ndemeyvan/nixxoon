@@ -74,6 +74,8 @@ public class CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAda
         final String postId=categoriesModelNouveauxList.get ( i ).PostId;
         final String current_user=firebaseAuth.getCurrentUser ().getUid ();
         final String idDuPost=categoriesModelNouveauxList.get ( i ).PostId;
+        final String categorie=categoriesModelNouveauxList.get(i).getCategories();
+        viewHolder.categorie(categorie);
         viewHolder.imageproduitxi ( imageproduit );
         viewHolder.setNom ( desc );
         viewHolder.setPrix(nvxPrix);
@@ -171,6 +173,7 @@ public class CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAda
         TextView nouveaux_tire;
         ImageView like;
         TextView likeCount;
+        TextView categorieChoice;
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
             description=itemView.findViewById ( R.id.nouveaux_description_du_produit );
@@ -184,6 +187,7 @@ public class CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAda
             like =itemView.findViewById ( R.id.like_image );
             profil_utilisateur=itemView.findViewById ( R.id.nouveaux_image_profile );
             likeCount=itemView.findViewById ( R.id.nouveaux_nombre_de_like );
+            categorieChoice=itemView.findViewById(R.id.categorieChoice);
         }
         public void setNom(final String desc){
             description.setText(desc);
@@ -194,6 +198,9 @@ public class CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAda
                    itemView.getContext ().startActivity ( categoryIntent );
                 }
             } );*/
+        }
+        public void categorie(String categ){
+            categorieChoice.setText(categ);
         }
         public void setPrix(String nouveauxPrix){
             prix.setText(nouveauxPrix);

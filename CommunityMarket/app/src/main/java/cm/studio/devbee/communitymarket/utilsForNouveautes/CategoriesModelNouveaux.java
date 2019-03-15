@@ -10,13 +10,15 @@ public class CategoriesModelNouveaux extends PostId{
     private String user_image;
     private String like;
     private String utilisateur;
+    private String categories;
+
 
 
     public CategoriesModelNouveaux(){
 
     }
 
-    public CategoriesModelNouveaux(String decription_du_produit, String date_de_publication, String nom_du_produit, String prix_du_produit, String image_du_produit, String user_image, String like, String utilisateur) {
+    public CategoriesModelNouveaux(String decription_du_produit, String date_de_publication, String nom_du_produit, String prix_du_produit, String image_du_produit, String user_image, String like, String utilisateur, String categories) {
         this.decription_du_produit = decription_du_produit;
         this.date_de_publication = date_de_publication;
         this.nom_du_produit = nom_du_produit;
@@ -25,6 +27,7 @@ public class CategoriesModelNouveaux extends PostId{
         this.user_image = user_image;
         this.like = like;
         this.utilisateur = utilisateur;
+        this.categories = categories;
     }
 
     public String getDecription_du_produit() {
@@ -89,5 +92,12 @@ public class CategoriesModelNouveaux extends PostId{
 
     public void setUtilisateur(String utilisateur) {
         this.utilisateur = utilisateur;
+    }
+    public String getCategories() {
+        return categories;
+    }
+
+    public void setCategories(String categories) {
+        this.categories = categories;
     }
 }
