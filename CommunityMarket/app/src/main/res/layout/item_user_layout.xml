@@ -10,13 +10,15 @@
     <android.support.v7.widget.CardView
         android:layout_width="110dp"
         android:layout_height="110dp"
-        app:cardCornerRadius="5dp">
+        app:cardCornerRadius="5dp"
+        app:cardBackgroundColor="@color/colorPrimaryDark">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="110dp"
             android:layout_height="110dp">
 
             <ImageView
+                android:src="@drawable/boy"
                 android:id="@+id/user_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -38,7 +40,7 @@
                 android:fontFamily="@font/abril_fatface"
                 android:lines="1"
                 android:text="user name"
-                android:textColor="@color/black"
+                android:textColor="@color/blanc"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
