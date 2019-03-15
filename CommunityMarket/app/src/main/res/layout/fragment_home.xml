@@ -5,182 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.HomeFragment"
-    android:background="@color/colorPrimary">
-
-
-    <!-- <Button
-         android:id="@+id/add_product_button"
-         android:layout_width="0dp"
-         android:layout_height="wrap_content"
-         android:layout_marginStart="16dp"
-         android:layout_marginLeft="16dp"
-         android:layout_marginEnd="16dp"
-         android:layout_marginRight="16dp"
-         android:layout_marginBottom="16dp"
-         android:text="vendre"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintStart_toStartOf="parent"
-         android:textAllCaps="false"
-         android:textColor="@color/blanc"
-         android:background="@drawable/button2_background"
-         android:elevation="3dp"/> -->
-
-    <!-- <android.support.design.widget.FloatingActionButton
-         android:id="@+id/content_floating_action_btn"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginEnd="16dp"
-         android:layout_marginRight="16dp"
-         android:layout_marginBottom="32dp"
-         android:clickable="true"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:srcCompat="@drawable/ic_ajouter" />
-
-
-         <TextView
-             android:id="@+id/textView6"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="16dp"
-             android:layout_marginLeft="16dp"
-             android:layout_marginTop="68dp"
-             android:text="NIXXON"
-             android:textColor="@color/orange"
-             android:textSize="36sp"
-             android:textStyle="bold"
-             app:fontFamily="sans-serif-condensed"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
-
-
-         <TextView
-             android:id="@+id/content_welcome_user"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="16dp"
-             android:layout_marginLeft="16dp"
-             android:layout_marginTop="16dp"
-             android:layout_marginEnd="8dp"
-             android:layout_marginRight="8dp"
-             android:layout_marginBottom="8dp"
-             android:text="WELCOME TO"
-             android:textColor="@color/blanc"
-             android:textSize="55sp"
-             android:textStyle="bold"
-             app:fontFamily="sans-serif-condensed"
-             app:layout_constraintBottom_toTopOf="@+id/textView6"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintHorizontal_bias="0.0"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent"
-             app:layout_constraintVertical_bias="0.483" />
-
-         <ViewFlipper
-             android:id="@+id/viewFlipper"
-             android:layout_width="match_parent"
-             android:layout_height="200dp"
-             android:layout_marginTop="8dp"
-             android:autoStart="true"
-             android:flipInterval="4000"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/textView6">
-
-             <ImageView
-                 android:id="@+id/imageSlideOne"
-                 android:layout_width="match_parent"
-                 android:layout_height="200dp"
-                 android:scaleType="centerCrop" />
-
-             <ImageView
-                 android:id="@+id/imageSlideTwo"
-                 android:layout_width="match_parent"
-                 android:layout_height="200dp"
-                 android:scaleType="centerCrop" />
-
-             <ImageView
-                 android:id="@+id/imageSlideThree"
-                 android:layout_width="match_parent"
-                 android:layout_height="200dp"
-                 android:scaleType="centerCrop" />
-
-             <ImageView
-                 android:id="@+id/imageSlideFour"
-                 android:layout_width="match_parent"
-                 android:layout_height="200dp"
-                 android:scaleType="centerCrop" />
-
-         </ViewFlipper>
-
-         <TextView
-             android:id="@+id/img1"
-             android:layout_width="0dp"
-             android:layout_height="0dp"
-             android:visibility="invisible" />
-
-         <TextView
-             android:id="@+id/img2"
-             android:layout_width="0dp"
-             android:layout_height="0dp"
-             android:visibility="invisible" />
-
-         <TextView
-             android:id="@+id/img3"
-             android:layout_width="0dp"
-             android:layout_height="0dp"
-             android:visibility="invisible" />
-
-         <TextView
-             android:id="@+id/img4"
-             android:layout_width="0dp"
-             android:layout_height="0dp"
-             android:visibility="invisible" />
-
-         <TextView
-             android:id="@+id/explorer"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="8dp"
-             android:layout_marginLeft="8dp"
-             android:layout_marginTop="16dp"
-             android:layout_marginEnd="8dp"
-             android:layout_marginRight="8dp"
-             android:text="CATEGORIES"
-             android:textColor="@color/blanc"
-             android:textSize="22sp"
-             android:textStyle="bold"
-             app:fontFamily="sans-serif-condensed"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintHorizontal_bias="0.028"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/viewFlipper" />
-
-         <ProgressBar
-             android:id="@+id/content_progresbar"
-             style="?android:attr/progressBarStyle"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="8dp"
-             android:layout_marginLeft="8dp"
-             android:layout_marginEnd="8dp"
-             android:layout_marginRight="8dp"
-             android:visibility="visible"
-             app:layout_constraintBottom_toBottomOf="@+id/viewFlipper"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="@+id/viewFlipper" />
-
-         <android.support.v7.widget.RecyclerView
-             android:id="@+id/content_recyclerView"
-             android:layout_width="0dp"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="8dp"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintHorizontal_bias="0.0"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/explorer" /> -->
+    android:background="@color/colorPrimaryDark">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -262,25 +87,6 @@
                     android:layout_height="0dp"
                     android:visibility="invisible" />
 
-                <!-- <TextView
-                    android:id="@+id/explorer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="CATEGORIES"
-                    android:textColor="@color/blanc"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    app:fontFamily="sans-serif-condensed"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.028"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewFlipper" /> -->
-
                 <ProgressBar
                     android:id="@+id/content_progresbar"
                     style="?android:attr/progressBarStyle"
@@ -333,7 +139,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:text="N O U V E A U X"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/abril_fatface"
@@ -390,7 +196,7 @@
                     android:layout_marginEnd="16dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="C H A U S S U R E S"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/abril_fatface"
@@ -436,7 +242,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="J U P E S"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/abril_fatface"
@@ -463,7 +269,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="U T I L I S A T E U R S"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/abril_fatface"
@@ -509,7 +315,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="T - S H I R T"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/abril_fatface"
@@ -557,7 +363,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="P U L L"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blanc"
                     android:textSize="20sp"
                     app:fontFamily="@font/abril_fatface"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -583,7 +389,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="A C C E S S O I R E"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blanc"
                     android:textSize="20sp"
                     app:fontFamily="@font/abril_fatface"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -646,7 +452,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="C U L O T T E S"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blanc"
                     android:textSize="20sp"
                     app:fontFamily="@font/abril_fatface"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -693,7 +499,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="P A N T A L O N S"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blanc"
                     android:textSize="20sp"
                     app:fontFamily="@font/abril_fatface"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -740,7 +546,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="C H E M I S E S"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blanc"
                     android:textSize="20sp"
                     app:fontFamily="@font/abril_fatface"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -787,7 +593,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="R O B E S"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blanc"
                     android:textSize="20sp"
                     app:fontFamily="@font/abril_fatface"
                     app:layout_constraintEnd_toEndOf="parent"
