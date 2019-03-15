@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.TshirtFragment"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimaryDark">
 
     <ImageView
         android:id="@+id/pubImag_tshire"
