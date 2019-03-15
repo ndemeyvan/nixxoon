@@ -91,7 +91,7 @@ public class PostActivityFinal extends AppCompatActivity {
         categoryName=getIntent ().getExtras ().get ( "categoryName" ).toString ();
         Toast.makeText ( getApplicationContext(),categoryName,Toast.LENGTH_LONG ).show ();
         asyncTask=new AsyncTask();
-       asyncTask.execute();
+        asyncTask.execute();
         postActivityWeakReference=new WeakReference<>(this);
        /* ActionBar ab=getSupportActionBar ();
         ab.setDisplayHomeAsUpEnabled ( true );*/
@@ -212,6 +212,7 @@ public class PostActivityFinal extends AppCompatActivity {
                                         user_post.put ( "utilisateur",current_user_id );
                                         user_post.put ( "image_du_produit",downloadUri.toString() );
                                         user_post.put ( "dete-en-seconde",date_avec_seconde );
+                                        user_post.put("categories",categoryName);
                                         firebaseFirestore.collection ( "publication" ).document ("categories").collection ( categoryName ).add(user_post).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentReference> task) {

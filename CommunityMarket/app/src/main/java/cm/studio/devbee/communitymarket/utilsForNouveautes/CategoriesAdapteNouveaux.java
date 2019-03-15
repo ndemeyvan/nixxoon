@@ -150,7 +150,7 @@ public class CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAda
                         }
                     }
                 } );
-                ////
+
                 firebaseFirestore.collection ( "publication" ).document ("categories").collection ( categorie ).document (idDuPost).collection ( "likes" ).document (current_user).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
