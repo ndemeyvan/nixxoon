@@ -31,7 +31,7 @@ private static  Button enregister;
 private static TextView textView5;
 private static Button register_text;
 private static FirebaseAuth mAuth;
-private static ProgressBar login_progressBar;
+private static ProgressBar register_progressBar;
 private static  AsyncTask asyncTask;
 private WeakReference<RegisterActivity> registerActivityWeakReference;
 
@@ -45,7 +45,7 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
         enregister=findViewById ( R.id.button );
         textView5=findViewById ( R.id.textView5 );
         register_text=findViewById ( R.id.register_text );
-        login_progressBar=findViewById ( R.id.login_progressBarRegister );
+        register_progressBar=findViewById ( R.id.register_progressBarRegister );
         mAuth = FirebaseAuth.getInstance();
         registerActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
@@ -63,7 +63,7 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
         enregister.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                login_progressBar.setVisibility ( View.VISIBLE );
+                register_progressBar.setVisibility ( View.VISIBLE );
                 textView5.setText ( "Bienvenue ... " );
                 String user_email=email.getText ().toString ();
                 String user_password=password.getText ().toString ();
@@ -78,7 +78,7 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
                                 startActivity ( intent );
                                 finish ();
                             }   else {
-                                login_progressBar.setVisibility ( View.INVISIBLE );
+                                register_progressBar.setVisibility ( View.INVISIBLE );
                                 String error =task.getException ().getMessage ();
                                 Toast.makeText ( getApplicationContext(),error,Toast.LENGTH_LONG ).show ();
                             }
@@ -88,7 +88,7 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
                      Toast.makeText ( getApplicationContext(),"les mots de passe ne correspondent pas !!!",Toast.LENGTH_LONG ).show ();
                    }
                }else{
-                   login_progressBar.setVisibility ( View.INVISIBLE );
+                   register_progressBar.setVisibility ( View.INVISIBLE );
                     Toast.makeText ( getApplicationContext(),"Veuillez remplir tous les champs svp !!",Toast.LENGTH_LONG ).show ();
                }
 
@@ -109,18 +109,22 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            asyncTask.cancel(true);
             super.onPostExecute ( aVoid );
-            asyncTask.cancel(true);
-            email=null;
-           password=null;
-             confirm_password=null;
-            enregister=null;
-           textView5=null;
-            register_text=null;
-           mAuth=null;
-            login_progressBar=null;
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        asyncTask.cancel(true);
+        super.onDestroy();
+        asyncTask.cancel(true);
+        email=null;
+        password=null;
+        confirm_password=null;
+        enregister=null;
+        textView5=null;
+        register_text=null;
+        mAuth=null;
+        register_progressBar=null;
+    }
 }
