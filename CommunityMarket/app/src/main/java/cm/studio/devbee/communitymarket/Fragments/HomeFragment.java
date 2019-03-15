@@ -36,6 +36,8 @@ import javax.annotation.Nullable;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouveaux;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
+import cm.studio.devbee.communitymarket.utilsForPostPrincipal.PrincipalAdapte;
+import cm.studio.devbee.communitymarket.utilsForPostPrincipal.PrincipalModel;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 
@@ -88,32 +90,33 @@ public class HomeFragment extends Fragment {
     private static ProgressDialog progressDialog;
     private static View v;
     private  static WeakReference<HomeFragment> homeFragmentWeakReference;
-
+    private static List<PrincipalModel> principalModelList;
+    private static PrincipalAdapte principalAdapte;
+    private RecyclerView principalRecyclerView;
 
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v= inflater.inflate(R.layout.fragment_home, container, false);
-        ////////chaussure
+        ////////nvx
+        principalRecyclerView=v.findViewById(R.id.principal_recyclerView);
+        principalModelList=new ArrayList<>();
+        principalAdapte=new PrincipalAdapte(principalModelList,getActivity());
+        principalRecyclerView.setAdapter(principalAdapte);
+        principalRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        //////nvx
+        ///chaussure
         categoriesAdapteChaussureList=new ArrayList<>(  );
         chaussureRecyclerView=v.findViewById ( R.id.chaussureRecyclerView );
         categoriesAdapteNouveaux=new CategoriesAdapteNouveaux (categoriesAdapteChaussureList,getContext().getApplicationContext());
         chaussureRecyclerView.setAdapter ( categoriesAdapteNouveaux );
         chaussureRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         /////chaussure
-        ////////nouveaux
-        categoriesModelList= new ArrayList<>();
-        nouveauxRecyclerView=v.findViewById(R.id.nouveautes_recyclerView);
-        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux(categoriesModelList,getActivity());
-        nouveauxRecyclerView.setAdapter(categoriesAdapteNouveaux);
-        nouveauxRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        ////nouveaux
         ///////jupes
         jupesRecyclerView=v.findViewById ( R.id.jupesRecyclerView );
         categoriesModelJupeList=new ArrayList<> (  );
@@ -278,9 +281,9 @@ public class HomeFragment extends Fragment {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
-                        CategoriesModelNouveaux categoriesModelNouveaux =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
-                        categoriesModelList.add(categoriesModelNouveaux);
-                        categoriesAdapteNouveaux.notifyDataSetChanged();
+                        PrincipalModel principalAdaptemodel =doc.getDocument().toObject(PrincipalModel.class).withId ( idupost );
+                      principalModelList.add(principalAdaptemodel);
+                        principalAdapte.notifyDataSetChanged();
                     }
                 }
 

@@ -319,7 +319,7 @@
                     android:textColor="@color/blanc"
                     android:textSize="11sp"
                     app:fontFamily="@font/abril_fatface"
-                    app:layout_constraintBottom_toTopOf="@+id/nouveautes_recyclerView"
+                    app:layout_constraintBottom_toTopOf="@+id/principal_recyclerView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/textView16"
@@ -353,7 +353,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView16"></android.support.v7.widget.RecyclerView>-->
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/nouveautes_recyclerView"
+                    android:id="@+id/principal_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -378,7 +378,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/textChausure"
-                    app:layout_constraintTop_toBottomOf="@+id/nouveautes_recyclerView"
+                    app:layout_constraintTop_toBottomOf="@+id/principal_recyclerView"
                     app:layout_constraintVertical_bias="0.76" />
 
                 <TextView
@@ -397,7 +397,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.031"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nouveautes_recyclerView" />
+                    app:layout_constraintTop_toBottomOf="@+id/principal_recyclerView" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/chaussureRecyclerView"
