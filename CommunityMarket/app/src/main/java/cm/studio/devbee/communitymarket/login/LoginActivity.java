@@ -132,5 +132,6 @@ public class LoginActivity extends AppCompatActivity {
         textView4=null;
          login_progressBar=null;
         mAuth=null;
+        home=null;
     }
 }
