@@ -84,7 +84,6 @@ public class ProfileActivity extends AppCompatActivity {
         profilRecycler=findViewById(R.id.profilRecycler);
         modelGridViewList=new ArrayList<>();
         gridViewAdapter=new GridViewAdapter(modelGridViewList,getApplicationContext());
-        profilRecycler=findViewById(R.id.vendeur_recyclerView);
         profilRecycler.setAdapter(gridViewAdapter);
         profilRecycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         asyncTask.execute();
