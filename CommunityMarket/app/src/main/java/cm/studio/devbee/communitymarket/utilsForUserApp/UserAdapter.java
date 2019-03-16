@@ -38,6 +38,7 @@ import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
+import cm.studio.devbee.communitymarket.postActivity.DetailActivityTwo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
