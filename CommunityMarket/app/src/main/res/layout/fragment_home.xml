@@ -102,35 +102,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/viewFlipper" />
 
-                <!-- <android.support.v7.widget.RecyclerView
-                    android:id="@+id/content_recyclerView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/explorer"></android.support.v7.widget.RecyclerView>-->
-                <Button
-                    android:id="@+id/nouveaux_bouton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/voir_tout_background"
-                    android:text="voir tout"
-                    android:textColor="@color/blanc"
-                    android:textSize="11sp"
-                    app:fontFamily="@font/abril_fatface"
-                    app:layout_constraintBottom_toTopOf="@+id/principal_recyclerView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/textView16"
-                    app:layout_constraintTop_toBottomOf="@+id/viewFlipper"
-                    app:layout_constraintVertical_bias="0.761" />
 
                 <TextView
                     android:id="@+id/textView16"
@@ -142,22 +113,13 @@
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:fontFamily="@font/abril_fatface"
+                    app:fontFamily="sans-serif-condensed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.065"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/viewFlipper" />
 
-                <!-- <android.support.v7.widget.RecyclerView
-                    android:id="@+id/nouveautes_recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView16"></android.support.v7.widget.RecyclerView>-->
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/principal_recyclerView"
                     android:layout_width="match_parent"
@@ -168,7 +130,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView16"></android.support.v7.widget.RecyclerView>
 
-                <Button
+                <!-- <Button
                     android:id="@+id/chaussure_bouton"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -185,7 +147,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/textChausure"
                     app:layout_constraintTop_toBottomOf="@+id/principal_recyclerView"
-                    app:layout_constraintVertical_bias="0.76" />
+                    app:layout_constraintVertical_bias="0.76" /> -->
 
                 <TextView
                     android:id="@+id/textChausure"
@@ -199,7 +161,7 @@
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:fontFamily="@font/abril_fatface"
+                    app:fontFamily="sans-serif-condensed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.031"
                     app:layout_constraintStart_toStartOf="parent"
@@ -216,24 +178,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textChausure"></android.support.v7.widget.RecyclerView>
 
-                <Button
-                    android:id="@+id/jupes_bouton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/voir_tout_background"
-                    android:text="voir tout"
-                    android:textColor="@color/blanc"
-                    android:textSize="11sp"
-                    app:fontFamily="@font/abril_fatface"
-                    app:layout_constraintBottom_toTopOf="@+id/jupesRecyclerView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/jupes"
-                    app:layout_constraintTop_toBottomOf="@+id/chaussureRecyclerView"
-                    app:layout_constraintVertical_bias="0.761" />
+                <!--  <Button
+                     android:id="@+id/jupes_bouton"
+                     android:layout_width="wrap_content"
+                     android:layout_height="30dp"
+                     android:layout_marginStart="8dp"
+                     android:layout_marginEnd="8dp"
+                     android:layout_marginBottom="8dp"
+                     android:background="@drawable/voir_tout_background"
+                     android:text="voir tout"
+                     android:textColor="@color/blanc"
+                     android:textSize="11sp"
+                     app:fontFamily="@font/abril_fatface"
+                     app:layout_constraintBottom_toTopOf="@+id/jupesRecyclerView"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintHorizontal_bias="1.0"
+                     app:layout_constraintStart_toEndOf="@+id/jupes"
+                     app:layout_constraintTop_toBottomOf="@+id/chaussureRecyclerView"
+                     app:layout_constraintVertical_bias="0.761" />-->
 
                 <TextView
                     android:id="@+id/jupes"
@@ -245,21 +207,21 @@
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:fontFamily="@font/abril_fatface"
+                    app:fontFamily="sans-serif-condensed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.049"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/chaussureRecyclerView" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/jupesRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/jupes"></android.support.v7.widget.RecyclerView>
+                 <android.support.v7.widget.RecyclerView
+                     android:id="@+id/jupesRecyclerView"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="16dp"
+                     android:layout_marginTop="16dp"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toBottomOf="@+id/jupes"></android.support.v7.widget.RecyclerView>
 
                 <TextView
                     android:id="@+id/textUtilisaeur"
@@ -272,40 +234,40 @@
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:fontFamily="@font/abril_fatface"
+                    app:fontFamily="sans-serif-condensed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/jupesRecyclerView" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/user_recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textUtilisaeur"></android.support.v7.widget.RecyclerView>
+                 <android.support.v7.widget.RecyclerView
+                     android:id="@+id/user_recyclerView"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="16dp"
+                     android:layout_marginTop="16dp"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toBottomOf="@+id/textUtilisaeur"></android.support.v7.widget.RecyclerView>
 
-                <Button
-                    android:id="@+id/tshirt_bouton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/voir_tout_background"
-                    android:text="voir tout"
-                    android:textColor="@color/blanc"
-                    android:textSize="11sp"
-                    app:fontFamily="@font/abril_fatface"
-                    app:layout_constraintBottom_toTopOf="@+id/tshirtRecycler"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/tshirt"
-                    app:layout_constraintTop_toBottomOf="@+id/user_recyclerView"
-                    app:layout_constraintVertical_bias="0.761" />
+                 <!--   <Button
+                       android:id="@+id/tshirt_bouton"
+                       android:layout_width="wrap_content"
+                       android:layout_height="30dp"
+                       android:layout_marginStart="8dp"
+                       android:layout_marginEnd="8dp"
+                       android:layout_marginBottom="8dp"
+                       android:background="@drawable/voir_tout_background"
+                       android:text="voir tout"
+                       android:textColor="@color/blanc"
+                       android:textSize="11sp"
+                       app:fontFamily="@font/abril_fatface"
+                       app:layout_constraintBottom_toTopOf="@+id/tshirtRecycler"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintHorizontal_bias="1.0"
+                       app:layout_constraintStart_toEndOf="@+id/tshirt"
+                       app:layout_constraintTop_toBottomOf="@+id/user_recyclerView"
+                       app:layout_constraintVertical_bias="0.761" />-->
 
                 <TextView
                     android:id="@+id/tshirt"
@@ -318,42 +280,42 @@
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:fontFamily="@font/abril_fatface"
+                    app:fontFamily="sans-serif-condensed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/user_recyclerView" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/tshirtRecycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/gradient_background_slider"
-                    android:padding="15dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tshirt"></android.support.v7.widget.RecyclerView>
+                  <android.support.v7.widget.RecyclerView
+                      android:id="@+id/tshirtRecycler"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="16dp"
+                      android:background="@drawable/gradient_background_slider"
+                      android:padding="15dp"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      app:layout_constraintStart_toStartOf="parent"
+                      app:layout_constraintTop_toBottomOf="@+id/tshirt"></android.support.v7.widget.RecyclerView>
 
-                <Button
-                    android:id="@+id/pull_bouton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/voir_tout_background"
-                    android:text="voir tout"
-                    android:textColor="@color/blanc"
-                    android:textSize="11sp"
-                    app:fontFamily="@font/abril_fatface"
-                    app:layout_constraintBottom_toTopOf="@+id/recyclerpull"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/tshirt"
-                    app:layout_constraintTop_toBottomOf="@+id/tshirtRecycler"
-                    app:layout_constraintVertical_bias="0.0" />
+                  <!-- <Button
+                      android:id="@+id/pull_bouton"
+                      android:layout_width="wrap_content"
+                      android:layout_height="30dp"
+                      android:layout_marginStart="8dp"
+                      android:layout_marginTop="16dp"
+                      android:layout_marginEnd="8dp"
+                      android:layout_marginBottom="8dp"
+                      android:background="@drawable/voir_tout_background"
+                      android:text="voir tout"
+                      android:textColor="@color/blanc"
+                      android:textSize="11sp"
+                      app:fontFamily="@font/abril_fatface"
+                      app:layout_constraintBottom_toTopOf="@+id/recyclerpull"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      app:layout_constraintHorizontal_bias="1.0"
+                      app:layout_constraintStart_toEndOf="@+id/tshirt"
+                      app:layout_constraintTop_toBottomOf="@+id/tshirtRecycler"
+                      app:layout_constraintVertical_bias="0.0" />-->
 
                 <TextView
                     android:id="@+id/pull"
@@ -365,7 +327,7 @@
                     android:text="P U L L"
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
-                    app:fontFamily="@font/abril_fatface"
+                    app:fontFamily="sans-serif-condensed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -391,13 +353,13 @@
                     android:text="A C C E S S O I R E"
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
-                    app:fontFamily="@font/abril_fatface"
+                    app:fontFamily="sans-serif-condensed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerpull" />
 
-                <Button
+                <!-- <Button
                     android:id="@+id/accessoire_bouton"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -415,7 +377,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/accessoire"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerpull"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.0" />-->
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycleraccessoire"
@@ -454,41 +416,41 @@
                     android:text="C U L O T T E S"
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
-                    app:fontFamily="@font/abril_fatface"
+                    app:fontFamily="sans-serif-condensed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pubImage" />
 
-                <Button
-                    android:id="@+id/cullote_bouton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/voir_tout_background"
-                    android:text="voir tout"
-                    android:textColor="@color/blanc"
-                    android:textSize="11sp"
-                    app:fontFamily="@font/abril_fatface"
-                    app:layout_constraintBottom_toTopOf="@+id/recyclercullote"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/cullote"
-                    app:layout_constraintTop_toBottomOf="@+id/pubImage"
-                    app:layout_constraintVertical_bias="0.0"></Button>
+                <!-- <Button
+                   android:id="@+id/cullote_bouton"
+                   android:layout_width="wrap_content"
+                   android:layout_height="30dp"
+                   android:layout_marginStart="8dp"
+                   android:layout_marginTop="16dp"
+                   android:layout_marginEnd="8dp"
+                   android:layout_marginBottom="8dp"
+                   android:background="@drawable/voir_tout_background"
+                   android:text="voir tout"
+                   android:textColor="@color/blanc"
+                   android:textSize="11sp"
+                   app:fontFamily="@font/abril_fatface"
+                   app:layout_constraintBottom_toTopOf="@+id/recyclercullote"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintHorizontal_bias="1.0"
+                   app:layout_constraintStart_toEndOf="@+id/cullote"
+                   app:layout_constraintTop_toBottomOf="@+id/pubImage"
+                   app:layout_constraintVertical_bias="0.0"></Button> -->
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclercullote"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/gradient_background_slider"                    android:padding="15dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cullote"></android.support.v7.widget.RecyclerView>
+               <android.support.v7.widget.RecyclerView
+                   android:id="@+id/recyclercullote"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="16dp"
+                   android:background="@drawable/gradient_background_slider"                    android:padding="15dp"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/cullote"></android.support.v7.widget.RecyclerView>
 
                 <TextView
                     android:id="@+id/pantalons"
@@ -500,31 +462,31 @@
                     android:text="P A N T A L O N S"
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
-                    app:fontFamily="@font/abril_fatface"
+                    app:fontFamily="sans-serif-condensed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recyclercullote" />
 
-                <Button
-                    android:id="@+id/pantalons_bouton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/voir_tout_background"
-                    android:text="voir tout"
-                    android:textColor="@color/blanc"
-                    android:textSize="11sp"
-                    app:fontFamily="@font/abril_fatface"
-                    app:layout_constraintBottom_toTopOf="@+id/recyclerpantalons"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/pantalons"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclercullote"
-                    app:layout_constraintVertical_bias="0.0"></Button>
+               <!-- <Button
+                   android:id="@+id/pantalons_bouton"
+                   android:layout_width="wrap_content"
+                   android:layout_height="30dp"
+                   android:layout_marginStart="8dp"
+                   android:layout_marginTop="16dp"
+                   android:layout_marginEnd="8dp"
+                   android:layout_marginBottom="8dp"
+                   android:background="@drawable/voir_tout_background"
+                   android:text="voir tout"
+                   android:textColor="@color/blanc"
+                   android:textSize="11sp"
+                   app:fontFamily="@font/abril_fatface"
+                   app:layout_constraintBottom_toTopOf="@+id/recyclerpantalons"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintHorizontal_bias="1.0"
+                   app:layout_constraintStart_toEndOf="@+id/pantalons"
+                   app:layout_constraintTop_toBottomOf="@+id/recyclercullote"
+                   app:layout_constraintVertical_bias="0.0"></Button>-->
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerpantalons"
@@ -547,13 +509,13 @@
                     android:text="C H E M I S E S"
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
-                    app:fontFamily="@font/abril_fatface"
+                    app:fontFamily="sans-serif-condensed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerpantalons" />
 
-                <Button
+                <!-- <Button
                     android:id="@+id/chemise_bouton"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -571,7 +533,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/chemise"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerpantalons"
-                    app:layout_constraintVertical_bias="0.0"></Button>
+                    app:layout_constraintVertical_bias="0.0"></Button>-->
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerchemise"
@@ -594,13 +556,13 @@
                     android:text="R O B E S"
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
-                    app:fontFamily="@font/abril_fatface"
+                    app:fontFamily="sans-serif-condensed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerchemise" />
 
-                <Button
+               <!-- <Button
                     android:id="@+id/robe_bouton"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -618,7 +580,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/robe"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerchemise"
-                    app:layout_constraintVertical_bias="0.511"></Button>
+                    app:layout_constraintVertical_bias="0.511"></Button> -->
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerrobe"
