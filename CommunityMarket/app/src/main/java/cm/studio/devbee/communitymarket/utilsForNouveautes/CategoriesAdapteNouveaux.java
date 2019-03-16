@@ -36,6 +36,7 @@ import javax.annotation.Nullable;
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
+import cm.studio.devbee.communitymarket.postActivity.DetailActivityTwo;
 import cm.studio.devbee.communitymarket.postActivity.PostActivityFinal;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -84,9 +85,10 @@ public class CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAda
         viewHolder.imageDuproduit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent gotoDetail =new Intent(context,DetailActivity.class);
-                    gotoDetail.putExtra("id du post",idDuPost);
-                    gotoDetail.putExtra("id de l'utilisateur",nom_id);
+                    Intent gotoDetail =new Intent(context,DetailActivityTwo.class);
+                    gotoDetail.putExtra("id_post",idDuPost);
+                    gotoDetail.putExtra("id_utilisateur",nom_id);
+                    gotoDetail.putExtra("id_categories",categorie);
                     context.startActivity(gotoDetail);
 
                 }
