@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint"
     android:layout_width="280dp"
     android:layout_height="150dp"
     android:layout_marginLeft="6dp"
@@ -117,6 +118,17 @@
                 app:layout_constraintEnd_toStartOf="@+id/postUser_prix"
                 app:layout_constraintHorizontal_bias="0.081"
                 app:layout_constraintStart_toEndOf="@+id/postImage" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/postImage"
+                app:layout_constraintEnd_toEndOf="@+id/postImage"
+                app:layout_constraintStart_toStartOf="@+id/postImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/background_nvx" />
+
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
