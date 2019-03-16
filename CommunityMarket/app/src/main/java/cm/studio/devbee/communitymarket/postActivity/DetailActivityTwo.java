@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,6 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
 
+import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -35,17 +38,22 @@ public class DetailActivityTwo extends AppCompatActivity {
     private static TextView date_de_publication;
     private static FirebaseAuth firebaseAuth;
     private static String current_user_id;
+    private static String utilisateur_actuel;
     private AsyncTask asyncTask;
-    private String categories;
+    private static ProgressBar detail_progress;
+    private static Button supprime_detail_button;
+    private static  String  categories;
     private static WeakReference<DetailActivityTwo> detailActivityTwoWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_detail_two );
+        firebaseAuth=FirebaseAuth.getInstance ();
+        utilisateur_actuel=firebaseAuth.getCurrentUser ().getUid ();
         firebaseFirestore=FirebaseFirestore.getInstance();
         iddupost =getIntent().getExtras().getString("id_post");
         current_user_id =getIntent().getExtras().getString("id_utilisateur");
-        categories =getIntent().getExtras().getString("id_categories");
+        categories=getIntent().getExtras().getString("id_categories");
         detail_image_post=findViewById(R.id.detail_image_post);
         detail_post_titre_produit=findViewById(R.id.detail_titre_produit);
         detail_prix_produit=findViewById(R.id.detail_prix_produit);
@@ -55,6 +63,12 @@ public class DetailActivityTwo extends AppCompatActivity {
         detail_description=findViewById(R.id.detail_description);
         date_de_publication=findViewById(R.id.date_de_publication);
         firebaseAuth=FirebaseAuth.getInstance();
+        detail_progress=findViewById ( R.id.detail_progress );
+        supprime_detail_button=findViewById ( R.id.supprime_detail_button );
+        detailActivityTwoWeakReference=new WeakReference<>(this);
+        asyncTask=new AsyncTask ();
+        asyncTask.execute();
+
         detailActivityTwoWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask ();
         asyncTask.execute();
@@ -77,6 +91,47 @@ public class DetailActivityTwo extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void supprime(){
+        if (current_user_id.equals ( utilisateur_actuel )){
+            supprime_detail_button.setVisibility ( View.VISIBLE );
+            supprime_detail_button.setText ( "supprimer ceci  des " + categories);
+            supprime_detail_button.setEnabled ( true );
+            supprime_detail_button.setVisibility ( View.VISIBLE );
+            supprime_detail_button.setOnClickListener ( new View.OnClickListener () {
+                @Override
+                public void onClick(View v) {
+                    ////////////////////////////////////////
+                    firebaseFirestore.collection ( "publication" ).document ("categories").collection (categories).document (iddupost).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.getResult ().exists ()){
+                                if (task.isSuccessful ()){
+                                    detail_progress.setVisibility ( View.VISIBLE );
+                                    firebaseFirestore.collection ( "publication" ).document ("categories").collection ( categories ).document (iddupost).delete ();
+                                    Toast.makeText ( getApplicationContext (),"supprimer des "+categories,Toast.LENGTH_LONG ).show ();
+                                    Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
+                                    startActivity ( gtohome );
+                                    finish ();
+                                }else {
+                                    detail_progress.setVisibility ( View.INVISIBLE );
+                                    String error=task.getException ().getMessage ();
+                                    Toast.makeText ( getApplicationContext (),error,Toast.LENGTH_LONG ).show ();
+
+                                }
+                            }else {
+
+                            }
+                        }
+                    } );
+                    /////////////////////////////////////////////////
+                }
+            } );
+        }else{
+            vendeur_button.setVisibility ( View.VISIBLE );
+            vendeur_button.setEnabled ( true );
+            supprime_detail_button.setVisibility ( View.INVISIBLE );
+        }
     }
 
     public void vendeurActivity(){
@@ -124,6 +179,7 @@ public class DetailActivityTwo extends AppCompatActivity {
                     }
                 }
             });
+            supprime ();
             vendeurActivity();
             nomEtImageProfil();
             return null;

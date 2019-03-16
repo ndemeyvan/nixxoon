@@ -136,6 +136,7 @@ public class PostActivityFinal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar_post.setVisibility ( View.VISIBLE );
+                vendreButton.setEnabled ( false );
                 prendreDonnerDevente ();
             }
         } );
@@ -219,6 +220,7 @@ public class PostActivityFinal extends AppCompatActivity {
                                                 if (task.isSuccessful()){
 
                                                 }else{
+
                                                     String error = task.getException().getMessage();
                                                     Toast.makeText(getApplicationContext(),error,Toast.LENGTH_LONG).show();
                                                 }
@@ -244,6 +246,7 @@ public class PostActivityFinal extends AppCompatActivity {
                                                     finish();
                                                     Toast.makeText(getApplicationContext(),"envoie effectuer",Toast.LENGTH_LONG).show();
                                                 }else{
+                                                    vendreButton.setEnabled ( true );
                                                     String error = task.getException().getMessage();
                                                     Toast.makeText(getApplicationContext(),error,Toast.LENGTH_LONG).show();
                                                 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class DetailActivity extends AppCompatActivity {
     private static String current_user_id;
     private static String utilisateur_actuel;
     private AsyncTask asyncTask;
+    private static ProgressBar detail_progress;
     private static Button supprime_detail_button;
     private static WeakReference<DetailActivity> detailActivityWeakReference;
     @Override
@@ -68,6 +70,7 @@ public class DetailActivity extends AppCompatActivity {
         detail_description=findViewById(R.id.detail_description);
         date_de_publication=findViewById(R.id.date_de_publication);
         firebaseAuth=FirebaseAuth.getInstance();
+        detail_progress=findViewById ( R.id.detail_progress );
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         detailActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
@@ -107,12 +110,14 @@ public class DetailActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.getResult ().exists ()){
                                 if (task.isSuccessful ()){
+                                    detail_progress.setVisibility ( View.VISIBLE );
                                     firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).delete ();
                                     Toast.makeText ( getApplicationContext (),"supprimer des nouveautés",Toast.LENGTH_LONG ).show ();
                                     Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
                                     startActivity ( gtohome );
                                     finish ();
                                 }else {
+                                    detail_progress.setVisibility ( View.INVISIBLE );
                                     String error=task.getException ().getMessage ();
                                     Toast.makeText ( getApplicationContext (),error,Toast.LENGTH_LONG ).show ();
 
@@ -209,6 +214,7 @@ public class DetailActivity extends AppCompatActivity {
          current_user_id=null;
         utilisateur_actuel=null;
         supprime_detail_button=null;
+        detail_progress=null;
 
     }
 }

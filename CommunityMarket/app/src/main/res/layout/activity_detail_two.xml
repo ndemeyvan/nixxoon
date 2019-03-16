@@ -81,42 +81,13 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/second_button_background"
         android:elevation="3dp"
-        android:fontFamily="@font/abril_fatface"
+        android:fontFamily="sans-serif-condensed"
         android:text="contacter le vendeur"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <!-- <ImageView
-         android:id="@+id/detail_likeImage"
-         android:layout_width="30dp"
-         android:layout_height="30dp"
-         android:layout_marginBottom="8dp"
-         app:layout_constraintBottom_toBottomOf="@+id/detail_image_post"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintHorizontal_bias="0.316"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toTopOf="@+id/detail_image_post"
-         app:layout_constraintVertical_bias="1.0"
-         app:srcCompat="@mipmap/ic_like_gray" /> -->
-
-    <!--<TextView
-        android:id="@+id/detail_nombre_de_likes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="8dp"
-        android:text="10 Likes"
-        android:textAllCaps="true"
-        android:textColor="@color/blanc"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" /> -->
 
     <TextView
         android:id="@+id/detail_user_name"
@@ -171,8 +142,40 @@
         android:fontFamily="sans-serif-condensed"
         android:text="xxxxx"
         android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/detail_user_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/supprime_detail_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/second_button_background"
+        android:text="supprimer ceci  des nouveautés"
+        android:textAllCaps="false"
+        android:textColor="@color/blanc"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/vendeur_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="@+id/vendeur_button" />
+
+    <ProgressBar
+        android:id="@+id/detail_progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/detail_titre_produit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

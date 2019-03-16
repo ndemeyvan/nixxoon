@@ -144,6 +144,7 @@
         android:fontFamily="sans-serif-condensed"
         android:text="xxxxx"
         android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/detail_user_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.025"
@@ -156,13 +157,28 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/second_button_background"
-        android:text="supprimer ceci  nouveautés"
+        android:text="supprimer ceci  des nouveautés"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
-        android:textSize="17sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/vendeur_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="@+id/vendeur_button" />
+
+    <ProgressBar
+        android:id="@+id/detail_progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/detail_titre_produit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
