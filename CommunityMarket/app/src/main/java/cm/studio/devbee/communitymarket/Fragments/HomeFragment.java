@@ -113,7 +113,7 @@ public class HomeFragment extends Fragment {
         ///chaussure
         categoriesAdapteChaussureList=new ArrayList<>(  );
         chaussureRecyclerView=v.findViewById ( R.id.chaussureRecyclerView );
-        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux (categoriesAdapteChaussureList,getContext().getApplicationContext());
+        categoriesAdapteNouveaux=new CategoriesAdapteNouveaux (categoriesAdapteChaussureList,getActivity());
         chaussureRecyclerView.setAdapter ( categoriesAdapteNouveaux );
         chaussureRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         /////chaussure
