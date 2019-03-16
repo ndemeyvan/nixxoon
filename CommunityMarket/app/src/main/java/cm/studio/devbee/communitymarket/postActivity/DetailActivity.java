@@ -27,6 +27,8 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import cm.studio.devbee.communitymarket.Accueil;
+import cm.studio.devbee.communitymarket.Fragments.HomeFragment;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -44,12 +46,16 @@ public class DetailActivity extends AppCompatActivity {
     private static TextView date_de_publication;
     private static FirebaseAuth firebaseAuth;
     private static String current_user_id;
+    private static String utilisateur_actuel;
     private AsyncTask asyncTask;
+    private static Button supprime_detail_button;
     private static WeakReference<DetailActivity> detailActivityWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        firebaseAuth=FirebaseAuth.getInstance ();
+        utilisateur_actuel=firebaseAuth.getCurrentUser ().getUid ();
         firebaseFirestore=FirebaseFirestore.getInstance();
         iddupost =getIntent().getExtras().getString("id du post");
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
@@ -62,6 +68,7 @@ public class DetailActivity extends AppCompatActivity {
         detail_description=findViewById(R.id.detail_description);
         date_de_publication=findViewById(R.id.date_de_publication);
         firebaseAuth=FirebaseAuth.getInstance();
+        supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         detailActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
         asyncTask.execute();
@@ -85,6 +92,44 @@ public class DetailActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void supprime(){
+        if (current_user_id.equals ( utilisateur_actuel )){
+            supprime_detail_button.setVisibility ( View.VISIBLE );
+            supprime_detail_button.setEnabled ( true );
+            supprime_detail_button.setVisibility ( View.VISIBLE );
+            supprime_detail_button.setOnClickListener ( new View.OnClickListener () {
+                @Override
+                public void onClick(View v) {
+                    ////////////////////////////////////////
+                    firebaseFirestore.collection ( "publication" ).document ("categories").collection ("nouveaux" ).document (iddupost).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.getResult ().exists ()){
+                                if (task.isSuccessful ()){
+                                    firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).delete ();
+                                    Toast.makeText ( getApplicationContext (),"supprimer des nouveautés",Toast.LENGTH_LONG ).show ();
+                                    Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
+                                    startActivity ( gtohome );
+                                    finish ();
+                                }else {
+                                    String error=task.getException ().getMessage ();
+                                    Toast.makeText ( getApplicationContext (),error,Toast.LENGTH_LONG ).show ();
+
+                                }
+                            }else {
+
+                            }
+                        }
+                    } );
+                    /////////////////////////////////////////////////
+                }
+            } );
+        }else{
+            vendeur_button.setVisibility ( View.VISIBLE );
+            vendeur_button.setEnabled ( true );
+            supprime_detail_button.setVisibility ( View.INVISIBLE );
+        }
     }
 
    public void vendeurActivity(){
@@ -134,6 +179,7 @@ public class DetailActivity extends AppCompatActivity {
             });
             vendeurActivity();
             nomEtImageProfil();
+            supprime ();
             return null;
         }
 
@@ -161,6 +207,8 @@ public class DetailActivity extends AppCompatActivity {
         date_de_publication=null;
          firebaseAuth=null;
          current_user_id=null;
+        utilisateur_actuel=null;
+        supprime_detail_button=null;
 
     }
 }

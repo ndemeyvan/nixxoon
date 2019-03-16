@@ -119,7 +119,6 @@ public class VendeurActivity extends AppCompatActivity {
                         ModelGridView modelGridView =doc.getDocument().toObject(ModelGridView.class);
                         modelGridViewList.add(modelGridView);
                         gridViewAdapter.notifyDataSetChanged();
-
                     }
                 }
 
