@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
     private static  AsyncTask asyncTask;
     private static  String categorie;
     private static Toolbar toolbargeneral;
+    private ImageView backgroundgeneral;
     private static WeakReference<UserGeneralPresentation> userGeneralPresentationWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
         categorie =getIntent().getExtras().getString("id_categories");
         profilImage=findViewById(R.id.generalImageProfilUser);
+        backgroundgeneral=findViewById(R.id.backgroundgeneral);
         residence=findViewById(R.id.general_residence);
         last_seen=findViewById(R.id.general_last_view);
         button_message=findViewById(R.id.general_button_message);
@@ -80,10 +83,12 @@ public class UserGeneralPresentation extends AppCompatActivity {
                         String residence_user  =task.getResult ().getString ("user_residence");
                         residence.setText(residence_user);
                         user_name.setText(name_user+" "+prenom);
-                        Picasso.with(UserGeneralPresentation.this).load(image_user).placeholder(R.drawable.use).into(profilImage);
+                        Picasso.with(UserGeneralPresentation.this).load(image_user).placeholder(R.drawable.boy).into(profilImage);
+                        Picasso.with(UserGeneralPresentation.this).load(image_user).into(backgroundgeneral);
                         getSupportActionBar().setTitle(name_user+" "+prenom);
                         button_voir.setText("voir les ventes de "+prenom);
                         button_message.setText("ecrire a "+prenom);
+
                     }
                 }else {
                     String error=task.getException().getMessage();
