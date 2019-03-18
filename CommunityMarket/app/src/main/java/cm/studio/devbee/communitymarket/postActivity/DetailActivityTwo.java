@@ -68,7 +68,6 @@ public class DetailActivityTwo extends AppCompatActivity {
         detailActivityTwoWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask ();
         asyncTask.execute();
-
         detailActivityTwoWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask ();
         asyncTask.execute();

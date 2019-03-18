@@ -47,7 +47,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".postActivity.DetailActivityTwo"></activity>
+        <activity android:name=".postActivity.DetailActivityTwo" />
+        <activity android:name=".postActivity.UserGeneralPresentation"></activity>
     </application>
 
 </manifest>

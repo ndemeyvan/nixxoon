@@ -141,7 +141,7 @@ public class DetailActivity extends AppCompatActivity {
        vendeur_button.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent vendeur=new Intent(getApplicationContext(),VendeurActivity.class);
+               Intent vendeur=new Intent(getApplicationContext(),UserGeneralPresentation.class);
                vendeur.putExtra("id du post",iddupost);
                vendeur.putExtra("id de l'utilisateur",current_user_id);
                startActivity(vendeur);
