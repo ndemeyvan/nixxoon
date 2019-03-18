@@ -74,7 +74,6 @@ public class ProfileActivity extends AppCompatActivity {
         telephone=findViewById(R.id.profil_user_phone);
         residence=findViewById(R.id.profil_user_residence);
         email=findViewById(R.id.profil_user_email);
-        operation=findViewById(R.id.user_operations);
         firebaseFirestore=FirebaseFirestore.getInstance ();
         profilImage=findViewById(R.id.circleImageView_profil);
         progressBar.setVisibility(View.VISIBLE);
@@ -105,7 +104,6 @@ public class ProfileActivity extends AppCompatActivity {
                         telephone.setText ( telephone_user );
                         residence.setText ( residence_user );
                         email.setText ( email_user );
-                        operation.setText("0");
                         getSupportActionBar().setTitle(prenomuser);
                         Picasso.with ( getApplicationContext() ).load ( image_profil_user ).transform(new CircleTransform()).placeholder(R.drawable.use).into ( profilImage );
                         progressBar.setVisibility(View.INVISIBLE);
