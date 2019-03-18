@@ -30,6 +30,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:text="nom produit"
                 android:ellipsize="end"
+                android:lines="1"
                 android:textColor="@color/black"
                 android:textSize="13sp"
                 android:textStyle="bold"
