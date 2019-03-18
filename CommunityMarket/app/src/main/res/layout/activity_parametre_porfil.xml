@@ -111,7 +111,7 @@
         android:background="@drawable/edit_text_background"
         android:elevation="1dp"
         android:ems="10"
-        android:maxLength="80"
+        android:maxLength="180"
         android:fontFamily="sans-serif-condensed"
         android:hint="D'ecris toi en quelque mots (80 caractere)"
         android:inputType="textPersonName"

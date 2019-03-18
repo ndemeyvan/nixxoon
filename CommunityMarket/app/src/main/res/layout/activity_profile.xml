@@ -138,21 +138,23 @@
 
             <TextView
                 android:id="@+id/profil_user_email"
-                android:layout_width="wrap_content"
-                android:layout_height="53dp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="176dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed"
-                android:lines="4"
+                android:lines="3"
                 android:text="xxxxxxxxx"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toEndOf="@+id/profil_user_residence"
+                app:layout_constraintHorizontal_bias="0.106"
                 app:layout_constraintStart_toStartOf="@+id/textView8"
-                tools:layout_editor_absoluteY="131dp" />
+                app:layout_constraintTop_toBottomOf="@+id/profil_user_residence"
+                tools:ignore="MissingConstraints" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
