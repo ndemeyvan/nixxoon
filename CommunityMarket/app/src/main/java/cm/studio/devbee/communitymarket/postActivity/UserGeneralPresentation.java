@@ -37,6 +37,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
     private static  AsyncTask asyncTask;
     private static  String categorie;
     private static Toolbar toolbargeneral;
+    private  TextView detail_user;
     private ImageView backgroundgeneral;
     private static WeakReference<UserGeneralPresentation> userGeneralPresentationWeakReference;
     @Override
@@ -45,6 +46,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
         setContentView(R.layout.activity_user_general_presentation);
         toolbargeneral=findViewById(R.id.general_toolbar);
         setSupportActionBar(toolbargeneral);
+        detail_user=findViewById(R.id.detail_user);
         iddupost =getIntent().getExtras().getString("id du post");
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
         categorie =getIntent().getExtras().getString("id_categories");
@@ -66,6 +68,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
                 gotoDetail.putExtra("id du post",iddupost);
                 gotoDetail.putExtra("id de l'utilisateur",current_user_id);
                 gotoDetail.putExtra("id_categories",categorie);
+
                 startActivity(gotoDetail);
                 finish();
             }
@@ -81,6 +84,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
                         String name_user= task.getResult ().getString ( "user_name" );
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         String residence_user  =task.getResult ().getString ("user_residence");
+                        String user_mail  =task.getResult ().getString ("user_mail");
                         residence.setText(residence_user);
                         user_name.setText(name_user+" "+prenom);
                         Picasso.with(UserGeneralPresentation.this).load(image_user).placeholder(R.drawable.boy).into(profilImage);
@@ -88,6 +92,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
                         getSupportActionBar().setTitle(name_user+" "+prenom);
                         button_voir.setText("voir les ventes de "+prenom);
                         button_message.setText("ecrire a "+prenom);
+                        detail_user.setText(user_mail);
 
                     }
                 }else {
