@@ -12,13 +12,14 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="76dp"
         android:text="E d u e n E"
         android:textColor="@color/orange"
         android:textSize="45dp"
         android:textStyle="bold"
         app:fontFamily="@font/caveat"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_background"
         android:elevation="3dp"
@@ -75,7 +76,8 @@
         app:layout_constraintBottom_toTopOf="@+id/gotoLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.183" />
 
     <ImageView
         android:id="@+id/devant"
