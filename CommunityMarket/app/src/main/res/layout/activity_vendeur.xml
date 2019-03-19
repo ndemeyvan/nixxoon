@@ -128,7 +128,7 @@
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed"
-                android:lines="3"
+                android:lines="2"
                 android:text="xxxxxxxxx"
                 android:textColor="@color/black"
                 android:textStyle="bold"
