@@ -48,7 +48,8 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".postActivity.DetailActivityTwo" />
-        <activity android:name=".postActivity.UserGeneralPresentation"></activity>
+        <activity android:name=".postActivity.UserGeneralPresentation" />
+        <activity android:name=".search.SearchActivity"></activity>
     </application>
 
 </manifest>

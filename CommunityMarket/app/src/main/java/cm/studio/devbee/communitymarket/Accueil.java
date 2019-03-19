@@ -48,6 +48,8 @@ import cm.studio.devbee.communitymarket.login.LoginActivity;
 import cm.studio.devbee.communitymarket.postActivity.PostActivity;
 import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 import cm.studio.devbee.communitymarket.profile.ProfileActivity;
+import cm.studio.devbee.communitymarket.search.SearchActivity;
+
 public class Accueil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth mAuth;
@@ -148,8 +150,8 @@ public class Accueil extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.search) {
-           /* Intent parametre=new Intent(Accueil.this,ParametrePorfilActivity.class);
-            startActivity(parametre);*/
+            Intent parametre=new Intent(Accueil.this,SearchActivity.class);
+            startActivity(parametre);
             return true;
         }
 
