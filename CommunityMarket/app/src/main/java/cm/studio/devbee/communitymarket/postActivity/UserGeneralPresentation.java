@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
     private static  String categorie;
     private static Toolbar toolbargeneral;
     private  TextView detail_user;
+    private static ProgressBar user_general_progress;
     private ImageView backgroundgeneral;
     private static WeakReference<UserGeneralPresentation> userGeneralPresentationWeakReference;
     @Override
@@ -57,10 +59,14 @@ public class UserGeneralPresentation extends AppCompatActivity {
         button_message=findViewById(R.id.general_button_message);
         button_voir=findViewById(R.id.general_voir_ventes);
         user_name=findViewById(R.id.general_user_name);
+        user_general_progress=findViewById ( R.id.user_general_progress );
         firebaseFirestore=FirebaseFirestore.getInstance();
         userGeneralPresentationWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
         asyncTask.execute();
+        button_message.setEnabled ( false );
+        button_voir.setEnabled ( false );
+        user_general_progress.setVisibility ( View.VISIBLE );
         button_voir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +74,6 @@ public class UserGeneralPresentation extends AppCompatActivity {
                 gotoDetail.putExtra("id du post",iddupost);
                 gotoDetail.putExtra("id de l'utilisateur",current_user_id);
                 gotoDetail.putExtra("id_categories",categorie);
-
                 startActivity(gotoDetail);
                 finish();
             }
@@ -93,6 +98,9 @@ public class UserGeneralPresentation extends AppCompatActivity {
                         button_voir.setText("voir les ventes de "+prenom);
                         button_message.setText("ecrire a "+prenom);
                         detail_user.setText(user_mail);
+                        button_message.setEnabled ( true );
+                        button_voir.setEnabled ( true );
+                        user_general_progress.setVisibility ( View.INVISIBLE );
 
                     }
                 }else {

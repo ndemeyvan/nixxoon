@@ -207,20 +207,6 @@ public class ParametrePorfilActivity extends AppCompatActivity {
     }
 
 
-
-   /* public void recuperation(){
-        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                String nom_user = task.getResult ().toString ();
-                String prenom_user =task.getResult ().toString ();
-                String telephone_user =task.getResult ().toString ();
-                String residence_user  =task.getResult ().toString ();
-                String image_profil_user =task.getResult ().toString ();
-
-            }
-        } );
-    }*/
     public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -232,7 +218,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             setimage();
             getuserdata ();
-           // recuperation ();
+            parametre_progressbar.setVisibility ( View.INVISIBLE );
             firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -251,6 +237,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
                             email.setText ( email_user );
                             button_enregister.setEnabled ( true );
                             mImageUri=Uri.parse ( image_profil_user );
+                            parametre_progressbar.setVisibility ( View.INVISIBLE );
                             Picasso.with ( getApplicationContext()).load ( image_profil_user ).placeholder(R.drawable.use).into ( parametreImage );
                         }
                     }else{

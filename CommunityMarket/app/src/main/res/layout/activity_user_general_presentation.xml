@@ -2,9 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".postActivity.UserGeneralPresentation">
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -51,20 +53,18 @@
     </LinearLayout>
 
 
-
     <android.support.v7.widget.Toolbar
+        android:id="@+id/general_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
-        android:id="@+id/general_toolbar"
-        app:titleTextColor="@color/blanc"
-        ></android.support.v7.widget.Toolbar>
+        app:titleTextColor="@color/blanc"></android.support.v7.widget.Toolbar>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/generalImageProfilUser"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="28dp"
         android:src="@drawable/boy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,6 +135,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/general_last_seen" />
+
     <TextView
         android:id="@+id/general_detail"
         android:layout_width="wrap_content"
@@ -153,7 +154,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="104dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/second_button_background"
         android:textAllCaps="false"
@@ -171,10 +172,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:textSize="16sp"
         android:background="@drawable/button_background"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/general_button_message" />
@@ -196,5 +197,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/general_residence"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ProgressBar
+        android:id="@+id/user_general_progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/generalImageProfilUser"
+        app:layout_constraintEnd_toEndOf="@+id/generalImageProfilUser"
+        app:layout_constraintStart_toStartOf="@+id/generalImageProfilUser"
+        app:layout_constraintTop_toTopOf="@+id/generalImageProfilUser" />
 
 </android.support.constraint.ConstraintLayout>
