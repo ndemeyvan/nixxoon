@@ -84,8 +84,6 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         parametrePorfilActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
        asyncTask.execute();
-        parametre_progressbar.setVisibility ( View.VISIBLE );
-        button_enregister.setEnabled ( false );
 
     }
     public void setimage(){
@@ -109,35 +107,19 @@ public class ParametrePorfilActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult ( requestCode, resultCode, data );
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-               mImageUri = result.getUri();
-               parametreImage.setImageURI ( mImageUri );
-               ischange=true;
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
-            }
-        }
-    }
+
     public void getuserdata(){
-        final String user_name = nom.getText ().toString ();
-        final String user_premon = premon.getText ().toString ();
-        final String user_telephone = telephone.getText ().toString ();
-        final String user_residence = residence.getText ().toString ();
-        final String user_email = email.getText ().toString ();
         button_enregister.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-
                 parametre_progressbar.setVisibility ( View.VISIBLE );
-
+                final String user_name = nom.getText ().toString ();
+                final String user_premon = premon.getText ().toString ();
+                final String user_telephone = telephone.getText ().toString ();
+                final String user_residence = residence.getText ().toString ();
+                final String user_email = email.getText ().toString ();
                 /////////// envoi des fichier dans la base de donnee
                 if (ischange) {
-
                     if (!TextUtils.isEmpty ( user_name ) && !TextUtils.isEmpty ( user_telephone ) && !TextUtils.isEmpty ( user_premon ) && !TextUtils.isEmpty ( user_residence ) && mImageUri != null && !TextUtils.isEmpty ( user_email )) {
                         parametre_progressbar.setVisibility ( View.VISIBLE );
                         final StorageReference image_de_profil = storageReference.child ( "image_de_profil" ).child ( current_user_id + " .jpg" );
@@ -170,6 +152,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
                     }
                 }else{
                     stockage ( null, user_name, user_premon, user_telephone, user_residence, user_email );
+
                 }
             }
         });
@@ -205,6 +188,21 @@ public class ParametrePorfilActivity extends AppCompatActivity {
             }
         } );
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult ( requestCode, resultCode, data );
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                mImageUri = result.getUri();
+                parametreImage.setImageURI ( mImageUri );
+                ischange=true;
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
+    }
+
 
 
 
@@ -249,7 +247,6 @@ public class ParametrePorfilActivity extends AppCompatActivity {
                             telephone.setText ( telephone_user );
                             residence.setText ( residence_user );
                             email.setText ( email_user );
-                            button_enregister.setEnabled ( true );
                             mImageUri=Uri.parse ( image_profil_user );
                             parametre_progressbar.setVisibility ( View.INVISIBLE );
                             Picasso.with ( getApplicationContext()).load ( image_profil_user ).placeholder(R.drawable.use).into ( parametreImage );

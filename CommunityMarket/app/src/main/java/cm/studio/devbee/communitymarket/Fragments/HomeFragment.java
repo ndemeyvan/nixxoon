@@ -538,7 +538,6 @@ public class HomeFragment extends Fragment {
          categoriesModelJupeList=null;
         user_recyclerView=null;
         userAdapter=null;
-      userList=null;
         //////////tshirt
          categoriesModelTshirtList=null;
          tshirtRecycler=null;
