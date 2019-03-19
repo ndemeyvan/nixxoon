@@ -31,6 +31,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewHolder
     Context context;
     FirebaseFirestore firebaseFirestore;
 
+    public SearchAdapter(List<SearchModel> searchModelList, Context context) {
+        this.searchModelList = searchModelList;
+        this.context = context;
+    }
+
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -45,6 +50,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewHolder
         String imagePorduit=searchModelList.get ( i ).getImage_du_produit ();
         String description=searchModelList.get ( i ).getDecription_du_produit ();
         final String prix=searchModelList.get ( i ).getPrix_du_produit ();
+        viewHolder.setprix ( prix );
         firebaseFirestore.collection ( "publication" ).document ("categories").get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
