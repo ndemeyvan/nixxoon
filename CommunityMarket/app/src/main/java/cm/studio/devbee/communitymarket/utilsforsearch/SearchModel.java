@@ -11,13 +11,12 @@ public class SearchModel {
     public SearchModel() {
     }
 
-    public SearchModel(String nom_du_produit, String decription_du_produit, String prix_du_produit, String date_de_publication, String utilisateur, String image_du_produit) {
+    public SearchModel(String nom_du_produit, String decription_du_produit, String prix_du_produit, String date_de_publication) {
         this.nom_du_produit = nom_du_produit;
         this.decription_du_produit = decription_du_produit;
         this.prix_du_produit = prix_du_produit;
         this.date_de_publication = date_de_publication;
-        this.utilisateur = utilisateur;
-        this.image_du_produit = image_du_produit;
+
     }
 
     public String getNom_du_produit() {

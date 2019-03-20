@@ -51,19 +51,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewHolder
         String description=searchModelList.get ( i ).getDecription_du_produit ();
         final String prix=searchModelList.get ( i ).getPrix_du_produit ();
         viewHolder.setprix ( prix );
-        firebaseFirestore.collection ( "publication" ).document ("categories").get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful ()){
-                    String pri_two=task.getResult ().getString ( "prix_du_produit" );
-                    viewHolder.setprix ( prix );
 
-                }else{
-                    String error =task.getException ().getMessage ();
-                    Toast.makeText (context,error,Toast.LENGTH_LONG ).show ();
-                }
-            }
-        } );
 
     }
 
@@ -73,29 +61,28 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewHolder
     }
 
     public class  viewHolder extends RecyclerView.ViewHolder{
-        TextView search_prix;
-        TextView search_usr_name;
-        TextView search_title;
-        ImageView search_image_post;
+        TextView search_price;
+        TextView search_user_name;
+        CircleImageView search_user_profil_image;
+        ImageView search_post_image;
         TextView search_description;
-        CircleImageView search_profil_image;
+        TextView utilisateur_search;
         public viewHolder(@NonNull View itemView) {
             super ( itemView );
-            search_title=itemView.findViewById ( R.id.search_title );
-            search_prix=itemView.findViewById ( R.id.search_prix );
-            search_profil_image=itemView.findViewById (R.id.search_profil_image);
+            search_price=itemView.findViewById ( R.id.search_prix );
+            utilisateur_search=itemView.findViewById ( R.id.utilisateur_search );
+            search_user_name=itemView.findViewById ( R.id.search_usr_name );
+            search_user_profil_image=itemView.findViewById ( R.id.search_profil_image );
+            search_post_image=itemView.findViewById ( R.id.seacrh_image_post );
             search_description=itemView.findViewById ( R.id.search_description );
-            search_usr_name =itemView.findViewById ( R.id.search_title );
-            search_image_post=itemView.findViewById ( R.id.search_image_post );
-            search_usr_name=itemView.findViewById ( R.id.search_usr_name );
         }
         public void seardata(String prix,String user_name,String title,String imageDupost,String desc,String profil_image){
-            search_title.setText ( title );
-            search_prix.setText ( prix );
+            //search_title.setText ( title );
+            search_price.setText ( prix );
             search_description.setText ( desc );
-            search_usr_name.setText ( user_name );
-            Picasso.with ( context ).load ( imageDupost ).into ( search_image_post );
-            Picasso.with ( context ).load ( profil_image ).into ( search_profil_image );
+            search_user_name.setText ( user_name );
+            Picasso.with ( context ).load ( imageDupost ).into ( search_post_image );
+            Picasso.with ( context ).load ( profil_image ).into ( search_user_profil_image );
 
 
         }

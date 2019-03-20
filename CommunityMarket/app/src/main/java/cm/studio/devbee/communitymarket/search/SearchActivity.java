@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -67,91 +68,33 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 searchUsers (find);
-               // getFriendList();
+
             }
         } );
 
 
     }
-    private void searchUsers(String recherche) {
-        if(recherche.length() > 0)
-            recherche = recherche.substring(0,1).toUpperCase() + recherche.substring(1).toLowerCase();
-        db.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).whereGreaterThanOrEqualTo("name", recherche)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot snapshots,
-                                        @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            System.err.println("Listen failed:" + e);
-                            return;
-                        }
-                        for (DocumentSnapshot doc : snapshots) {
-                            SearchModel user = doc.toObject(SearchModel.class);
-                            listUsers.add(user);
-                        }
-                        searchAdapter.notifyDataSetChanged();
-                    }
-                });
-    }
 
-    public void getFriendList(){
-        Query query = db.collection ( "publication" ).document ("categories").collection ( "nouveaux" );
-        FirestoreRecyclerOptions < SearchModel > response =  new  FirestoreRecyclerOptions.Builder<SearchModel> ().setQuery ( query,SearchModel.class ).build ();
-         adapter =  new  FirestoreRecyclerAdapter < SearchModel , categorieSearchHolder > (response) {
-            @NonNull
+    public void searchUsers(String s){
+        db.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).whereEqualTo("categories",s.toLowerCase())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public categorieSearchHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(viewGroup.getContext ()).inflate (R.layout.item_seacrh_layout,viewGroup,false);
-                return new categorieSearchHolder ( view );
-            }
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-            @Override
-            protected void onBindViewHolder(@NonNull categorieSearchHolder holder, int position, @NonNull SearchModel model) {
-               holder.search_description.setText ( model.getDecription_du_produit () );
-               holder.search_price.setText ( model.getPrix_du_produit () );
-               holder.utilisateur_search.setText ( model.getUtilisateur ());
-               Picasso.with ( getApplicationContext () ).load ( model.getImage_du_produit () ).into ( holder.search_user_profil_image );
-
-
+                for (DocumentSnapshot doc:task.getResult()){
+                    listUsers.clear();
+                    SearchModel searchModel = new SearchModel(doc.getString("decription_du_produit"),doc.getString("categories"),doc.getString("date_de_publication"),doc.getString("nom_du_produit"));
+                    listUsers.add(searchModel);
                 }
-        };
 
-        search_recyclerview.setAdapter ( adapter );
-
-
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
-    public class categorieSearchHolder extends RecyclerView.ViewHolder{
-        TextView search_price;
-        TextView search_user_name;
-        CircleImageView search_user_profil_image;
-        ImageView search_post_image;
-        TextView search_description;
-        TextView utilisateur_search;
-        public categorieSearchHolder(@NonNull View itemView) {
-            super ( itemView );
-            search_price=itemView.findViewById ( R.id.search_prix );
-            utilisateur_search=itemView.findViewById ( R.id.utilisateur_search );
-            search_user_name=itemView.findViewById ( R.id.search_usr_name );
-            search_user_profil_image=itemView.findViewById ( R.id.search_profil_image );
-            search_post_image=itemView.findViewById ( R.id.seacrh_image_post );
-            search_description=itemView.findViewById ( R.id.search_description );
-        }
-        public void search_dat(Context context, String prix,String search_post,String description){
-            search_price.setText ( prix );
-            Picasso.with ( context ).load (search_post  ).into (search_post_image  );
-            search_description.setText ( description );
-        }
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        //adapter.startListening();
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
 }

@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,15 +25,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import cm.studio.devbee.communitymarket.Fragments.AccesoireFragment;
 import cm.studio.devbee.communitymarket.Fragments.ChaussureFragment;
@@ -49,6 +57,8 @@ import cm.studio.devbee.communitymarket.postActivity.PostActivity;
 import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 import cm.studio.devbee.communitymarket.profile.ProfileActivity;
 import cm.studio.devbee.communitymarket.search.SearchActivity;
+import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
+import cm.studio.devbee.communitymarket.utilsforsearch.SearchModel;
 
 public class Accueil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -61,6 +71,7 @@ public class Accueil extends AppCompatActivity
     private TabLayout tabLayout;
     private ViewPager tabsviewpager;
     private static AsyncTask asyncTask;
+    private static List<SearchModel> searchModelList;
     private static WeakReference<Accueil> accueilWeakReference;
 
     @Override
@@ -128,6 +139,7 @@ public class Accueil extends AppCompatActivity
     }
 
 
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById ( R.id.drawer_layout );
@@ -141,6 +153,7 @@ public class Accueil extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater ().inflate ( R.menu.accueil, menu );
+
         return true;
     }
 
@@ -150,8 +163,8 @@ public class Accueil extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.search) {
-            Intent parametre=new Intent(Accueil.this,SearchActivity.class);
-            startActivity(parametre);
+            Intent gogotoSearch = new Intent(getApplicationContext(),SearchActivity.class);
+            startActivity(gogotoSearch);
             return true;
         }
 
