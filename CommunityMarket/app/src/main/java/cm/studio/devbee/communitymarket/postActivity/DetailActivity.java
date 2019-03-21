@@ -206,7 +206,7 @@ public class DetailActivity extends AppCompatActivity {
          detail_post_titre_produit=null;
         detail_profil_image=null;
         vendeur_button=null;
-        detail_user_name=null;
+
         detail_prix_produit=null;
          detail_description=null;
         date_de_publication=null;
