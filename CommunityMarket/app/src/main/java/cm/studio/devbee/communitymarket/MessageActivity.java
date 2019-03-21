@@ -4,25 +4,39 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
+import cm.studio.devbee.communitymarket.utilForChat.ChatApdapter;
+import cm.studio.devbee.communitymarket.utilForChat.ModeChat;
+import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessageActivity extends AppCompatActivity {
@@ -39,6 +53,9 @@ public class MessageActivity extends AppCompatActivity {
     private static ImageButton send_button;
     private static EditText message_user_send;
     private static RecyclerView message_recyclerview;
+    private static ChatApdapter chatApdapter;
+    private static List<ModeChat> modeChatList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +76,12 @@ public class MessageActivity extends AppCompatActivity {
         send_button=findViewById ( R.id.imageButton_to_send );
         message_user_send=findViewById ( R.id.user_message_to_send );
         message_recyclerview=findViewById ( R.id.message_recyclerView );
+        message_recyclerview.setHasFixedSize (true);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager ( getApplicationContext () );
+        linearLayoutManager.setStackFromEnd ( true );
+        message_recyclerview.setLayoutManager ( linearLayoutManager );
         nomEtImageProfil ();
-        mesage_toolbar.setNavigationOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                finish ();
-            }
-        } );
+
         send_button.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
@@ -77,6 +93,13 @@ public class MessageActivity extends AppCompatActivity {
                 }
                 message_user_send.setText ( "" );
 
+            }
+        } );
+
+        mesage_toolbar.setNavigationOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                finish ();
             }
         } );
 
@@ -93,6 +116,7 @@ public class MessageActivity extends AppCompatActivity {
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         user_name.setText(name_user+" "+prenom);
                         Picasso.with(getApplicationContext()).load(image_user).into(user_message_image);
+                        //sendMessage(current_user,user_id_message,image_user);
                     }
                 }else {
                     String error=task.getException().getMessage();
@@ -121,4 +145,25 @@ public class MessageActivity extends AppCompatActivity {
             }
         } );
     }
+   /* public void sendMessage(final String myId, final String userId, final String imageUrl){
+        modeChatList=new ArrayList<> (  );
+         firebaseFirestore.collection ( "chats" ).addSnapshotListener(new EventListener<QuerySnapshot> () {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    if (doc.getType()==DocumentChange.Type.ADDED){
+                        ModeChat modeChat =doc.getDocument().toObject(ModeChat.class);
+                       if (modeChat.getRecepteur ().equals ( myId )&&modeChat.getExpediteur ().equals ( userId )||
+                               modeChat.getRecepteur ().equals ( userId )&&modeChat.getExpediteur ().equals ( myId )){
+                           modeChatList.add(modeChat);
+                       }
+                       chatApdapter=new ChatApdapter ( modeChatList, getApplicationContext (),imageUrl );
+                       message_recyclerview.setAdapter ( chatApdapter );
+                        chatApdapter.notifyDataSetChanged();
+                    }
+                }
+
+            }
+        });
+    }*/
 }
