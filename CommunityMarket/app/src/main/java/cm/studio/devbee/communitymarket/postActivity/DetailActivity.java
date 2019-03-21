@@ -48,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
     private static FirebaseAuth firebaseAuth;
     private static String current_user_id;
     private static String utilisateur_actuel;
-    private AsyncTask asyncTask;
+    private static AsyncTask asyncTask;
     private static ProgressBar detail_progress;
     private static Button supprime_detail_button;
     private static WeakReference<DetailActivity> detailActivityWeakReference;

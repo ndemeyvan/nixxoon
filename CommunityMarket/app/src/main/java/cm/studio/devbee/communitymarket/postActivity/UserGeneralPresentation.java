@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
 
+import cm.studio.devbee.communitymarket.MessageActivity;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -67,6 +68,17 @@ public class UserGeneralPresentation extends AppCompatActivity {
         button_message.setEnabled ( false );
         button_voir.setEnabled ( false );
         user_general_progress.setVisibility ( View.VISIBLE );
+        button_message.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent gotoMessage =new Intent(getApplicationContext(),MessageActivity.class);
+                gotoMessage.putExtra("id du post",iddupost);
+                gotoMessage.putExtra("id de l'utilisateur",current_user_id);
+                gotoMessage.putExtra("id_categories",categorie);
+                startActivity(gotoMessage);
+                finish();
+            }
+        } );
         button_voir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

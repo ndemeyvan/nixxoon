@@ -270,7 +270,6 @@ public class ParametrePorfilActivity extends AppCompatActivity {
     protected void onDestroy() {
         asyncTask.cancel(true);
         super.onDestroy();
-        asyncTask.cancel(true);
         parametre_toolbar=null;
         nom=null;
         premon=null;
