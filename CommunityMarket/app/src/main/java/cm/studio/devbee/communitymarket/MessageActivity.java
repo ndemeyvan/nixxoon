@@ -35,6 +35,7 @@ public class MessageActivity extends AppCompatActivity {
         setContentView ( R.layout.activity_message );
         user_message_image=findViewById ( R.id.image_user_message );
         user_name=findViewById ( R.id.user_messag_name );
+        firebaseAuth=FirebaseAuth.getInstance ();
         mesage_toolbar=findViewById ( R.id.message_toolbar );
         setSupportActionBar ( mesage_toolbar );
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );

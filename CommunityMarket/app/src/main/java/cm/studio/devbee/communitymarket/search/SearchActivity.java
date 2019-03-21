@@ -17,8 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -45,7 +43,6 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView search_recyclerview;
     private Context context;
     private FirebaseFirestore db;
-    private FirestoreRecyclerAdapter adapter;
     LinearLayoutManager linearLayoutManager;
     private List<SearchModel> listUsers;
     SearchAdapter searchAdapter;
