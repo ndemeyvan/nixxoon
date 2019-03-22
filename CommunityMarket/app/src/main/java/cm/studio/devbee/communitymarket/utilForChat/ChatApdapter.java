@@ -59,7 +59,7 @@ public class ChatApdapter  extends RecyclerView.Adapter<ChatApdapter.ViewHolder>
         String msg=modeChatList.get ( i ).getMessage ();
         viewHolder.setMessage ( msg );
         Picasso.with ( context ).load ( imagUrl ).into ( viewHolder.imag_profil );
-      
+
     }
 
 

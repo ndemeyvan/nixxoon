@@ -108,8 +108,32 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         } );
+        send_button.setEnabled(true);
+        /*firebaseFirestore.collection ( "mes donnees utilisateur" ).document(current_user).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                recuperation();
+            }
+        });*/
 
+    }
 
+    private void recuperation() {
+        if (current_user==null){
+            firebaseFirestore.collection ( "chats" ).document ( user_id_message ).collection(current_user).orderBy ( "temps",Query.Direction.ASCENDING ).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                    List<DocumentChange> documentChanges = queryDocumentSnapshots.getDocumentChanges();
+                    if (documentChanges!=null){
+                        for (DocumentChange doc:documentChanges){
+                            if (doc.getType()==DocumentChange.Type.ADDED){
+                                modeChatList.add(modeChat);
+                            }
+                        }
+                    }
+                }
+            });
+        }
     }
 
     public void nomEtImageProfil(){
@@ -164,15 +188,27 @@ public class MessageActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText ( getApplicationContext (), "une erreur,veillez ressayer svp", Toast.LENGTH_LONG ).show ();
+                Toast.makeText ( getApplicationContext (), "une erreur est suvenu veiller resseayer svp", Toast.LENGTH_LONG ).show ();
             }
         });
 
+        firebaseFirestore.collection ( "chats" ).document ( user_id_message ).collection(current_user).add( messageMap ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText ( getApplicationContext (), "une erreur est suvenu veiller resseayer svp", Toast.LENGTH_LONG ).show ();
+            }
+        });
     }
 
    public void sendMessage(final String myId, final String userId, final String imageUrl){
+
         modeChatList=new ArrayList<> (  );
-        Query firstQuery = firebaseFirestore.collection ( "chats" ).document ( current_user ).collection(user_id_message).orderBy ( "temps",Query.Direction.ASCENDING );
+        Query firstQuery = firebaseFirestore.collection ( "chats" ).document ( user_id_message ).collection(current_user).orderBy ( "temps",Query.Direction.ASCENDING );
         firstQuery .addSnapshotListener(new EventListener<QuerySnapshot> () {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -191,5 +227,6 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+
     }
 }
