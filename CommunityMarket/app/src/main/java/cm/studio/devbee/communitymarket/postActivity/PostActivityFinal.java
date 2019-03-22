@@ -93,8 +93,7 @@ public class PostActivityFinal extends AppCompatActivity {
         asyncTask=new AsyncTask();
         asyncTask.execute();
         postActivityWeakReference=new WeakReference<>(this);
-       /* ActionBar ab=getSupportActionBar ();
-        ab.setDisplayHomeAsUpEnabled ( true );*/
+
 
     }
     public void setimage(){
@@ -259,9 +258,6 @@ public class PostActivityFinal extends AppCompatActivity {
                             });
                         }
                     });
-////////////////////////////////////////////////////////////////////////////
-
-
 
 
     }

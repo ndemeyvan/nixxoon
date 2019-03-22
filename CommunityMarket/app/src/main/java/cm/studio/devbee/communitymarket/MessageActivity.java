@@ -16,9 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,7 +48,7 @@ public class MessageActivity extends AppCompatActivity {
     private static Intent intent ;
     private static String user_id_message;
     private static String user_categories_message;
-    private static String id_du_post;
+    private static String toUid;
     private static  String current_user;
     private static FirebaseFirestore firebaseFirestore;
     private static FirebaseAuth firebaseAuth;
@@ -72,7 +75,7 @@ public class MessageActivity extends AppCompatActivity {
         intent=getIntent (  );
         firebaseFirestore=FirebaseFirestore.getInstance();
         current_user=firebaseAuth.getCurrentUser ().getUid ();
-        user_id_message=intent.getStringExtra ( "id de l'utilisateur" );
+        toUid=intent.getStringExtra ( "id de l'utilisateur" );
         send_button=findViewById ( R.id.imageButton_to_send );
         message_user_send=findViewById ( R.id.user_message_to_send );
         message_recyclerview=findViewById ( R.id.message_recyclerView );
@@ -81,6 +84,12 @@ public class MessageActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd ( true );
         message_recyclerview.setLayoutManager ( linearLayoutManager );
         nomEtImageProfil ();
+        mesage_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         send_button.setOnClickListener ( new View.OnClickListener () {
             @Override
@@ -123,17 +132,28 @@ public class MessageActivity extends AppCompatActivity {
         messageMap.put ( "expediteur",sender );
         messageMap.put ( "recepteur",receiver );
         messageMap.put ( "message",message );
-        firebaseFirestore.collection ( "chats" ).document ( current_user ).set ( messageMap ).addOnCompleteListener ( new OnCompleteListener<Void> () {
+        firebaseFirestore.collection ( "chats" ).document ( current_user ).collection(toUid).add( messageMap ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful ()) {
-                    Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
-                } else {
-                    String error = task.getException ().getMessage ();
-                    Toast.makeText ( getApplicationContext (), error, Toast.LENGTH_LONG ).show ();
-                }
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
             }
-        } );
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText ( getApplicationContext (), "une erreur est suvenu veiller resseayer svp", Toast.LENGTH_LONG ).show ();
+            }
+        });
+        firebaseFirestore.collection ( "chats" ).document ( toUid ).collection(current_user).add( messageMap ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText ( getApplicationContext (), "une erreur est suvenu veiller resseayer svp", Toast.LENGTH_LONG ).show ();
+            }
+        });
     }
 
     public void sendMessage(final String myId, final String userId, final String imageUrl){
