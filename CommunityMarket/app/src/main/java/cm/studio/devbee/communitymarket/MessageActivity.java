@@ -112,6 +112,7 @@ public class MessageActivity extends AppCompatActivity {
                     }
                 }else {
                     String error=task.getException().getMessage();
+                    Toast.makeText ( getApplicationContext (), error, Toast.LENGTH_LONG ).show ();
 
                 }
             }
@@ -126,8 +127,6 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful ()) {
-                    Intent intent = new Intent ( getApplicationContext (), Accueil.class );
-                    startActivity ( intent );
                     Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
                 } else {
                     String error = task.getException ().getMessage ();
@@ -149,7 +148,7 @@ public class MessageActivity extends AppCompatActivity {
                                modeChat.getRecepteur ().equals ( userId )&&modeChat.getExpediteur ().equals ( myId )){
                            modeChatList.add(modeChat);
                        }
-                       chatApdapter=new ChatApdapter ( modeChatList, getApplicationContext (),imageUrl );
+                       chatApdapter=new ChatApdapter ( modeChatList,getApplicationContext (),imageUrl );
                        message_recyclerview.setAdapter ( chatApdapter );
                         chatApdapter.notifyDataSetChanged();
                     }

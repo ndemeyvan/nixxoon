@@ -85,23 +85,18 @@ public class ChatApdapter  extends RecyclerView.Adapter<ChatApdapter.ViewHolder>
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView message;
         CircleImageView imag_profil;
-       // CircleImageView chat_imag_item_right;
+
 
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
             message=itemView.findViewById ( R.id.show_message );
             imag_profil=itemView.findViewById ( R.id.chat_imag_item);
-            //chat_imag_item_right=itemView.findViewById(R.id.chat_imag_item_right);
 
         }
         public void setMessage(String msg){
             message.setText ( msg );
         }
 
-
-        public void setuserData(String image){
-            Picasso.with(context).load(image).into(imag_profil );
-        }
 
     }
 
