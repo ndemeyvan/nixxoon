@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,7 +46,7 @@ public class ChatApdapter  extends RecyclerView.Adapter<ChatApdapter.ViewHolder>
         viewGroup.getContext();
 
         if (i==MSG_TYPE_RIGHT){
-            View v=LayoutInflater.from ( viewGroup.getContext () ).inflate (R.layout.right_messag_right ,viewGroup,false);
+            View v=LayoutInflater.from ( viewGroup.getContext () ).inflate (R.layout.right_item_chat ,viewGroup,false);
             return new ViewHolder ( v );
         }else {
             View v=LayoutInflater.from ( viewGroup.getContext () ).inflate (R.layout.left_item_chat ,viewGroup,false);
@@ -58,13 +59,14 @@ public class ChatApdapter  extends RecyclerView.Adapter<ChatApdapter.ViewHolder>
         String msg=modeChatList.get ( i ).getMessage ();
         viewHolder.setMessage ( msg );
         Picasso.with ( context ).load ( imagUrl ).into ( viewHolder.imag_profil );
-        /*firebaseFirestore.collection("mes donnees utilisateur").document(expediteurMessage).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+       /* firebaseFirestore.collection("mes donnees utilisateur").document(current8user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         viewHolder.setuserData ( image_user );
+                        Picasso.with ( context ).load ( image_user ).into ( viewHolder.chat_imag_item_right);
                     }
                 }else {
                     String error=task.getException().getMessage();
@@ -83,11 +85,13 @@ public class ChatApdapter  extends RecyclerView.Adapter<ChatApdapter.ViewHolder>
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView message;
         CircleImageView imag_profil;
+       // CircleImageView chat_imag_item_right;
 
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
             message=itemView.findViewById ( R.id.show_message );
-            imag_profil=itemView.findViewById ( R.id.chat_imag_item_left );
+            imag_profil=itemView.findViewById ( R.id.chat_imag_item);
+            //chat_imag_item_right=itemView.findViewById(R.id.chat_imag_item_right);
 
         }
         public void setMessage(String msg){

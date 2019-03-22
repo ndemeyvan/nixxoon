@@ -96,14 +96,6 @@ public class MessageActivity extends AppCompatActivity {
             }
         } );
 
-        mesage_toolbar.setNavigationOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                finish ();
-            }
-        } );
-
-
     }
     public void nomEtImageProfil(){
         firebaseFirestore.collection("mes donnees utilisateur").document(user_id_message).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
@@ -116,7 +108,7 @@ public class MessageActivity extends AppCompatActivity {
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         user_name.setText(name_user+" "+prenom);
                         Picasso.with(getApplicationContext()).load(image_user).into(user_message_image);
-                        //sendMessage(current_user,user_id_message,image_user);
+                        sendMessage(current_user,user_id_message,image_user);
                     }
                 }else {
                     String error=task.getException().getMessage();
@@ -136,8 +128,7 @@ public class MessageActivity extends AppCompatActivity {
                 if (task.isSuccessful ()) {
                     Intent intent = new Intent ( getApplicationContext (), Accueil.class );
                     startActivity ( intent );
-                    finish ();
-                    Toast.makeText ( getApplicationContext (), "compte enregistre", Toast.LENGTH_LONG ).show ();
+                    Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
                 } else {
                     String error = task.getException ().getMessage ();
                     Toast.makeText ( getApplicationContext (), error, Toast.LENGTH_LONG ).show ();
@@ -145,7 +136,8 @@ public class MessageActivity extends AppCompatActivity {
             }
         } );
     }
-   /* public void sendMessage(final String myId, final String userId, final String imageUrl){
+
+    public void sendMessage(final String myId, final String userId, final String imageUrl){
         modeChatList=new ArrayList<> (  );
          firebaseFirestore.collection ( "chats" ).addSnapshotListener(new EventListener<QuerySnapshot> () {
             @Override
@@ -165,5 +157,5 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
-    }*/
+    }
 }
