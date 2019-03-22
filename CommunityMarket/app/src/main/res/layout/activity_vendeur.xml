@@ -147,7 +147,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/second_button_background"
                 android:elevation="3dp"
-                android:fontFamily="@font/abril_fatface"
+                android:fontFamily="sans-serif-condensed"
                 android:text="message"
                 android:textAllCaps="false"
                 android:textColor="@color/blanc"

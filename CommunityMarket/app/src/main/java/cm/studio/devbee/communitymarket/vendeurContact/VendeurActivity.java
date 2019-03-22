@@ -1,6 +1,7 @@
 package cm.studio.devbee.communitymarket.vendeurContact;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.Accueil;
+import cm.studio.devbee.communitymarket.MessageActivity;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.gridView_post.GridViewAdapter;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
@@ -80,6 +83,13 @@ public class VendeurActivity extends AppCompatActivity {
         vendeurActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
         asyncTask.execute();
+        message_button_vendeur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotochat= new Intent(getApplicationContext(),MessageActivity.class);
+
+            }
+        });
 
     }
     public void nomEtImageProfil(){

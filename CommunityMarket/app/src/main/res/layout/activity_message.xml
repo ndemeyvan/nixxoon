@@ -68,7 +68,7 @@
         android:background="@drawable/edit_for_message"
         android:ems="10"
         android:hint="entrer votre message ici"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine|textPersonName"
         android:padding="15dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
