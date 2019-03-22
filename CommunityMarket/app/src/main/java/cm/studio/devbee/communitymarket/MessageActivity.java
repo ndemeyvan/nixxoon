@@ -30,7 +30,9 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +50,7 @@ public class MessageActivity extends AppCompatActivity {
     private static Intent intent ;
     private static String user_id_message;
     private static String user_categories_message;
-    private static String toUid;
+    private static String id_du_post;
     private static  String current_user;
     private static FirebaseFirestore firebaseFirestore;
     private static FirebaseAuth firebaseAuth;
@@ -58,6 +60,7 @@ public class MessageActivity extends AppCompatActivity {
     private static RecyclerView message_recyclerview;
     private static ChatApdapter chatApdapter;
     private static List<ModeChat> modeChatList;
+    ModeChat modeChat;
 
 
     @Override
@@ -75,7 +78,7 @@ public class MessageActivity extends AppCompatActivity {
         intent=getIntent (  );
         firebaseFirestore=FirebaseFirestore.getInstance();
         current_user=firebaseAuth.getCurrentUser ().getUid ();
-        toUid=intent.getStringExtra ( "id de l'utilisateur" );
+        user_id_message=intent.getStringExtra ( "id de l'utilisateur" );
         send_button=findViewById ( R.id.imageButton_to_send );
         message_user_send=findViewById ( R.id.user_message_to_send );
         message_recyclerview=findViewById ( R.id.message_recyclerView );
@@ -94,6 +97,7 @@ public class MessageActivity extends AppCompatActivity {
         send_button.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
+                send_button.setEnabled(false);
                 String message_utilisateur=message_user_send.getText ().toString ();
                 if (!TextUtils.isEmpty ( message_utilisateur )){
                     messagee(current_user,user_id_message,message_utilisateur);
@@ -105,13 +109,16 @@ public class MessageActivity extends AppCompatActivity {
             }
         } );
 
+
     }
+
     public void nomEtImageProfil(){
         firebaseFirestore.collection("mes donnees utilisateur").document(user_id_message).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
+
                         String prenom=task.getResult ().getString ( "user_prenom" );
                         String name_user= task.getResult ().getString ( "user_name" );
                         String image_user=task.getResult ().getString ( "user_profil_image" );
@@ -128,42 +135,50 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
     public void messagee(String sender,String receiver,String message){
+        Date date=new Date();
+        SimpleDateFormat sdf= new SimpleDateFormat("d/MM/y H:mm:ss");
+        final String date_avec_seconde=sdf.format(date);
         Map<String,Object> messageMap=new HashMap<> (  );
         messageMap.put ( "expediteur",sender );
         messageMap.put ( "recepteur",receiver );
         messageMap.put ( "message",message );
-        firebaseFirestore.collection ( "chats" ).document ( current_user ).collection(toUid).add( messageMap ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        messageMap.put ( "temps",date_avec_seconde );
+
+       /* firebaseFirestore.collection ( "chats" ).document ( current_user ).set( messageMap ).addOnCompleteListener ( new OnCompleteListener<Void> () {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful ()) {
+                    Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
+                } else {
+                    String error = task.getException ().getMessage ();
+                    Toast.makeText ( getApplicationContext (), error, Toast.LENGTH_LONG ).show ();
+                }
+            }
+        } );*/
+        firebaseFirestore.collection ( "chats" ).document ( current_user ).collection(user_id_message).add( messageMap ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
+                send_button.setEnabled(true);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText ( getApplicationContext (), "une erreur est suvenu veiller resseayer svp", Toast.LENGTH_LONG ).show ();
+                Toast.makeText ( getApplicationContext (), "une erreur,veillez ressayer svp", Toast.LENGTH_LONG ).show ();
             }
         });
-        firebaseFirestore.collection ( "chats" ).document ( toUid ).collection(current_user).add( messageMap ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText ( getApplicationContext (), "une erreur est suvenu veiller resseayer svp", Toast.LENGTH_LONG ).show ();
-            }
-        });
+
     }
 
-    public void sendMessage(final String myId, final String userId, final String imageUrl){
+   public void sendMessage(final String myId, final String userId, final String imageUrl){
         modeChatList=new ArrayList<> (  );
-         firebaseFirestore.collection ( "chats" ).addSnapshotListener(new EventListener<QuerySnapshot> () {
+        Query firstQuery = firebaseFirestore.collection ( "chats" ).document ( current_user ).collection(user_id_message).orderBy ( "temps",Query.Direction.ASCENDING );
+        firstQuery .addSnapshotListener(new EventListener<QuerySnapshot> () {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
-                        ModeChat modeChat =doc.getDocument().toObject(ModeChat.class);
+                         modeChat =doc.getDocument().toObject(ModeChat.class);
                        if (modeChat.getRecepteur ().equals ( myId )&&modeChat.getExpediteur ().equals ( userId )||
                                modeChat.getRecepteur ().equals ( userId )&&modeChat.getExpediteur ().equals ( myId )){
                            modeChatList.add(modeChat);

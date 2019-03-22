@@ -59,21 +59,7 @@ public class ChatApdapter  extends RecyclerView.Adapter<ChatApdapter.ViewHolder>
         String msg=modeChatList.get ( i ).getMessage ();
         viewHolder.setMessage ( msg );
         Picasso.with ( context ).load ( imagUrl ).into ( viewHolder.imag_profil );
-       /* firebaseFirestore.collection("mes donnees utilisateur").document(current8user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
-                    if (task.getResult ().exists ()){
-                        String image_user=task.getResult ().getString ( "user_profil_image" );
-                        viewHolder.setuserData ( image_user );
-                        Picasso.with ( context ).load ( image_user ).into ( viewHolder.chat_imag_item_right);
-                    }
-                }else {
-                    String error=task.getException().getMessage();
-                    Toast.makeText(context,error,Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
+      
     }
 
 
