@@ -28,7 +28,7 @@
         android:padding="8dp"
         android:text="Hello"
         android:maxWidth="140dp"
-        android:textColor="@color/blanc"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/chat_imag_item"

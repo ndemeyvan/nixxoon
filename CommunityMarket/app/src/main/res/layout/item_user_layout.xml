@@ -39,7 +39,6 @@
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed"
                 android:lines="1"
-                android:text="user name"
                 android:textColor="@color/blanc"
                 android:textSize="12sp"
                 android:textStyle="bold"

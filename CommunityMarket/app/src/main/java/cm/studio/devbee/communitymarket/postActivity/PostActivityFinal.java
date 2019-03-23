@@ -182,7 +182,7 @@ public class PostActivityFinal extends AppCompatActivity {
                         @Override
                         public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                             Calendar calendar=Calendar.getInstance ();
-                            SimpleDateFormat currentDate=new SimpleDateFormat (" MMM dd,yyyy" );
+                            SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
                             saveCurrentDate=currentDate.format ( calendar.getTime () );
                             randomKey=saveCurrentDate;
                             String random =random ();

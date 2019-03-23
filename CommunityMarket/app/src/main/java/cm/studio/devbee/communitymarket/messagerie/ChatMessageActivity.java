@@ -8,9 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -36,6 +40,7 @@ public class ChatMessageActivity extends AppCompatActivity {
     private static RecyclerView contatc_recyclerview;
     private GroupAdapter groupAdapter;
     private static Toolbar message_toolbar;
+    private String image_profil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +87,7 @@ public class ChatMessageActivity extends AppCompatActivity {
     }
 
 
+
     public class ContactItem extends Item<ViewHolder> {
         private DiplayAllChat diplayAllChat;
 
@@ -91,14 +97,36 @@ public class ChatMessageActivity extends AppCompatActivity {
 
         @Override
         public void bind(@NonNull ViewHolder viewHolder, int position) {
-        TextView lats_message=viewHolder.itemView.findViewById ( R.id.chat_last_message );
-        TextView nom_utilisateur=viewHolder.itemView.findViewById ( R.id.chat_user_name );
+        final TextView lats_message=viewHolder.itemView.findViewById ( R.id.chat_last_message );
+        final TextView nom_utilisateur=viewHolder.itemView.findViewById ( R.id.chat_user_name );
         TextView temps=viewHolder.itemView.findViewById ( R.id.chat_temps );
-            CircleImageView profil=viewHolder.itemView.findViewById ( R.id.chat_message_image_profil );
+            final CircleImageView profil=viewHolder.itemView.findViewById ( R.id.chat_message_image_profil );
             lats_message.setText ( diplayAllChat.getDernier_message () );
             nom_utilisateur.setText ( diplayAllChat.getNom_utilisateur () );
             temps.setText ( diplayAllChat.getTemps () );
-            Picasso.with ( getApplicationContext () ).load (diplayAllChat.getImage_profil ()  ).into ( profil );
+            if ( diplayAllChat.getId_recepteur ().equals ( current_user )){
+                firebaseFirestore=FirebaseFirestore.getInstance ();
+                firebaseFirestore.collection("mes donnees utilisateur").document(diplayAllChat.getId_expediteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()){
+                            if (task.getResult ().exists ()){
+                                String prenom=task.getResult ().getString ( "user_prenom" );
+                                String name_user= task.getResult ().getString ( "user_name" );
+                                image_profil =task.getResult ().getString ( "user_profil_image" );
+                                nom_utilisateur.setText(name_user+" "+prenom);
+                                Picasso.with(getApplicationContext()).load(image_profil).into(profil);
+                            }
+                        }else {
+                            String error=task.getException().getMessage();
+                            Toast.makeText ( getApplicationContext (), error, Toast.LENGTH_LONG ).show ();
+
+                        }
+                    }
+                });
+            }else{
+                Picasso.with ( getApplicationContext () ).load (diplayAllChat.getImage_profil ()  ).into ( profil );
+            }
         }
 
         @Override

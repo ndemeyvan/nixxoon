@@ -188,7 +188,7 @@ public class MessageActivity extends AppCompatActivity {
         String message_utilisateur=message_user_send.getText ().toString ();
         final ModelChat modelChat=new ModelChat (  );
         Calendar calendar=Calendar.getInstance ();
-        SimpleDateFormat currentDate=new SimpleDateFormat (" MMM dd,yyyy" );
+        final SimpleDateFormat currentDate=new SimpleDateFormat ("  dd MMM yyyy" );
         saveCurrentDate=currentDate.format ( calendar.getTime () );
         randomKey=saveCurrentDate;
         modelChat.setExpediteur ( current_user );
@@ -200,8 +200,9 @@ public class MessageActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
                     Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
-                   contact =new DiplayAllChat (  );
+                    contact =new DiplayAllChat (  );
                     contact.setId_recepteur ( user_id_message );
+                    contact.setId_expediteur ( current_user );
                     contact.setImage_profil (lien_profil_contact );
                     contact.setTemps ( modelChat.getTemps () );
                     contact.setNom_utilisateur (nom_utilisateur );
@@ -225,6 +226,7 @@ public class MessageActivity extends AppCompatActivity {
                     contact.setId_recepteur ( user_id_message );
                     contact.setNom_utilisateur (nom_utilisateur );
                     contact.setImage_profil (lien_profil_contact );
+                    contact.setId_expediteur ( current_user );
                     contact.setTemps ( modelChat.getTemps () );
                     contact.setDernier_message ( modelChat.getMessage () );
                     firebaseFirestore.collection ( "dernier_message" )
