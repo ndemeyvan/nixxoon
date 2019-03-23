@@ -172,6 +172,9 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         donnees_utilisateur.put ( "user_residence", user_residence );
         donnees_utilisateur.put ( "user_mail", user_email );
         donnees_utilisateur.put ( "user_profil_image", downloadUri.toString () );
+        donnees_utilisateur.put ( "id_utilisateur", current_user_id);
+
+
         firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user_id ).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

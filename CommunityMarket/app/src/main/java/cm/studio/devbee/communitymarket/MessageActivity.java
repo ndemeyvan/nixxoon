@@ -11,7 +11,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
+import com.xwray.groupie.GroupAdapter;
+import com.xwray.groupie.Item;
+import com.xwray.groupie.ViewHolder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,9 +41,9 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import cm.studio.devbee.communitymarket.utilForChat.ChatApdapter;
-import cm.studio.devbee.communitymarket.utilForChat.ModeChat;
-import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
+import cm.studio.devbee.communitymarket.utilForChat.ModelChat;
+import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
+import cm.studio.devbee.communitymarket.utilsforsearch.SearchAdapter;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessageActivity extends AppCompatActivity {
@@ -58,10 +60,9 @@ public class MessageActivity extends AppCompatActivity {
     private static ImageButton send_button;
     private static EditText message_user_send;
     private static RecyclerView message_recyclerview;
-    private static ChatApdapter chatApdapter;
-    private static List<ModeChat> modeChatList;
-    ModeChat modeChat;
-
+    private static List<ModelChat> modeChatList;
+    private static GroupAdapter groupAdapter;
+    private static UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +73,7 @@ public class MessageActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance ();
         mesage_toolbar=findViewById ( R.id.message_toolbar );
         setSupportActionBar ( mesage_toolbar );
-
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
-
         intent=getIntent (  );
         firebaseFirestore=FirebaseFirestore.getInstance();
         current_user=firebaseAuth.getCurrentUser ().getUid ();
@@ -82,10 +81,6 @@ public class MessageActivity extends AppCompatActivity {
         send_button=findViewById ( R.id.imageButton_to_send );
         message_user_send=findViewById ( R.id.user_message_to_send );
         message_recyclerview=findViewById ( R.id.message_recyclerView );
-        message_recyclerview.setHasFixedSize (true);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager ( getApplicationContext () );
-        linearLayoutManager.setStackFromEnd ( true );
-        message_recyclerview.setLayoutManager ( linearLayoutManager );
         nomEtImageProfil ();
         mesage_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,41 +88,55 @@ public class MessageActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         send_button.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 send_button.setEnabled(false);
-                String message_utilisateur=message_user_send.getText ().toString ();
-                if (!TextUtils.isEmpty ( message_utilisateur )){
-                    messagee(current_user,user_id_message,message_utilisateur);
-                }else{
-                    Toast.makeText ( getApplicationContext (), "ecrire quelque chose", Toast.LENGTH_SHORT ).show ();
-                }
+                sendmessagee ();
                 message_user_send.setText ( "" );
+            }
+        } );
+        groupAdapter=new GroupAdapter();
+        message_recyclerview.setLayoutManager ( new LinearLayoutManager ( getApplicationContext () ) );
+        message_recyclerview.setAdapter ( groupAdapter );
+
+        firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get().addOnSuccessListener ( new OnSuccessListener<DocumentSnapshot> () {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+            }
+        } ).addOnFailureListener ( new OnFailureListener () {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText ( getApplicationContext (), " erreur,resseayer svp", Toast.LENGTH_LONG ).show ();
 
             }
         } );
-        send_button.setEnabled(true);
-        /*firebaseFirestore.collection ( "mes donnees utilisateur" ).document(current_user).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                recuperation();
-            }
-        });*/
+        firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get()
+                .addOnSuccessListener ( new OnSuccessListener<DocumentSnapshot> () {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        userModel=documentSnapshot.toObject ( UserModel.class );
+                        recuperation ();
+                    }
+                } );
+
 
     }
 
     private void recuperation() {
-        if (current_user==null){
-            firebaseFirestore.collection ( "chats" ).document ( user_id_message ).collection(current_user).orderBy ( "temps",Query.Direction.ASCENDING ).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        if (userModel!=null){
+            String fromId=userModel.getId_utilisateur ();
+            String vers=userModel.getId_utilisateur ();
+            firebaseFirestore.collection ( "chats" ).document ( fromId ).collection(user_id_message).orderBy ( "temps",Query.Direction.ASCENDING ).addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                     List<DocumentChange> documentChanges = queryDocumentSnapshots.getDocumentChanges();
                     if (documentChanges!=null){
                         for (DocumentChange doc:documentChanges){
                             if (doc.getType()==DocumentChange.Type.ADDED){
-                                modeChatList.add(modeChat);
+                                ModelChat model=doc.getDocument ().toObject ( ModelChat.class );
+                                groupAdapter.add ( new MessageItem ( model ) );
                             }
                         }
                     }
@@ -142,13 +151,12 @@ public class MessageActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
-
                         String prenom=task.getResult ().getString ( "user_prenom" );
                         String name_user= task.getResult ().getString ( "user_name" );
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         user_name.setText(name_user+" "+prenom);
                         Picasso.with(getApplicationContext()).load(image_user).into(user_message_image);
-                        sendMessage(current_user,user_id_message,image_user);
+                       // sendMessage(current_user,user_id_message,image_user);
                     }
                 }else {
                     String error=task.getException().getMessage();
@@ -158,75 +166,86 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
     }
-    public void messagee(String sender,String receiver,String message){
+    public void sendmessagee(){
         Date date=new Date();
         SimpleDateFormat sdf= new SimpleDateFormat("d/MM/y H:mm:ss");
         final String date_avec_seconde=sdf.format(date);
-        Map<String,Object> messageMap=new HashMap<> (  );
-        messageMap.put ( "expediteur",sender );
-        messageMap.put ( "recepteur",receiver );
-        messageMap.put ( "message",message );
-        messageMap.put ( "temps",date_avec_seconde );
-
-       /* firebaseFirestore.collection ( "chats" ).document ( current_user ).set( messageMap ).addOnCompleteListener ( new OnCompleteListener<Void> () {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful ()) {
+        String message_utilisateur=message_user_send.getText ().toString ();
+        ModelChat modelChat=new ModelChat (  );
+        modelChat.setExpediteur ( current_user );
+        modelChat.setRecepteur ( user_id_message );
+        modelChat.setTemps ( date_avec_seconde );
+        modelChat.setMessage ( message_utilisateur );
+        if (!modelChat.getMessage ().isEmpty ()){
+            firebaseFirestore.collection ( "chats" ).document ( current_user ).collection(user_id_message).add( modelChat ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
                     Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
-                } else {
-                    String error = task.getException ().getMessage ();
-                    Toast.makeText ( getApplicationContext (), error, Toast.LENGTH_LONG ).show ();
+
                 }
-            }
-        } );*/
-        firebaseFirestore.collection ( "chats" ).document ( current_user ).collection(user_id_message).add( messageMap ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
-                send_button.setEnabled(true);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText ( getApplicationContext (), "une erreur est suvenu veiller resseayer svp", Toast.LENGTH_LONG ).show ();
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
 
-        firebaseFirestore.collection ( "chats" ).document ( user_id_message ).collection(current_user).add( messageMap ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
+                    Toast.makeText ( getApplicationContext (), " erreur,resseayer svp", Toast.LENGTH_LONG ).show ();
+                }
+            });
+            firebaseFirestore.collection ( "chats" ).document ( user_id_message ).collection(current_user).add( modelChat ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText ( getApplicationContext (), "une erreur est suvenu veiller resseayer svp", Toast.LENGTH_LONG ).show ();
-            }
-        });
+                }
+            });
+        }else{
+            Toast.makeText ( getApplicationContext (), "ecrire quelque chose", Toast.LENGTH_SHORT ).show ();
+
+        }
     }
+//////////////////////////////////////////////////////////////////////////////////
+    public class MessageItem extends Item<ViewHolder> {
 
-   public void sendMessage(final String myId, final String userId, final String imageUrl){
+        private ModelChat modelChat;
 
-        modeChatList=new ArrayList<> (  );
-        Query firstQuery = firebaseFirestore.collection ( "chats" ).document ( user_id_message ).collection(current_user).orderBy ( "temps",Query.Direction.ASCENDING );
-        firstQuery .addSnapshotListener(new EventListener<QuerySnapshot> () {
+public MessageItem(ModelChat modelChat){
+    this.modelChat=modelChat;
+}
+
+    @Override
+    public void bind(@NonNull ViewHolder viewHolder, int position) {
+        TextView text=viewHolder.itemView.findViewById ( R.id.show_message );
+        final CircleImageView image=viewHolder.itemView.findViewById ( R.id.chat_imag_item );
+        text.setText ( modelChat.getMessage () );
+        firebaseFirestore.collection("mes donnees utilisateur").document(user_id_message).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                         modeChat =doc.getDocument().toObject(ModeChat.class);
-                       if (modeChat.getRecepteur ().equals ( myId )&&modeChat.getExpediteur ().equals ( userId )||
-                               modeChat.getRecepteur ().equals ( userId )&&modeChat.getExpediteur ().equals ( myId )){
-                           modeChatList.add(modeChat);
-                       }
-                       chatApdapter=new ChatApdapter ( modeChatList,getApplicationContext (),imageUrl );
-                       message_recyclerview.setAdapter ( chatApdapter );
-                        chatApdapter.notifyDataSetChanged();
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    if (task.getResult ().exists ()){
+                        String image_user=task.getResult ().getString ( "user_profil_image" );
+                        Picasso.with ( getApplicationContext () ).load ( image_user ).into ( image );
                     }
+                }else {
+                    String error=task.getException().getMessage();
+                    Toast.makeText(getApplicationContext (),error,Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
     }
+
+    @Override
+    public int getLayout() {
+        return modelChat.getExpediteur ().equals (firebaseAuth.getCurrentUser ().getUid ()) ? R.layout.right_item_chat:R.layout.left_item_chat;
+    }
+
+
+}
+
+
+
+
+
 }

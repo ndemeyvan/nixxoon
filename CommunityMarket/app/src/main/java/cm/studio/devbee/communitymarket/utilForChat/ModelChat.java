@@ -2,17 +2,28 @@ package cm.studio.devbee.communitymarket.utilForChat;
 
 import cm.studio.devbee.communitymarket.utilsForNouveautes.PostId;
 
-public class ModeChat{
-
+public class ModelChat {
+    String temps;
     String expediteur;
     String recepteur;
     String message;
 
-    public ModeChat() {
+    public ModelChat() {
     }
 
-    public ModeChat(String message) {
+    public ModelChat(String temps, String expediteur, String recepteur, String message) {
+        this.temps = temps;
+        this.expediteur = expediteur;
+        this.recepteur = recepteur;
         this.message = message;
+    }
+
+    public String getTemps() {
+        return temps;
+    }
+
+    public void setTemps(String temps) {
+        this.temps = temps;
     }
 
     public String getExpediteur() {
