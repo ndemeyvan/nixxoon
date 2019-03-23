@@ -69,6 +69,7 @@ public class MessageActivity extends AppCompatActivity {
     private String saveCurrentDate;
     private static ChatAdapter chatAdapter;
     List<ModelChat> modelChatList;
+    private  static  String current_user_image;
 
 
     @Override
@@ -214,15 +215,16 @@ public class MessageActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
+
                         String prenom=task.getResult ().getString ( "user_prenom" );
                         String name_user= task.getResult ().getString ( "user_name" );
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         lien_profil_contact =task.getResult ().getString ( "user_profil_image" );
                         nom_utilisateur=task.getResult ().getString ( "user_name" );
+                        readMessage ( current_user,user_id_message,lien_profil_contact );
                         user_name.setText(name_user+" "+prenom);
                         Picasso.with(getApplicationContext()).load(image_user).into(user_message_image);
-                        readMessage ( current_user,user_id_message,lien_profil_contact );
-                       // sendMessage(current_user,user_id_message,image_user);
+
                     }
                 }else {
                     String error=task.getException().getMessage();
@@ -231,6 +233,7 @@ public class MessageActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
    /* public void sendmessagee(){
         Date date=new Date();

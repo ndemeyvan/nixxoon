@@ -76,45 +76,21 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 }
             }
         });
-        if (!imageUrl.equals ( image_profil )){
-            firebaseFirestore.collection("mes donnees utilisateur").document(modelChat.getRecepteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()){
-                        if (task.getResult ().exists ()){
+        firebaseFirestore.collection("mes donnees utilisateur").document(modelChat.getRecepteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    if (task.getResult ().exists ()){
 
-                            Picasso.with(context).load(imageUrl).into(viewHolder.image);
-                            // sendMessage(current_user,user_id_message,image_user);
-                        }
-                    }else {
-                        String error=task.getException().getMessage();
-                        Toast.makeText (context, error, Toast.LENGTH_LONG ).show ();
+                        Picasso.with(context).load(imageUrl).into(viewHolder.image);
+                        // sendMessage(current_user,user_id_message,image_user);
                     }
+                }else {
+                    String error=task.getException().getMessage();
+                    Toast.makeText (context, error, Toast.LENGTH_LONG ).show ();
                 }
-            });
-        }else{
-            firebaseFirestore.collection("mes donnees utilisateur").document(modelChat.getRecepteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()){
-                        if (task.getResult ().exists ()){
-
-                            Picasso.with(context).load(image_profil).into(viewHolder.image);
-                            // sendMessage(current_user,user_id_message,image_user);
-                        }
-                    }else {
-                        String error=task.getException().getMessage();
-                        Toast.makeText (context, error, Toast.LENGTH_LONG ).show ();
-                    }
-                }
-            });
-
-        }
-
-
-
-
-
+            }
+        });
     }
 
     @Override
