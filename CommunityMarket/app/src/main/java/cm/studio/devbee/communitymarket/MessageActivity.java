@@ -222,13 +222,13 @@ public MessageItem(ModelChat modelChat){
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
-                    if (task.getResult ().exists ()){
+                    if (task.getResult().exists ()){
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         Picasso.with ( getApplicationContext () ).load ( image_user ).into ( image );
                     }
                 }else {
                     String error=task.getException().getMessage();
-                    Toast.makeText(getApplicationContext (),error,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),error,Toast.LENGTH_LONG).show();
                 }
             }
         });
