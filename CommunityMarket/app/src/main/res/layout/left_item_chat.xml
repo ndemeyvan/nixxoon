@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/show_message"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -27,6 +27,7 @@
         android:background="@drawable/background_dipla_left"
         android:padding="8dp"
         android:text="Hello"
+        android:maxWidth="140dp"
         android:textColor="@color/blanc"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -53,6 +53,7 @@ import cm.studio.devbee.communitymarket.Fragments.RobeFragment;
 import cm.studio.devbee.communitymarket.Fragments.TshirtFragment;
 import cm.studio.devbee.communitymarket.a_propos.AproposActivity;
 import cm.studio.devbee.communitymarket.login.LoginActivity;
+import cm.studio.devbee.communitymarket.messagerie.ChatMessageActivity;
 import cm.studio.devbee.communitymarket.postActivity.PostActivity;
 import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 import cm.studio.devbee.communitymarket.profile.ProfileActivity;
@@ -180,6 +181,7 @@ public class Accueil extends AppCompatActivity
             Intent intent = new Intent ( getApplicationContext(),ProfileActivity.class );
             startActivity ( intent );
         } else if (id == R.id.ic_logout) {
+            FirebaseAuth.getInstance ().signOut ();
             Intent intenttwo = new Intent ( getApplicationContext(),LoginActivity.class );
             startActivity ( intenttwo );
             finish ();
@@ -190,6 +192,9 @@ public class Accueil extends AppCompatActivity
         else if (id == R.id.nous_contacter) {
             Intent nous_contacter=new Intent(getApplicationContext(),AproposActivity.class);
             startActivity(nous_contacter);
+        }else if(id==R.id.ic_message){
+            Intent message=new Intent(getApplicationContext(),ChatMessageActivity.class);
+            startActivity(message);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById ( R.id.drawer_layout );
         drawer.closeDrawer ( GravityCompat.START );

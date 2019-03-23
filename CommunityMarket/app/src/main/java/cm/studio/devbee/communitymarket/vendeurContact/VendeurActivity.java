@@ -1,12 +1,10 @@
 package cm.studio.devbee.communitymarket.vendeurContact;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -31,14 +29,10 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import cm.studio.devbee.communitymarket.Accueil;
-import cm.studio.devbee.communitymarket.MessageActivity;
+import cm.studio.devbee.communitymarket.messagerie.MessageActivity;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.gridView_post.GridViewAdapter;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
-import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
-import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouveaux;
-import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class VendeurActivity extends AppCompatActivity {

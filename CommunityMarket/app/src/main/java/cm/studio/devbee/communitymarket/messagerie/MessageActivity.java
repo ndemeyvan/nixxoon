@@ -1,5 +1,6 @@
-package cm.studio.devbee.communitymarket;
+package cm.studio.devbee.communitymarket.messagerie;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,8 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.utilForChat.DiplayAllChat;
 import cm.studio.devbee.communitymarket.utilForChat.ModelChat;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import cm.studio.devbee.communitymarket.utilsforsearch.SearchAdapter;
@@ -63,6 +66,10 @@ public class MessageActivity extends AppCompatActivity {
     private static List<ModelChat> modeChatList;
     private static GroupAdapter groupAdapter;
     private static UserModel userModel;
+    private String lien_profil_contact;
+    private static   DiplayAllChat contact;
+    private static  String nom_utilisateur;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +99,7 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sendmessagee ();
+
                 message_user_send.setText ( "" );
             }
         } );
@@ -121,6 +129,8 @@ public class MessageActivity extends AppCompatActivity {
                 } );
 
 
+
+
     }
 
     private void recuperation() {
@@ -136,6 +146,7 @@ public class MessageActivity extends AppCompatActivity {
                             if (doc.getType()==DocumentChange.Type.ADDED){
                                 ModelChat model=doc.getDocument ().toObject ( ModelChat.class );
                                 groupAdapter.add ( new MessageItem ( model ) );
+                                groupAdapter.notifyDataSetChanged ();
                             }
                         }
                     }
@@ -153,6 +164,8 @@ public class MessageActivity extends AppCompatActivity {
                         String prenom=task.getResult ().getString ( "user_prenom" );
                         String name_user= task.getResult ().getString ( "user_name" );
                         String image_user=task.getResult ().getString ( "user_profil_image" );
+                        lien_profil_contact =task.getResult ().getString ( "user_profil_image" );
+                        nom_utilisateur=task.getResult ().getString ( "user_name" );
                         user_name.setText(name_user+" "+prenom);
                         Picasso.with(getApplicationContext()).load(image_user).into(user_message_image);
                        // sendMessage(current_user,user_id_message,image_user);
@@ -170,7 +183,7 @@ public class MessageActivity extends AppCompatActivity {
         SimpleDateFormat sdf= new SimpleDateFormat("d/MM/y H:mm:ss");
         final String date_avec_seconde=sdf.format(date);
         String message_utilisateur=message_user_send.getText ().toString ();
-        ModelChat modelChat=new ModelChat (  );
+        final ModelChat modelChat=new ModelChat (  );
         modelChat.setExpediteur ( current_user );
         modelChat.setRecepteur ( user_id_message );
         modelChat.setTemps ( date_avec_seconde );
@@ -180,6 +193,15 @@ public class MessageActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
                     Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
+                   contact =new DiplayAllChat (  );
+                    contact.setId_recepteur ( user_id_message );
+                    contact.setImage_profil (lien_profil_contact );
+                    contact.setTemps ( modelChat.getTemps () );
+                    contact.setDernier_message ( modelChat.getMessage () );
+                    firebaseFirestore.collection ( "dernier_message" )
+                            .document (current_user).collection ( "contacts" )
+                            .document (user_id_message)
+                            .set ( contact );
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -192,6 +214,15 @@ public class MessageActivity extends AppCompatActivity {
             firebaseFirestore.collection ( "chats" ).document ( user_id_message ).collection(current_user).add( modelChat ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
+                    contact.setId_recepteur ( user_id_message );
+                    contact.setNom_utilisateur (nom_utilisateur );
+                    contact.setImage_profil (lien_profil_contact );
+                    contact.setTemps ( modelChat.getTemps () );
+                    contact.setDernier_message ( modelChat.getMessage () );
+                    firebaseFirestore.collection ( "dernier_message" )
+                            .document (user_id_message).collection ( "contacts" )
+                            .document (current_user)
+                            .set ( contact );
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
