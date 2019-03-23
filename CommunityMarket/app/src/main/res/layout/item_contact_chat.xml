@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="3dp">
+    android:layout_marginTop="3dp">
 
     <android.support.v7.widget.CardView
+        app:cardBackgroundColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -30,10 +31,12 @@
                 android:id="@+id/chat_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="@color/black"
+                android:text="xxxxx"
+                android:textColor="@color/blanc"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.004"
@@ -44,28 +47,36 @@
                 android:id="@+id/chat_last_message"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:ellipsize="end"
                 android:lines="1"
                 android:text="last message"
+                android:textColor="@color/blanc"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.016"
+                app:layout_constraintHorizontal_bias="0.019"
                 app:layout_constraintStart_toEndOf="@+id/chat_message_image_profil"
-                app:layout_constraintTop_toBottomOf="@+id/chat_user_name" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/chat_temps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="xxxxx"
+                android:textColor="@color/blanc"
+                android:textSize="16sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/chat_user_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.941"
-                app:layout_constraintStart_toEndOf="@+id/chat_user_name"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/chat_user_name"
+                app:layout_constraintVertical_bias="0.0" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 

@@ -204,6 +204,7 @@ public class MessageActivity extends AppCompatActivity {
                     contact.setId_recepteur ( user_id_message );
                     contact.setImage_profil (lien_profil_contact );
                     contact.setTemps ( modelChat.getTemps () );
+                    contact.setNom_utilisateur (nom_utilisateur );
                     contact.setDernier_message ( modelChat.getMessage () );
                     firebaseFirestore.collection ( "dernier_message" )
                             .document (current_user).collection ( "contacts" )

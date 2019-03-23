@@ -52,6 +52,13 @@ public class ChatMessageActivity extends AppCompatActivity {
         firebaseFirestore=FirebaseFirestore.getInstance ();
         contatc_recyclerview.setAdapter ( groupAdapter );
         recuperation ();
+        getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
+        message_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     public  void recuperation(){
         firebaseFirestore.collection ( "dernier_message" )
