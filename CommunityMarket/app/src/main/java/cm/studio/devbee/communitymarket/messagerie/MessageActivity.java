@@ -193,7 +193,7 @@ public class MessageActivity extends AppCompatActivity {
         long temmps=System.currentTimeMillis ();
         modelChat.setExpediteur ( current_user );
         modelChat.setRecepteur ( user_id_message );
-        modelChat.setTemps ( temmps+"");
+        modelChat.setTemps ( randomKey+"");
         modelChat.setMessage ( message_utilisateur );
         if (!modelChat.getMessage ().isEmpty ()){
             firebaseFirestore.collection ( "chats" ).document ( current_user ).collection(user_id_message).add( modelChat ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
