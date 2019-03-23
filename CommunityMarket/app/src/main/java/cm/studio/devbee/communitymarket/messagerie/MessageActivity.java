@@ -109,7 +109,7 @@ public class MessageActivity extends AppCompatActivity {
                             Toast.makeText ( getApplicationContext (),"message envoye",Toast.LENGTH_LONG ).show ();
 
                         }else{
-                            Toast.makeText ( getApplicationContext (),"ecrire",Toast.LENGTH_LONG ).show ();
+                            Toast.makeText ( getApplicationContext (),"ecrire quelque chose svp",Toast.LENGTH_LONG ).show ();
 
                         }
                          message_user_send.setText ( "" );
@@ -131,14 +131,7 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         } );
-        firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get()
-                .addOnSuccessListener ( new OnSuccessListener<DocumentSnapshot> () {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        userModel=documentSnapshot.toObject ( UserModel.class );
-                       // recuperation ();
-                    }
-                } );
+
     }
     public void sendMessage(String expediteur,String recepteur ,String message){
         Date date=new Date ();
@@ -177,23 +170,18 @@ public class MessageActivity extends AppCompatActivity {
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         ModelChat userModel =doc.getDocument().toObject(ModelChat.class);
                         if (userModel.getRecepteur ().equals ( monId )&&userModel.getExpediteur ().equals ( sonID )||
                                 userModel.getRecepteur ().equals ( sonID )&&userModel.getExpediteur ().equals ( monId ) ){
-
                             modelChatList.add(userModel);
-
                         }
                         chatAdapter=new ChatAdapter (getApplicationContext (),modelChatList,imageYrl);
                         chatAdapter.notifyDataSetChanged();
                         message_recyclerview.setAdapter ( chatAdapter );
-
                     }
                 }
-
             }
         });
     }

@@ -19,9 +19,12 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
+import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
+    String image_profil;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
     private Context context;
@@ -58,21 +61,60 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         ModelChat modelChat=modelChatList.get ( i );
         viewHolder.message.setText ( modelChat.getMessage () );
-        firebaseFirestore.collection("mes donnees utilisateur").document(modelChat.getRecepteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+        UserModel userModel=new UserModel (  );
+        firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
-                        Picasso.with(context).load(imageUrl).into(viewHolder.image);
+                         image_profil =task.getResult ().getString ( "user_profil_image" );
                         // sendMessage(current_user,user_id_message,image_user);
                     }
                 }else {
                     String error=task.getException().getMessage();
                     Toast.makeText (context, error, Toast.LENGTH_LONG ).show ();
-
                 }
             }
         });
+        if (!imageUrl.equals ( image_profil )){
+            firebaseFirestore.collection("mes donnees utilisateur").document(modelChat.getRecepteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()){
+                        if (task.getResult ().exists ()){
+
+                            Picasso.with(context).load(imageUrl).into(viewHolder.image);
+                            // sendMessage(current_user,user_id_message,image_user);
+                        }
+                    }else {
+                        String error=task.getException().getMessage();
+                        Toast.makeText (context, error, Toast.LENGTH_LONG ).show ();
+                    }
+                }
+            });
+        }else{
+            firebaseFirestore.collection("mes donnees utilisateur").document(modelChat.getRecepteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()){
+                        if (task.getResult ().exists ()){
+
+                            Picasso.with(context).load(image_profil).into(viewHolder.image);
+                            // sendMessage(current_user,user_id_message,image_user);
+                        }
+                    }else {
+                        String error=task.getException().getMessage();
+                        Toast.makeText (context, error, Toast.LENGTH_LONG ).show ();
+                    }
+                }
+            });
+
+        }
+
+
+
+
+
     }
 
     @Override
