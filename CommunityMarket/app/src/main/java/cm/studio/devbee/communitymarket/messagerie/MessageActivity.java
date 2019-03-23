@@ -199,6 +199,7 @@ public class MessageActivity extends AppCompatActivity {
             firebaseFirestore.collection ( "chats" ).document ( current_user ).collection(user_id_message).add( modelChat ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
+                    Toast.makeText ( getApplicationContext (), "si vous avez des doublures de messages,ils sont supprimees automatiquement.", Toast.LENGTH_LONG ).show ();
                     Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
                     contact =new DiplayAllChat (  );
                     contact.setId_recepteur ( user_id_message );

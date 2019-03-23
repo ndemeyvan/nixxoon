@@ -1,8 +1,10 @@
 package cm.studio.devbee.communitymarket.messagerie;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -99,6 +101,7 @@ public class ChatMessageActivity extends AppCompatActivity {
         public void bind(@NonNull ViewHolder viewHolder, int position) {
         final TextView lats_message=viewHolder.itemView.findViewById ( R.id.chat_last_message );
         final TextView nom_utilisateur=viewHolder.itemView.findViewById ( R.id.chat_user_name );
+            CardView chat_card = viewHolder.itemView.findViewById ( R.id.chat_card );
         TextView temps=viewHolder.itemView.findViewById ( R.id.chat_temps );
             final CircleImageView profil=viewHolder.itemView.findViewById ( R.id.chat_message_image_profil );
             lats_message.setText ( diplayAllChat.getDernier_message () );
@@ -127,6 +130,21 @@ public class ChatMessageActivity extends AppCompatActivity {
             }else{
                 Picasso.with ( getApplicationContext () ).load (diplayAllChat.getImage_profil ()  ).into ( profil );
             }
+
+            chat_card.setOnClickListener ( new View.OnClickListener () {
+                @Override
+                public void onClick(View v) {
+                    if (diplayAllChat.getId_recepteur ().equals ( current_user )){
+                        Intent chatOne =new Intent ( getApplicationContext (),MessageActivity.class );
+                        chatOne.putExtra ( "id de l'utilisateur" ,diplayAllChat.getId_expediteur () );
+                        startActivity ( chatOne );
+                    }else{
+                        Intent chat =new Intent ( getApplicationContext (),MessageActivity.class );
+                        chat.putExtra ( "id de l'utilisateur" ,diplayAllChat.getId_recepteur () );
+                        startActivity ( chat );
+                    }
+                }
+            } );
         }
 
         @Override
