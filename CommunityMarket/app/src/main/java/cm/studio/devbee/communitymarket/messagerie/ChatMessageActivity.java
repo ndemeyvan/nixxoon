@@ -44,6 +44,7 @@ public class ChatMessageActivity extends AppCompatActivity {
         current_user=firebaseAuth.getCurrentUser ().getUid ();
         contatc_recyclerview.setLayoutManager ( new LinearLayoutManager ( getApplicationContext () ) );
         groupAdapter=new GroupAdapter ();
+        firebaseFirestore=FirebaseFirestore.getInstance ();
         contatc_recyclerview.setAdapter ( groupAdapter );
         recuperation ();
     }
