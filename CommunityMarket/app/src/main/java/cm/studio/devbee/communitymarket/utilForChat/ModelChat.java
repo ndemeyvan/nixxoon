@@ -1,7 +1,5 @@
 package cm.studio.devbee.communitymarket.utilForChat;
 
-import cm.studio.devbee.communitymarket.utilsForNouveautes.PostId;
-
 public class ModelChat {
     String temps;
     String expediteur;

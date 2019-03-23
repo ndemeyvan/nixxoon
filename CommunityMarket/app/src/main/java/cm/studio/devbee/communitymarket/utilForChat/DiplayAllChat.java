@@ -8,6 +8,7 @@ public class DiplayAllChat {
     String image_profil;
     String nom_utilisateur;
 
+
     public DiplayAllChat() {
     }
 

@@ -102,7 +102,6 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sendmessagee ();
-
                 message_user_send.setText ( "" );
             }
         } );
@@ -191,9 +190,10 @@ public class MessageActivity extends AppCompatActivity {
         final SimpleDateFormat currentDate=new SimpleDateFormat ("  dd MMM yyyy" );
         saveCurrentDate=currentDate.format ( calendar.getTime () );
         randomKey=saveCurrentDate;
+        long temmps=System.currentTimeMillis ();
         modelChat.setExpediteur ( current_user );
         modelChat.setRecepteur ( user_id_message );
-        modelChat.setTemps ( randomKey );
+        modelChat.setTemps ( temmps+"");
         modelChat.setMessage ( message_utilisateur );
         if (!modelChat.getMessage ().isEmpty ()){
             firebaseFirestore.collection ( "chats" ).document ( current_user ).collection(user_id_message).add( modelChat ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
