@@ -218,7 +218,7 @@ public MessageItem(ModelChat modelChat){
         TextView text=viewHolder.itemView.findViewById ( R.id.show_message );
         final CircleImageView image=viewHolder.itemView.findViewById ( R.id.chat_imag_item );
         text.setText ( modelChat.getMessage () );
-        firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseFirestore.collection("mes donnees utilisateur").document(user_id_message).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
