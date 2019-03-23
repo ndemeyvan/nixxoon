@@ -200,7 +200,7 @@ public class MessageActivity extends AppCompatActivity {
                 }
             });
         }else{
-            Toast.makeText ( getApplicationContext (), "ecrire quelque chose", Toast.LENGTH_SHORT ).show ();
+            Toast.makeText ( getApplicationContext (), "ecrire svp", Toast.LENGTH_SHORT ).show ();
 
         }
     }
