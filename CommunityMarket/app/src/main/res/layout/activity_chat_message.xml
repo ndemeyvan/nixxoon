@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".messagerie.ChatMessageActivity">
+    tools:context=".messagerie.ChatMessageActivity"
+    android:background="@color/black">
+    <android.support.v7.widget.Toolbar
+        android:background="@color/blanc"
+        android:id="@+id/message_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/contatc_recyclerview"
@@ -13,5 +19,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/message_toolbar" />
 </android.support.constraint.ConstraintLayout>

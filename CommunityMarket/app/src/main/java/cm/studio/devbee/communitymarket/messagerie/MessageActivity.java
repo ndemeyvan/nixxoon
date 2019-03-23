@@ -35,6 +35,7 @@ import com.xwray.groupie.ViewHolder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +53,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MessageActivity extends AppCompatActivity {
     private static CircleImageView user_message_image;
     private static TextView user_name;
+    private static String randomKey;
     private static Intent intent ;
     private static String user_id_message;
     private static String user_categories_message;
@@ -69,6 +71,7 @@ public class MessageActivity extends AppCompatActivity {
     private String lien_profil_contact;
     private static   DiplayAllChat contact;
     private static  String nom_utilisateur;
+    private String saveCurrentDate;
 
 
     @Override
@@ -184,10 +187,14 @@ public class MessageActivity extends AppCompatActivity {
         final String date_avec_seconde=sdf.format(date);
         String message_utilisateur=message_user_send.getText ().toString ();
         final ModelChat modelChat=new ModelChat (  );
+        Calendar calendar=Calendar.getInstance ();
+        SimpleDateFormat currentDate=new SimpleDateFormat (" MMM dd,yyyy" );
+        saveCurrentDate=currentDate.format ( calendar.getTime () );
+        randomKey=saveCurrentDate;
         modelChat.setExpediteur ( current_user );
         modelChat.setRecepteur ( user_id_message );
         modelChat.setTemps ( date_avec_seconde );
-        modelChat.setMessage ( message_utilisateur );
+        modelChat.setMessage ( randomKey );
         if (!modelChat.getMessage ().isEmpty ()){
             firebaseFirestore.collection ( "chats" ).document ( current_user ).collection(user_id_message).add( modelChat ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
