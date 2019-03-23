@@ -1,7 +1,7 @@
 package cm.studio.devbee.communitymarket.utilForChat;
 
 public class ModelChat {
-    String temps;
+    long temps;
     String expediteur;
     String recepteur;
     String message;
@@ -9,18 +9,18 @@ public class ModelChat {
     public ModelChat() {
     }
 
-    public ModelChat(String temps, String expediteur, String recepteur, String message) {
+    public ModelChat(long temps, String expediteur, String recepteur, String message) {
         this.temps = temps;
         this.expediteur = expediteur;
         this.recepteur = recepteur;
         this.message = message;
     }
 
-    public String getTemps() {
+    public long getTemps() {
         return temps;
     }
 
-    public void setTemps(String temps) {
+    public void setTemps(long temps) {
         this.temps = temps;
     }
 
