@@ -38,13 +38,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChoiceActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ChoiceActivity"/>
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".login.RegisterActivity" />
         <activity
@@ -61,11 +55,9 @@
         <activity android:name=".a_propos.AproposActivity" />
         <activity android:name=".postActivity.DetailActivity" />
         <activity android:name=".vendeurContact.VendeurActivity" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
         <activity android:name=".postActivity.DetailActivityTwo" />
         <activity android:name=".postActivity.UserGeneralPresentation" />
         <activity android:name=".search.SearchActivity" />
@@ -74,7 +66,6 @@
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
