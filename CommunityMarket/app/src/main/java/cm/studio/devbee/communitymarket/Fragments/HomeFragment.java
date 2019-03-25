@@ -210,7 +210,7 @@ public class HomeFragment extends Fragment {
         homeFragmentWeakReference=new WeakReference<>(this);
         firebaseAuth=FirebaseAuth.getInstance();
         current_user=firebaseAuth.getCurrentUser().getUid();
-        firebaseFirestore.collection ( "publication" ).document (current_user).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (!task.getResult ().exists ()){

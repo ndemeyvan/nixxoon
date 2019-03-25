@@ -61,7 +61,7 @@ public class MessageActivity extends AppCompatActivity {
     private static ImageButton send_button;
     private static EditText message_user_send;
     private static RecyclerView message_recyclerview;
-    private static List<ModelChat> modeChatList;
+    private static List<ModelChat> modelChatListmodeChatList;
     private static GroupAdapter groupAdapter;
     private static UserModel userModel;
     private static String lien_profil_contact;
@@ -119,28 +119,8 @@ public class MessageActivity extends AppCompatActivity {
                          message_user_send.setText ( "" );
             }
         } );
-       /* groupAdapter=new GroupAdapter();
-        message_recyclerview.setLayoutManager ( new LinearLayoutManager ( getApplicationContext () ) );
-        message_recyclerview.setAdapter ( groupAdapter );*/
-
-        firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get().addOnSuccessListener ( new OnSuccessListener<DocumentSnapshot> () {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-
-            }
-        } ).addOnFailureListener ( new OnFailureListener () {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText ( getApplicationContext (), " erreur,resseayer svp", Toast.LENGTH_LONG ).show ();
-
-            }
-        } );
-
     }
     public void sendMessage(final String expediteur, final String recepteur , final String message){
-        Date date=new Date ();
-        SimpleDateFormat sdf= new SimpleDateFormat ("d/MM/y H:mm:ss");
-        final String date_avec_seconde=sdf.format(date);
          time=System.currentTimeMillis ();
         HashMap<String,Object> mesageMap = new HashMap<> (  );
         mesageMap.put ( "expediteur",expediteur );
@@ -166,8 +146,6 @@ public class MessageActivity extends AppCompatActivity {
                         .document (expediteur).collection ( "contacts" )
                         .document (recepteur)
                         .set ( contact );
-
-
             }
         } ).addOnFailureListener ( new OnFailureListener () {
             @Override
@@ -192,6 +170,7 @@ public class MessageActivity extends AppCompatActivity {
                         .document (recepteur).collection ( "contacts" )
                         .document (expediteur)
                         .set ( contact );
+
             }
         } ).addOnFailureListener ( new OnFailureListener () {
             @Override
@@ -209,12 +188,11 @@ public class MessageActivity extends AppCompatActivity {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         ModelChat userModel =doc.getDocument().toObject(ModelChat.class);
-                        if (userModel.getRecepteur ().equals ( monId )&&userModel.getExpediteur ().equals ( sonID )||
+                        if (userModel.getRecepteur ().equals ( monId )&& userModel.getExpediteur ().equals ( sonID )||
                                 userModel.getRecepteur ().equals ( sonID )&&userModel.getExpediteur ().equals ( monId ) ){
-                            modelChatList.add(userModel);
+                                modelChatList.add(userModel);
                         }
                         chatAdapter=new ChatAdapter (getApplicationContext (),modelChatList,imageYrl);
-                        chatAdapter.notifyDataSetChanged();
                         message_recyclerview.setAdapter ( chatAdapter );
                     }
                 }

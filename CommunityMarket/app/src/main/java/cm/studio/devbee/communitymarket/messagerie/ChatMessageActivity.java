@@ -90,6 +90,7 @@ public class ChatMessageActivity extends AppCompatActivity {
 
 
 
+
     public class ContactItem extends Item<ViewHolder> {
         private DiplayAllChat diplayAllChat;
 

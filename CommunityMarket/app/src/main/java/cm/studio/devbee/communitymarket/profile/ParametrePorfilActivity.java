@@ -157,6 +157,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
             }
         });
     }
+
     public void stockage(@NonNull Task<Uri> task,String user_name,String user_premon,String user_telephone,String user_residence,String user_email ){
         Uri downloadUri;
 

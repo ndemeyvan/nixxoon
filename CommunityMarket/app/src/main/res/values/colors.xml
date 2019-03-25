@@ -10,4 +10,6 @@
     <color name="colorPrimaryDark">#000</color>
     <color name="black">#000</color>
     <color name="blanc">#ffffff</color>
+    <color name="bleu">#3b5998</color>
+    <color name="twitter">#00acee</color>
 </resources>

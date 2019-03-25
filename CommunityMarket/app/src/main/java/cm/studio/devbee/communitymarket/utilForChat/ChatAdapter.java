@@ -61,14 +61,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         ModelChat modelChat=modelChatList.get ( i );
         viewHolder.message.setText ( modelChat.getMessage () );
-        UserModel userModel=new UserModel (  );
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
                          image_profil =task.getResult ().getString ( "user_profil_image" );
-                        // sendMessage(current_user,user_id_message,image_user);
+
                     }
                 }else {
                     String error=task.getException().getMessage();
@@ -81,9 +80,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
-
                         Picasso.with(context).load(imageUrl).into(viewHolder.image);
-                        // sendMessage(current_user,user_id_message,image_user);
                     }
                 }else {
                     String error=task.getException().getMessage();
