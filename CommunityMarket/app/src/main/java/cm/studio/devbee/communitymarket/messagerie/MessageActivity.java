@@ -32,6 +32,7 @@ import com.xwray.groupie.GroupAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -149,12 +150,16 @@ public class MessageActivity extends AppCompatActivity {
         firebaseFirestore.collection ( "conversation" ).document ( expediteur ).collection(recepteur).add ( mesageMap ).addOnSuccessListener ( new OnSuccessListener<DocumentReference> () {
             @Override
             public void onSuccess(DocumentReference documentReference) {
+                Calendar calendar=Calendar.getInstance ();
+                SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
+                saveCurrentDate=currentDate.format ( calendar.getTime () );
+                randomKey=saveCurrentDate;
                 contact =new DiplayAllChat (  );
                 modelChat= new ModelChat();
                 contact.setId_recepteur ( user_id_message );
                 contact.setId_expediteur ( current_user );
                 contact.setImage_profil (lien_profil_contact );
-                contact.setTemps ( time );
+                contact.setTemps ( randomKey );
                 contact.setNom_utilisateur (nom_utilisateur );
                 contact.setDernier_message ( message );
                 firebaseFirestore.collection ( "dernier_message" )
@@ -173,11 +178,15 @@ public class MessageActivity extends AppCompatActivity {
         firebaseFirestore.collection ( "conversation" ).document ( recepteur ).collection(expediteur).add ( mesageMap ).addOnSuccessListener ( new OnSuccessListener<DocumentReference> () {
             @Override
             public void onSuccess(DocumentReference documentReference) {
+                Calendar calendar=Calendar.getInstance ();
+                SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
+                saveCurrentDate=currentDate.format ( calendar.getTime () );
+                randomKey=saveCurrentDate;
                 contact.setId_recepteur ( user_id_message );
                 contact.setNom_utilisateur (nom_utilisateur );
                 contact.setImage_profil (lien_profil_contact );
                 contact.setId_expediteur ( current_user );
-                contact.setTemps (time );
+                contact.setTemps (randomKey );
                 contact.setDernier_message ( message );
                 firebaseFirestore.collection ( "dernier_message" )
                         .document (recepteur).collection ( "contacts" )

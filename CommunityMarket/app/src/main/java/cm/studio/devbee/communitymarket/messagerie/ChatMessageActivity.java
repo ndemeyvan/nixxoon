@@ -106,7 +106,7 @@ public class ChatMessageActivity extends AppCompatActivity {
             final CircleImageView profil=viewHolder.itemView.findViewById ( R.id.chat_message_image_profil );
             lats_message.setText ( diplayAllChat.getDernier_message () );
             nom_utilisateur.setText ( diplayAllChat.getNom_utilisateur () );
-            temps.setText ( diplayAllChat.getTemps () +"");
+            temps.setText ( diplayAllChat.getTemps () );
             if ( diplayAllChat.getId_recepteur ().equals ( current_user )){
                 firebaseFirestore=FirebaseFirestore.getInstance ();
                 firebaseFirestore.collection("mes donnees utilisateur").document(diplayAllChat.getId_expediteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
