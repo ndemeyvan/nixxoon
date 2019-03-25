@@ -71,6 +71,7 @@ public class MessageActivity extends AppCompatActivity {
     private static List<ModelChat> modelChatList;
     private  static  String current_user_image;
     private static  ModelChat modelChat;
+    private static long time;
 
 
     @Override
@@ -135,11 +136,11 @@ public class MessageActivity extends AppCompatActivity {
         } );
 
     }
-    public void sendMessage(String expediteur,String recepteur ,String message){
+    public void sendMessage(final String expediteur, final String recepteur , final String message){
         Date date=new Date ();
         SimpleDateFormat sdf= new SimpleDateFormat ("d/MM/y H:mm:ss");
         final String date_avec_seconde=sdf.format(date);
-        long time=System.currentTimeMillis ();
+         time=System.currentTimeMillis ();
         HashMap<String,Object> mesageMap = new HashMap<> (  );
         mesageMap.put ( "expediteur",expediteur );
         mesageMap.put ( "recepteur",recepteur );
@@ -153,12 +154,12 @@ public class MessageActivity extends AppCompatActivity {
                 contact.setId_recepteur ( user_id_message );
                 contact.setId_expediteur ( current_user );
                 contact.setImage_profil (lien_profil_contact );
-                contact.setTemps ( modelChat.getTemps () );
+                contact.setTemps ( time );
                 contact.setNom_utilisateur (nom_utilisateur );
-                contact.setDernier_message ( modelChat.getMessage () );
+                contact.setDernier_message ( message );
                 firebaseFirestore.collection ( "dernier_message" )
-                        .document (current_user).collection ( "contacts" )
-                        .document (user_id_message)
+                        .document (expediteur).collection ( "contacts" )
+                        .document (recepteur)
                         .set ( contact );
 
 
@@ -176,11 +177,11 @@ public class MessageActivity extends AppCompatActivity {
                 contact.setNom_utilisateur (nom_utilisateur );
                 contact.setImage_profil (lien_profil_contact );
                 contact.setId_expediteur ( current_user );
-                contact.setTemps ( modelChat.getTemps () );
-                contact.setDernier_message ( modelChat.getMessage () );
+                contact.setTemps (time );
+                contact.setDernier_message ( message );
                 firebaseFirestore.collection ( "dernier_message" )
-                        .document (user_id_message).collection ( "contacts" )
-                        .document (current_user)
+                        .document (recepteur).collection ( "contacts" )
+                        .document (expediteur)
                         .set ( contact );
             }
         } ).addOnFailureListener ( new OnFailureListener () {
