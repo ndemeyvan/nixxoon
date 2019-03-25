@@ -181,6 +181,7 @@ public class Accueil extends AppCompatActivity
             Intent intent = new Intent ( getApplicationContext(),ProfileActivity.class );
             startActivity ( intent );
         } else if (id == R.id.ic_logout) {
+            mAuth.getInstance().signOut();
             Intent intenttwo = new Intent ( getApplicationContext(),ChoiceActivity.class );
             startActivity ( intenttwo );
             finish ();

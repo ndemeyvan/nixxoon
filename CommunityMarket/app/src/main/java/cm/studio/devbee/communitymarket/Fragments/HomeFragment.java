@@ -547,7 +547,6 @@ public class HomeFragment extends Fragment {
       content_recyclerView=null;
         categoriesAdapte=null;
        categoriesModelList=null;
-        viewFlipper=null;
          categoriesAdapteNouveaux=null;
         nouveauxRecyclerView=null;
         chaussureRecyclerView=null;
