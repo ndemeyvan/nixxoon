@@ -22,6 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:titleTextColor="@color/blanc">
 
+
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
@@ -56,6 +57,7 @@
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+
 
     <EditText
         android:id="@+id/user_message_to_send"
