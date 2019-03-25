@@ -52,12 +52,10 @@ public class ChoiceActivity extends AppCompatActivity {
         gotoLogin=findViewById ( R.id.gotoLogin );
         firebaseAuth=FirebaseAuth.getInstance();
         gotoRegister=findViewById ( R.id.gotoRegister );
-        devant=findViewById(R.id.devant);
         facebook_button=findViewById(R.id.facebook_button);
         choiceActivityWeakReference=new WeakReference<>(this);
         login ();
         register ();
-        va();
         printkey();
         callbackManager=CallbackManager.Factory.create();
         facebook_button.setReadPermissions("email");
@@ -90,12 +88,12 @@ public class ChoiceActivity extends AppCompatActivity {
     }
 
     private void handleFacebookAccesToken(AccessToken loginResult) {
+        Toast.makeText(getApplicationContext(),"bienvenu",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"vous serez rediriger a l'acceuil dans quelques seconde",Toast.LENGTH_LONG).show();
         AuthCredential authCredential=FacebookAuthProvider.getCredential(loginResult.getToken());
         firebaseAuth.signInWithCredential(authCredential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                Toast.makeText(getApplicationContext(),"bienvenu",Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(),"vous serez rediriger a l'acceuil dans quelques seconde",Toast.LENGTH_LONG).show();
 
                 Intent gotoHome=new Intent(getApplicationContext(),Accueil.class);
                 startActivity(gotoHome);
@@ -155,16 +153,7 @@ public class ChoiceActivity extends AppCompatActivity {
             }
         } );
     }
-    public void va(){
-        devant.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent go = new Intent(getApplicationContext(),Accueil.class);
-                startActivity(go);
-                finish();
-            }
-        });
-    }
+
 
     @Override
     protected void onDestroy() {
