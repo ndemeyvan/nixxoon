@@ -41,7 +41,6 @@ public class ChoiceActivity extends AppCompatActivity {
         private static ImageView devant;
         private static WeakReference<ChoiceActivity> choiceActivityWeakReference;
         private static LoginButton facebook_button;
-        private static  Button twitter_button;
         private static FirebaseAuth firebaseAuth;
         private static   CallbackManager callbackManager;
 
@@ -55,20 +54,11 @@ public class ChoiceActivity extends AppCompatActivity {
         gotoRegister=findViewById ( R.id.gotoRegister );
         devant=findViewById(R.id.devant);
         facebook_button=findViewById(R.id.facebook_button);
-        twitter_button=findViewById(R.id.twitter_button);
         choiceActivityWeakReference=new WeakReference<>(this);
         login ();
         register ();
         va();
         printkey();
-
-        if (firebaseAuth.getCurrentUser() != null) {
-            // User is signed in (getCurrentUser() will be null if not signed in)
-            Intent intent = new Intent(getApplicationContext(), Accueil.class);
-            startActivity(intent);
-            finish();
-        }
-
         callbackManager=CallbackManager.Factory.create();
         facebook_button.setReadPermissions("email");
         facebook_button.setOnClickListener(new View.OnClickListener() {
