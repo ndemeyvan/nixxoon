@@ -61,7 +61,7 @@ public class ChoiceActivity extends AppCompatActivity {
         register ();
         va();
         printkey();
-        
+
         if (firebaseAuth.getCurrentUser() != null) {
             // User is signed in (getCurrentUser() will be null if not signed in)
             Intent intent = new Intent(getApplicationContext(), Accueil.class);
@@ -104,6 +104,9 @@ public class ChoiceActivity extends AppCompatActivity {
         firebaseAuth.signInWithCredential(authCredential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
+                Toast.makeText(getApplicationContext(),"bienvenu",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"vous serez rediriger a l'acceuil dans quelques seconde",Toast.LENGTH_LONG).show();
+
                 Intent gotoHome=new Intent(getApplicationContext(),Accueil.class);
                 startActivity(gotoHome);
                 finish();
