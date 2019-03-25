@@ -21,6 +21,7 @@ import android.widget.ViewFlipper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -33,9 +34,13 @@ import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Nullable;
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouveaux;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
 import cm.studio.devbee.communitymarket.utilsForPostPrincipal.PrincipalAdapte;
@@ -47,6 +52,7 @@ import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
+    private static FirebaseAuth firebaseAuth;
     private static FirebaseFirestore firebaseFirestore;
     private static ImageView imageOne,imageTwo,imageThree,imageFour;
     private static TextView img1,img2,img3,img4;
@@ -95,6 +101,7 @@ public class HomeFragment extends Fragment {
     private static List<PrincipalModel> principalModelList;
     private static PrincipalAdapte principalAdapte;
     private RecyclerView principalRecyclerView;
+    private static  String current_user;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -201,7 +208,18 @@ public class HomeFragment extends Fragment {
         AsyncTask asyncTask=new AsyncTask ();
         asyncTask.execute (  );
         homeFragmentWeakReference=new WeakReference<>(this);
-
+        firebaseAuth=FirebaseAuth.getInstance();
+        current_user=firebaseAuth.getCurrentUser().getUid();
+        firebaseFirestore.collection ( "publication" ).document (current_user).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (!task.getResult ().exists ()){
+                   Intent gotoparametreProfil = new Intent(getActivity(),ParametrePorfilActivity.class);
+                   getActivity().startActivity(gotoparametreProfil);
+                   getActivity().finish();
+                }
+            }
+        } );
         return v;
     }
 
@@ -565,6 +583,7 @@ public class HomeFragment extends Fragment {
          recyclerrobe=null;
           progressDialog=null;
        v=null;
+        firebaseAuth=null;
 
 
     }
