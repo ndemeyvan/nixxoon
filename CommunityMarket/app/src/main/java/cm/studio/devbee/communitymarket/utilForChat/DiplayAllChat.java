@@ -1,7 +1,7 @@
 package cm.studio.devbee.communitymarket.utilForChat;
 
 public class DiplayAllChat {
-    String temps;
+    long temps;
     String id_expediteur;
     String id_recepteur;
     String dernier_message;
@@ -12,7 +12,7 @@ public class DiplayAllChat {
     public DiplayAllChat() {
     }
 
-    public DiplayAllChat(String temps, String id_expediteur, String id_recepteur, String dernier_message, String image_profil, String nom_utilisateur) {
+    public DiplayAllChat(long temps, String id_expediteur, String id_recepteur, String dernier_message, String image_profil, String nom_utilisateur) {
         this.temps = temps;
         this.id_expediteur = id_expediteur;
         this.id_recepteur = id_recepteur;
@@ -21,11 +21,11 @@ public class DiplayAllChat {
         this.nom_utilisateur = nom_utilisateur;
     }
 
-    public String getTemps() {
+    public long getTemps() {
         return temps;
     }
 
-    public void setTemps(String temps) {
+    public void setTemps(long temps) {
         this.temps = temps;
     }
 

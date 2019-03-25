@@ -53,7 +53,7 @@ public class MessageActivity extends AppCompatActivity {
     private static String user_id_message;
     private static String user_categories_message;
     private static String id_du_post;
-    private static  String current_user;
+    private static String current_user;
     private static FirebaseFirestore firebaseFirestore;
     private static FirebaseAuth firebaseAuth;
     private static Toolbar mesage_toolbar;
@@ -63,13 +63,14 @@ public class MessageActivity extends AppCompatActivity {
     private static List<ModelChat> modeChatList;
     private static GroupAdapter groupAdapter;
     private static UserModel userModel;
-    private String lien_profil_contact;
-    private static   DiplayAllChat contact;
-    private static  String nom_utilisateur;
-    private String saveCurrentDate;
+    private static String lien_profil_contact;
+    private static DiplayAllChat contact;
+    private static String nom_utilisateur;
+    private static String saveCurrentDate;
     private static ChatAdapter chatAdapter;
-    List<ModelChat> modelChatList;
+    private static List<ModelChat> modelChatList;
     private  static  String current_user_image;
+    private static  ModelChat modelChat;
 
 
     @Override
@@ -147,6 +148,20 @@ public class MessageActivity extends AppCompatActivity {
         firebaseFirestore.collection ( "conversation" ).document ( expediteur ).collection(recepteur).add ( mesageMap ).addOnSuccessListener ( new OnSuccessListener<DocumentReference> () {
             @Override
             public void onSuccess(DocumentReference documentReference) {
+                contact =new DiplayAllChat (  );
+                modelChat= new ModelChat();
+                contact.setId_recepteur ( user_id_message );
+                contact.setId_expediteur ( current_user );
+                contact.setImage_profil (lien_profil_contact );
+                contact.setTemps ( modelChat.getTemps () );
+                contact.setNom_utilisateur (nom_utilisateur );
+                contact.setDernier_message ( modelChat.getMessage () );
+                firebaseFirestore.collection ( "dernier_message" )
+                        .document (current_user).collection ( "contacts" )
+                        .document (user_id_message)
+                        .set ( contact );
+
+
             }
         } ).addOnFailureListener ( new OnFailureListener () {
             @Override
@@ -157,6 +172,16 @@ public class MessageActivity extends AppCompatActivity {
         firebaseFirestore.collection ( "conversation" ).document ( recepteur ).collection(expediteur).add ( mesageMap ).addOnSuccessListener ( new OnSuccessListener<DocumentReference> () {
             @Override
             public void onSuccess(DocumentReference documentReference) {
+                contact.setId_recepteur ( user_id_message );
+                contact.setNom_utilisateur (nom_utilisateur );
+                contact.setImage_profil (lien_profil_contact );
+                contact.setId_expediteur ( current_user );
+                contact.setTemps ( modelChat.getTemps () );
+                contact.setDernier_message ( modelChat.getMessage () );
+                firebaseFirestore.collection ( "dernier_message" )
+                        .document (user_id_message).collection ( "contacts" )
+                        .document (current_user)
+                        .set ( contact );
             }
         } ).addOnFailureListener ( new OnFailureListener () {
             @Override
