@@ -65,6 +65,13 @@ public class ChoiceActivity extends AppCompatActivity {
                 facebookSignIn();
             }
         });
+        firebaseAuth=FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() != null) {
+            // User is signed in (getCurrentUser() will be null if not signed in)
+            Intent intent = new Intent(getApplicationContext(), Accueil.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void facebookSignIn() {

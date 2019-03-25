@@ -63,7 +63,7 @@
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".messagerie.MessageActivity" />
         <activity android:name=".messagerie.ChatMessageActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity" android:theme="@style/slash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
