@@ -8,16 +8,18 @@ public class UserModel extends PostId{
     private String user_profil_image;
     private String user_prenom;
     private String id_utilisateur;
+    private String status;
 
 
     public UserModel(){
 
     }
 
-    public UserModel(String user_profil_image, String user_prenom, String id_utilisateur) {
+    public UserModel(String user_profil_image, String user_prenom, String id_utilisateur, String status) {
         this.user_profil_image = user_profil_image;
         this.user_prenom = user_prenom;
         this.id_utilisateur = id_utilisateur;
+        this.status = status;
     }
 
     public String getUser_profil_image() {
@@ -42,5 +44,13 @@ public class UserModel extends PostId{
 
     public void setId_utilisateur(String id_utilisateur) {
         this.id_utilisateur = id_utilisateur;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

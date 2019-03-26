@@ -5,15 +5,17 @@ public class ModelChat {
     String expediteur;
     String recepteur;
     String message;
+    private String status;
 
     public ModelChat() {
     }
 
-    public ModelChat(long temps, String expediteur, String recepteur, String message) {
+    public ModelChat(long temps, String expediteur, String recepteur, String message, String status) {
         this.temps = temps;
         this.expediteur = expediteur;
         this.recepteur = recepteur;
         this.message = message;
+        this.status = status;
     }
 
     public long getTemps() {
@@ -46,5 +48,13 @@ public class ModelChat {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

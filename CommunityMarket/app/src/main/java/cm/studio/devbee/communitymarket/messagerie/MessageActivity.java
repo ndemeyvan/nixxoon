@@ -101,7 +101,7 @@ public class MessageActivity extends AppCompatActivity {
         mesage_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+               startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
             }
         });
         send_button.setOnClickListener ( new View.OnClickListener () {
@@ -192,7 +192,7 @@ public class MessageActivity extends AppCompatActivity {
                                 userModel.getRecepteur ().equals ( sonID )&&userModel.getExpediteur ().equals ( monId ) ){
                                 modelChatList.add(userModel);
                         }
-                        chatAdapter=new ChatAdapter (getApplicationContext (),modelChatList,imageYrl);
+                        chatAdapter=new ChatAdapter (getApplicationContext (),modelChatList,imageYrl,true);
                         message_recyclerview.setAdapter ( chatAdapter );
                     }
                 }
@@ -248,6 +248,34 @@ public class MessageActivity extends AppCompatActivity {
         });
 
     }
+    public void userstatus(String status){
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
+        user.update("status", status)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume ();
+        userstatus("online");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause ();
+        userstatus("offline");
+    }
+
    /* public void sendmessagee(){
         Date date=new Date();
         SimpleDateFormat sdf= new SimpleDateFormat("d/MM/y H:mm:ss");

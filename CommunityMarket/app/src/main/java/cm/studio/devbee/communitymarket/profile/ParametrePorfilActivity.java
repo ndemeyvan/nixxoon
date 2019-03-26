@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -64,6 +65,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
     private static AsyncTask asyncTask;
     private static boolean ischange=false;
     private static WeakReference<ParametrePorfilActivity> parametrePorfilActivityWeakReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,7 +176,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         donnees_utilisateur.put ( "user_mail", user_email );
         donnees_utilisateur.put ( "user_profil_image", downloadUri.toString () );
         donnees_utilisateur.put ( "id_utilisateur", current_user_id);
-
+        donnees_utilisateur.put ( "status","online" );
 
         firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user_id ).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
             @Override
@@ -206,23 +208,47 @@ public class ParametrePorfilActivity extends AppCompatActivity {
             }
         }
     }
+    public void userstatus(String status){
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user_id);
+        user.update("status", status)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume ();
+        userstatus("online");
 
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause ();
+        userstatus("offline");
+    }
 
-   /* public void recuperation(){
-        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                String nom_user = task.getResult ().toString ();
-                String prenom_user =task.getResult ().toString ();
-                String telephone_user =task.getResult ().toString ();
-                String residence_user  =task.getResult ().toString ();
-                String image_profil_user =task.getResult ().toString ();
+    /* public void recuperation(){
+                firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        String nom_user = task.getResult ().toString ();
+                        String prenom_user =task.getResult ().toString ();
+                        String telephone_user =task.getResult ().toString ();
+                        String residence_user  =task.getResult ().toString ();
+                        String image_profil_user =task.getResult ().toString ();
 
-            }
-        } );
-    }*/
+                    }
+                } );
+            }*/
     public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {

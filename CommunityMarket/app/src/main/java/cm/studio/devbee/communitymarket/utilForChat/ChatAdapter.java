@@ -31,13 +31,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     String current_user;
     final int MSG_TYPE_RIGHT=1;
     final int MSG_TYPE_LEFT=0;
-        List<ModelChat> modelChatList;
-        String imageUrl;
+    private boolean ischat;
+    private  List<ModelChat> modelChatList;
+    private String imageUrl;
 
-    public ChatAdapter(Context context, List<ModelChat> modelChatList, String imageUrl) {
+    public ChatAdapter(Context context, List<ModelChat> modelChatList, String imageUrl,boolean ischat) {
         this.context = context;
         this.modelChatList = modelChatList;
         this.imageUrl = imageUrl;
+        this.ischat=ischat;
     }
 
     @NonNull
@@ -61,6 +63,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         ModelChat modelChat=modelChatList.get ( i );
         viewHolder.message.setText ( modelChat.getMessage () );
+        UserModel userModel=new UserModel (  );
+        modelChat.setStatus ( userModel.getStatus () );
+        String status=modelChatList.get ( i ).getStatus ();
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -88,6 +93,18 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 }
             }
         });
+        if (ischat==true){
+            if (status.equals ( "online" )){
+                viewHolder.online_status.setVisibility ( View.VISIBLE );
+                viewHolder.offline_status.setVisibility ( View.INVISIBLE );
+            }else {
+                viewHolder.online_status.setVisibility ( View.INVISIBLE );
+                viewHolder.offline_status.setVisibility ( View.VISIBLE );
+            }
+        }else{
+            viewHolder.online_status.setVisibility ( View.INVISIBLE );
+            viewHolder.offline_status.setVisibility ( View.INVISIBLE );
+        }
     }
 
     @Override
@@ -98,11 +115,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView message;
         CircleImageView image;
-
+        CircleImageView online_status;
+        CircleImageView offline_status;
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
             message=itemView.findViewById ( R.id.show_message );
             image=itemView.findViewById ( R.id.chat_imag_item );
+            online_status=itemView.findViewById ( R.id.online_status_image );
+            offline_status=itemView.findViewById ( R.id.offline_status_image );
         }
     }
 

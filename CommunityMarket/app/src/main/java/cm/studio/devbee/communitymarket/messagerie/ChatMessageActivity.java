@@ -139,10 +139,12 @@ public class ChatMessageActivity extends AppCompatActivity {
                         Intent chatOne =new Intent ( getApplicationContext (),MessageActivity.class );
                         chatOne.putExtra ( "id de l'utilisateur" ,diplayAllChat.getId_expediteur () );
                         startActivity ( chatOne );
+                        finish ();
                     }else{
                         Intent chat =new Intent ( getApplicationContext (),MessageActivity.class );
                         chat.putExtra ( "id de l'utilisateur" ,diplayAllChat.getId_recepteur () );
                         startActivity ( chat );
+                        finish ();
                     }
                 }
             } );

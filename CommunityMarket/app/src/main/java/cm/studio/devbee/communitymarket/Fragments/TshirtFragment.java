@@ -152,9 +152,8 @@ public class TshirtFragment extends Fragment {
         tshirtRecyclerView=null;
          v=null;
          categoriesAdapteTshirt=null;
-         categoriesModelTshirtList=null;
          imagePubTshirt=null;
-        textPubTshirt=null;
-        progressDialog=null;
+         textPubTshirt=null;
+         progressDialog=null;
     }
 }

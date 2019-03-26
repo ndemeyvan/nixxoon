@@ -48,11 +48,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
     private String current_user;
+    private boolean ischat;
 
 
-    public UserAdapter(List<UserModel> userModelList, Context context) {
+    public UserAdapter(List<UserModel> userModelList, Context context,boolean ischat) {
         this.userModelList = userModelList;
         this.context = context;
+        this.ischat=ischat;
     }
 
     @NonNull
@@ -71,6 +73,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
        String nom_utilisateur=userModelList.get ( i ).getUser_prenom ();
        String image =userModelList.get ( i ).getUser_profil_image ();
        final String nom=userModelList.get ( i ).getId_utilisateur ();
+       String status=userModelList.get ( i ).getStatus ();
        viewHolder.setNom ( nom );
        viewHolder.setNom ( nom_utilisateur );
        viewHolder.setimage ( image );
@@ -84,6 +87,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
            }
        } );
+       if (ischat==true){
+           if (status.equals ( "online" )){
+                viewHolder.online_image.setVisibility ( View.VISIBLE );
+                viewHolder.offline_image.setVisibility ( View.INVISIBLE );
+           }else {
+               viewHolder.online_image.setVisibility ( View.INVISIBLE );
+               viewHolder.offline_image.setVisibility ( View.VISIBLE );
+           }
+       }else{
+           viewHolder.online_image.setVisibility ( View.INVISIBLE );
+           viewHolder.offline_image.setVisibility ( View.INVISIBLE );
+       }
     }
 
     @Override
@@ -96,12 +111,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         TextView nom_utilisateur;
         ImageView profil_utilisateur;
         TextView textView;
+        CircleImageView online_image;
+        CircleImageView offline_image;
+        TextView status;
 
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
             nom_utilisateur=itemView.findViewById ( R.id.user_text_name );
             profil_utilisateur=itemView.findViewById ( R.id.user_image );
             textView=itemView.findViewById ( R.id.id_utilisateur_user );
+            online_image=itemView.findViewById ( R.id.online_image );
+            offline_image=itemView.findViewById ( R.id.off_image );
+            status=itemView.findViewById ( R.id.status );
+
         }
         public void setuser(String nom){
             textView.setText ( nom );
