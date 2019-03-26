@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -71,6 +72,15 @@ public class ChoiceActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Accueil.class);
             startActivity(intent);
             finish();
+        }
+
+        if(CheckNetwork.isInternetAvailable(getApplicationContext ())) //returns true if internet available
+        {
+
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext (),"Activer internet",Toast.LENGTH_LONG).show();
         }
     }
 

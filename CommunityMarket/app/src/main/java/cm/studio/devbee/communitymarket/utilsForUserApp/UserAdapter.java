@@ -39,6 +39,7 @@ import javax.annotation.Nullable;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
 import cm.studio.devbee.communitymarket.postActivity.DetailActivityTwo;
+import cm.studio.devbee.communitymarket.postActivity.UserGeneralPresentation;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
@@ -46,6 +47,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     Context context;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
+    private String current_user;
 
 
     public UserAdapter(List<UserModel> userModelList, Context context) {
@@ -58,6 +60,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v=LayoutInflater.from ( viewGroup.getContext () ).inflate (R.layout.item_user_layout,viewGroup,false);
         viewGroup.getContext();
+        viewGroup.getContext();
+        firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseAuth=FirebaseAuth.getInstance();
         return new ViewHolder ( v );
     }
 
@@ -65,8 +70,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull  final ViewHolder viewHolder, int i) {
        String nom_utilisateur=userModelList.get ( i ).getUser_prenom ();
        String image =userModelList.get ( i ).getUser_profil_image ();
+       final String nom=userModelList.get ( i ).getId_utilisateur ();
+       viewHolder.setNom ( nom );
        viewHolder.setNom ( nom_utilisateur );
        viewHolder.setimage ( image );
+       viewHolder.profil_utilisateur.setOnClickListener ( new View.OnClickListener () {
+           @Override
+           public void onClick(View v) {
+               current_user=firebaseAuth.getCurrentUser ().getUid ();
+               Intent gotogneral=new Intent ( context,UserGeneralPresentation.class );
+               gotogneral.putExtra ( "id de l'utilisateur",nom );
+               context.startActivity ( gotogneral );
+
+           }
+       } );
     }
 
     @Override
@@ -78,11 +95,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         TextView nom_utilisateur;
         ImageView profil_utilisateur;
+        TextView textView;
 
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
             nom_utilisateur=itemView.findViewById ( R.id.user_text_name );
             profil_utilisateur=itemView.findViewById ( R.id.user_image );
+            textView=itemView.findViewById ( R.id.id_utilisateur_user );
+        }
+        public void setuser(String nom){
+            textView.setText ( nom );
         }
 
         public void setNom(final String nom){
