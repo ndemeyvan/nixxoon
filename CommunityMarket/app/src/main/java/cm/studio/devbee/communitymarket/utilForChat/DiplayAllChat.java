@@ -7,7 +7,7 @@ public class DiplayAllChat {
     String dernier_message;
     String image_profil;
     String nom_utilisateur;
-    String status;
+
 
 
 
@@ -21,7 +21,7 @@ public class DiplayAllChat {
         this.dernier_message = dernier_message;
         this.image_profil = image_profil;
         this.nom_utilisateur = nom_utilisateur;
-        this.status = status;
+
     }
 
     public String getTemps() {
@@ -72,11 +72,5 @@ public class DiplayAllChat {
         this.nom_utilisateur = nom_utilisateur;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

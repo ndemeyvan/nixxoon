@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class ChatMessageActivity extends AppCompatActivity {
     private String image_profil;
     private String status;
     private DiplayAllChat diplayAllChat;
+    private  static  CircleImageView online_status_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class ChatMessageActivity extends AppCompatActivity {
         groupAdapter=new GroupAdapter ();
         firebaseFirestore=FirebaseFirestore.getInstance ();
         contatc_recyclerview.setAdapter ( groupAdapter );
+        online_status_image=findViewById ( R.id.online_status_image );
         recuperation ();
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         message_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -146,12 +149,8 @@ public class ChatMessageActivity extends AppCompatActivity {
         final TextView nom_utilisateur=viewHolder.itemView.findViewById ( R.id.chat_user_name );
         final CircleImageView online =viewHolder.itemView.findViewById ( R.id.online );
         final CircleImageView offline=viewHolder.itemView.findViewById ( R.id.offline );
-        TextView text_status=viewHolder.itemView.findViewById ( R.id.text_status );
-            UserModel userModel=new UserModel (  );
-            diplayAllChat.setStatus ( userModel.getStatus () );
-            text_status.setText ( diplayAllChat.getStatus () );
             CardView chat_card = viewHolder.itemView.findViewById ( R.id.chat_card );
-             TextView temps=viewHolder.itemView.findViewById ( R.id.chat_temps );
+            TextView temps=viewHolder.itemView.findViewById ( R.id.chat_temps );
             final CircleImageView profil=viewHolder.itemView.findViewById ( R.id.chat_message_image_profil );
             lats_message.setText ( diplayAllChat.getDernier_message () );
             nom_utilisateur.setText ( diplayAllChat.getNom_utilisateur () );
@@ -166,16 +165,18 @@ public class ChatMessageActivity extends AppCompatActivity {
                                 String prenom=task.getResult ().getString ( "user_prenom" );
                                 String name_user= task.getResult ().getString ( "user_name" );
                                 image_profil =task.getResult ().getString ( "user_profil_image" );
-                                status= task.getResult ().getString ( "status" );
+                                String statusUser= task.getResult ().getString ( "status" );
+                                Log.e ("key",statusUser);
+                                //nom_utilisateur.setText(name_user+" "+prenom);
                                 nom_utilisateur.setText(name_user+" "+prenom);
-                                Picasso.with(getApplicationContext()).load(image_profil).into(profil);
 
-                                if (diplayAllChat.getStatus ().equals ( "online" )){
+                                Picasso.with(getApplicationContext()).load(image_profil).into(profil);
+                                if (statusUser.equals ( "online" )){
                                     online.setVisibility ( View.VISIBLE );
                                     offline.setVisibility ( View.INVISIBLE );
                                 }else {
                                     online.setVisibility ( View.INVISIBLE );
-                                    offline.setVisibility ( View.VISIBLE );
+                                    offline.setVisibility ( View.INVISIBLE );
                                 }
                             }
 
