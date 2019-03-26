@@ -73,6 +73,8 @@ public class MessageActivity extends AppCompatActivity {
     private  static  String current_user_image;
     private static  ModelChat modelChat;
     private static long time;
+    private static  CircleImageView online_status;
+    private static CircleImageView offline_status;
 
 
     @Override
@@ -248,6 +250,28 @@ public class MessageActivity extends AppCompatActivity {
         });
 
     }
+    public void status(){
+        firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    if (task.getResult ().exists ()){
+
+                        String status=task.getResult ().getString ( "status" );
+                            if (status.equals ( "online" )){
+                                online_status.setVisibility ( View.VISIBLE );
+                                offline_status.setVisibility ( View.INVISIBLE );
+                            }else {
+                              online_status.setVisibility ( View.INVISIBLE );
+                               offline_status.setVisibility ( View.VISIBLE );
+                            }
+                        }
+
+                    }
+                }
+        });
+
+    }
     public void userstatus(String status){
         DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
         user.update("status", status)
@@ -276,7 +300,13 @@ public class MessageActivity extends AppCompatActivity {
         userstatus("offline");
     }
 
-   /* public void sendmessagee(){
+    @Override
+    protected void onDestroy() {
+        userstatus("offline");
+        super.onDestroy ();
+        userstatus("offline");
+    }
+    /* public void sendmessagee(){
         Date date=new Date();
         SimpleDateFormat sdf= new SimpleDateFormat("d/MM/y H:mm:ss");
         final String date_avec_seconde=sdf.format(date);

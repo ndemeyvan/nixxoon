@@ -13,9 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,9 +33,11 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.utilForChat.DiplayAllChat;
 import cm.studio.devbee.communitymarket.utilForChat.ModelChat;
+import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatMessageActivity extends AppCompatActivity {
@@ -43,6 +48,8 @@ public class ChatMessageActivity extends AppCompatActivity {
     private GroupAdapter groupAdapter;
     private static Toolbar message_toolbar;
     private String image_profil;
+    private String status;
+    private DiplayAllChat diplayAllChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +70,10 @@ public class ChatMessageActivity extends AppCompatActivity {
         message_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
             }
         });
+
     }
     public  void recuperation(){
         firebaseFirestore.collection ( "dernier_message" )
@@ -88,6 +96,40 @@ public class ChatMessageActivity extends AppCompatActivity {
 
     }
 
+    public void userstatus(String status){
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
+        user.update("status", status)
+                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener () {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume ();
+        userstatus("online");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause ();
+        userstatus("offline");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy ();
+        userstatus("offline");
+    }
+
 
 
 
@@ -102,8 +144,14 @@ public class ChatMessageActivity extends AppCompatActivity {
         public void bind(@NonNull ViewHolder viewHolder, int position) {
         final TextView lats_message=viewHolder.itemView.findViewById ( R.id.chat_last_message );
         final TextView nom_utilisateur=viewHolder.itemView.findViewById ( R.id.chat_user_name );
+        final CircleImageView online =viewHolder.itemView.findViewById ( R.id.online );
+        final CircleImageView offline=viewHolder.itemView.findViewById ( R.id.offline );
+        TextView text_status=viewHolder.itemView.findViewById ( R.id.text_status );
+            UserModel userModel=new UserModel (  );
+            diplayAllChat.setStatus ( userModel.getStatus () );
+            text_status.setText ( diplayAllChat.getStatus () );
             CardView chat_card = viewHolder.itemView.findViewById ( R.id.chat_card );
-        TextView temps=viewHolder.itemView.findViewById ( R.id.chat_temps );
+             TextView temps=viewHolder.itemView.findViewById ( R.id.chat_temps );
             final CircleImageView profil=viewHolder.itemView.findViewById ( R.id.chat_message_image_profil );
             lats_message.setText ( diplayAllChat.getDernier_message () );
             nom_utilisateur.setText ( diplayAllChat.getNom_utilisateur () );
@@ -118,19 +166,30 @@ public class ChatMessageActivity extends AppCompatActivity {
                                 String prenom=task.getResult ().getString ( "user_prenom" );
                                 String name_user= task.getResult ().getString ( "user_name" );
                                 image_profil =task.getResult ().getString ( "user_profil_image" );
+                                status= task.getResult ().getString ( "status" );
                                 nom_utilisateur.setText(name_user+" "+prenom);
                                 Picasso.with(getApplicationContext()).load(image_profil).into(profil);
+
+                                if (diplayAllChat.getStatus ().equals ( "online" )){
+                                    online.setVisibility ( View.VISIBLE );
+                                    offline.setVisibility ( View.INVISIBLE );
+                                }else {
+                                    online.setVisibility ( View.INVISIBLE );
+                                    offline.setVisibility ( View.VISIBLE );
+                                }
                             }
+
                         }else {
                             String error=task.getException().getMessage();
                             Toast.makeText ( getApplicationContext (), error, Toast.LENGTH_LONG ).show ();
-
                         }
                     }
                 });
             }else{
                 Picasso.with ( getApplicationContext () ).load (diplayAllChat.getImage_profil ()  ).into ( profil );
             }
+
+
 
             chat_card.setOnClickListener ( new View.OnClickListener () {
                 @Override

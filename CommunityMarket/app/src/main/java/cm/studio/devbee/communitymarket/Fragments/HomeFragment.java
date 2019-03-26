@@ -498,7 +498,7 @@ public class HomeFragment extends Fragment {
     public void userstatus(String status){
         DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
         user.update("status", status)
-                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                     }
@@ -561,8 +561,10 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onDestroy() {
+        userstatus ( "false" );
         super.onDestroy();
-       firebaseFirestore=null;
+        userstatus ( "false" );
+       /*firebaseFirestore=null;
         imageFour=null;
         imageThree=null;
         imageTwo=null;
@@ -584,7 +586,6 @@ public class HomeFragment extends Fragment {
         user_recyclerView=null;
         userAdapter=null;
         //////////tshirt
-         categoriesModelTshirtList=null;
          tshirtRecycler=null;
         //////chargement
      lastVisible=null;
@@ -610,7 +611,7 @@ public class HomeFragment extends Fragment {
          recyclerrobe=null;
           progressDialog=null;
        v=null;
-        firebaseAuth=null;
+        firebaseAuth=null;*/
 
 
     }

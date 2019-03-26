@@ -29,9 +29,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -181,6 +183,7 @@ public class Accueil extends AppCompatActivity
             Intent intent = new Intent ( getApplicationContext(),ProfileActivity.class );
             startActivity ( intent );
         } else if (id == R.id.ic_logout) {
+            userstatus("offline");
             mAuth.getInstance().signOut();
             Intent intenttwo = new Intent ( getApplicationContext(),ChoiceActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP );
             startActivity ( intenttwo );
@@ -217,6 +220,34 @@ public class Accueil extends AppCompatActivity
             }
         } );
     }
+    public void userstatus(String status){
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user_id);
+        user.update("status", status)
+                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume ();
+        userstatus("online");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause ();
+        userstatus("offline");
+    }
+
+
 
     public class CircleTransform implements Transformation {
         @Override
@@ -277,8 +308,10 @@ public class Accueil extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
+        userstatus("offline");
         asyncTask.cancel(true);
         super.onDestroy();
+        userstatus("offline");
         asyncTask.cancel(true);
         mAuth=null;
         firebaseFirestore=null;

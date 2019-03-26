@@ -66,6 +66,18 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         UserModel userModel=new UserModel (  );
         modelChat.setStatus ( userModel.getStatus () );
         String status=modelChatList.get ( i ).getStatus ();
+        /*if (ischat==true){
+            if (status.equals ( "online" )){
+                viewHolder.online_status.setVisibility ( View.VISIBLE );
+                viewHolder.offline_status.setVisibility ( View.INVISIBLE );
+            }else {
+                viewHolder.online_status.setVisibility ( View.INVISIBLE );
+                viewHolder.offline_status.setVisibility ( View.VISIBLE );
+            }
+        }else{
+            viewHolder.online_status.setVisibility ( View.INVISIBLE );
+            viewHolder.offline_status.setVisibility ( View.INVISIBLE );
+        }*/
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -93,18 +105,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 }
             }
         });
-        if (ischat==true){
-            if (status.equals ( "online" )){
-                viewHolder.online_status.setVisibility ( View.VISIBLE );
-                viewHolder.offline_status.setVisibility ( View.INVISIBLE );
-            }else {
-                viewHolder.online_status.setVisibility ( View.INVISIBLE );
-                viewHolder.offline_status.setVisibility ( View.VISIBLE );
-            }
-        }else{
-            viewHolder.online_status.setVisibility ( View.INVISIBLE );
-            viewHolder.offline_status.setVisibility ( View.INVISIBLE );
-        }
+
     }
 
     @Override
@@ -117,6 +118,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         CircleImageView image;
         CircleImageView online_status;
         CircleImageView offline_status;
+
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
             message=itemView.findViewById ( R.id.show_message );
