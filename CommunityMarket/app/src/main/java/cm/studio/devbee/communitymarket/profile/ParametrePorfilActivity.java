@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -64,6 +65,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
     private static Bitmap compressedImageFile;
     private static AsyncTask asyncTask;
     private static boolean ischange=false;
+    private static ImageButton imageButton;
     private static WeakReference<ParametrePorfilActivity> parametrePorfilActivityWeakReference;
 
 
@@ -83,9 +85,30 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         firebaseFirestore=FirebaseFirestore.getInstance ();
         current_user_id=mAuth.getCurrentUser ().getUid ();
         parametre_progressbar=findViewById ( R.id.parametre_progressbar );
+        imageButton=findViewById(R.id.imageButton);
         parametrePorfilActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
        asyncTask.execute();
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    try {
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 555);
+                        CropImage.activity()
+                                .setGuidelines(CropImageView.Guidelines.ON)
+                                .start(ParametrePorfilActivity.this);
+
+                    }catch (Exception e){
+                        e.printStackTrace ();
+                    }
+                } else {
+                    CropImage.activity()
+                            .setGuidelines(CropImageView.Guidelines.ON)
+                            .start(ParametrePorfilActivity.this);
+                }
+            }
+        });
 
     }
     public void setimage(){
