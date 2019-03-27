@@ -144,14 +144,15 @@
         app:layout_constraintTop_toBottomOf="@+id/param_mail"
         app:layout_constraintVertical_bias="0.636" />
 
-    <ImageView
+    <ImageButton
+        android:background="@drawable/background_message_button"
         android:id="@+id/add_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/param_nom"
         app:layout_constraintEnd_toEndOf="@+id/parametre_image"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_ajouter" />
 
     <ProgressBar
         android:id="@+id/parametre_progressbar"

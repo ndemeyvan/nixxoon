@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -154,6 +153,7 @@ public class PostActivityFinal extends AppCompatActivity {
     public void stocker(){
         Date date=new Date();
         SimpleDateFormat sdf= new SimpleDateFormat("d/MM/y H:mm:ss");
+
         final String date_avec_seconde=sdf.format(date);
 
                     File newImageFile= new File(mImageUri.getPath ());

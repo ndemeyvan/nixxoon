@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,22 +27,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import javax.annotation.Nullable;
-
-import cm.studio.devbee.communitymarket.Fragments.APIservice;
-import cm.studio.devbee.communitymarket.Notification.Client;
-import cm.studio.devbee.communitymarket.Notification.Token;
+import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.utilForChat.ChatAdapter;
 import cm.studio.devbee.communitymarket.utilForChat.DiplayAllChat;
@@ -80,7 +73,7 @@ public class MessageActivity extends AppCompatActivity {
     private static long time;
     private static  CircleImageView online_status;
     private static CircleImageView offline_status;
-    APIservice apIservice;
+
 
 
     @Override
@@ -129,15 +122,9 @@ public class MessageActivity extends AppCompatActivity {
                          message_user_send.setText ( "" );
             }
         } );
-        apIservice=Client.getClient ( "https://fcm.googleapis.com/" ).create ( APIservice.class );
-        updateToken ( FirebaseInstanceId.getInstance ().getToken () );
-    }
-    public void updateToken(String token){
-        DocumentReference  db=firebaseFirestore.collection ( "Token" ).document ( current_user );
-        Token token1 =new Token ( token );
-        db.set ( token1 );
 
     }
+
     public void userstatus(String status){
         DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
         user.update("status", status)
@@ -176,7 +163,8 @@ public class MessageActivity extends AppCompatActivity {
 
     public void sendMessage(final String expediteur, final String recepteur , final String message){
          time=System.currentTimeMillis ();
-        HashMap<String,Object> mesageMap = new HashMap<> (  );
+
+        final HashMap<String,Object> mesageMap = new HashMap<> (  );
         mesageMap.put ( "expediteur",expediteur );
         mesageMap.put ( "recepteur",recepteur );
         mesageMap.put ( "message",message );
@@ -200,6 +188,16 @@ public class MessageActivity extends AppCompatActivity {
                         .document (expediteur).collection ( "contacts" )
                         .document (recepteur)
                         .set ( contact );
+                Map<String,Object > notificationMap= new HashMap<>();
+                notificationMap.put("message",message);
+                notificationMap.put("from",current_user);
+                firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( user_id_message ).collection("notification").add(notificationMap)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(getApplicationContext(),"notification envoyer",Toast.LENGTH_LONG).show();
+                            }
+                        });
             }
         } ).addOnFailureListener ( new OnFailureListener () {
             @Override
@@ -234,6 +232,7 @@ public class MessageActivity extends AppCompatActivity {
         //statusUSer ();
     }
     public void readMessage(final String monId, final String sonID, final String imageYrl){
+        modelChatList.clear();
         Query firstQuery =firebaseFirestore.collection ( "conversation" ).document ( current_user ).collection(user_id_message).orderBy ( "temps",Query.Direction.ASCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -247,6 +246,7 @@ public class MessageActivity extends AppCompatActivity {
                         }
                         chatAdapter=new ChatAdapter (getApplicationContext (),modelChatList,imageYrl,true);
                         message_recyclerview.setAdapter ( chatAdapter );
+                        chatAdapter.notifyDataSetChanged();
                     }
                 }
             }
