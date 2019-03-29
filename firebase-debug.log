@@ -1,0 +1,80 @@
+[debug] [2019-03-28T23:41:37.124Z] ----------------------------------------------------------------------
+[debug] [2019-03-28T23:41:37.133Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\houdini\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init functions
+[debug] [2019-03-28T23:41:37.134Z] CLI Version:   3.16.0
+[debug] [2019-03-28T23:41:37.134Z] Platform:      win32
+[debug] [2019-03-28T23:41:37.134Z] Node Version:  v10.15.3
+[debug] [2019-03-28T23:41:37.137Z] Time:          Fri Mar 29 2019 00:41:37 GMT+0100 (GMT+01:00)
+[debug] [2019-03-28T23:41:37.138Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-03-28T23:41:37.291Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2019-03-28T23:41:37.293Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\houdini\nix\nixxoon
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2019-03-29T00:48:13.735Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-03-29T00:48:13.735Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/Y4UZjsYmWhT3RXPZ9mol3UcMngfL45FREzxgRtCP9J0',
+  client_id:
+   '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope:
+   'email https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Fri Mar 29 2019 01:48:13 GMT+0100 (GMT+01:00)
+[debug] [2019-03-29T00:48:22.901Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-29T00:48:22.953Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects  
+  
+ Fri Mar 29 2019 01:48:22 GMT+0100 (GMT+01:00)
+[debug] [2019-03-29T00:48:24.793Z] <<< HTTP RESPONSE 200
+[info] 
+=== Functions Setup
+[info] 
+[info] A functions directory will be created in your project with a Node.js
+[info] package pre-configured. Functions can be deployed with firebase deploy.
+[info] 
+[debug] [2019-03-29T00:49:12.783Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-29T00:49:12.785Z] > authorizing via signed-in user
+[debug] [2019-03-29T00:49:12.787Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-03-29T00:49:12.787Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/Y4UZjsYmWhT3RXPZ9mol3UcMngfL45FREzxgRtCP9J0',
+  client_id:
+   '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope:
+   'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Fri Mar 29 2019 01:49:12 GMT+0100 (GMT+01:00)
+[debug] [2019-03-29T00:49:20.542Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-29T00:49:20.643Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/eduene-3c8a4  
+  
+ Fri Mar 29 2019 01:49:20 GMT+0100 (GMT+01:00)
+[debug] [2019-03-29T00:49:21.564Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-29T00:49:21.566Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/eduene-3c8a4/tokens  
+  
+ Fri Mar 29 2019 01:49:21 GMT+0100 (GMT+01:00)
+[debug] [2019-03-29T00:49:22.621Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-29T00:49:22.627Z] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/eduene-3c8a4?updateMask=usageSettings  
+ { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Fri Mar 29 2019 01:49:22 GMT+0100 (GMT+01:00)
+[debug] [2019-03-29T00:49:22.631Z] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/eduene-3c8a4?updateMask=usageSettings  
+ { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Fri Mar 29 2019 01:49:22 GMT+0100 (GMT+01:00)
+[debug] [2019-03-29T00:49:25.990Z] <<< HTTP RESPONSE 200
+[info] +  Wrote functions/package.json
+[info] +  Wrote functions/index.js
+[debug] [2019-03-29T00:49:28.543Z] <<< HTTP RESPONSE 200

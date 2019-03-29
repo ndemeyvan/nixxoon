@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -71,6 +72,7 @@ public class PostActivityFinal extends AppCompatActivity {
     private static Bitmap compressedImageFile;
     private static AsyncTask asyncTask;
     private static WeakReference<PostActivityFinal> postActivityWeakReference;
+    private static ImageButton post_new_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
@@ -82,6 +84,7 @@ public class PostActivityFinal extends AppCompatActivity {
         postfinaltoolbar=findViewById ( R.id.final_toolbar );
         imageProduit=findViewById ( R.id.imageProduit );
         nomProduit=findViewById ( R.id.post_product_name );
+        post_new_button=findViewById ( R.id.post_new_button );
         descriptionProduit=findViewById ( R.id.post_product_description );
         prixPorduit=findViewById ( R.id.post_production_prix );
         vendreButton=findViewById ( R.id.post_button );
@@ -96,13 +99,15 @@ public class PostActivityFinal extends AppCompatActivity {
 
     }
     public void setimage(){
-        imageProduit.setOnClickListener ( new View.OnClickListener () {
+        post_new_button.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     try {
                         requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 555);
-
+                        CropImage.activity()
+                                .setGuidelines(CropImageView.Guidelines.ON)
+                                .start(PostActivityFinal.this);
                     }catch (Exception e){
                         e.printStackTrace ();
                     }

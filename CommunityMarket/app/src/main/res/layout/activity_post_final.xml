@@ -22,14 +22,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/final_toolbar"
-        app:srcCompat="@drawable/ic_ajouter" />
+        app:srcCompat="@drawable/noir" />
 
     <EditText
         android:id="@+id/post_product_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_background"
         android:elevation="1dp"
@@ -56,9 +56,10 @@
         android:elevation="1dp"
         android:ems="10"
         android:fontFamily="sans-serif-condensed"
-        android:hint="description "
+        android:hint="description (250 caractere max)"
         android:inputType="textMultiLine"
         android:padding="15dp"
+        android:maxLength="250"
         android:textColor="@color/blanc"
         android:textColorHint="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +104,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_production_prix"
-        app:layout_constraintVertical_bias="0.813" />
+        app:layout_constraintVertical_bias="0.28" />
 
     <ProgressBar
         android:id="@+id/progressBar_post"
@@ -111,16 +112,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/post_button"
+        app:layout_constraintBottom_toTopOf="@+id/post_product_name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_production_prix" />
+        app:layout_constraintTop_toTopOf="@+id/imageProduit" />
+
+    <ImageButton
+        android:id="@+id/post_new_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/background_message_button"
+        android:src="@drawable/ic_ajouter"
+        app:layout_constraintBottom_toBottomOf="@+id/imageProduit"
+        app:layout_constraintEnd_toEndOf="@+id/imageProduit" />
 
 
 </android.support.constraint.ConstraintLayout>

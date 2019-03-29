@@ -41,7 +41,7 @@ import cm.studio.devbee.communitymarket.postActivity.PostActivityFinal;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAdapteNouveaux.ViewHolder> {
+public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAdapteNouveaux.ViewHolder> {
     List<CategoriesModelNouveaux> categoriesModelNouveauxList;
     Context context;
     private FirebaseFirestore firebaseFirestore;

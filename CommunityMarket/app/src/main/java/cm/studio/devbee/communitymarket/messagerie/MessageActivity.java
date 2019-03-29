@@ -36,13 +36,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
-import cm.studio.devbee.communitymarket.Accueil;
+
+import cm.studio.devbee.communitymarket.Fragments.APIService;
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.notification.Client;
+import cm.studio.devbee.communitymarket.notification.Data;
+import cm.studio.devbee.communitymarket.notification.MyResponse;
+import cm.studio.devbee.communitymarket.notification.Sender;
+import cm.studio.devbee.communitymarket.notification.Token;
 import cm.studio.devbee.communitymarket.utilForChat.ChatAdapter;
 import cm.studio.devbee.communitymarket.utilForChat.DiplayAllChat;
 import cm.studio.devbee.communitymarket.utilForChat.ModelChat;
+import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MessageActivity extends AppCompatActivity {
     private static CircleImageView user_message_image;
@@ -73,6 +83,8 @@ public class MessageActivity extends AppCompatActivity {
     private static long time;
     private static  CircleImageView online_status;
     private static CircleImageView offline_status;
+    private static APIService apiService;
+    boolean notify=false;
 
 
 
@@ -110,6 +122,7 @@ public class MessageActivity extends AppCompatActivity {
         send_button.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
+                notify=true;
                 String message =message_user_send.getText ().toString ();
                         if(!TextUtils.isEmpty ( message )){
                             sendMessage (current_user,user_id_message,message);
@@ -122,6 +135,7 @@ public class MessageActivity extends AppCompatActivity {
                          message_user_send.setText ( "" );
             }
         } );
+        apiService=Client.getClient ( "https://fcm.googleapis.com/" ).create ( APIService.class );
 
     }
 
@@ -191,13 +205,7 @@ public class MessageActivity extends AppCompatActivity {
                 Map<String,Object > notificationMap= new HashMap<>();
                 notificationMap.put("message",message);
                 notificationMap.put("from",current_user);
-                firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( user_id_message ).collection("notification").add(notificationMap)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(getApplicationContext(),"notification envoyer",Toast.LENGTH_LONG).show();
-                            }
-                        });
+
             }
         } ).addOnFailureListener ( new OnFailureListener () {
             @Override
@@ -230,7 +238,56 @@ public class MessageActivity extends AppCompatActivity {
             }
         } );
         //statusUSer ();
+        final String msg =message;
+        firebaseAuth=FirebaseAuth.getInstance ();
+        current_user=firebaseAuth.getCurrentUser ().getUid ();
+        firebaseFirestore=FirebaseFirestore.getInstance ();
+        DocumentReference reference=firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user);
+        reference.addSnapshotListener ( new EventListener<DocumentSnapshot> () {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                UserModel userModel=new UserModel (  );
+                if(notify) {
+                    sendNotification ( user_id_message, userModel.getUser_prenom (), msg );
+                }
+                notify=false;
+            }
+        } );
     }
+
+    private void sendNotification(String recepteur, final String user_name, final String msg) {
+        Query token=firebaseFirestore.collection ( "Tokens" );
+        Query query=token.orderBy ( recepteur );
+        query.addSnapshotListener ( new EventListener<QuerySnapshot> () {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    Token token =doc.getDocument ().toObject ( Token.class );
+                    Data data =new Data ( current_user,R.mipmap.ic_launcher ,user_name +": "+msg,"nouveaux message",
+                            user_id_message);
+                    Sender sender = new Sender ( data,token.getToken () );
+                    apiService.sendNotification ( sender )
+                            .enqueue ( new Callback<MyResponse> () {
+                                @Override
+                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                    if (response.code ()==200){
+                                        if (response.body ().success!=1){
+                                            Toast.makeText ( getApplicationContext (),"echec",Toast.LENGTH_LONG ).show ();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                                }
+                            } );
+                }
+            }
+        } );
+
+    }
+
     public void readMessage(final String monId, final String sonID, final String imageYrl){
         modelChatList.clear();
         Query firstQuery =firebaseFirestore.collection ( "conversation" ).document ( current_user ).collection(user_id_message).orderBy ( "temps",Query.Direction.ASCENDING );

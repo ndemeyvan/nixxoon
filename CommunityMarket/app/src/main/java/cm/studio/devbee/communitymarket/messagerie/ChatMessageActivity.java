@@ -25,6 +25,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
@@ -36,6 +37,7 @@ import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.notification.Token;
 import cm.studio.devbee.communitymarket.utilForChat.DiplayAllChat;
 import cm.studio.devbee.communitymarket.utilForChat.ModelChat;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
@@ -76,6 +78,7 @@ public class ChatMessageActivity extends AppCompatActivity {
                 startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
             }
         });
+        updateToken(FirebaseInstanceId.getInstance ().getToken () );
 
     }
     public  void recuperation(){
@@ -97,6 +100,14 @@ public class ChatMessageActivity extends AppCompatActivity {
                     }
                 } );
 
+    }
+    public void updateToken(String token){
+        firebaseAuth=FirebaseAuth.getInstance ();
+        current_user=firebaseAuth.getCurrentUser ().getUid ();
+        firebaseFirestore=FirebaseFirestore.getInstance ();
+        DocumentReference reference=firebaseFirestore.collection ( "Tokens" ).document (current_user);
+        Token token1=new Token ( token );
+        reference.set ( token1 );
     }
 
     public void userstatus(String status){

@@ -16,7 +16,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -51,7 +53,8 @@ public class RobeFragment extends Fragment {
     private static GridViewAdapter categoriesAdapterobe;
     private static List<ModelGridView> categoriesModelrobeList;
     private static WeakReference<RobeFragment> robeFragmentWeakReference;
-
+    private static FirebaseAuth firebaseAuth;
+    String curent_user;
     public RobeFragment() {
         // Required empty public constructor
     }
@@ -72,11 +75,41 @@ public class RobeFragment extends Fragment {
         robeRecyclerView.setAdapter ( categoriesAdapterobe );
         robeRecyclerView.setLayoutManager(new GridLayoutManager (getActivity(),2));
         ////////pull
+        firebaseAuth=FirebaseAuth.getInstance ();
+        curent_user=firebaseAuth.getCurrentUser ().getUid ();
         asyncTask=new AsyncTask ();
         asyncTask.execute();
         robeFragmentWeakReference=new WeakReference<> ( this );
         return v;
     }
+    public void userstatus(String status){
+
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(curent_user);
+        user.update("status", status)
+                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume ();
+        userstatus("online");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause ();
+        userstatus("offline");
+    }
+
     public void RecyclerView(){
 
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "robe" ).orderBy ( "dete-en-seconde",Query.Direction.DESCENDING );
@@ -95,6 +128,7 @@ public class RobeFragment extends Fragment {
             }
         });
     }
+
     public  void imagePub(){
         DocumentReference user = firebaseFirestore.collection("publicit").document("imageFixe");
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {

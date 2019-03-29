@@ -80,16 +80,6 @@
                 app:layout_constraintStart_toEndOf="@+id/seacrh_image_post"
                 app:layout_constraintTop_toBottomOf="@+id/search_profil_image" />
 
-            <ImageView
-                android:id="@+id/search_image_post"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/seacrh_image_post"
-                app:layout_constraintEnd_toEndOf="@+id/seacrh_image_post"
-                app:layout_constraintStart_toStartOf="@+id/seacrh_image_post"
-                app:layout_constraintTop_toTopOf="@+id/seacrh_image_post"
-                app:srcCompat="@drawable/background_nvx" />
-
             <TextView
                 android:id="@+id/utilisateur_search"
                 android:layout_width="wrap_content"

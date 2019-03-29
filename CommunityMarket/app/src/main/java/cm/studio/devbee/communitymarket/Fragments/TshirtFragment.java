@@ -16,7 +16,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -51,6 +53,8 @@ public class TshirtFragment extends Fragment {
     private static ProgressDialog progressDialog;
     private static WeakReference<TshirtFragment> tshirtFragmentWeakReference;
     private  AsyncTask asyncTask;
+    private static FirebaseAuth firebaseAuth;
+    String curent_user;
 
     public TshirtFragment() {
         // Required empty public constructor
@@ -72,9 +76,38 @@ public class TshirtFragment extends Fragment {
         textPubTshirt=v.findViewById ( R.id.pubImageText_tshirt );
          asyncTask=new AsyncTask ();
         asyncTask.execute (  );
+        firebaseAuth=FirebaseAuth.getInstance ();
+        curent_user=firebaseAuth.getCurrentUser ().getUid ();
         tshirtFragmentWeakReference=new WeakReference<>(this);
 
         return v;
+    }
+    public void userstatus(String status){
+
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(curent_user);
+        user.update("status", status)
+                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume ();
+        userstatus("online");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause ();
+        userstatus("offline");
     }
     public void tshirtRecyclerView(){
 

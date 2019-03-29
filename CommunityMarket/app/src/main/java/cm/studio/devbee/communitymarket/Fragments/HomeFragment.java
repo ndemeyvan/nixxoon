@@ -564,7 +564,7 @@ public class HomeFragment extends Fragment {
         userstatus ( "false" );
         super.onDestroy();
         userstatus ( "false" );
-       /*firebaseFirestore=null;
+       firebaseFirestore=null;
         imageFour=null;
         imageThree=null;
         imageTwo=null;
@@ -611,7 +611,7 @@ public class HomeFragment extends Fragment {
          recyclerrobe=null;
           progressDialog=null;
        v=null;
-        firebaseAuth=null;*/
+        firebaseAuth=null;
 
 
     }
