@@ -89,11 +89,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
        } );
        if (ischat){
            if (status.equals ( "online" )){
-                viewHolder.online_image.setVisibility ( View.VISIBLE );
+                viewHolder.online_image.setVisibility ( View.INVISIBLE );
                 viewHolder.offline_image.setVisibility ( View.INVISIBLE );
            }else {
                viewHolder.online_image.setVisibility ( View.INVISIBLE );
-               viewHolder.offline_image.setVisibility ( View.VISIBLE );
+               viewHolder.offline_image.setVisibility ( View.INVISIBLE );
            }
        }else{
            viewHolder.online_image.setVisibility ( View.INVISIBLE );

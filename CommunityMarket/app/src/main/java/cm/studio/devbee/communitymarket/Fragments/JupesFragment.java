@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -52,6 +53,8 @@ public class JupesFragment extends Fragment {
     private static GridViewAdapter categoriesAdaptejupe;
     private static List<ModelGridView> categoriesModeljupeList;
     private static WeakReference<JupesFragment> jupeFragmentWeakReference;
+    private static FirebaseAuth firebaseAuth;
+    String curent_user;
 
     public JupesFragment() {
         // Required empty public constructor
@@ -66,7 +69,8 @@ public class JupesFragment extends Fragment {
         firebaseFirestore=FirebaseFirestore.getInstance ();
         imagePubjupe=v.findViewById ( R.id.pubImag_jupe);
         textPubjupe=v.findViewById ( R.id.pubImageText_jupe);
-
+        firebaseAuth=FirebaseAuth.getInstance ();
+        curent_user=firebaseAuth.getCurrentUser ().getUid ();
         //////////
         jupeRecyclerView=v.findViewById ( R.id.jupeRecyclerView );
         categoriesModeljupeList=new ArrayList<> (  );
@@ -79,9 +83,9 @@ public class JupesFragment extends Fragment {
         asyncTask.execute();
         return v;
     }
-    pub
+
     public void userstatus(String status){
-        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user_id);
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(curent_user);
         user.update("status", status)
                 .addOnSuccessListener(new OnSuccessListener<Void> () {
                     @Override
@@ -105,7 +109,8 @@ public class JupesFragment extends Fragment {
     public void onPause() {
         super.onPause ();
         userstatus("offline");
-    }lic void jupeRecyclerView(){
+    }
+    public void jupeRecyclerView(){
 
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "jupes" ).orderBy ( "dete-en-seconde",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot> () {

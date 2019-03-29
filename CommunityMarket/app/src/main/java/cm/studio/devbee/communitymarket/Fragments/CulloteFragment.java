@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -53,6 +54,8 @@ public class CulloteFragment extends Fragment {
     private static GridViewAdapter categoriesAdaptecullote;
     private static List<ModelGridView> categoriesModelculloteList;
     private static WeakReference<CulloteFragment> culloteFragmentWeakReference;
+    private static FirebaseAuth firebaseAuth;
+    String curent_user;
 
     public CulloteFragment() {
         // Required empty public constructor
@@ -77,10 +80,12 @@ public class CulloteFragment extends Fragment {
         asyncTask=new AsyncTask ();
         asyncTask.execute();
         culloteFragmentWeakReference=new WeakReference<> ( this );
+        firebaseAuth=FirebaseAuth.getInstance ();
+        curent_user=firebaseAuth.getCurrentUser ().getUid ();
         return v;
     }
     public void userstatus(String status){
-        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user_id);
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document();
         user.update("status", status)
                 .addOnSuccessListener(new OnSuccessListener<Void> () {
                     @Override

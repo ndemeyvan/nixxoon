@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -52,6 +53,8 @@ public class ChaussureFragment extends Fragment {
     private static ProgressDialog progressDialog;
     private static WeakReference<ChaussureFragment> chaussuresFragmentWeakReference;
     private AsyncTask asyncTask;
+    private static FirebaseAuth firebaseAuth;
+    String curent_user;
 
     public ChaussureFragment() {
         // Required empty public constructor
@@ -76,12 +79,14 @@ public class ChaussureFragment extends Fragment {
         chaussuresRecyclerView=v.findViewById ( R.id.pubImageText_tshirt );
         asyncTask=new AsyncTask ();
         asyncTask.execute (  );
+        firebaseAuth=FirebaseAuth.getInstance ();
+        curent_user=firebaseAuth.getCurrentUser ().getUid ();
 
 
         return v;
     }
     public void userstatus(String status){
-        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user_id);
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(curent_user);
         user.update("status", status)
                 .addOnSuccessListener(new OnSuccessListener<Void> () {
                     @Override
