@@ -1,6 +1,8 @@
 package cm.studio.devbee.communitymarket.messagerie;
 
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,14 +29,21 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
+
 import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.Fragments.APIService;
@@ -126,6 +135,7 @@ public class MessageActivity extends AppCompatActivity {
                 String message =message_user_send.getText ().toString ();
                         if(!TextUtils.isEmpty ( message )){
                             sendMessage (current_user,user_id_message,message);
+                            sendNotification();
                             Toast.makeText ( getApplicationContext (),"message envoye",Toast.LENGTH_LONG ).show ();
 
                         }else{
@@ -136,6 +146,10 @@ public class MessageActivity extends AppCompatActivity {
             }
         } );
         apiService=Client.getClient ( "https://fcm.googleapis.com/" ).create ( APIService.class );
+        OneSignal.startInit(MessageActivity.this).inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+        OneSignal.sendTag("user_id",current_user);
 
     }
 
@@ -238,53 +252,79 @@ public class MessageActivity extends AppCompatActivity {
             }
         } );
         //statusUSer ();
-        final String msg =message;
-        firebaseAuth=FirebaseAuth.getInstance ();
-        current_user=firebaseAuth.getCurrentUser ().getUid ();
-        firebaseFirestore=FirebaseFirestore.getInstance ();
-        DocumentReference reference=firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user);
-        reference.addSnapshotListener ( new EventListener<DocumentSnapshot> () {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                UserModel userModel=new UserModel (  );
-                if(notify) {
-                    sendNotification ( user_id_message, userModel.getUser_prenom (), msg );
-                }
-                notify=false;
-            }
-        } );
+
     }
 
-    private void sendNotification(String recepteur, final String user_name, final String msg) {
-        Query token=firebaseFirestore.collection ( "Tokens" );
-        Query query=token.orderBy ( recepteur );
-        query.addSnapshotListener ( new EventListener<QuerySnapshot> () {
+    private void sendNotification() {
+        Toast.makeText(this, "Current Recipients is : user1@gmail.com ( Just For Demo )", Toast.LENGTH_SHORT).show();
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    Token token =doc.getDocument ().toObject ( Token.class );
-                    Data data =new Data ( current_user,R.mipmap.ic_launcher ,user_name +": "+msg,"nouveaux message",
-                            user_id_message);
-                    Sender sender = new Sender ( data,token.getToken () );
-                    apiService.sendNotification ( sender )
-                            .enqueue ( new Callback<MyResponse> () {
-                                @Override
-                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-                                    if (response.code ()==200){
-                                        if (response.body ().success!=1){
-                                            Toast.makeText ( getApplicationContext (),"echec",Toast.LENGTH_LONG ).show ();
-                                        }
-                                    }
-                                }
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+                    String send_email;
 
-                                @Override
-                                public void onFailure(Call<MyResponse> call, Throwable t) {
+                    //This is a Simple Logic to Send Notification different Device Programmatically....
+                    if (current_user.equals(current_user)) {
+                        send_email =user_id_message;
+                    } else {
+                        send_email =current_user;
+                    }
 
-                                }
-                            } );
+                    try {
+                        String jsonResponse;
+                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        con.setUseCaches(false);
+                        con.setDoOutput(true);
+                        con.setDoInput(true);
+
+                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        con.setRequestProperty("Authorization", "Basic MmQxNjExZDktZjFkNi00MzFiLTgzZGQtOWZkMDEyYjYyZWE2");
+                        con.setRequestMethod("POST");
+
+                        String strJsonBody = "{"
+                                + "\"app_id\": \"0ee417cd-5789-427c-bea7-8bf2fc90eec1\","
+
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"user_id\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
+
+                                + "\"data\": {\"foo\": \"bar\"},"
+                                + "\"contents\": {\"en\": \"English Message\"}"
+                                + "}";
+
+
+                        System.out.println("strJsonBody:\n" + strJsonBody);
+
+                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                        con.setFixedLengthStreamingMode(sendBytes.length);
+
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
+
+                        int httpResponse = con.getResponseCode();
+                        System.out.println("httpResponse: " + httpResponse);
+
+                        if (httpResponse >= HttpURLConnection.HTTP_OK
+                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        } else {
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        System.out.println("jsonResponse:\n" + jsonResponse);
+
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
                 }
             }
-        } );
+        });
 
     }
 
