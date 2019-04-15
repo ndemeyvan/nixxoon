@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -35,13 +37,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.Fragments.AccesoireFragment;
 import cm.studio.devbee.communitymarket.Fragments.ChaussureFragment;
@@ -61,6 +67,7 @@ import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 import cm.studio.devbee.communitymarket.profile.ProfileActivity;
 import cm.studio.devbee.communitymarket.search.SearchActivity;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
+import cm.studio.devbee.communitymarket.utilsforsearch.SearchAdapter;
 import cm.studio.devbee.communitymarket.utilsforsearch.SearchModel;
 
 public class Accueil extends AppCompatActivity
@@ -76,6 +83,7 @@ public class Accueil extends AppCompatActivity
     private static AsyncTask asyncTask;
     private static List<SearchModel> searchModelList;
     private static WeakReference<Accueil> accueilWeakReference;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +148,25 @@ public class Accueil extends AppCompatActivity
             }
         } );
     }
+    public void checkRead(){
+        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful ()){
+                    String message= task.getResult ().getString ( "message" );
+
+                    if (message.equals ( "non_lu" )){
+                        menu.getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_lu));
+                    }else {
+                        menu.getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
+
+                    }
+                }
+            }
+        } );
+    }
+
+
 
 
 
@@ -156,6 +183,7 @@ public class Accueil extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater ().inflate ( R.menu.accueil, menu );
+        this.menu = menu;
 
         return true;
     }
@@ -167,6 +195,25 @@ public class Accueil extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.search) {
             Intent gogotoSearch = new Intent(getApplicationContext(),SearchActivity.class);
+            startActivity(gogotoSearch);
+            return true;
+        }else if (id == R.id.message) {
+            Intent gogotoSearch = new Intent(getApplicationContext(),ChatMessageActivity.class);
+            firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful ()){
+                        String message= task.getResult ().getString ( "message" );
+
+                        if (message.equals ( "non_lu" )){
+                            menu.getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_lu));
+                        }else {
+                            menu.getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
+
+                        }
+                    }
+                }
+            } );
             startActivity(gogotoSearch);
             return true;
         }

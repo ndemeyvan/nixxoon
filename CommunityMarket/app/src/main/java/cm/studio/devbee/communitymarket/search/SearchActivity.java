@@ -40,6 +40,8 @@ import java.util.List;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
 import cm.studio.devbee.communitymarket.utilsForPostPrincipal.PrincipalModel;
+import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
+import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import cm.studio.devbee.communitymarket.utilsforsearch.SearchAdapter;
 import cm.studio.devbee.communitymarket.utilsforsearch.SearchModel;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -53,8 +55,8 @@ public class SearchActivity extends AppCompatActivity {
     private static FirebaseAuth firebaseAuth;
     private static String current_user;
     private LinearLayoutManager linearLayoutManager;
-    private List<SearchModel> listUsers;
-    private SearchAdapter searchAdapter;
+    private List<UserModel> listUsers;
+    private UserAdapter searchAdapter;
 
 
     @Override
@@ -86,7 +88,7 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                search(s.toString());
+                search(s.toString().toLowerCase ());
             }
 
             @Override
@@ -99,33 +101,34 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void search(final String s) {
-        Query firstQuery =db.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "decription_du_produit").startAt ( s ).endAt ( s+"\uf0ff" );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        Query firstQuery =db.collection ( "mes donnees utilisateur" ).orderBy ( "search").startAt ( s ).endAt ( s+"\uf0ff" );
+        firstQuery.addSnapshotListener(SearchActivity.this,new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                //if (search_edit_text.getText ().equals ( "" )) {
+                //if (search_edit_text.getText ().equals ( " " )) {
                     for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges ()) {
                         if (doc.getType () == DocumentChange.Type.ADDED) {
                             listUsers.clear ();
-                            SearchModel searchModel = doc.getDocument ().toObject ( SearchModel.class );
-                            if (!current_user.equals ( searchModel.getUtilisateur () )) {
+                            UserModel searchModel = doc.getDocument ().toObject ( UserModel.class );
+                            assert searchModel!=null;
+                            assert current_user!=null;
+                            if (!current_user.equals ( searchModel.getId_utilisateur () )) {
                                 listUsers.add ( searchModel );
                             }
                         }
-                        searchAdapter = new SearchAdapter ( listUsers, getApplicationContext () );
+                        searchAdapter = new UserAdapter ( listUsers,SearchActivity.this ,s);
                         search_recyclerview.setAdapter ( searchAdapter );
                     }
-                   /* if (search_edit_text.getText ().equals ( " " )) {
+                   /*if (search_edit_text.getText ().equals ( " " )) {
                         for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges ()) {
                             if (doc.getType () == DocumentChange.Type.ADDED) {
                                 listUsers.clear ();
-                                String idupost=doc.getDocument ().getId ();
-                                SearchModel searchModel = doc.getDocument ().toObject ( SearchModel.class ).withId ( idupost );;
-                                if (!current_user.equals ( searchModel.getUtilisateur () )) {
+                                UserModel searchModel = doc.getDocument ().toObject ( UserModel.class );
+                                if (!current_user.equals ( searchModel.getId_utilisateur () )) {
                                     listUsers.add ( searchModel );
                                 }
                             }
-                            searchAdapter = new SearchAdapter ( listUsers, getApplicationContext () );
+                            searchAdapter = new UserAdapter ( listUsers, SearchActivity.this ,s);
                             search_recyclerview.setAdapter ( searchAdapter );
                         }
                     }*/
@@ -134,8 +137,5 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 
 }

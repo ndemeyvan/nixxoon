@@ -203,6 +203,8 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         donnees_utilisateur.put ( "user_profil_image", downloadUri.toString () );
         donnees_utilisateur.put ( "id_utilisateur", current_user_id);
         donnees_utilisateur.put ( "status","online" );
+        donnees_utilisateur.put ( "search",user_name.toLowerCase () );
+        donnees_utilisateur.put ( "message","non_lu" );
 
         firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user_id ).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
             @Override

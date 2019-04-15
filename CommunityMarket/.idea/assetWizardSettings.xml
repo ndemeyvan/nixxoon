@@ -33,9 +33,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_user" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\houdini\Desktop\message_non_lu.png" />
+                                      <entry key="outputName" value="ic_message_non_lu" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="000000" />
+                                      <entry key="themeColor" value="fbffff" />
                                     </map>
                                   </option>
                                 </PersistentState>

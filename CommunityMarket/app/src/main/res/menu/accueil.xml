@@ -8,4 +8,11 @@
         android:icon="@drawable/ic_search"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/message"
+        android:orderInCategory="100"
+        android:title="profil"
+        android:icon="@drawable/ic_message_lu"
+        app:showAsAction="always"
+        />
 </menu>

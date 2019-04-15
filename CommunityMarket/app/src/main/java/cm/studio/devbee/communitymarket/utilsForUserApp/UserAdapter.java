@@ -50,12 +50,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private FirebaseAuth firebaseAuth;
     private String current_user;
     private boolean ischat;
+    String s;
 
 
     public UserAdapter(List<UserModel> userModelList, Context context,boolean ischat) {
         this.userModelList = userModelList;
         this.context = context;
         this.ischat=ischat;
+    }
+    public UserAdapter(List<UserModel> userModelList, Context context,String s) {
+        this.userModelList = userModelList;
+        this.context = context;
+        this.s=s;
     }
 
     @NonNull

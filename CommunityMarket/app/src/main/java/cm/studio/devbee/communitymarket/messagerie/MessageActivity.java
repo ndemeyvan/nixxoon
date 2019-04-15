@@ -229,6 +229,18 @@ public class MessageActivity extends AppCompatActivity {
                 .document (recepteur).collection ( "contacts" )
                 .document (expediteur)
                 .set ( contact );
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(user_id_message);
+        user.update("message", "non_lu")
+                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
 
     }
 

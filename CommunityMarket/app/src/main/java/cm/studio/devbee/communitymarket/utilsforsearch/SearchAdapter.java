@@ -26,26 +26,29 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewHolder> {
-    List<SearchModel> searchModelList;
+    List<UserModel> searchModelList;
     Context context;
     FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
      String nom_id;
+    String give;
 
-    public SearchAdapter(List<SearchModel> searchModelList, Context context) {
+    public SearchAdapter(List<UserModel> searchModelList, Context context,String give) {
         this.searchModelList = searchModelList;
         this.context = context;
+        this.give = give;
     }
 
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v =LayoutInflater.from ( viewGroup.getContext () ).inflate ( R.layout.item_seacrh_layout,viewGroup,false );
+        View v =LayoutInflater.from ( viewGroup.getContext () ).inflate ( R.layout.item_user_layout,viewGroup,false );
         firebaseFirestore=FirebaseFirestore.getInstance ();
         viewGroup.getContext ();
         firebaseAuth=FirebaseAuth.getInstance();
@@ -54,43 +57,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final viewHolder viewHolder, int i) {
-        String imagePorduit=searchModelList.get ( i ).getImage_du_produit ();
-        final String idDuPost=searchModelList.get ( i ).PostId;
-        String description=searchModelList.get ( i ).getDecription_du_produit ();
-        final String prix=searchModelList.get ( i ).getPrix_du_produit ();
-         nom_id=searchModelList.get ( i ).getUtilisateur ();
-
-
-        firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (idDuPost).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful ()) {
-                    if (task.getResult ().exists ()) {
-                        String user_name = task.getResult ().getString ( "utilisateur" );
-                        ////sockelerie a faire after
-                        String titreDuProduit = task.getResult ().getString ( "nom_du_produit" );
-                        String description = task.getResult ().getString ( "decription_du_produit" );
-                        String imageduproduit = task.getResult ().getString ( "image_du_produit" );
-                        String prixduproduit = task.getResult ().getString ( "prix_du_produit" );
-                        String datedepublication = task.getResult ().getString ( "date_de_publication" );
-                        //viewHolder.search_description.setText ( description );
-                        viewHolder.setprix ( prixduproduit );
-                        viewHolder.image_produit ( imageduproduit );
-                        viewHolder.stdesc ( description );
-                        viewHolder.searchdata (titreDuProduit);
-                        nom_id="user_name";
-                       // Picasso.with ( getApplicationContext () ).load ( imageduproduit ).into ( detail_image_post );
-                    }
-
-                }
-            }
-        });
-        firebaseFirestore.collection("mes donnees utilisateur").document(nom_id).get().addOnCompleteListener((Activity) context,new OnCompleteListener<DocumentSnapshot>() {
+        String user_name=searchModelList.get ( i ).getUser_prenom ();
+        String image=searchModelList.get ( i ).getUser_prenom ();
+        firebaseFirestore.collection("mes donnees utilisateur").document (give).get().addOnCompleteListener((Activity) context,new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
-
                         String name_user= task.getResult ().getString ( "user_name" );
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         viewHolder.userNameAndProfile ( image_user,name_user );

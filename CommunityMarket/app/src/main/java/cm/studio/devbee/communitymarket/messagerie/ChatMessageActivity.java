@@ -79,6 +79,18 @@ public class ChatMessageActivity extends AppCompatActivity {
             }
         });
         updateToken(FirebaseInstanceId.getInstance ().getToken () );
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
+        user.update("message", "lu")
+                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
 
     }
     public  void recuperation(){
