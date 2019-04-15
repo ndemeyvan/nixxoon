@@ -1,22 +1,27 @@
 package cm.studio.devbee.communitymarket.utilsforsearch;
 
-public class SearchModel {
+import cm.studio.devbee.communitymarket.utilsForNouveautes.PostId;
+
+public class SearchModel extends cm.studio.devbee.communitymarket.utilsForNouveautes.PostId {
     private String nom_du_produit;
     private String decription_du_produit;
     private String prix_du_produit;
     private String date_de_publication;
     private String utilisateur;
     private String image_du_produit;
+    private String categories;
 
     public SearchModel() {
     }
 
-    public SearchModel(String nom_du_produit, String decription_du_produit, String prix_du_produit, String date_de_publication) {
+    public SearchModel(String nom_du_produit, String decription_du_produit, String prix_du_produit, String date_de_publication, String utilisateur, String image_du_produit, String categories) {
         this.nom_du_produit = nom_du_produit;
         this.decription_du_produit = decription_du_produit;
         this.prix_du_produit = prix_du_produit;
         this.date_de_publication = date_de_publication;
-
+        this.utilisateur = utilisateur;
+        this.image_du_produit = image_du_produit;
+        this.categories = categories;
     }
 
     public String getNom_du_produit() {
@@ -65,5 +70,13 @@ public class SearchModel {
 
     public void setImage_du_produit(String image_du_produit) {
         this.image_du_produit = image_du_produit;
+    }
+
+    public String getCategories() {
+        return categories;
+    }
+
+    public void setCategories(String categories) {
+        this.categories = categories;
     }
 }

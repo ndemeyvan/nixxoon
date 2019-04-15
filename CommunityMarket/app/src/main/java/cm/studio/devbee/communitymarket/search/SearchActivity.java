@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,9 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,6 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
+import cm.studio.devbee.communitymarket.utilsForPostPrincipal.PrincipalModel;
 import cm.studio.devbee.communitymarket.utilsforsearch.SearchAdapter;
 import cm.studio.devbee.communitymarket.utilsforsearch.SearchModel;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -43,9 +50,11 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView search_recyclerview;
     private Context context;
     private FirebaseFirestore db;
-    LinearLayoutManager linearLayoutManager;
+    private static FirebaseAuth firebaseAuth;
+    private static String current_user;
+    private LinearLayoutManager linearLayoutManager;
     private List<SearchModel> listUsers;
-    SearchAdapter searchAdapter;
+    private SearchAdapter searchAdapter;
 
 
     @Override
@@ -57,14 +66,31 @@ public class SearchActivity extends AppCompatActivity {
         final String find=search_edit_text.getText ().toString ();
         search_recyclerview=findViewById ( R.id.search_recyclerview );
         listUsers = new ArrayList<>();
-        searchAdapter=new SearchAdapter (listUsers,getApplicationContext ());
         search_recyclerview.setAdapter (  searchAdapter);
         search_recyclerview.setLayoutManager ( new LinearLayoutManager ( getApplicationContext (),LinearLayoutManager.VERTICAL,false ) );
         db = FirebaseFirestore.getInstance();
-        search_buton.setOnClickListener ( new View.OnClickListener () {
+        /*search_buton.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                searchUsers (find);
+                search(find);
+
+            }
+        } );*/
+        firebaseAuth=FirebaseAuth.getInstance ();
+        current_user=firebaseAuth.getCurrentUser ().getUid ();
+        search_edit_text.addTextChangedListener ( new TextWatcher () {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                search(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         } );
@@ -72,26 +98,44 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    public void searchUsers(String s){
-        db.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).whereEqualTo("categories",s.toLowerCase())
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    private void search(final String s) {
+        Query firstQuery =db.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "decription_du_produit").startAt ( s ).endAt ( s+"\uf0ff" );
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                //if (search_edit_text.getText ().equals ( "" )) {
+                    for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges ()) {
+                        if (doc.getType () == DocumentChange.Type.ADDED) {
+                            listUsers.clear ();
+                            SearchModel searchModel = doc.getDocument ().toObject ( SearchModel.class );
+                            if (!current_user.equals ( searchModel.getUtilisateur () )) {
+                                listUsers.add ( searchModel );
+                            }
+                        }
+                        searchAdapter = new SearchAdapter ( listUsers, getApplicationContext () );
+                        search_recyclerview.setAdapter ( searchAdapter );
+                    }
+                   /* if (search_edit_text.getText ().equals ( " " )) {
+                        for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges ()) {
+                            if (doc.getType () == DocumentChange.Type.ADDED) {
+                                listUsers.clear ();
+                                String idupost=doc.getDocument ().getId ();
+                                SearchModel searchModel = doc.getDocument ().toObject ( SearchModel.class ).withId ( idupost );;
+                                if (!current_user.equals ( searchModel.getUtilisateur () )) {
+                                    listUsers.add ( searchModel );
+                                }
+                            }
+                            searchAdapter = new SearchAdapter ( listUsers, getApplicationContext () );
+                            search_recyclerview.setAdapter ( searchAdapter );
+                        }
+                    }*/
 
-                for (DocumentSnapshot doc:task.getResult()){
-                    listUsers.clear();
-                    SearchModel searchModel = new SearchModel(doc.getString("decription_du_produit"),doc.getString("categories"),doc.getString("date_de_publication"),doc.getString("nom_du_produit"));
-                    listUsers.add(searchModel);
-                }
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+              //  }
             }
         });
     }
+
+
 
 
 }
