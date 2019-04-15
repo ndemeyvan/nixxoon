@@ -206,9 +206,9 @@ public class Accueil extends AppCompatActivity
                         String message= task.getResult ().getString ( "message" );
 
                         if (message.equals ( "non_lu" )){
-                            menu.getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_lu));
+                            menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_lu));
                         }else {
-                            menu.getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
+                            menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
 
                         }
                     }
