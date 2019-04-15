@@ -21,6 +21,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -63,6 +68,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.facebook.appevents.codeless.internal.UnityReflection.sendMessage;
+
 public class MessageActivity extends AppCompatActivity {
     private static CircleImageView user_message_image;
     private static TextView user_name;
@@ -93,7 +100,8 @@ public class MessageActivity extends AppCompatActivity {
     private static  CircleImageView online_status;
     private static CircleImageView offline_status;
     private static APIService apiService;
-    boolean notify=false;
+   private static DatabaseReference reference;
+
 
 
 
@@ -131,16 +139,13 @@ public class MessageActivity extends AppCompatActivity {
         send_button.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                notify=true;
+                //notify=true;
                 String message =message_user_send.getText ().toString ();
                         if(!TextUtils.isEmpty ( message )){
-                            sendMessage (current_user,user_id_message,message);
-                            sendNotification();
-                            Toast.makeText ( getApplicationContext (),"message envoye",Toast.LENGTH_LONG ).show ();
-
+                            sendmessage (current_user,user_id_message,message);
+                            //sendNotification();
                         }else{
-                            Toast.makeText ( getApplicationContext (),"ecrire quelque chose svp",Toast.LENGTH_LONG ).show ();
-
+                            Toast.makeText ( getApplicationContext (),"vous ne pouvez pas envoyer un message vide",Toast.LENGTH_LONG ).show ();
                         }
                          message_user_send.setText ( "" );
             }
@@ -188,8 +193,18 @@ public class MessageActivity extends AppCompatActivity {
 
 
     }
+    public void sendmessage(String expediteur,String recepteur,String message){
+        DatabaseReference reference =FirebaseDatabase.getInstance ().getReference ();
+        final HashMap<String,Object> mesageMap = new HashMap<> (  );
+        mesageMap.put ( "expediteur",expediteur );
+        mesageMap.put ( "recepteur",recepteur );
+        mesageMap.put ( "message",message );
+        mesageMap.put ( "temps",time);
+        reference.child ( "Chats" ).push ().setValue ( mesageMap );
 
-    public void sendMessage(final String expediteur, final String recepteur , final String message){
+    }
+
+    /*public void sendMessage(final String expediteur, final String recepteur , final String message){
          time=System.currentTimeMillis ();
 
         final HashMap<String,Object> mesageMap = new HashMap<> (  );
@@ -253,7 +268,7 @@ public class MessageActivity extends AppCompatActivity {
         } );
         //statusUSer ();
 
-    }
+    }*/
 
     private void sendNotification() {
         Toast.makeText(this, "Current Recipients is : user1@gmail.com ( Just For Demo )", Toast.LENGTH_SHORT).show();
@@ -329,8 +344,30 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     public void readMessage(final String monId, final String sonID, final String imageYrl){
-        modelChatList.clear();
-        Query firstQuery =firebaseFirestore.collection ( "conversation" ).document ( current_user ).collection(user_id_message).orderBy ( "temps",Query.Direction.ASCENDING );
+       // modelChatList.clear();
+        modelChatList=new ArrayList<> (  );
+        reference=FirebaseDatabase.getInstance ().getReference ("Chats");
+        reference.addValueEventListener ( new ValueEventListener () {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                modelChatList.clear ();
+                for (DataSnapshot snapshot:dataSnapshot.getChildren ()){
+                    ModelChat chat = snapshot.getValue (ModelChat.class);
+                    if (chat.getRecepteur ().equals ( monId )&&chat.getExpediteur ().equals ( sonID)||chat.getRecepteur ().equals ( sonID )&&chat.getExpediteur ().equals ( monId )){
+                        modelChatList.add ( chat );
+                    }
+                    chatAdapter=new ChatAdapter (getApplicationContext (),modelChatList,imageYrl,true);
+                    message_recyclerview.setAdapter ( chatAdapter );
+                    chatAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        } );
+      /*  Query firstQuery =firebaseFirestore.collection ( "conversation" ).document ( current_user ).collection(user_id_message).orderBy ( "temps",Query.Direction.ASCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -347,7 +384,7 @@ public class MessageActivity extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });*/
     }
 
 

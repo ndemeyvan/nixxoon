@@ -26,6 +26,7 @@ import com.squareup.picasso.Transformation;
 import java.util.List;
 
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
 import cm.studio.devbee.communitymarket.postActivity.DetailActivityTwo;
 
 public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHolder> {
