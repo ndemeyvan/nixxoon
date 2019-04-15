@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,7 +75,7 @@ public class ChaussureFragment extends Fragment {
         categoriesModelchaussuresList=new ArrayList<> (  );
         categoriesAdaptechaussures=new GridViewAdapter (categoriesModelchaussuresList,getActivity());
         chaussuresRecyclerView.setAdapter ( categoriesAdaptechaussures );
-        chaussuresRecyclerView.setLayoutManager(new GridLayoutManager (getActivity(),2));
+        chaussuresRecyclerView.setLayoutManager(new LinearLayoutManager (getActivity(),LinearLayoutManager.VERTICAL,false));
         chaussuresRecyclerView=v.findViewById ( R.id.pubImag_tshire );
         chaussuresRecyclerView=v.findViewById ( R.id.pubImageText_tshirt );
         asyncTask=new AsyncTask ();

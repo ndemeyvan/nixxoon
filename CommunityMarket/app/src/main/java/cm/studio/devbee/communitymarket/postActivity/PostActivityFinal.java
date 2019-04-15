@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -72,7 +73,7 @@ public class PostActivityFinal extends AppCompatActivity {
     private static Bitmap compressedImageFile;
     private static AsyncTask asyncTask;
     private static WeakReference<PostActivityFinal> postActivityWeakReference;
-    private static ImageButton post_new_button;
+    private static FloatingActionButton post_new_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );

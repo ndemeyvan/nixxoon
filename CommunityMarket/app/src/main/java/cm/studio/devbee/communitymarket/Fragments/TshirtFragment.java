@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,7 +72,7 @@ public class TshirtFragment extends Fragment {
         categoriesModelTshirtList=new ArrayList<>(  );
         categoriesAdapteTshirt=new GridViewAdapter (categoriesModelTshirtList,getActivity());
         tshirtRecyclerView.setAdapter ( categoriesAdapteTshirt );
-        tshirtRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        tshirtRecyclerView.setLayoutManager(new LinearLayoutManager (getActivity(),LinearLayoutManager.VERTICAL,false));
         imagePubTshirt=v.findViewById ( R.id.pubImag_tshire );
         textPubTshirt=v.findViewById ( R.id.pubImageText_tshirt );
          asyncTask=new AsyncTask ();

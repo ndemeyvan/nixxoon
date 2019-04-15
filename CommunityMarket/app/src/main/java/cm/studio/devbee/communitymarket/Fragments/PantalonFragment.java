@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,7 +75,7 @@ public class PantalonFragment extends Fragment {
         categoriesModelpantalonsList=new ArrayList<> (  );
         categoriesAdaptepantalons=new GridViewAdapter ( categoriesModelpantalonsList,getActivity () );
         pantalonsRecyclerView.setAdapter ( categoriesAdaptepantalons );
-        pantalonsRecyclerView.setLayoutManager(new GridLayoutManager (getActivity(),2));
+        pantalonsRecyclerView.setLayoutManager(new LinearLayoutManager (getActivity(),LinearLayoutManager.VERTICAL,false));
         ////////pull
         firebaseAuth=FirebaseAuth.getInstance ();
         curent_user=firebaseAuth.getCurrentUser ().getUid ();

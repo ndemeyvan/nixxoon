@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +76,7 @@ public class CulloteFragment extends Fragment {
         categoriesModelculloteList=new ArrayList<> (  );
         categoriesAdaptecullote=new GridViewAdapter (categoriesModelculloteList,getActivity () );
         culloteRecyclerView.setAdapter ( categoriesAdaptecullote );
-        culloteRecyclerView.setLayoutManager(new GridLayoutManager (getActivity(),2));
+        culloteRecyclerView.setLayoutManager(new LinearLayoutManager (getActivity(),LinearLayoutManager.VERTICAL,false));
         ////////pull
         asyncTask=new AsyncTask ();
         asyncTask.execute();

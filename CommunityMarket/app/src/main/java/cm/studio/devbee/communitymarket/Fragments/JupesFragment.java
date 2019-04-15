@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,7 +77,7 @@ public class JupesFragment extends Fragment {
         categoriesModeljupeList=new ArrayList<> (  );
         categoriesAdaptejupe=new GridViewAdapter ( categoriesModeljupeList,getActivity () );
         jupeRecyclerView.setAdapter ( categoriesAdaptejupe );
-        jupeRecyclerView.setLayoutManager(new GridLayoutManager (getActivity(),2));
+        jupeRecyclerView.setLayoutManager(new LinearLayoutManager (getActivity(),LinearLayoutManager.VERTICAL,false));
         ////////pull
         jupeFragmentWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask ();

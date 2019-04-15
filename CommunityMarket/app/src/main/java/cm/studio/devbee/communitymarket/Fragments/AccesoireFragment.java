@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,7 +75,7 @@ public class AccesoireFragment extends Fragment {
         categoriesModelacessoireList=new ArrayList<> (  );
         categoriesAdapteacessoire=new GridViewAdapter (categoriesModelacessoireList,getActivity () );
         acessoireRecyclerView.setAdapter ( categoriesAdapteacessoire );
-        acessoireRecyclerView.setLayoutManager(new GridLayoutManager (getActivity(),2));
+        acessoireRecyclerView.setLayoutManager(new LinearLayoutManager (getActivity(),LinearLayoutManager.VERTICAL,false));
         ////////pull
         asyncTask=new AsyncTask ();
         asyncTask.execute();
