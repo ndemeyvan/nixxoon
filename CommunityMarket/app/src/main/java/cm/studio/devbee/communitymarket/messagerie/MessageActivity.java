@@ -201,6 +201,34 @@ public class MessageActivity extends AppCompatActivity {
         mesageMap.put ( "message",message );
         mesageMap.put ( "temps",time);
         reference.child ( "Chats" ).push ().setValue ( mesageMap );
+        ///////////////////////////////////////////
+        Calendar calendar=Calendar.getInstance ();
+        SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
+        saveCurrentDate=currentDate.format ( calendar.getTime () );
+        randomKey=saveCurrentDate;
+        contact =new DiplayAllChat (  );
+        modelChat= new ModelChat();
+        contact.setId_recepteur ( user_id_message );
+        contact.setId_expediteur ( current_user );
+        contact.setImage_profil (lien_profil_contact );
+        contact.setTemps ( randomKey );
+        contact.setNom_utilisateur (nom_utilisateur );
+        contact.setDernier_message ( message );
+        firebaseFirestore.collection ( "dernier_message" )
+                .document (expediteur).collection ( "contacts" )
+                .document (recepteur)
+                .set ( contact );
+        ///////////////////////////////////////////////////
+        contact.setId_recepteur ( user_id_message );
+        contact.setNom_utilisateur (nom_utilisateur );
+        contact.setImage_profil (lien_profil_contact );
+        contact.setId_expediteur ( current_user );
+        contact.setTemps (randomKey );
+        contact.setDernier_message ( message );
+        firebaseFirestore.collection ( "dernier_message" )
+                .document (recepteur).collection ( "contacts" )
+                .document (expediteur)
+                .set ( contact );
 
     }
 
@@ -367,24 +395,7 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         } );
-      /*  Query firstQuery =firebaseFirestore.collection ( "conversation" ).document ( current_user ).collection(user_id_message).orderBy ( "temps",Query.Direction.ASCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        ModelChat userModel =doc.getDocument().toObject(ModelChat.class);
-                        if (userModel.getRecepteur ().equals ( monId )&& userModel.getExpediteur ().equals ( sonID )||
-                                userModel.getRecepteur ().equals ( sonID )&&userModel.getExpediteur ().equals ( monId ) ){
-                                modelChatList.add(userModel);
-                        }
-                        chatAdapter=new ChatAdapter (getApplicationContext (),modelChatList,imageYrl,true);
-                        message_recyclerview.setAdapter ( chatAdapter );
-                        chatAdapter.notifyDataSetChanged();
-                    }
-                }
-            }
-        });*/
+
     }
 
 

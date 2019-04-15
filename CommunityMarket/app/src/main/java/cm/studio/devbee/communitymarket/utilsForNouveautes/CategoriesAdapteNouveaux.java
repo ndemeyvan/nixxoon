@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket.utilsForNouveautes;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -122,7 +123,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
             }
         } );
 
-        firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (idDuPost).collection ( "likes" ).document (current_user).addSnapshotListener ( new EventListener<DocumentSnapshot> () {
+        firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (idDuPost).collection ( "likes" ).document (current_user).addSnapshotListener ( (Activity) context,new EventListener<DocumentSnapshot> () {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 if (documentSnapshot.exists ()){
