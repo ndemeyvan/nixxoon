@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -75,7 +76,7 @@ public class MessageActivity extends AppCompatActivity {
     private static TextView user_name;
     private static String randomKey;
     private static Intent intent ;
-    private static String user_id_message;
+    public static String user_id_message;
     private static String user_categories_message;
     private static String id_du_post;
     private static String current_user;
@@ -101,9 +102,7 @@ public class MessageActivity extends AppCompatActivity {
     private static CircleImageView offline_status;
     private static APIService apiService;
    private static DatabaseReference reference;
-
-
-
+   private static ImageView image_en_fond;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +123,7 @@ public class MessageActivity extends AppCompatActivity {
         message_user_send=findViewById ( R.id.user_message_to_send );
         message_recyclerview=findViewById ( R.id.message_recyclerView );
         message_recyclerview.setHasFixedSize ( true );
+        image_en_fond=findViewById ( R.id.image_en_fond );
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager ( MessageActivity.this );
         linearLayoutManager.setStackFromEnd ( true );
         message_recyclerview.setLayoutManager ( linearLayoutManager );
@@ -232,6 +232,11 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed ();
+        startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+    }
     /*public void sendMessage(final String expediteur, final String recepteur , final String message){
          time=System.currentTimeMillis ();
 
@@ -398,9 +403,7 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
-
-
-    public void nomEtImageProfil(){
+public void nomEtImageProfil(){
         firebaseFirestore.collection("mes donnees utilisateur").document(user_id_message).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -423,6 +426,7 @@ public class MessageActivity extends AppCompatActivity {
                         }
                         readMessage ( current_user,user_id_message,lien_profil_contact );
                         user_name.setText(name_user+" "+prenom);
+                        Picasso.with(getApplicationContext()).load(image_user).into(image_en_fond);
                         Picasso.with(getApplicationContext()).load(image_user).into(user_message_image);
 
                     }

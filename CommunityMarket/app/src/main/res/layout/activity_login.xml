@@ -157,6 +157,7 @@
         android:fontFamily="@font/abril_fatface"
         android:text="X "
         android:textSize="30sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.974"
         app:layout_constraintStart_toStartOf="parent"

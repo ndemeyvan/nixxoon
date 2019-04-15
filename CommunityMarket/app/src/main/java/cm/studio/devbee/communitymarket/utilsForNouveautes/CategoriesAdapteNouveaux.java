@@ -94,7 +94,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
 
                 }
             });
-        firebaseFirestore.collection("mes donnees utilisateur").document(nom_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseFirestore.collection("mes donnees utilisateur").document(nom_id).get().addOnCompleteListener((Activity) context,new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
@@ -110,7 +110,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
                 }
             }
         });
-        firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (idDuPost).collection ( "likes" ).addSnapshotListener ( new EventListener<QuerySnapshot> () {
+        firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (idDuPost).collection ( "likes" ).addSnapshotListener ( (Activity) context,new EventListener<QuerySnapshot> () {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 if (!queryDocumentSnapshots.isEmpty ()){
@@ -139,7 +139,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
             @Override
             public void onClick(View v) {
 
-                firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (idDuPost).collection ( "likes" ).document (current_user).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (idDuPost).collection ( "likes" ).document (current_user).get ().addOnCompleteListener ( (Activity) context,new OnCompleteListener<DocumentSnapshot> () {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (!task.getResult ().exists ()){
@@ -154,7 +154,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
                     }
                 } );
 
-                firebaseFirestore.collection ( "publication" ).document ("categories").collection ( categorie ).document (idDuPost).collection ( "likes" ).document (current_user).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                firebaseFirestore.collection ( "publication" ).document ("categories").collection ( categorie ).document (idDuPost).collection ( "likes" ).document (current_user).get ().addOnCompleteListener ( (Activity) context,new OnCompleteListener<DocumentSnapshot> () {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (!task.getResult ().exists ()){
@@ -168,9 +168,6 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
                         }
                     }
                 } );
-
-
-
 
             }
         } );
@@ -211,13 +208,6 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
         }
         public void setNom(final String desc){
             description.setText(desc);
-            /*itemView.setOnClickListener ( new View.OnClickListener () {
-                @Override
-                public void onClick(View v) { Intent categoryIntent=new Intent ( itemView.getContext (),PostActivityFinal.class );
-                   categoryIntent.putExtra ( "categoryName",name );
-                   itemView.getContext ().startActivity ( categoryIntent );
-                }
-            } );*/
         }
         public void categorie(String categ){
             categorieChoice.setText(categ);
@@ -232,13 +222,6 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
             likeCount.setText(lelike+"");
         }
         public void imageproduitxi(String image){
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent gotoDetail =new Intent(itemView.getContext(),DetailActivity.class);
-                    itemView.getContext().startActivity(gotoDetail);
-                }
-            });*/
             Picasso.with(context).load(image).into (imageDuproduit );
         }
         public void setuserData(String name,String image){

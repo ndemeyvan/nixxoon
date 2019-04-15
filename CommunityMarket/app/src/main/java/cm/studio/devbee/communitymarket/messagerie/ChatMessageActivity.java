@@ -144,9 +144,6 @@ public class ChatMessageActivity extends AppCompatActivity {
         userstatus("offline");
     }
 
-
-
-
     public class ContactItem extends Item<ViewHolder> {
         private DiplayAllChat diplayAllChat;
 
@@ -168,7 +165,8 @@ public class ChatMessageActivity extends AppCompatActivity {
             temps.setText ( diplayAllChat.getTemps () );
             if ( diplayAllChat.getId_recepteur ().equals ( current_user )){
                 firebaseFirestore=FirebaseFirestore.getInstance ();
-                firebaseFirestore.collection("mes donnees utilisateur").document(diplayAllChat.getId_expediteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+                MessageActivity message = new MessageActivity ();
+                firebaseFirestore.collection("mes donnees utilisateur").document(message.user_id_message).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()){
@@ -178,16 +176,14 @@ public class ChatMessageActivity extends AppCompatActivity {
                                 image_profil =task.getResult ().getString ( "user_profil_image" );
                                 String statusUser= task.getResult ().getString ( "status" );
                                 Log.e ("key",statusUser);
-                                //nom_utilisateur.setText(name_user+" "+prenom);
                                 nom_utilisateur.setText(name_user+" "+prenom);
-
                                 Picasso.with(getApplicationContext()).load(image_profil).into(profil);
                                 if (statusUser.equals ( "online" )){
                                     online.setVisibility ( View.VISIBLE );
                                     offline.setVisibility ( View.INVISIBLE );
                                 }else {
                                     online.setVisibility ( View.INVISIBLE );
-                                    offline.setVisibility ( View.INVISIBLE );
+                                    offline.setVisibility ( View.VISIBLE );
                                 }
                             }
 
@@ -200,9 +196,6 @@ public class ChatMessageActivity extends AppCompatActivity {
             }else{
                 Picasso.with ( getApplicationContext () ).load (diplayAllChat.getImage_profil ()  ).into ( profil );
             }
-
-
-
             chat_card.setOnClickListener ( new View.OnClickListener () {
                 @Override
                 public void onClick(View v) {
@@ -220,7 +213,6 @@ public class ChatMessageActivity extends AppCompatActivity {
                 }
             } );
         }
-
         @Override
         public int getLayout() {
             return R.layout.item_contact_chat;
