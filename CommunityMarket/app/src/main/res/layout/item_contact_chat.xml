@@ -16,11 +16,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/chat_message_image_profil"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/boy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/online"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_marginBottom="4dp"
                 android:src="@mipmap/ic_launcher"
                 android:visibility="invisible"
                 app:civ_border_color="#05df29"
@@ -37,20 +52,6 @@
                 app:civ_border_width="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/chat_message_image_profil"
                 app:layout_constraintEnd_toEndOf="@+id/chat_message_image_profil" />
-
-
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/chat_message_image_profil"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/boy"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/chat_user_name"
