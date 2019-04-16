@@ -147,7 +147,7 @@ public class DetailActivityFour extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).document (iddupost).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( utilisateur_actuel ).document (iddupost).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()){

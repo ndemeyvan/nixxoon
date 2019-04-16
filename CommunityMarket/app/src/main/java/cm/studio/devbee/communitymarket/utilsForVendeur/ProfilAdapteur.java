@@ -30,6 +30,8 @@ import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
 import cm.studio.devbee.communitymarket.postActivity.DetailActivityFour;
 import cm.studio.devbee.communitymarket.postActivity.DetailActivityThree;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class ProfilAdapteur extends RecyclerView.Adapter<ProfilAdapteur.ViewHolder> {
     List<ModelGridView> modelGridViewList;
     Context context;
@@ -66,7 +68,7 @@ public class ProfilAdapteur extends RecyclerView.Adapter<ProfilAdapteur.ViewHold
         viewHolder.produit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotoDetail =new Intent(context,DetailActivityFour.class);
+                Intent gotoDetail =new Intent(context,DetailActivityFour.class).setFlags ( FLAG_ACTIVITY_NEW_TASK);
                 gotoDetail.putExtra("id du post",idDuPost);
                 gotoDetail.putExtra("id de l'utilisateur",nom_utilisateur);
                 gotoDetail.putExtra("id_categories",categorie);
