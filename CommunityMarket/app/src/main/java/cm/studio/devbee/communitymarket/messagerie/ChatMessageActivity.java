@@ -85,7 +85,6 @@ public class ChatMessageActivity extends AppCompatActivity {
             }
         });
         updateToken(FirebaseInstanceId.getInstance ().getToken () );
-
         DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
         user.update("message", "lu")
                 .addOnSuccessListener(new OnSuccessListener<Void> () {
@@ -102,7 +101,6 @@ public class ChatMessageActivity extends AppCompatActivity {
     }
 
     public  void recuperation(){
-
         Query firstQuery =firebaseFirestore.collection ( "dernier_message" )
                 .document (current_user).collection ( "contacts" ).orderBy ( "temps",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener( ChatMessageActivity.this,new EventListener<QuerySnapshot>() {
@@ -110,7 +108,6 @@ public class ChatMessageActivity extends AppCompatActivity {
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
-
                         DiplayAllChat model=doc.getDocument().toObject(DiplayAllChat.class);
                         groupAdapter.add(new ContactItem ( model ) );
                         groupAdapter.notifyDataSetChanged();
@@ -195,10 +192,10 @@ public class ChatMessageActivity extends AppCompatActivity {
             lats_message.setText ( diplayAllChat.getDernier_message () );
             nom_utilisateur.setText ( diplayAllChat.getNom_utilisateur () );
             temps.setText ( diplayAllChat.getTemps () );
-            if ( diplayAllChat.getId_recepteur ().equals ( current_user )){
+           if ( diplayAllChat.getId_recepteur ().equals ( current_user )){
                 firebaseFirestore=FirebaseFirestore.getInstance ();
                 MessageActivity message = new MessageActivity ();
-                firebaseFirestore.collection("mes donnees utilisateur").document(diplayAllChat.getId_expediteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+               firebaseFirestore.collection("mes donnees utilisateur").document(diplayAllChat.getId_expediteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()){

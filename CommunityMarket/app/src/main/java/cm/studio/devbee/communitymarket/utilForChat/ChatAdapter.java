@@ -14,7 +14,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.GeoPoint;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -67,6 +66,18 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         UserModel userModel=new UserModel (  );
         modelChat.setStatus ( userModel.getStatus () );
         String status=modelChatList.get ( i ).getStatus ();
+        /*if (ischat==true){
+            if (status.equals ( "online" )){
+                viewHolder.online_status.setVisibility ( View.VISIBLE );
+                viewHolder.offline_status.setVisibility ( View.INVISIBLE );
+            }else {
+                viewHolder.online_status.setVisibility ( View.INVISIBLE );
+                viewHolder.offline_status.setVisibility ( View.VISIBLE );
+            }
+        }else{
+            viewHolder.online_status.setVisibility ( View.INVISIBLE );
+            viewHolder.offline_status.setVisibility ( View.INVISIBLE );
+        }*/
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -94,15 +105,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 }
             }
         });
-        if (i==modelChatList.size ()-1){
-            if (modelChat.isItseen ()){
-                viewHolder.itseen.setText ( "seen" );
-            }else{
-                viewHolder.itseen.setText ( "send" );
-            }
-        }else {
-            viewHolder.itseen.setVisibility ( View.GONE );
-        }
 
     }
 
@@ -116,11 +118,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         CircleImageView image;
         CircleImageView online_status;
         CircleImageView offline_status;
-        TextView itseen;
 
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
-            itseen=itemView.findViewById ( R.id.text_seen );
             message=itemView.findViewById ( R.id.show_message );
             image=itemView.findViewById ( R.id.chat_imag_item );
             online_status=itemView.findViewById ( R.id.online_status_image );

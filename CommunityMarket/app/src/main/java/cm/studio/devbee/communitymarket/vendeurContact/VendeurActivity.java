@@ -75,7 +75,6 @@ public class VendeurActivity extends AppCompatActivity {
         vendeur_recyclerView=findViewById(R.id.vendeur_recyclerView);
         vendeur_recyclerView.setAdapter(gridViewAdapter);
         vendeur_recyclerView.setLayoutManager(new GridLayoutManager(VendeurActivity.this,2));
-       //        vendeur_recyclerView.setLayoutManager(new LinearLayoutManager (VendeurActivity.this,LinearLayoutManager.VERTICAL,false));
         vendeurActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
         asyncTask.execute();
