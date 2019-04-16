@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -43,7 +44,7 @@ public class VendeurActivity extends AppCompatActivity {
     private static TextView vendeur_residence;
     private static TextView vendeur_phone;
     private static TextView vendeur_email;
-    private static FloatingActionButton message_button_vendeur;
+    private static ImageButton message_button_vendeur;
     private static ProgressBar  vendeur_progressbar;
     private  static String iddupost;
     private static String current_user_id;
@@ -62,11 +63,10 @@ public class VendeurActivity extends AppCompatActivity {
         vendeur_toolbar=findViewById(R.id.message_button_vendeur );
         setSupportActionBar(vendeur_toolbar);
         vendeur_image=findViewById(R.id.vendeur_image);
-        vendeur_user_name=findViewById(R.id.vendeur_user_name);
         vendeur_residence=findViewById(R.id.vendeur_residence);
         vendeur_phone=findViewById(R.id.vendeur_phone);
         vendeur_email=findViewById(R.id.vendeur_email);
-        message_button_vendeur=findViewById(R.id.message_button_vendeur);
+        message_button_vendeur=findViewById(R.id.sendMessage);
         vendeur_progressbar=findViewById(R.id.vendeur_progressbar);
         iddupost =getIntent().getExtras().getString("id du post");
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");

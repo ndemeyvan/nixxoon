@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -65,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
     private static ProfilAdapteur gridViewAdapter;
     private static List<ModelGridView> modelGridViewList;
     private static RecyclerView Recycler;
-    private static FloatingActionButton param_profil_button;
+    private static ImageButton param_profil_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
         //////////////////
         progressBar=findViewById(R.id.progressBar);
         mAuth=FirebaseAuth.getInstance();
-        param_profil_button=findViewById ( R.id.param_profil_button );
-        nom=findViewById(R.id.profil_user_name);
+        param_profil_button=findViewById ( R.id.param_profil );
         telephone=findViewById(R.id.profil_user_phone);
         residence=findViewById(R.id.profil_user_residence);
         email=findViewById(R.id.profil_user_email);
@@ -96,16 +96,16 @@ public class ProfileActivity extends AppCompatActivity {
                 finish ();
             }
         });
-        gridViewAdapter=new ProfilAdapteur(modelGridViewList,getApplicationContext());
-        Recycler.setAdapter(gridViewAdapter);
-        Recycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         param_profil_button.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                Intent gotoprofilparamettre=new Intent ( getApplicationContext (),ParametrePorfilActivity.class );
-                startActivity ( gotoprofilparamettre );
+                Intent gotoparam=new Intent ( getApplicationContext (),ParametrePorfilActivity.class );
+                startActivity ( gotoparam );
             }
         } );
+        gridViewAdapter=new ProfilAdapteur(modelGridViewList,getApplicationContext());
+        Recycler.setAdapter(gridViewAdapter);
+        Recycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         asyncTask.execute();
 
     }
@@ -131,11 +131,10 @@ public class ProfileActivity extends AppCompatActivity {
                         String residence_user  =task.getResult ().getString ("user_residence");
                         String image_profil_user =task.getResult ().getString ("user_profil_image");
                         String email_user =task.getResult ().getString ("user_mail");
-                        nom.setText ( nom_user + " " + prenomuser);
                         telephone.setText ( telephone_user );
                         residence.setText ( residence_user );
                         email.setText ( email_user );
-                        getSupportActionBar().setTitle(prenomuser);
+                        getSupportActionBar().setTitle( nom_user + " " + prenomuser);
                         Picasso.with ( getApplicationContext() ).load ( image_profil_user ).transform(new CircleTransform()).placeholder(R.drawable.use).into ( profilImage );
                         progressBar.setVisibility(View.INVISIBLE);
                     }
