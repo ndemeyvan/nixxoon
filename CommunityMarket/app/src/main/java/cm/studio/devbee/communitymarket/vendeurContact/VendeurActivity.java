@@ -2,6 +2,7 @@ package cm.studio.devbee.communitymarket.vendeurContact;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -29,9 +30,9 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.messagerie.MessageActivity;
 import cm.studio.devbee.communitymarket.R;
-import cm.studio.devbee.communitymarket.gridView_post.GridViewAdapter;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
 import cm.studio.devbee.communitymarket.utilsForVendeur.VendeurAdapteur;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -42,7 +43,7 @@ public class VendeurActivity extends AppCompatActivity {
     private static TextView vendeur_residence;
     private static TextView vendeur_phone;
     private static TextView vendeur_email;
-    private static Button message_button_vendeur;
+    private static FloatingActionButton message_button_vendeur;
     private static ProgressBar  vendeur_progressbar;
     private  static String iddupost;
     private static String current_user_id;
@@ -58,7 +59,7 @@ public class VendeurActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendeur);
-        vendeur_toolbar=findViewById(R.id.toolbarVendeur);
+        vendeur_toolbar=findViewById(R.id.message_button_vendeur );
         setSupportActionBar(vendeur_toolbar);
         vendeur_image=findViewById(R.id.vendeur_image);
         vendeur_user_name=findViewById(R.id.vendeur_user_name);
@@ -71,6 +72,14 @@ public class VendeurActivity extends AppCompatActivity {
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
         firebaseFirestore=FirebaseFirestore.getInstance();
         modelGridViewList=new ArrayList<>();
+        getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
+        vendeur_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                finish ();
+            }
+        });
         gridViewAdapter=new VendeurAdapteur (modelGridViewList,VendeurActivity.this);
         vendeur_recyclerView=findViewById(R.id.vendeur_recyclerView);
         vendeur_recyclerView.setAdapter(gridViewAdapter);

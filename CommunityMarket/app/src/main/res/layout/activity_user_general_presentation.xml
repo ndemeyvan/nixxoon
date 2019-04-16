@@ -57,8 +57,8 @@
         android:id="@+id/general_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
-        app:titleTextColor="@color/blanc"></android.support.v7.widget.Toolbar>
+        android:background="@color/blanc"
+        app:titleTextColor="@color/black"></android.support.v7.widget.Toolbar>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/generalImageProfilUser"

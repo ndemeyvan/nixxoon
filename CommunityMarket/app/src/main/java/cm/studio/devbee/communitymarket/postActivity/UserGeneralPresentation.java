@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
 
+import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.messagerie.MessageActivity;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
@@ -57,6 +58,14 @@ public class UserGeneralPresentation extends AppCompatActivity {
         backgroundgeneral=findViewById(R.id.backgroundgeneral);
         residence=findViewById(R.id.general_residence);
         last_seen=findViewById(R.id.general_last_view);
+        getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
+        toolbargeneral.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity ( new Intent ( getApplicationContext (),DetailActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                finish ();
+            }
+        });
         button_message=findViewById(R.id.general_button_message);
         button_voir=findViewById(R.id.general_voir_ventes);
         user_name=findViewById(R.id.general_user_name);

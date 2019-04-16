@@ -8,6 +8,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -42,6 +43,7 @@ import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.gridView_post.GridViewAdapter;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
+import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
 import cm.studio.devbee.communitymarket.utilsForVendeur.ProfilAdapteur;
 import cm.studio.devbee.communitymarket.utilsForVendeur.VendeurAdapteur;
 import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
@@ -63,6 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
     private static ProfilAdapteur gridViewAdapter;
     private static List<ModelGridView> modelGridViewList;
     private static RecyclerView Recycler;
+    private static FloatingActionButton param_profil_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
         //////////////////
         progressBar=findViewById(R.id.progressBar);
         mAuth=FirebaseAuth.getInstance();
+        param_profil_button=findViewById ( R.id.param_profil_button );
         nom=findViewById(R.id.profil_user_name);
         telephone=findViewById(R.id.profil_user_phone);
         residence=findViewById(R.id.profil_user_residence);
@@ -84,9 +88,24 @@ public class ProfileActivity extends AppCompatActivity {
         profileActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
         modelGridViewList=new ArrayList<>();
+        getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
+        profil_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                finish ();
+            }
+        });
         gridViewAdapter=new ProfilAdapteur(modelGridViewList,getApplicationContext());
         Recycler.setAdapter(gridViewAdapter);
         Recycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        param_profil_button.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent gotoprofilparamettre=new Intent ( getApplicationContext (),ParametrePorfilActivity.class );
+                startActivity ( gotoprofilparamettre );
+            }
+        } );
         asyncTask.execute();
 
     }
