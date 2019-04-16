@@ -42,6 +42,7 @@ import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.gridView_post.GridViewAdapter;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
+import cm.studio.devbee.communitymarket.utilsForVendeur.VendeurAdapteur;
 import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -58,7 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
     private static android.support.v7.widget.Toolbar profil_toolbar;
     private WeakReference<ProfileActivity> profileActivityWeakReference;
     private static AsyncTask asyncTask;
-    private static GridViewAdapter gridViewAdapter;
+    private static VendeurAdapteur gridViewAdapter;
     private static List<ModelGridView> modelGridViewList;
     private static RecyclerView Recycler;
 
@@ -82,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
         modelGridViewList=new ArrayList<>();
-        gridViewAdapter=new GridViewAdapter(modelGridViewList,getApplicationContext());
+        gridViewAdapter=new VendeurAdapteur(modelGridViewList,getApplicationContext());
         Recycler.setAdapter(gridViewAdapter);
         Recycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         asyncTask.execute();

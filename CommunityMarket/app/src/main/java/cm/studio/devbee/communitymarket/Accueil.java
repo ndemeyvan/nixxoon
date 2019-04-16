@@ -217,6 +217,7 @@ public class Accueil extends AppCompatActivity
             mAuth.getInstance().signOut();
             Intent intenttwo = new Intent ( getApplicationContext(),ChoiceActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP );
             startActivity ( intenttwo );
+            finish ();
 
         }else if (id == R.id.setting) {
             Intent parametre=new Intent(getApplicationContext(),ParametrePorfilActivity.class);

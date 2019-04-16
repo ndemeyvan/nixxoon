@@ -1,4 +1,4 @@
-package cm.studio.devbee.communitymarket.gridView_post;
+package cm.studio.devbee.communitymarket.utilsForVendeur;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,15 +26,18 @@ import com.squareup.picasso.Transformation;
 import java.util.List;
 
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
+import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
 import cm.studio.devbee.communitymarket.postActivity.DetailActivityTwo;
+import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
 
-public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHolder> {
+public class VendeurAdapteur extends RecyclerView.Adapter<VendeurAdapteur.ViewHolder> {
     List<ModelGridView> modelGridViewList;
     Context context;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
 
-    public GridViewAdapter(List<ModelGridView> modelGridViewList, Context context) {
+    public VendeurAdapteur(List<ModelGridView> modelGridViewList, Context context) {
         this.modelGridViewList = modelGridViewList;
         this.context = context;
     }
@@ -44,34 +47,23 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         firebaseFirestore=FirebaseFirestore.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
-        View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_post_layout,viewGroup,false);
+        View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_post_layout_vendeur,viewGroup,false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
-    String produit_image =modelGridViewList.get(i).getImage_du_produit();
-    String nom=modelGridViewList.get(i).getNom_du_produit();
-    String prix_produit=modelGridViewList.get(i).getPrix_du_produit();
-    final String nom_utilisateur=modelGridViewList.get(i).getUtilisateur();
-    final String idDuPost=modelGridViewList.get ( i ).PostId;
-    final String categorie=modelGridViewList.get(i).getCategories();
-    viewHolder.setCatrogies_name(categorie);
-    viewHolder.prix_produit(prix_produit);
-    viewHolder.image_produit(produit_image);
-    viewHolder.nom_produit(nom);
-    viewHolder.setUser(nom_utilisateur);
-    viewHolder.produit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent gotoDetail =new Intent(context,DetailActivityTwo.class);
-                gotoDetail.putExtra("id_post",idDuPost);
-                gotoDetail.putExtra("id_utilisateur",nom_utilisateur);
-                gotoDetail.putExtra("id_categories",categorie);
-                context.startActivity(gotoDetail);
-
-            }
-        });
+        String produit_image =modelGridViewList.get(i).getImage_du_produit();
+        String nom=modelGridViewList.get(i).getNom_du_produit();
+        String prix_produit=modelGridViewList.get(i).getPrix_du_produit();
+        final String nom_utilisateur=modelGridViewList.get(i).getUtilisateur();
+        final String idDuPost=modelGridViewList.get ( i ).PostId;
+        final String categorie=modelGridViewList.get(i).getCategories();
+        viewHolder.setCatrogies_name(categorie);
+        viewHolder.prix_produit(prix_produit);
+        viewHolder.image_produit(produit_image);
+        viewHolder.nom_produit(nom);
+        viewHolder.setUser(nom_utilisateur);
         firebaseFirestore.collection("mes donnees utilisateur").document(nom_utilisateur).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -101,18 +93,18 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
         TextView catrogies_name;
         TextView nom_user;
 
-       public ViewHolder(@NonNull View itemView) {
-           super(itemView);
-           produit=itemView.findViewById(R.id.post_image_vendeur );
-           post_titre_produit_description=itemView.findViewById(R.id.post_titre_produit_description);
-           prix_post=itemView.findViewById(R.id.prix_postl_vendeur );
-           post_image_profil=itemView.findViewById ( R.id.profil_vendeur );
-           catrogies_name=itemView.findViewById(R.id.catrogies_name_vendeur );
-           nom_user=itemView.findViewById(R.id.nom_user);
-       }
-       public void image_produit(String image){
-           Picasso.with(context).load(image).into (produit );
-       }
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            produit=itemView.findViewById(R.id.post_image_vendeur );
+            post_titre_produit_description=itemView.findViewById(R.id.post_titre_produit_descriptionl_vendeur);
+            prix_post=itemView.findViewById(R.id.prix_postl_vendeur );
+            post_image_profil=itemView.findViewById ( R.id.profil_vendeur );
+            catrogies_name=itemView.findViewById(R.id.catrogies_name_vendeur );
+            nom_user=itemView.findViewById(R.id.nom_userl_vendeur);
+        }
+        public void image_produit(String image){
+            Picasso.with(context).load(image).into (produit );
+        }
         public void nom_produit(String nom){
             post_titre_produit_description.setText(nom);
         }
@@ -129,7 +121,7 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
             nom_user.setText(user);
         }
 
-   }
+    }
     public class CircleTransform implements Transformation {
         @Override
         public Bitmap transform(Bitmap source) {

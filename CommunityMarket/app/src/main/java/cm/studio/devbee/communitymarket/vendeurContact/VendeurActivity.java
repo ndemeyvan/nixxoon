@@ -33,6 +33,7 @@ import cm.studio.devbee.communitymarket.messagerie.MessageActivity;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.gridView_post.GridViewAdapter;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
+import cm.studio.devbee.communitymarket.utilsForVendeur.VendeurAdapteur;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class VendeurActivity extends AppCompatActivity {
@@ -48,7 +49,7 @@ public class VendeurActivity extends AppCompatActivity {
     private static FirebaseFirestore firebaseFirestore;
     private static Toolbar vendeur_toolbar;
     private static RecyclerView vendeur_recyclerView;
-    private static GridViewAdapter gridViewAdapter;
+    private static VendeurAdapteur gridViewAdapter;
     private static List<ModelGridView> modelGridViewList;
     private WeakReference<VendeurActivity> vendeurActivityWeakReference;
     private  AsyncTask asyncTask;
@@ -70,7 +71,7 @@ public class VendeurActivity extends AppCompatActivity {
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
         firebaseFirestore=FirebaseFirestore.getInstance();
         modelGridViewList=new ArrayList<>();
-        gridViewAdapter=new GridViewAdapter(modelGridViewList,VendeurActivity.this);
+        gridViewAdapter=new VendeurAdapteur(modelGridViewList,VendeurActivity.this);
         vendeur_recyclerView=findViewById(R.id.vendeur_recyclerView);
         vendeur_recyclerView.setAdapter(gridViewAdapter);
         vendeur_recyclerView.setLayoutManager(new GridLayoutManager(VendeurActivity.this,2));

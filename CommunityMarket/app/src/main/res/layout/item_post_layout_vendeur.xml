@@ -23,7 +23,7 @@
 
 
             <TextView
-                android:id="@+id/post_titre_produit_description"
+                android:id="@+id/post_titre_produit_descriptionl_vendeur"
                 android:layout_width="000dp"
                 android:layout_height="19dp"
                 android:layout_marginStart="8dp"
@@ -95,7 +95,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/nom_user"
+                android:id="@+id/nom_userl_vendeur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
