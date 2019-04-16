@@ -113,7 +113,7 @@ public class DetailActivityThree extends AppCompatActivity {
                                 if (task.isSuccessful ()){
                                     detail_progress.setVisibility ( View.VISIBLE );
                                     firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).delete ();
-                                    Toast.makeText ( getApplicationContext (),"supprimer des nouveautés",Toast.LENGTH_LONG ).show ();
+                                    Toast.makeText ( getApplicationContext (),"supprimer de votre mur",Toast.LENGTH_LONG ).show ();
                                     Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
                                     startActivity ( gtohome );
                                     finish ();
