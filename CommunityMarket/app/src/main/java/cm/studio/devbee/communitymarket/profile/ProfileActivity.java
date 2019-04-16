@@ -2,6 +2,7 @@ package cm.studio.devbee.communitymarket.profile;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -37,6 +38,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.gridView_post.GridViewAdapter;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
@@ -87,6 +89,14 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed ();
+        Intent gotoHome =new Intent ( ProfileActivity.this,Accueil.class );
+        startActivity ( gotoHome );
+        finish ();
+    }
+
     public void recupererDonne(){
         current_user_id=mAuth.getCurrentUser ().getUid ();
         firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot>() {
@@ -117,7 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void recyclerprofil(){
 
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firstQuery.addSnapshotListener(ProfileActivity.this,new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){

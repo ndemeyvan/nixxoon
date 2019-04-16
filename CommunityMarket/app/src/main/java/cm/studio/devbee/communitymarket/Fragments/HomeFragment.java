@@ -296,7 +296,7 @@ public class HomeFragment extends Fragment {
     }
 
  public void nouveautes(){
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "dete-en-seconde",Query.Direction.DESCENDING );
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).orderBy ( "dete-en-seconde",Query.Direction.ASCENDING );
                // .limit(3);
         firstQuery.addSnapshotListener(getActivity(),new EventListener<QuerySnapshot>() {
             @Override

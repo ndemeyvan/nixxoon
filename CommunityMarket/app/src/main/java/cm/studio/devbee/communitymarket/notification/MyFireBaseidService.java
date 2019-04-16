@@ -1,6 +1,8 @@
 package cm.studio.devbee.communitymarket.notification;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -27,8 +29,8 @@ public class MyFireBaseidService extends FirebaseInstanceIdService {
         firebaseAuth=FirebaseAuth.getInstance ();
         current_user=firebaseAuth.getCurrentUser ().getUid ();
         firebaseFirestore=FirebaseFirestore.getInstance ();
-        DocumentReference reference=firebaseFirestore.collection ( "Tokens" ).document (current_user);
+        DatabaseReference reference=FirebaseDatabase.getInstance ().getReference ().child ( "Tokens" );
         Token token=new Token ( refreshToken );
-        reference.set ( token );
+        reference.child (current_user).setValue ( token );
     }
 }

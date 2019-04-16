@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -83,6 +85,7 @@ public class ChatMessageActivity extends AppCompatActivity {
             }
         });
         updateToken(FirebaseInstanceId.getInstance ().getToken () );
+
         DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
         user.update("message", "lu")
                 .addOnSuccessListener(new OnSuccessListener<Void> () {
@@ -97,6 +100,7 @@ public class ChatMessageActivity extends AppCompatActivity {
                 });
 
     }
+
     public  void recuperation(){
 
         Query firstQuery =firebaseFirestore.collection ( "dernier_message" )
@@ -115,36 +119,14 @@ public class ChatMessageActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-        /*firebaseFirestore.collection ( "dernier_message" )
-                .document (current_user).collection ( "contacts" )
-                .addSnapshotListener ( new EventListener<QuerySnapshot> () {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        List<DocumentChange> documentChanges = queryDocumentSnapshots.getDocumentChanges();
-                        if (documentChanges!=null){
-                            for (DocumentChange doc:documentChanges){
-                                if (doc.getType()==DocumentChange.Type.ADDED){
-                                    DiplayAllChat model=doc.getDocument ().toObject ( DiplayAllChat.class );
-                                    groupAdapter.add ( new ContactItem ( model ) );
-                                    groupAdapter.notifyDataSetChanged ();
-                                }
-                            }
-                        }
-                    }
-                } );*/
-
     }
     public void updateToken(String token){
         firebaseAuth=FirebaseAuth.getInstance ();
         current_user=firebaseAuth.getCurrentUser ().getUid ();
         firebaseFirestore=FirebaseFirestore.getInstance ();
-        DocumentReference reference=firebaseFirestore.collection ( "Tokens" ).document (current_user);
+        DatabaseReference reference=FirebaseDatabase.getInstance ().getReference ("Tokens");
         Token token1=new Token ( token );
-        reference.set ( token1 );
+        reference.child ( current_user ).setValue ( token1 );
     }
 
     public void userstatus(String status){
@@ -156,6 +138,19 @@ public class ChatMessageActivity extends AppCompatActivity {
                     }
                 })
                 .addOnFailureListener(new OnFailureListener () {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+
+        DocumentReference link = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
+        link.update("message", "lu")
+                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                     }

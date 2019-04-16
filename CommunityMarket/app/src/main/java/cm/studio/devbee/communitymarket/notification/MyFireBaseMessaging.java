@@ -24,11 +24,10 @@ public class MyFireBaseMessaging extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived ( remoteMessage );
+
         String sented=remoteMessage.getData ().get ( "sented" );
         firebaseAuth=FirebaseAuth.getInstance ();
         current_user=firebaseAuth.getCurrentUser ().getUid ();
-        firebaseFirestore=FirebaseFirestore.getInstance ();
-        DocumentReference reference=firebaseFirestore.collection ( "Tokens" ).document (current_user);
         if (current_user!=null && sented.equals ( current_user )){
             sendNotification(remoteMessage);
         }

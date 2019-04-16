@@ -15,16 +15,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/t_shirt" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="240dp"
-        app:layout_constraintBottom_toBottomOf="@+id/detail_image_post"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/detail_image_post"
-        app:layout_constraintTop_toTopOf="@+id/detail_image_post"
-        app:srcCompat="@drawable/background_detail" />
-
     <TextView
         android:id="@+id/detail_titre_produit"
         android:layout_width="310dp"

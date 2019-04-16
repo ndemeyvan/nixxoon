@@ -53,6 +53,7 @@ import java.util.Scanner;
 
 import javax.annotation.Nullable;
 
+import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.Fragments.APIService;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.notification.Client;
@@ -105,6 +106,7 @@ public class MessageActivity extends AppCompatActivity {
    private static DatabaseReference reference;
    private static ImageView image_en_fond;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
@@ -152,10 +154,6 @@ public class MessageActivity extends AppCompatActivity {
             }
         } );
         apiService=Client.getClient ( "https://fcm.googleapis.com/" ).create ( APIService.class );
-        OneSignal.startInit(MessageActivity.this).inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init();
-        OneSignal.sendTag("user_id",current_user);
 
     }
 
@@ -248,6 +246,9 @@ public class MessageActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
+
+        final String msg =message;
+        firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user );
 
     }
 
