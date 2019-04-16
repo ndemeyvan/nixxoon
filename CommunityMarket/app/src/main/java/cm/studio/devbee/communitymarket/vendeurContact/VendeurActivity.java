@@ -83,6 +83,8 @@ public class VendeurActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent gotochat= new Intent(getApplicationContext(),MessageActivity.class);
+                gotochat.putExtra("id de l'utilisateur",current_user_id);
+                startActivity ( gotochat );
 
             }
         });
