@@ -42,6 +42,7 @@ import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.gridView_post.GridViewAdapter;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
+import cm.studio.devbee.communitymarket.utilsForVendeur.ProfilAdapteur;
 import cm.studio.devbee.communitymarket.utilsForVendeur.VendeurAdapteur;
 import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
 
@@ -59,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
     private static android.support.v7.widget.Toolbar profil_toolbar;
     private WeakReference<ProfileActivity> profileActivityWeakReference;
     private static AsyncTask asyncTask;
-    private static VendeurAdapteur gridViewAdapter;
+    private static ProfilAdapteur gridViewAdapter;
     private static List<ModelGridView> modelGridViewList;
     private static RecyclerView Recycler;
 
@@ -83,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
         modelGridViewList=new ArrayList<>();
-        gridViewAdapter=new VendeurAdapteur(modelGridViewList,getApplicationContext());
+        gridViewAdapter=new ProfilAdapteur(modelGridViewList,getApplicationContext());
         Recycler.setAdapter(gridViewAdapter);
         Recycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         asyncTask.execute();
@@ -133,7 +134,8 @@ public class ProfileActivity extends AppCompatActivity {
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
-                        ModelGridView modelGridView =doc.getDocument().toObject(ModelGridView.class);
+                        String idupost=doc.getDocument ().getId ();
+                        ModelGridView modelGridView =doc.getDocument().toObject(ModelGridView.class).withId ( idupost );
                         modelGridViewList.add(modelGridView);
                         gridViewAdapter.notifyDataSetChanged();
 

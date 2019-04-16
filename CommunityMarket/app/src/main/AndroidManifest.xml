@@ -40,7 +40,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChoiceActivity"/>
+        <activity android:name=".ChoiceActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".login.RegisterActivity" />
         <activity
@@ -57,34 +57,45 @@
         <activity android:name=".a_propos.AproposActivity" />
         <activity android:name=".postActivity.DetailActivity" />
         <activity android:name=".vendeurContact.VendeurActivity" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <activity android:name=".postActivity.DetailActivityTwo" />
         <activity android:name=".postActivity.UserGeneralPresentation" />
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".messagerie.MessageActivity" />
         <activity android:name=".messagerie.ChatMessageActivity" />
-        <activity android:name=".SplashActivity" android:theme="@style/slash">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/slash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".notification.MyFireBaseidService"
+
+        <service
+            android:name=".notification.MyFireBaseidService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".notification.MyFireBaseMessaging"
+        <service
+            android:name=".notification.MyFireBaseMessaging"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".postActivity.DetailActivityThree" />
+        <activity android:name=".postActivity.DetailActivityFour"></activity>
     </application>
 
 </manifest>

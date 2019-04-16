@@ -27,18 +27,16 @@ import java.util.List;
 
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
-import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
+import cm.studio.devbee.communitymarket.postActivity.DetailActivityFour;
 import cm.studio.devbee.communitymarket.postActivity.DetailActivityThree;
-import cm.studio.devbee.communitymarket.postActivity.DetailActivityTwo;
-import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
 
-public class VendeurAdapteur extends RecyclerView.Adapter<VendeurAdapteur.ViewHolder> {
+public class ProfilAdapteur extends RecyclerView.Adapter<ProfilAdapteur.ViewHolder> {
     List<ModelGridView> modelGridViewList;
     Context context;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
 
-    public VendeurAdapteur(List<ModelGridView> modelGridViewList, Context context) {
+    public ProfilAdapteur(List<ModelGridView> modelGridViewList, Context context) {
         this.modelGridViewList = modelGridViewList;
         this.context = context;
     }
@@ -68,7 +66,7 @@ public class VendeurAdapteur extends RecyclerView.Adapter<VendeurAdapteur.ViewHo
         viewHolder.produit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotoDetail =new Intent(context,DetailActivityThree.class);
+                Intent gotoDetail =new Intent(context,DetailActivityFour.class);
                 gotoDetail.putExtra("id du post",idDuPost);
                 gotoDetail.putExtra("id de l'utilisateur",nom_utilisateur);
                 gotoDetail.putExtra("id_categories",categorie);

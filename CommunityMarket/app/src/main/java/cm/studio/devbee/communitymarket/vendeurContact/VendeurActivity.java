@@ -71,7 +71,7 @@ public class VendeurActivity extends AppCompatActivity {
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
         firebaseFirestore=FirebaseFirestore.getInstance();
         modelGridViewList=new ArrayList<>();
-        gridViewAdapter=new VendeurAdapteur(modelGridViewList,VendeurActivity.this);
+        gridViewAdapter=new VendeurAdapteur (modelGridViewList,VendeurActivity.this);
         vendeur_recyclerView=findViewById(R.id.vendeur_recyclerView);
         vendeur_recyclerView.setAdapter(gridViewAdapter);
         vendeur_recyclerView.setLayoutManager(new GridLayoutManager(VendeurActivity.this,2));
@@ -116,13 +116,14 @@ public class VendeurActivity extends AppCompatActivity {
     }
     public void vendeur_produit(){
 
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).orderBy ( "prix_du_produit",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
-                        ModelGridView modelGridView =doc.getDocument().toObject(ModelGridView.class);
+                        String idupost=doc.getDocument ().getId ();
+                        ModelGridView modelGridView =doc.getDocument().toObject(ModelGridView.class).withId ( idupost );
                         modelGridViewList.add(modelGridView);
                         gridViewAdapter.notifyDataSetChanged();
                     }
