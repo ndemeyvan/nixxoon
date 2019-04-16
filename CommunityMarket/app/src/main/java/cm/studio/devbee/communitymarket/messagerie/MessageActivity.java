@@ -3,6 +3,7 @@ package cm.studio.devbee.communitymarket.messagerie;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -187,19 +188,22 @@ public class MessageActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        userstatus("offline");
+        userstatus("online");
         super.onDestroy ();
-        userstatus("offline");
+        userstatus("online");
 
 
     }
     public void sendmessage(String expediteur,String recepteur,String message){
         DatabaseReference reference =FirebaseDatabase.getInstance ().getReference ();
+        long milli;
+        milli=SystemClock.currentThreadTimeMillis ();
         final HashMap<String,Object> mesageMap = new HashMap<> (  );
         mesageMap.put ( "expediteur",expediteur );
         mesageMap.put ( "recepteur",recepteur );
         mesageMap.put ( "message",message );
         mesageMap.put ( "temps",time);
+        mesageMap.put ( "milli",milli);
         reference.child ( "Chats" ).push ().setValue ( mesageMap );
         ///////////////////////////////////////////
         Calendar calendar=Calendar.getInstance ();
@@ -212,6 +216,7 @@ public class MessageActivity extends AppCompatActivity {
         contact.setId_expediteur ( current_user );
         contact.setImage_profil (lien_profil_contact );
         contact.setTemps ( randomKey );
+        contact.setTempsMilli ( String.valueOf ( milli ) );
         contact.setNom_utilisateur (nom_utilisateur );
         contact.setDernier_message ( message );
         firebaseFirestore.collection ( "dernier_message" )
@@ -224,6 +229,7 @@ public class MessageActivity extends AppCompatActivity {
         contact.setImage_profil (lien_profil_contact );
         contact.setId_expediteur ( current_user );
         contact.setTemps (randomKey );
+        contact.setTempsMilli ( String.valueOf ( milli ) );
         contact.setDernier_message ( message );
         firebaseFirestore.collection ( "dernier_message" )
                 .document (recepteur).collection ( "contacts" )

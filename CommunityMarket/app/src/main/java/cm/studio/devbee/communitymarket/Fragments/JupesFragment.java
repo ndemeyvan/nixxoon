@@ -88,7 +88,7 @@ public class JupesFragment extends Fragment {
     public void userstatus(String status){
         DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(curent_user);
         user.update("status", status)
-                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                .addOnSuccessListener(getActivity (),new OnSuccessListener<Void> () {
                     @Override
                     public void onSuccess(Void aVoid) {
                     }
@@ -114,7 +114,7 @@ public class JupesFragment extends Fragment {
     public void jupeRecyclerView(){
 
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "jupes" ).orderBy ( "dete-en-seconde",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot> () {
+        firstQuery.addSnapshotListener(getActivity (),new EventListener<QuerySnapshot> () {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
@@ -132,7 +132,7 @@ public class JupesFragment extends Fragment {
     }
     public  void imagePub_jupe(){
         DocumentReference user = firebaseFirestore.collection("publicit").document("imageFixe");
-        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+        user.get().addOnCompleteListener(getActivity (),new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
@@ -145,7 +145,7 @@ public class JupesFragment extends Fragment {
 
                 }
             }
-        }).addOnFailureListener(new OnFailureListener () {
+        }).addOnFailureListener(getActivity (),new OnFailureListener () {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getActivity(),"erreur lors du chargement du slider",Toast.LENGTH_LONG).show();

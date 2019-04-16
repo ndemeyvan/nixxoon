@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket.messagerie;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
@@ -40,6 +42,7 @@ import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.notification.Token;
 import cm.studio.devbee.communitymarket.utilForChat.DiplayAllChat;
 import cm.studio.devbee.communitymarket.utilForChat.ModelChat;
+import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -76,6 +79,7 @@ public class ChatMessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                finish ();
             }
         });
         updateToken(FirebaseInstanceId.getInstance ().getToken () );
@@ -94,7 +98,28 @@ public class ChatMessageActivity extends AppCompatActivity {
 
     }
     public  void recuperation(){
-        firebaseFirestore.collection ( "dernier_message" )
+
+        Query firstQuery =firebaseFirestore.collection ( "dernier_message" )
+                .document (current_user).collection ( "contacts" ).orderBy ( "temps",Query.Direction.DESCENDING );
+        firstQuery.addSnapshotListener( ChatMessageActivity.this,new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                    if (doc.getType()==DocumentChange.Type.ADDED){
+
+                        DiplayAllChat model=doc.getDocument().toObject(DiplayAllChat.class);
+                        groupAdapter.add(new ContactItem ( model ) );
+                        groupAdapter.notifyDataSetChanged();
+                    }
+                }
+
+            }
+        });
+
+
+
+
+        /*firebaseFirestore.collection ( "dernier_message" )
                 .document (current_user).collection ( "contacts" )
                 .addSnapshotListener ( new EventListener<QuerySnapshot> () {
                     @Override
@@ -110,7 +135,7 @@ public class ChatMessageActivity extends AppCompatActivity {
                             }
                         }
                     }
-                } );
+                } );*/
 
     }
     public void updateToken(String token){
@@ -153,7 +178,7 @@ public class ChatMessageActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy ();
-        userstatus("offline");
+        userstatus("online");
     }
 
     public class ContactItem extends Item<ViewHolder> {
@@ -178,7 +203,7 @@ public class ChatMessageActivity extends AppCompatActivity {
             if ( diplayAllChat.getId_recepteur ().equals ( current_user )){
                 firebaseFirestore=FirebaseFirestore.getInstance ();
                 MessageActivity message = new MessageActivity ();
-                firebaseFirestore.collection("mes donnees utilisateur").document(message.user_id_message).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+                firebaseFirestore.collection("mes donnees utilisateur").document(diplayAllChat.getId_expediteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()){

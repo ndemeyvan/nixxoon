@@ -97,6 +97,7 @@ public class Accueil extends AppCompatActivity
         setupViewPager(tabsviewpager);
         tabLayout.setupWithViewPager(tabsviewpager);
         mAuth=FirebaseAuth.getInstance ();
+        current_user_id=mAuth.getCurrentUser ().getUid ();
         firebaseFirestore=FirebaseFirestore.getInstance ();
         accueilWeakReference=new WeakReference<>(this);
         acceuille_image=navigationView.getHeaderView(0).findViewById(R.id.acceuille_image);
@@ -107,6 +108,20 @@ public class Accueil extends AppCompatActivity
         drawer.addDrawerListener ( toggle );
         toggle.syncState ();
         navigationView.setNavigationItemSelectedListener ( this );
+        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful ()){
+                    String message= task.getResult ().getString ( "message" );
+
+                    if (message.equals ( "non_lu" )){
+                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
+                    }else{
+                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
+                    }
+                }
+            }
+        } );
         asyncTask=new AsyncTask();
         asyncTask.execute();
 
@@ -128,7 +143,7 @@ public class Accueil extends AppCompatActivity
 
     }
     public void recup(){
-        current_user_id=mAuth.getCurrentUser ().getUid ();
+
         firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -144,23 +159,6 @@ public class Accueil extends AppCompatActivity
                 }else{
 
 
-                }
-            }
-        } );
-    }
-    public void checkRead(){
-        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful ()){
-                    String message= task.getResult ().getString ( "message" );
-
-                    if (message.equals ( "non_lu" )){
-                        menu.getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
-                    }else {
-                        menu.getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
-
-                    }
                 }
             }
         } );
@@ -199,20 +197,6 @@ public class Accueil extends AppCompatActivity
             return true;
         }else if (id == R.id.message) {
             Intent gogotoSearch = new Intent(getApplicationContext(),ChatMessageActivity.class);
-            firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful ()){
-                        String message= task.getResult ().getString ( "message" );
-
-                        if (message.equals ( "non_lu" )){
-                            menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
-                        }else if (message.equals ( "lu" )){
-                            menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
-                        }
-                    }
-                }
-            } );
             startActivity(gogotoSearch);
             return true;
         }
@@ -361,13 +345,12 @@ public class Accueil extends AppCompatActivity
         asyncTask.cancel(true);
         mAuth=null;
         firebaseFirestore=null;
-        current_user_id=null;
        acceuille_image=null;
        drawer_user_name=null;
        content_floating_action_btn=null;
       tabLayout=null;
-        tabsviewpager=null;
-         accueilWeakReference=null;
+      tabsviewpager=null;
+      accueilWeakReference=null;
     }
 }
 

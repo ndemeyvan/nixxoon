@@ -114,7 +114,7 @@ public class RobeFragment extends Fragment {
     public void RecyclerView(){
 
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "robe" ).orderBy ( "dete-en-seconde",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot> () {
+        firstQuery.addSnapshotListener(getActivity (),new EventListener<QuerySnapshot> () {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
@@ -132,7 +132,7 @@ public class RobeFragment extends Fragment {
 
     public  void imagePub(){
         DocumentReference user = firebaseFirestore.collection("publicit").document("imageFixe");
-        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+        user.get().addOnCompleteListener(getActivity (),new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){

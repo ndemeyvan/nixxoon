@@ -7,6 +7,7 @@ public class DiplayAllChat {
     String dernier_message;
     String image_profil;
     String nom_utilisateur;
+    String tempsMilli;
 
 
 
@@ -14,14 +15,14 @@ public class DiplayAllChat {
     public DiplayAllChat() {
     }
 
-    public DiplayAllChat(String temps, String id_expediteur, String id_recepteur, String dernier_message, String image_profil, String nom_utilisateur, String status) {
+    public DiplayAllChat(String temps, String id_expediteur, String id_recepteur, String dernier_message, String image_profil, String nom_utilisateur, String tempsMilli) {
         this.temps = temps;
         this.id_expediteur = id_expediteur;
         this.id_recepteur = id_recepteur;
         this.dernier_message = dernier_message;
         this.image_profil = image_profil;
         this.nom_utilisateur = nom_utilisateur;
-
+        this.tempsMilli = tempsMilli;
     }
 
     public String getTemps() {
@@ -72,5 +73,11 @@ public class DiplayAllChat {
         this.nom_utilisateur = nom_utilisateur;
     }
 
+    public String getTempsMilli() {
+        return tempsMilli;
+    }
 
+    public void setTempsMilli(String tempsMilli) {
+        this.tempsMilli = tempsMilli;
+    }
 }

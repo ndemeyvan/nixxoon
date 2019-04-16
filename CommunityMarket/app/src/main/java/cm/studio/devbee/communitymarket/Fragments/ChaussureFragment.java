@@ -115,7 +115,7 @@ public class ChaussureFragment extends Fragment {
     public void chaussureRecyclerView(){
 
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Chaussures" ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot> () {
+        firstQuery.addSnapshotListener(getActivity (),new EventListener<QuerySnapshot> () {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
@@ -133,7 +133,7 @@ public class ChaussureFragment extends Fragment {
     }
     public void imagePub_chaussure(){
         DocumentReference user = firebaseFirestore.collection("publicit").document("imageFixe");
-        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+        user.get().addOnCompleteListener(getActivity (),new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
