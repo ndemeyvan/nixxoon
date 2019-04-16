@@ -67,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
     private static List<ModelGridView> modelGridViewList;
     private static RecyclerView Recycler;
     private static ImageButton param_profil_button;
+    ImageView profilbacck_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
         firebaseFirestore=FirebaseFirestore.getInstance ();
         profilImage=findViewById(R.id.circleImageView_profil);
         progressBar.setVisibility(View.VISIBLE);
+        profilbacck_image=findViewById ( R.id.profilbacck_image );
         profileActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
         modelGridViewList=new ArrayList<>();
@@ -135,6 +137,7 @@ public class ProfileActivity extends AppCompatActivity {
                         residence.setText ( residence_user );
                         email.setText ( email_user );
                         getSupportActionBar().setTitle( nom_user + " " + prenomuser);
+                        Picasso.with ( getApplicationContext() ).load ( image_profil_user ).into ( profilbacck_image );
                         Picasso.with ( getApplicationContext() ).load ( image_profil_user ).transform(new CircleTransform()).placeholder(R.drawable.use).into ( profilImage );
                         progressBar.setVisibility(View.INVISIBLE);
                     }

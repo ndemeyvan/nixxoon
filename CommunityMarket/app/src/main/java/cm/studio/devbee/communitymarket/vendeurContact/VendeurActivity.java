@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -55,6 +56,7 @@ public class VendeurActivity extends AppCompatActivity {
     private static List<ModelGridView> modelGridViewList;
     private WeakReference<VendeurActivity> vendeurActivityWeakReference;
     private  AsyncTask asyncTask;
+    ImageView profilbacck_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class VendeurActivity extends AppCompatActivity {
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
         firebaseFirestore=FirebaseFirestore.getInstance();
         modelGridViewList=new ArrayList<>();
+        profilbacck_image=findViewById ( R.id.profilbacck_image );
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         vendeur_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +116,7 @@ public class VendeurActivity extends AppCompatActivity {
                         vendeur_email.setText(email_user);
                         vendeur_phone.setText(telephone_user);
                         vendeur_residence.setText(residence_user);
-                        vendeur_user_name.setText(name_user+" "+prenom);
+                        Picasso.with(VendeurActivity.this).load(image_user).placeholder(R.drawable.use).into(profilbacck_image);
                         Picasso.with(VendeurActivity.this).load(image_user).placeholder(R.drawable.use).into(vendeur_image);
                         getSupportActionBar().setTitle(name_user+" "+prenom);
                     }
