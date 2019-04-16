@@ -250,71 +250,6 @@ public class MessageActivity extends AppCompatActivity {
         super.onBackPressed ();
         startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
     }
-    /*public void sendMessage(final String expediteur, final String recepteur , final String message){
-         time=System.currentTimeMillis ();
-
-        final HashMap<String,Object> mesageMap = new HashMap<> (  );
-        mesageMap.put ( "expediteur",expediteur );
-        mesageMap.put ( "recepteur",recepteur );
-        mesageMap.put ( "message",message );
-        mesageMap.put ( "temps",time);
-        firebaseFirestore.collection ( "conversation" ).document ( expediteur ).collection(recepteur).add ( mesageMap ).addOnSuccessListener ( new OnSuccessListener<DocumentReference> () {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Calendar calendar=Calendar.getInstance ();
-                SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
-                saveCurrentDate=currentDate.format ( calendar.getTime () );
-                randomKey=saveCurrentDate;
-                contact =new DiplayAllChat (  );
-                modelChat= new ModelChat();
-                contact.setId_recepteur ( user_id_message );
-                contact.setId_expediteur ( current_user );
-                contact.setImage_profil (lien_profil_contact );
-                contact.setTemps ( randomKey );
-                contact.setNom_utilisateur (nom_utilisateur );
-                contact.setDernier_message ( message );
-                firebaseFirestore.collection ( "dernier_message" )
-                        .document (expediteur).collection ( "contacts" )
-                        .document (recepteur)
-                        .set ( contact );
-                Map<String,Object > notificationMap= new HashMap<>();
-                notificationMap.put("message",message);
-                notificationMap.put("from",current_user);
-
-            }
-        } ).addOnFailureListener ( new OnFailureListener () {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-            }
-        } );
-        firebaseFirestore.collection ( "conversation" ).document ( recepteur ).collection(expediteur).add ( mesageMap ).addOnSuccessListener ( new OnSuccessListener<DocumentReference> () {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Calendar calendar=Calendar.getInstance ();
-                SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
-                saveCurrentDate=currentDate.format ( calendar.getTime () );
-                randomKey=saveCurrentDate;
-                contact.setId_recepteur ( user_id_message );
-                contact.setNom_utilisateur (nom_utilisateur );
-                contact.setImage_profil (lien_profil_contact );
-                contact.setId_expediteur ( current_user );
-                contact.setTemps (randomKey );
-                contact.setDernier_message ( message );
-                firebaseFirestore.collection ( "dernier_message" )
-                        .document (recepteur).collection ( "contacts" )
-                        .document (expediteur)
-                        .set ( contact );
-
-            }
-        } ).addOnFailureListener ( new OnFailureListener () {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        } );
-        //statusUSer ();
-
-    }*/
 
     private void sendNotification() {
         Toast.makeText(this, "Current Recipients is : user1@gmail.com ( Just For Demo )", Toast.LENGTH_SHORT).show();
@@ -413,6 +348,18 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         } );
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
+        user.update("message", "lu")
+                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
 
     }
 
@@ -452,8 +399,5 @@ public void nomEtImageProfil(){
         });
 
     }
-
-
-
 
 }

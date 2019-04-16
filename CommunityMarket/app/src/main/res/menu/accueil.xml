@@ -12,7 +12,7 @@
         android:id="@+id/message"
         android:orderInCategory="1"
         android:title="profil"
-        android:icon="@drawable/message_lu"
+        android:icon="@drawable/ic_message_non_lu"
         app:showAsAction="always"
 
         />
