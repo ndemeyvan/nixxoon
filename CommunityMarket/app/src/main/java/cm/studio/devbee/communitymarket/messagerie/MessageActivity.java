@@ -105,6 +105,7 @@ public class MessageActivity extends AppCompatActivity {
     private static APIService apiService;
    private static DatabaseReference reference;
    private static ImageView image_en_fond;
+   private static ValueEventListener valueEventListener;
 
 
     @Override
@@ -131,6 +132,7 @@ public class MessageActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd ( true );
         message_recyclerview.setLayoutManager ( linearLayoutManager );
         nomEtImageProfil ();
+        messagelu ( user_id_message );
         online_status=findViewById ( R.id.online_status_image );
         offline_status=findViewById ( R.id.offline_status_image );
         mesage_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -156,6 +158,7 @@ public class MessageActivity extends AppCompatActivity {
         apiService=Client.getClient ( "https://fcm.googleapis.com/" ).create ( APIService.class );
 
     }
+
 
     public void userstatus(String status){
         DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
@@ -186,8 +189,8 @@ public class MessageActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        userstatus("online");
         super.onDestroy ();
+        reference.removeEventListener ( valueEventListener );
         userstatus("online");
 
 
@@ -202,6 +205,7 @@ public class MessageActivity extends AppCompatActivity {
         mesageMap.put ( "message",message );
         mesageMap.put ( "temps",time);
         mesageMap.put ( "milli",milli);
+        mesageMap.put ( "itseen",false);
         reference.child ( "Chats" ).push ().setValue ( mesageMap );
         ///////////////////////////////////////////
         Calendar calendar=Calendar.getInstance ();
@@ -369,7 +373,28 @@ public class MessageActivity extends AppCompatActivity {
                 });
 
     }
+    public void messagelu(final String userid){
+        reference=FirebaseDatabase.getInstance ().getReference ("Chats");
+        valueEventListener=reference.addValueEventListener ( new ValueEventListener () {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren ()){
+                    ModelChat chat = snapshot.getValue (ModelChat.class);
+                    if (chat.getRecepteur ().equals ( current_user )&&chat.getExpediteur ().equals ( userid)){
+                        HashMap<String,Object> hashMap =new HashMap<> (  );
+                        hashMap.put ( "itseen",true );
+                        snapshot.getRef ().updateChildren ( hashMap );
 
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        } );
+    }
 public void nomEtImageProfil(){
         firebaseFirestore.collection("mes donnees utilisateur").document(user_id_message).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override

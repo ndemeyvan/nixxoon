@@ -5,17 +5,19 @@ public class ModelChat {
     String expediteur;
     String recepteur;
     String message;
-    private String status;
+    String status;
+    boolean itseen=false;
 
     public ModelChat() {
     }
 
-    public ModelChat(long temps, String expediteur, String recepteur, String message, String status) {
+    public ModelChat(long temps, String expediteur, String recepteur, String message, String status, boolean itseen) {
         this.temps = temps;
         this.expediteur = expediteur;
         this.recepteur = recepteur;
         this.message = message;
         this.status = status;
+        this.itseen = itseen;
     }
 
     public long getTemps() {
@@ -56,5 +58,13 @@ public class ModelChat {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isItseen() {
+        return itseen;
+    }
+
+    public void setItseen(boolean itseen) {
+        this.itseen = itseen;
     }
 }
