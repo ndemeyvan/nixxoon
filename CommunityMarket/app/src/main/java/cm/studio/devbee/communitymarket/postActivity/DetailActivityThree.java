@@ -106,13 +106,13 @@ public class DetailActivityThree extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     ////////////////////////////////////////
-                    firebaseFirestore.collection ( "publication" ).document ("categories").collection ("nouveaux" ).document (iddupost).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                    firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).document (iddupost).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.getResult ().exists ()){
                                 if (task.isSuccessful ()){
                                     detail_progress.setVisibility ( View.VISIBLE );
-                                    firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).delete ();
+                                    firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).document (iddupost).delete ();
                                     Toast.makeText ( getApplicationContext (),"supprimer",Toast.LENGTH_LONG ).show ();
                                     Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
                                     startActivity ( gtohome );
