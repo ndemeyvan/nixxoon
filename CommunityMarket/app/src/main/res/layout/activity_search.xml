@@ -7,7 +7,7 @@
     tools:context=".search.SearchActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/toolbarSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
@@ -29,7 +29,7 @@
         android:textColorHint="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarSearch" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_recyclerview"

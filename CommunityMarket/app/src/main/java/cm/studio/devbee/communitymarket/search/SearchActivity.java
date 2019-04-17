@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.ToolbarWidgetWrapper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -56,6 +58,7 @@ public class SearchActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private static FirebaseAuth firebaseAuth;
     private static String current_user;
+    Toolbar toolbarSearch;
     private LinearLayoutManager linearLayoutManager;
     private List<UserModel> listUsers;
     private UserAdapter searchAdapter;
@@ -70,6 +73,7 @@ public class SearchActivity extends AppCompatActivity {
         final String find=search_edit_text.getText ().toString ();
         search_recyclerview=findViewById ( R.id.search_recyclerview );
         listUsers = new ArrayList<>();
+        toolbarSearch=findViewById(R.id.toolbarSearch);
         search_recyclerview.setAdapter (  searchAdapter);
         search_recyclerview.setLayoutManager ( new LinearLayoutManager ( getApplicationContext (),LinearLayoutManager.VERTICAL,false ) );
         db = FirebaseFirestore.getInstance();
@@ -83,7 +87,7 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         firebaseAuth=FirebaseAuth.getInstance ();
         current_user=firebaseAuth.getCurrentUser ().getUid ();
-        toolbargeneral.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbarSearch.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity ( new Intent( getApplicationContext (),DetailActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
