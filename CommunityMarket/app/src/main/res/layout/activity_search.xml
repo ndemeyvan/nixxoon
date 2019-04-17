@@ -10,8 +10,8 @@
         android:id="@+id/toolbarSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
-        app:titleTextColor="@color/blanc"></android.support.v7.widget.Toolbar>
+        android:background="@color/blanc"
+        app:titleTextColor="@color/black"></android.support.v7.widget.Toolbar>
 
     <EditText
         android:id="@+id/search_edit_text"
