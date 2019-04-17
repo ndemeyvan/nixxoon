@@ -71,9 +71,11 @@ public class SearchActivity extends AppCompatActivity {
         search_edit_text=findViewById ( R.id.search_edit_text );
         search_buton=findViewById ( R.id.search_button );
         final String find=search_edit_text.getText ().toString ();
+
         search_recyclerview=findViewById ( R.id.search_recyclerview );
         listUsers = new ArrayList<>();
         toolbarSearch=findViewById(R.id.toolbarSearch);
+        setSupportActionBar(toolbarSearch);
         search_recyclerview.setAdapter (  searchAdapter);
         search_recyclerview.setLayoutManager ( new LinearLayoutManager ( getApplicationContext (),LinearLayoutManager.VERTICAL,false ) );
         db = FirebaseFirestore.getInstance();
