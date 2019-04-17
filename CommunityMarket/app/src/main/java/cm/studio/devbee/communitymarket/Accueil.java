@@ -123,8 +123,8 @@ public class Accueil extends AppCompatActivity
                 }
             }
         } );
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(0).setChecked(true);
+        //navigationView.setNavigationItemSelectedListener(this);
+        //navigationView.getMenu().getItem(0).setChecked(true);
         asyncTask=new AsyncTask();
         asyncTask.execute();
 
