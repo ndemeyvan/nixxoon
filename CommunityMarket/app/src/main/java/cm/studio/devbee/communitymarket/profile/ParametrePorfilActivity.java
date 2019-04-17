@@ -195,8 +195,8 @@ public class ParametrePorfilActivity extends AppCompatActivity {
             downloadUri=mImageUri;
         }
         Map<String, String> donnees_utilisateur = new HashMap<> ();
-        donnees_utilisateur.put ( "user_name", user_name );
-        donnees_utilisateur.put ( "user_prenom", user_premon.toLowerCase() );
+        donnees_utilisateur.put ( "user_name",user_name.toUpperCase().charAt(0)+""+user_name.substring(1, user_name.length()) );
+        donnees_utilisateur.put ( "user_prenom",user_premon.toUpperCase().charAt(0)+""+user_premon.substring(1, user_premon.length()));
         donnees_utilisateur.put ( "user_telephone", user_telephone );
         donnees_utilisateur.put ( "user_residence", user_residence );
         donnees_utilisateur.put ( "user_mail", user_email );
