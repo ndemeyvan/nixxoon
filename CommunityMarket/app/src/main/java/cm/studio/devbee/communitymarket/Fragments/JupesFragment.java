@@ -113,7 +113,7 @@ public class JupesFragment extends Fragment {
     }
     public void jupeRecyclerView(){
 
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "jupes" ).orderBy ( "dete-en-seconde",Query.Direction.DESCENDING );
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "jupes" ).orderBy ( "prix_du_produit",Query.Direction.ASCENDING );
         firstQuery.addSnapshotListener(getActivity (),new EventListener<QuerySnapshot> () {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {

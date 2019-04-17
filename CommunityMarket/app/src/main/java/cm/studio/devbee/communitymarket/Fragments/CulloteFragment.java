@@ -113,7 +113,7 @@ public class CulloteFragment extends Fragment {
     }
     public void RecyclerView(){
 
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Cullotes" ).orderBy ( "dete-en-seconde",Query.Direction.DESCENDING );
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Cullotes" ).orderBy ( "prix_du_produit",Query.Direction.ASCENDING );
         firstQuery.addSnapshotListener(getActivity (),new EventListener<QuerySnapshot> () {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
