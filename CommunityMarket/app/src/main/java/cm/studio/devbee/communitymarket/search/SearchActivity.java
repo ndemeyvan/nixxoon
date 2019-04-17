@@ -126,7 +126,9 @@ public class SearchActivity extends AppCompatActivity {
                         for (DocumentSnapshot doc :task.getResult()) {
                             listUsers.clear ();
                             UserModel searchModel = new UserModel(doc.getString("user_profil_image"),doc.getString("user_prenom"),doc.getString("id_utilisateur"),doc.getString("status"),doc.getString("search"));
-                            listUsers.add(searchModel);
+                            if (!current_user.equals ( searchModel.getId_utilisateur () )) {
+                                listUsers.add ( searchModel );
+                            }
                         }
                         searchAdapter = new UserAdapter ( listUsers, SearchActivity.this ,s);
                         search_recyclerview.setAdapter ( searchAdapter );
