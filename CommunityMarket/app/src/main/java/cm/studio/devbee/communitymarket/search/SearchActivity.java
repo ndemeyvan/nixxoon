@@ -1,6 +1,7 @@
 package cm.studio.devbee.communitymarket.search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
 import cm.studio.devbee.communitymarket.utilsForPostPrincipal.PrincipalModel;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserAdapter;
@@ -78,8 +80,16 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         } );*/
+        getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         firebaseAuth=FirebaseAuth.getInstance ();
         current_user=firebaseAuth.getCurrentUser ().getUid ();
+        toolbargeneral.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity ( new Intent( getApplicationContext (),DetailActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                finish ();
+            }
+        });
         search_edit_text.addTextChangedListener ( new TextWatcher () {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

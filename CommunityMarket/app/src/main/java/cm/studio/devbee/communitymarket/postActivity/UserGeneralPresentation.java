@@ -58,7 +58,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
         backgroundgeneral=findViewById(R.id.backgroundgeneral);
         residence=findViewById(R.id.general_residence);
         last_seen=findViewById(R.id.general_last_view);
-        getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
+        //getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         toolbargeneral.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
