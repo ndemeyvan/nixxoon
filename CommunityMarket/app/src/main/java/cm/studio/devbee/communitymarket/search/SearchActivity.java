@@ -118,8 +118,27 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void search(final String s) {
-        Query firstQuery =db.collection ( "mes donnees utilisateur" ).orderBy ( "search").startAt ( s ).endAt ( s+"\uf0ff" );
-        firstQuery.addSnapshotListener(SearchActivity.this,new EventListener<QuerySnapshot>() {
+        db.collection ( "mes donnees utilisateur" ).whereEqualTo( "search",s).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        listUsers.clear ();
+                        for (DocumentSnapshot doc :task.getResult()) {
+                            listUsers.clear ();
+                            UserModel searchModel = new UserModel(doc.getString("user_profil_image"),doc.getString("user_prenom"),doc.getString("id_utilisateur"),doc.getString("status"),doc.getString("search"));
+                            listUsers.add(searchModel);
+                        }
+                        searchAdapter = new UserAdapter ( listUsers, SearchActivity.this ,s);
+                        search_recyclerview.setAdapter ( searchAdapter );
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+        /*firstQuery.addSnapshotListener(SearchActivity.this,new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 //if (search_edit_text.getText ().equals ( " " )) {
@@ -152,7 +171,6 @@ public class SearchActivity extends AppCompatActivity {
 
               //  }
             }
-        });
+
     }
 
-}

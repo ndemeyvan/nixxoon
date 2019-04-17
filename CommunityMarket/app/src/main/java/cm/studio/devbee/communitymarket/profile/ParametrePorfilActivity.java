@@ -88,7 +88,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         imageButton=findViewById(R.id.imageButton);
         parametrePorfilActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
-       asyncTask.execute();
+        asyncTask.execute();
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,14 +196,14 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         }
         Map<String, String> donnees_utilisateur = new HashMap<> ();
         donnees_utilisateur.put ( "user_name", user_name );
-        donnees_utilisateur.put ( "user_prenom", user_premon );
+        donnees_utilisateur.put ( "user_prenom", user_premon.toLowerCase() );
         donnees_utilisateur.put ( "user_telephone", user_telephone );
         donnees_utilisateur.put ( "user_residence", user_residence );
         donnees_utilisateur.put ( "user_mail", user_email );
         donnees_utilisateur.put ( "user_profil_image", downloadUri.toString () );
         donnees_utilisateur.put ( "id_utilisateur", current_user_id);
         donnees_utilisateur.put ( "status","online" );
-        donnees_utilisateur.put ( "search",user_name.toLowerCase () );
+        donnees_utilisateur.put ( "search",user_premon.toLowerCase() );
         donnees_utilisateur.put ( "message","non_lu" );
 
         firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user_id ).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {

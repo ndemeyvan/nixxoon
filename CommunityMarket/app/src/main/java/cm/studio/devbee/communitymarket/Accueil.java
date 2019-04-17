@@ -103,6 +103,7 @@ public class Accueil extends AppCompatActivity
         acceuille_image=navigationView.getHeaderView(0).findViewById(R.id.acceuille_image);
         drawer_user_name=navigationView.getHeaderView(0).findViewById(R.id.drawer_user_name);
         DrawerLayout drawer =findViewById ( R.id.drawer_layout );
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle (
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close );
         drawer.addDrawerListener ( toggle );
@@ -122,10 +123,13 @@ public class Accueil extends AppCompatActivity
                 }
             }
         } );
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
         asyncTask=new AsyncTask();
         asyncTask.execute();
 
     }
+
     public void setupViewPager(ViewPager viewPager){
         TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
         tabsAdapter.addFragment(new HomeFragment(),"Decouvrir");
@@ -270,12 +274,40 @@ public class Accueil extends AppCompatActivity
     public void onResume() {
         super.onResume ();
         userstatus("online");
+        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful ()){
+                    String message= task.getResult ().getString ( "message" );
+
+                    if (message.equals ( "non_lu" )){
+                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
+                    }else{
+                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
+                    }
+                }
+            }
+        } );
     }
 
     @Override
     public void onPause() {
         super.onPause ();
         userstatus("offline");
+        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful ()){
+                    String message= task.getResult ().getString ( "message" );
+
+                    if (message.equals ( "non_lu" )){
+                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
+                    }else{
+                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
+                    }
+                }
+            }
+        } );
     }
 
 
