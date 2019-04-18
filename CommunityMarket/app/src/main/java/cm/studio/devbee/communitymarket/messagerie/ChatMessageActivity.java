@@ -13,14 +13,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,23 +26,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
 import com.xwray.groupie.ViewHolder;
-
-import java.util.List;
-
 import javax.annotation.Nullable;
-
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
-import cm.studio.devbee.communitymarket.notification.Token;
 import cm.studio.devbee.communitymarket.utilForChat.DiplayAllChat;
-import cm.studio.devbee.communitymarket.utilForChat.ModelChat;
-import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
-import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatMessageActivity extends AppCompatActivity {
@@ -84,7 +72,7 @@ public class ChatMessageActivity extends AppCompatActivity {
                 finish ();
             }
         });
-        updateToken(FirebaseInstanceId.getInstance ().getToken () );
+
         DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
         user.update("message", "lu")
                 .addOnSuccessListener(new OnSuccessListener<Void> () {
@@ -117,14 +105,7 @@ public class ChatMessageActivity extends AppCompatActivity {
             }
         });
     }
-    public void updateToken(String token){
-        firebaseAuth=FirebaseAuth.getInstance ();
-        current_user=firebaseAuth.getCurrentUser ().getUid ();
-        firebaseFirestore=FirebaseFirestore.getInstance ();
-        DatabaseReference reference=FirebaseDatabase.getInstance ().getReference ("Tokens");
-        Token token1=new Token ( token );
-        reference.child ( current_user ).setValue ( token1 );
-    }
+
 
     public void userstatus(String status){
         DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);

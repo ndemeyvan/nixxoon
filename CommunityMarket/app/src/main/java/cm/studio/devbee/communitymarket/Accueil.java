@@ -126,20 +126,6 @@ public class Accueil extends AppCompatActivity
         } );
         //navigationView.setNavigationItemSelectedListener(this);
         //navigationView.getMenu().getItem(0).setChecked(true);
-        OneSignal.startInit ( this ).init ();
-        OneSignal.setSubscription ( true );
-        OneSignal.idsAvailable ( new OneSignal.IdsAvailableHandler () {
-            @Override
-            public void idsAvailable(String userId, String registrationId) {
-                firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user_id ).collection ( "notificationKey" ).add ( userId ).addOnCompleteListener ( new OnCompleteListener<DocumentReference> () {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-
-                    }
-                } );
-            }
-        } );
-        OneSignal.setInFocusDisplaying ( OneSignal.OSInFocusDisplayOption.Notification );
         asyncTask=new AsyncTask();
         asyncTask.execute();
 

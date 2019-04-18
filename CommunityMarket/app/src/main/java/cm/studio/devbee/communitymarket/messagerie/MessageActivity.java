@@ -50,29 +50,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
-import javax.annotation.Nullable;
-
-import cm.studio.devbee.communitymarket.Accueil;
-import cm.studio.devbee.communitymarket.Fragments.APIService;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.SendNotif;
-import cm.studio.devbee.communitymarket.notification.Client;
-import cm.studio.devbee.communitymarket.notification.Data;
-import cm.studio.devbee.communitymarket.notification.MyResponse;
-import cm.studio.devbee.communitymarket.notification.Sender;
-import cm.studio.devbee.communitymarket.notification.Token;
 import cm.studio.devbee.communitymarket.utilForChat.ChatAdapter;
 import cm.studio.devbee.communitymarket.utilForChat.DiplayAllChat;
 import cm.studio.devbee.communitymarket.utilForChat.ModelChat;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
 import cm.studio.devbee.communitymarket.utilsForUserApp.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static com.facebook.appevents.codeless.internal.UnityReflection.sendMessage;
 
 public class MessageActivity extends AppCompatActivity {
     private static CircleImageView user_message_image;
@@ -103,7 +88,6 @@ public class MessageActivity extends AppCompatActivity {
     private static long time;
     private static  CircleImageView online_status;
     private static CircleImageView offline_status;
-    private static APIService apiService;
    private static DatabaseReference reference;
    private static ImageView image_en_fond;
    private static ValueEventListener valueEventListener;
