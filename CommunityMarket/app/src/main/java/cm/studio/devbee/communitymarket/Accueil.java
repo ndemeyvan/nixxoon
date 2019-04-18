@@ -41,6 +41,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -125,6 +126,20 @@ public class Accueil extends AppCompatActivity
         } );
         //navigationView.setNavigationItemSelectedListener(this);
         //navigationView.getMenu().getItem(0).setChecked(true);
+        OneSignal.startInit ( this ).init ();
+        OneSignal.setSubscription ( true );
+        OneSignal.idsAvailable ( new OneSignal.IdsAvailableHandler () {
+            @Override
+            public void idsAvailable(String userId, String registrationId) {
+                firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user_id ).collection ( "notificationKey" ).add ( userId ).addOnCompleteListener ( new OnCompleteListener<DocumentReference> () {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                    }
+                } );
+            }
+        } );
+        OneSignal.setInFocusDisplaying ( OneSignal.OSInFocusDisplayOption.Notification );
         asyncTask=new AsyncTask();
         asyncTask.execute();
 
@@ -217,6 +232,7 @@ public class Accueil extends AppCompatActivity
             Intent intent = new Intent ( getApplicationContext(),ProfileActivity.class );
             startActivity ( intent );
         } else if (id == R.id.ic_logout) {
+            OneSignal.setSubscription ( false );
             userstatus("offline");
             mAuth.getInstance().signOut();
             Intent intenttwo = new Intent ( getApplicationContext(),ChoiceActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP );

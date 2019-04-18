@@ -56,6 +56,7 @@ import javax.annotation.Nullable;
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.Fragments.APIService;
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.SendNotif;
 import cm.studio.devbee.communitymarket.notification.Client;
 import cm.studio.devbee.communitymarket.notification.Data;
 import cm.studio.devbee.communitymarket.notification.MyResponse;
@@ -155,8 +156,21 @@ public class MessageActivity extends AppCompatActivity {
                          message_user_send.setText ( "" );
             }
         } );
-        apiService=Client.getClient ( "https://fcm.googleapis.com/" ).create ( APIService.class );
+        OneSignal.startInit ( this ).init ();
+        OneSignal.setSubscription ( true );
+        OneSignal.idsAvailable ( new OneSignal.IdsAvailableHandler () {
+            @Override
+            public void idsAvailable(String userId, String registrationId) {
+                firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user ).collection ( "notificationKey" ).add ( userId ).addOnCompleteListener ( new OnCompleteListener<DocumentReference> () {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
 
+                    }
+                } );
+            }
+        } );
+        OneSignal.setInFocusDisplaying ( OneSignal.OSInFocusDisplayOption.Notification );
+        new SendNotif ("message 1","heading 1",null);
     }
 
 
