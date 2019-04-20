@@ -43,6 +43,7 @@ public class DetailActivityTwo extends AppCompatActivity {
     private static ProgressBar detail_progress;
     private static Button supprime_detail_button;
     private static  String  categories;
+    private static  String lien_image;
     private static WeakReference<DetailActivityTwo> detailActivityTwoWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +66,10 @@ public class DetailActivityTwo extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         detail_progress=findViewById ( R.id.detail_progress );
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
-        detailActivityTwoWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask ();
         asyncTask.execute();
         detailActivityTwoWeakReference=new WeakReference<>(this);
+        vendeur_button.setEnabled ( false );
         asyncTask=new AsyncTask ();
         asyncTask.execute();
     }
@@ -134,17 +135,7 @@ public class DetailActivityTwo extends AppCompatActivity {
         }
     }
 
-    public void vendeurActivity(){
-        vendeur_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent vendeur=new Intent(getApplicationContext(),UserGeneralPresentation.class);
-                vendeur.putExtra("id du post",iddupost);
-                vendeur.putExtra("id de l'utilisateur",current_user_id);
-                startActivity(vendeur);
-            }
-        });
-    }
+
     public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -171,7 +162,9 @@ public class DetailActivityTwo extends AppCompatActivity {
                             detail_prix_produit.setText(prixduproduit);
                             detail_description.setText(description);
                             date_de_publication.setText(datedepublication);
+                            lien_image=imageduproduit;
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
+                            vendeur_button.setEnabled ( true );
                         }
                     }else {
                         String error=task.getException().getMessage();
@@ -190,6 +183,18 @@ public class DetailActivityTwo extends AppCompatActivity {
             super.onPostExecute ( aVoid );
 
         }
+    }
+    public void vendeurActivity(){
+        vendeur_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent vendeur=new Intent(getApplicationContext(),UserGeneralPresentation.class);
+                vendeur.putExtra("id du post",iddupost);
+                vendeur.putExtra("id de l'utilisateur",current_user_id);
+                vendeur.putExtra("image_en_vente",lien_image);
+                startActivity(vendeur);
+            }
+        });
     }
 
     @Override

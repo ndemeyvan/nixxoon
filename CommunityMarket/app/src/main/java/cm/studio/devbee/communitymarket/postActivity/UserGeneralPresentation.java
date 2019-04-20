@@ -13,12 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
 
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.messagerie.MessageActivity;
@@ -28,6 +34,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserGeneralPresentation extends AppCompatActivity {
     private static FirebaseFirestore firebaseFirestore;
+    private static FirebaseAuth firebaseAuth;
+    String current_user;
     private  static CircleImageView profilImage;
     private static TextView user_name;
     private static TextView residence;
@@ -44,6 +52,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
     private static ProgressBar user_general_progress;
     private ImageView backgroundgeneral;
     private static TextView general_last_seen;
+    String lien_image;
     private static WeakReference<UserGeneralPresentation> userGeneralPresentationWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +64,12 @@ public class UserGeneralPresentation extends AppCompatActivity {
         iddupost =getIntent().getExtras().getString("id du post");
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
         categorie =getIntent().getExtras().getString("id_categories");
+        lien_image =getIntent().getExtras().getString("image_en_vente");
         profilImage=findViewById(R.id.generalImageProfilUser);
         backgroundgeneral=findViewById(R.id.backgroundgeneral);
         residence=findViewById(R.id.general_residence);
         last_seen=findViewById(R.id.general_last_view);
+        firebaseAuth=FirebaseAuth.getInstance ();
         general_last_seen=findViewById ( R.id.general_last_view );
         //getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         toolbargeneral.setNavigationOnClickListener(new View.OnClickListener() {
@@ -86,8 +97,31 @@ public class UserGeneralPresentation extends AppCompatActivity {
                 gotoMessage.putExtra("id du post",iddupost);
                 gotoMessage.putExtra("id de l'utilisateur",current_user_id);
                 gotoMessage.putExtra("id_categories",categorie);
+                gotoMessage.putExtra("image_en_vente",lien_image);
+                Map<String, String> donnees_utilisateur = new HashMap<> ();
+                donnees_utilisateur.put ( "image_en_vente",lien_image);
+                current_user=firebaseAuth.getCurrentUser ().getUid ();
+                firebaseFirestore.collection ( "sell_image" ).document ( current_user_id ).collection ( current_user ).document (current_user_id).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                } );
+                DocumentReference user =  firebaseFirestore.collection ( "sell_image" ).document ( current_user_id ).collection ( current_user ).document (current_user_id);
+                user.update("image_en_vente", lien_image)
+                        .addOnSuccessListener(new OnSuccessListener<Void> () {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener () {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                            }
+                        });
                 startActivity(gotoMessage);
                 finish();
+
             }
         } );
         button_voir.setOnClickListener(new View.OnClickListener() {

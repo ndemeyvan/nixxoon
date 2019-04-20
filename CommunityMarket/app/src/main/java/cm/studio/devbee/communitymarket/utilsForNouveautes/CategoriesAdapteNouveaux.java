@@ -69,7 +69,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
         viewHolder.setIsRecyclable ( false );
         String desc =categoriesModelNouveauxList.get ( i).getDecription_du_produit();
         String nvxPrix=categoriesModelNouveauxList.get(i).getPrix_du_produit();
-        String imageproduit=categoriesModelNouveauxList.get ( i ).getImage_du_produit ();
+        final String imageproduit=categoriesModelNouveauxList.get ( i ).getImage_du_produit ();
         final String nom_id=categoriesModelNouveauxList.get ( i ).getUtilisateur ();
         String tempsdepub=categoriesModelNouveauxList.get ( i ).getDate_de_publication ();
         String produinom=categoriesModelNouveauxList.get ( i ).getNom_du_produit ();
@@ -90,6 +90,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
                     gotoDetail.putExtra("id_post",idDuPost);
                     gotoDetail.putExtra("id_utilisateur",nom_id);
                     gotoDetail.putExtra("id_categories",categorie);
+                    gotoDetail.putExtra("image_en_vente",imageproduit);
                     context.startActivity(gotoDetail);
 
                 }

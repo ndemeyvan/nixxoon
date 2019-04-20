@@ -52,6 +52,7 @@ import java.util.Map;
 import java.util.Scanner;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.SendNotif;
+import cm.studio.devbee.communitymarket.postActivity.UserGeneralPresentation;
 import cm.studio.devbee.communitymarket.utilForChat.ChatAdapter;
 import cm.studio.devbee.communitymarket.utilForChat.DiplayAllChat;
 import cm.studio.devbee.communitymarket.utilForChat.ModelChat;
@@ -91,6 +92,8 @@ public class MessageActivity extends AppCompatActivity {
    private static DatabaseReference reference;
    private static ImageView image_en_fond;
    private static ValueEventListener valueEventListener;
+   private static ImageView image_de_discutions;
+   String lien_image;
 
 
     @Override
@@ -108,16 +111,17 @@ public class MessageActivity extends AppCompatActivity {
         firebaseFirestore=FirebaseFirestore.getInstance();
         current_user=firebaseAuth.getCurrentUser ().getUid ();
         user_id_message=intent.getStringExtra ( "id de l'utilisateur" );
+        lien_image=intent.getStringExtra ( "image_en_vente" );
         send_button=findViewById ( R.id.imageButton_to_send );
         message_user_send=findViewById ( R.id.user_message_to_send );
         message_recyclerview=findViewById ( R.id.message_recyclerView );
+        image_de_discutions=findViewById ( R.id.image_de_discutions );
         message_recyclerview.setHasFixedSize ( true );
-        image_en_fond=findViewById ( R.id.image_en_fond );
+        //image_en_fond=findViewById ( R.id.image_en_fond );
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager ( MessageActivity.this );
         linearLayoutManager.setStackFromEnd ( true );
         message_recyclerview.setLayoutManager ( linearLayoutManager );
         nomEtImageProfil ();
-
         online_status=findViewById ( R.id.online_status_image );
         offline_status=findViewById ( R.id.offline_status_image );
         mesage_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -157,6 +161,23 @@ public class MessageActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
+        firebaseFirestore.collection ( "sell_image" ).document ( user_id_message ).collection ( current_user ).document (user_id_message).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    if (task.getResult ().exists ()){
+                        String image= task.getResult ().getString ( "image_en_vente" );
+                        Picasso.with ( MessageActivity.this ).load ( image ).into ( image_de_discutions );
+
+
+                    }
+                }else {
+                    String error=task.getException().getMessage();
+
+
+                }
+            }
+        });
 
     }
 
@@ -282,8 +303,7 @@ public class MessageActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
-
-        final String msg =message;
+       final String msg =message;
         firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user );
 
     }
@@ -429,7 +449,7 @@ public void nomEtImageProfil(){
                         }
                         readMessage ( current_user,user_id_message,lien_profil_contact );
                         user_name.setText(name_user+" "+prenom);
-                        Picasso.with(getApplicationContext()).load(image_user).into(image_en_fond);
+//                        Picasso.with(getApplicationContext()).load(image_user).into(image_en_fond);
                         Picasso.with(getApplicationContext()).load(image_user).into(user_message_image);
 
                     }

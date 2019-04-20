@@ -51,6 +51,7 @@ public class DetailActivity extends AppCompatActivity {
     private static AsyncTask asyncTask;
     private static ProgressBar detail_progress;
     private static Button supprime_detail_button;
+    private static String lien_image;
     private static WeakReference<DetailActivity> detailActivityWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class DetailActivity extends AppCompatActivity {
         detail_progress=findViewById ( R.id.detail_progress );
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         detailActivityWeakReference=new WeakReference<>(this);
+        vendeur_button.setEnabled ( false );
         asyncTask=new AsyncTask();
         asyncTask.execute();
 
@@ -137,17 +139,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-   public void vendeurActivity(){
-       vendeur_button.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent vendeur=new Intent(getApplicationContext(),UserGeneralPresentation.class);
-               vendeur.putExtra("id du post",iddupost);
-               vendeur.putExtra("id de l'utilisateur",current_user_id);
-               startActivity(vendeur);
-           }
-       });
-   }
+
     public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -174,7 +166,9 @@ public class DetailActivity extends AppCompatActivity {
                             detail_prix_produit.setText(prixduproduit);
                             detail_description.setText(description);
                             date_de_publication.setText(datedepublication);
+                            lien_image=imageduproduit;
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
+                            vendeur_button.setEnabled ( true );
                         }
                     }else {
                         String error=task.getException().getMessage();
@@ -194,6 +188,19 @@ public class DetailActivity extends AppCompatActivity {
 
         }
     }
+    public void vendeurActivity(){
+        vendeur_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent vendeur=new Intent(getApplicationContext(),UserGeneralPresentation.class);
+                vendeur.putExtra("id du post",iddupost);
+                vendeur.putExtra("id de l'utilisateur",current_user_id);
+                vendeur.putExtra("image_en_vente",lien_image);
+                startActivity(vendeur);
+            }
+        });
+    }
+
 
     @Override
     protected void onDestroy() {

@@ -72,7 +72,6 @@ public class SearchActivity extends AppCompatActivity {
         search_edit_text=findViewById ( R.id.search_edit_text );
         search_buton=findViewById ( R.id.search_button );
         final String find=search_edit_text.getText ().toString ();
-
         search_recyclerview=findViewById ( R.id.search_recyclerview );
         listUsers = new ArrayList<>();
         toolbarSearch=findViewById(R.id.toolbarSearch);
@@ -80,16 +79,10 @@ public class SearchActivity extends AppCompatActivity {
         search_recyclerview.setAdapter (  searchAdapter);
         search_recyclerview.setLayoutManager ( new LinearLayoutManager ( getApplicationContext (),LinearLayoutManager.VERTICAL,false ) );
         db = FirebaseFirestore.getInstance();
-        /*search_buton.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                search(find);
-
-            }
-        } );*/
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         firebaseAuth=FirebaseAuth.getInstance ();
         current_user=firebaseAuth.getCurrentUser ().getUid ();
+        getSupportActionBar ().setTitle ( "rechercher" );
         toolbarSearch.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,39 +133,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        /*firstQuery.addSnapshotListener(SearchActivity.this,new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                //if (search_edit_text.getText ().equals ( " " )) {
-                    for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges ()) {
-                        if (doc.getType () == DocumentChange.Type.ADDED) {
-                            listUsers.clear ();
-                            UserModel searchModel = doc.getDocument ().toObject ( UserModel.class );
-                            assert searchModel!=null;
-                            assert current_user!=null;
-                            if (!current_user.equals ( searchModel.getId_utilisateur () )) {
-                                listUsers.add ( searchModel );
-                            }
-                        }
-                        searchAdapter = new UserAdapter ( listUsers,SearchActivity.this ,s);
-                        search_recyclerview.setAdapter ( searchAdapter );
-                    }
-                   /*if (search_edit_text.getText ().equals ( " " )) {
-                        for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges ()) {
-                            if (doc.getType () == DocumentChange.Type.ADDED) {
-                                listUsers.clear ();
-                                UserModel searchModel = doc.getDocument ().toObject ( UserModel.class );
-                                if (!current_user.equals ( searchModel.getId_utilisateur () )) {
-                                    listUsers.add ( searchModel );
-                                }
-                            }
-                            searchAdapter = new UserAdapter ( listUsers, SearchActivity.this ,s);
-                            search_recyclerview.setAdapter ( searchAdapter );
-                        }
-                    }*/
-
-              //  }
-            }
+        }
 
     }
 

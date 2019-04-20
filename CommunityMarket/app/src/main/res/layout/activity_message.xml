@@ -7,7 +7,7 @@
     tools:context=".messagerie.MessageActivity"
     android:background="@color/black">
 
-    <LinearLayout
+ <!-- <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -24,18 +24,18 @@
             android:id="@+id/image_en_fond"
             android:scaleType="centerCrop"
             />
-    </LinearLayout>
+    </LinearLayout> -->
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="50dp"
+
         android:background="@drawable/background_detail"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/user_message_to_send"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -151,8 +151,29 @@
         app:layout_constraintBottom_toTopOf="@+id/user_message_to_send"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" >
+        app:layout_constraintTop_toBottomOf="@+id/image_de_discutions">
 
     </android.support.v7.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/image_de_discutions"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:elevation="5dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+       />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_de_discutions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/background_detail" />
+
 
 </android.support.constraint.ConstraintLayout>

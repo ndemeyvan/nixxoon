@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
-        android:text="reside a :"
+        android:text="reside a"
         android:textColor="@color/blanc"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,13 +101,13 @@
         android:id="@+id/general_residence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:text="xxx"
         android:textColor="@color/blanc"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView13"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
@@ -116,7 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
-        android:text="Derniere activite :"
+        android:text="Derniere activite"
         android:textColor="@color/blanc"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,13 +126,13 @@
         android:id="@+id/general_last_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="76dp"
-        android:text=""
+        android:layout_marginTop="20dp"
+        android:text="xxx"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/general_last_seen"
+        app:layout_constraintStart_toStartOf="@+id/general_last_seen"
         app:layout_constraintTop_toBottomOf="@+id/general_last_seen" />
 
     <TextView
@@ -194,9 +194,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/general_button_message"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/general_residence"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.423" />
 
     <ProgressBar
         android:id="@+id/user_general_progress"

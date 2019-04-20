@@ -14,11 +14,14 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
 
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
@@ -42,6 +45,7 @@ public class DetailActivityFour extends AppCompatActivity {
     private static AsyncTask asyncTask;
     private static ProgressBar detail_progress;
     private static Button supprime_detail_button;
+    String lien_image;
     private static WeakReference<DetailActivityFour> detailActivityFourWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,7 @@ public class DetailActivityFour extends AppCompatActivity {
         firebaseFirestore=FirebaseFirestore.getInstance();
         iddupost =getIntent().getExtras().getString("id du post");
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
+        lien_image =getIntent().getExtras().getString("image_en_vente");
         detail_image_post=findViewById(R.id.detail_image_post);
         detail_post_titre_produit=findViewById(R.id.detail_titre_produit);
         detail_prix_produit=findViewById(R.id.detail_prix_produit);
@@ -64,6 +69,7 @@ public class DetailActivityFour extends AppCompatActivity {
         detail_progress=findViewById ( R.id.detail_progress );
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         detailActivityFourWeakReference=new WeakReference<>(this);
+        vendeur_button.setEnabled ( false );
         asyncTask= new AsyncTask ();
         asyncTask.execute();
 
@@ -128,17 +134,7 @@ public class DetailActivityFour extends AppCompatActivity {
         }
     }
 
-    public void vendeurActivity(){
-        vendeur_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent vendeur=new Intent(getApplicationContext(),UserGeneralPresentation.class);
-                vendeur.putExtra("id du post",iddupost);
-                vendeur.putExtra("id de l'utilisateur",current_user_id);
-                startActivity(vendeur);
-            }
-        });
-    }
+
     public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -164,7 +160,9 @@ public class DetailActivityFour extends AppCompatActivity {
                             detail_prix_produit.setText(prixduproduit);
                             detail_description.setText(description);
                             date_de_publication.setText(datedepublication);
+                            lien_image=imageduproduit;
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
+                            vendeur_button.setEnabled ( true );
                         }
                     }else {
                         String error=task.getException().getMessage();
@@ -184,6 +182,28 @@ public class DetailActivityFour extends AppCompatActivity {
 
         }
     }
+    public void vendeurActivity(){
+        vendeur_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent vendeur=new Intent(getApplicationContext(),UserGeneralPresentation.class);
+                vendeur.putExtra("id du post",iddupost);
+                vendeur.putExtra("id de l'utilisateur",current_user_id);
+                vendeur.putExtra("image_en_vente",lien_image);
+                Map<String, String> donnees_utilisateur = new HashMap<> ();
+                donnees_utilisateur.put ( "image_en_vente",lien_image);
+                startActivity(vendeur);
+                /* firebaseFirestore.collection ( "sell_image" ).document ( current_user_id ).collection ( utilisateur_actuel ).add ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<DocumentReference> () {
+                   @Override
+                   public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                   }
+               } );*/
+            }
+        });
+    }
+
+
 
     @Override
     protected void onDestroy() {
