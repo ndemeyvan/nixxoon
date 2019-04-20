@@ -140,21 +140,24 @@ public class MessageActivity extends AppCompatActivity {
                          message_user_send.setText ( "" );
             }
         } );
-        OneSignal.startInit ( this ).init ();
-        OneSignal.setSubscription ( true );
-        OneSignal.idsAvailable ( new OneSignal.IdsAvailableHandler () {
-            @Override
-            public void idsAvailable(String userId, String registrationId) {
-                firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user ).collection ( "notificationKey" ).add ( userId ).addOnCompleteListener ( new OnCompleteListener<DocumentReference> () {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
 
+        Calendar calendar=Calendar.getInstance ();
+        SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
+        String saveCurrentDate=currentDate.format ( calendar.getTime () );
+        String randomKey=saveCurrentDate;
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
+        user.update("derniere_conection", randomKey)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
                     }
-                } );
-            }
-        } );
-        OneSignal.setInFocusDisplaying ( OneSignal.OSInFocusDisplayOption.Notification );
-        new SendNotif ("message 1","heading 1",null);
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+
     }
 
 
@@ -171,6 +174,7 @@ public class MessageActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
+
     }
 
     @Override
@@ -183,6 +187,22 @@ public class MessageActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause ();
         userstatus("offline");
+        Calendar calendar=Calendar.getInstance ();
+        SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
+        String saveCurrentDate=currentDate.format ( calendar.getTime () );
+        String randomKey=saveCurrentDate;
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
+        user.update("derniere_conection", randomKey)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
     }
 
     @Override
@@ -190,7 +210,22 @@ public class MessageActivity extends AppCompatActivity {
         userstatus("online");
         super.onDestroy ();
         userstatus("online");
-
+        Calendar calendar=Calendar.getInstance ();
+        SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
+        String saveCurrentDate=currentDate.format ( calendar.getTime () );
+        String randomKey=saveCurrentDate;
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
+        user.update("derniere_conection", randomKey)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
 
     }
     public void sendmessage(String expediteur,String recepteur,String message){

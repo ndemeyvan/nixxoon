@@ -46,6 +46,8 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -124,6 +126,23 @@ public class Accueil extends AppCompatActivity
                 }
             }
         } );
+        Calendar calendar=Calendar.getInstance ();
+        SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
+        String saveCurrentDate=currentDate.format ( calendar.getTime () );
+        String randomKey=saveCurrentDate;
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user_id);
+        user.update("derniere_conection", randomKey)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+
         //navigationView.setNavigationItemSelectedListener(this);
         //navigationView.getMenu().getItem(0).setChecked(true);
         asyncTask=new AsyncTask();
@@ -187,15 +206,12 @@ public class Accueil extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater ().inflate ( R.menu.accueil, menu );
         this.menu = menu;
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId ();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.search) {
             Intent gogotoSearch = new Intent(getApplicationContext(),SearchActivity.class);
             startActivity(gogotoSearch);
@@ -246,6 +262,20 @@ public class Accueil extends AppCompatActivity
     protected void onStart() {
         super.onStart();
         recup();
+        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful ()){
+                    String message= task.getResult ().getString ( "message" );
+
+                    if (message.equals ( "non_lu" )){
+                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
+                    }else{
+                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
+                    }
+                }
+            }
+        } );
     }
     public void vaTopost(){
         content_floating_action_btn=findViewById ( R.id.content_floating_action_btn );
@@ -353,7 +383,6 @@ public class Accueil extends AppCompatActivity
     public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-
             super.onPreExecute ();
         }
 
@@ -361,6 +390,20 @@ public class Accueil extends AppCompatActivity
         protected Void doInBackground(Void... voids) {
             recup();
             vaTopost ();
+            firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful ()){
+                        String message= task.getResult ().getString ( "message" );
+
+                        if (message.equals ( "non_lu" )){
+                            menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
+                        }else{
+                            menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
+                        }
+                    }
+                }
+            } );
             return null;
         }
 

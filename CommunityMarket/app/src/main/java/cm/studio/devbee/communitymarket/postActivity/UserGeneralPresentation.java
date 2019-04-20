@@ -43,6 +43,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
     private  TextView detail_user;
     private static ProgressBar user_general_progress;
     private ImageView backgroundgeneral;
+    private static TextView general_last_seen;
     private static WeakReference<UserGeneralPresentation> userGeneralPresentationWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
         backgroundgeneral=findViewById(R.id.backgroundgeneral);
         residence=findViewById(R.id.general_residence);
         last_seen=findViewById(R.id.general_last_view);
+        general_last_seen=findViewById ( R.id.general_last_seen );
         //getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         toolbargeneral.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +113,8 @@ public class UserGeneralPresentation extends AppCompatActivity {
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         String residence_user  =task.getResult ().getString ("user_residence");
                         String user_mail  =task.getResult ().getString ("user_mail");
+                        String derniere_conection  =task.getResult ().getString ("derniere_conection");
+                        general_last_seen.setText ( derniere_conection );
                         residence.setText(residence_user);
                         user_name.setText(name_user+" "+prenom);
                         Picasso.with(UserGeneralPresentation.this).load(image_user).placeholder(R.drawable.boy).into(profilImage);

@@ -38,6 +38,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -194,6 +196,10 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         }else{
             downloadUri=mImageUri;
         }
+        Calendar calendar=Calendar.getInstance ();
+        SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
+       String saveCurrentDate=currentDate.format ( calendar.getTime () );
+        String randomKey=saveCurrentDate;
         Map<String, String> donnees_utilisateur = new HashMap<> ();
         donnees_utilisateur.put ( "user_name",user_name.toUpperCase().charAt(0)+""+user_name.substring(1, user_name.length()) );
         donnees_utilisateur.put ( "user_prenom",user_premon.toUpperCase().charAt(0)+""+user_premon.substring(1, user_premon.length()));
@@ -204,7 +210,8 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         donnees_utilisateur.put ( "id_utilisateur", current_user_id);
         donnees_utilisateur.put ( "status","online" );
         donnees_utilisateur.put ( "search",user_name.toLowerCase() );
-        donnees_utilisateur.put ( "message","non_lu" );
+        donnees_utilisateur.put ( "message","lu" );
+        donnees_utilisateur.put ( "derniere_conection",randomKey );
 
         firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user_id ).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
             @Override
