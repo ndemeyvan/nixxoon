@@ -137,7 +137,6 @@ public class DetailActivityThree extends AppCompatActivity {
             } );
         }else{
             vendeur_button.setVisibility ( View.VISIBLE );
-            vendeur_button.setEnabled ( true );
             supprime_detail_button.setVisibility ( View.INVISIBLE );
         }
     }

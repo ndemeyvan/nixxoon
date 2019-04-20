@@ -167,11 +167,12 @@ public class MessageActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
                         String image= task.getResult ().getString ( "image_en_vente" );
-                        Picasso.with ( MessageActivity.this ).load ( image ).into ( image_de_discutions );
-
-
+                        Picasso.with ( MessageActivity.this ).load ( image ).placeholder ( R.drawable.imgg ).into ( image_de_discutions );
+                    }else{
+                        image_de_discutions.setImageResource ( R.drawable.imgg );
                     }
                 }else {
+
                     String error=task.getException().getMessage();
 
 
