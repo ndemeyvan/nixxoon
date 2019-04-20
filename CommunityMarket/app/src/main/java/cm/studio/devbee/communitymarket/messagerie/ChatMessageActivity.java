@@ -167,12 +167,14 @@ public class ChatMessageActivity extends AppCompatActivity {
         final TextView nom_utilisateur=viewHolder.itemView.findViewById ( R.id.chat_user_name );
         final CircleImageView online =viewHolder.itemView.findViewById ( R.id.online );
         final CircleImageView offline=viewHolder.itemView.findViewById ( R.id.offline );
+        final TextView lu_non_lu=viewHolder.itemView.findViewById ( R.id.lu_non );
             CardView chat_card = viewHolder.itemView.findViewById ( R.id.chat_card );
             TextView temps=viewHolder.itemView.findViewById ( R.id.chat_temps );
             final CircleImageView profil=viewHolder.itemView.findViewById ( R.id.chat_message_image_profil );
             lats_message.setText ( diplayAllChat.getDernier_message () );
             nom_utilisateur.setText ( diplayAllChat.getNom_utilisateur () );
             temps.setText ( diplayAllChat.getTemps () );
+            lu_non_lu.setText (  diplayAllChat.getLu () );
            if ( diplayAllChat.getId_recepteur ().equals ( current_user )){
                 firebaseFirestore=FirebaseFirestore.getInstance ();
                 MessageActivity message = new MessageActivity ();
@@ -185,7 +187,8 @@ public class ChatMessageActivity extends AppCompatActivity {
                                 String name_user= task.getResult ().getString ( "user_name" );
                                 image_profil =task.getResult ().getString ( "user_profil_image" );
                                 String statusUser= task.getResult ().getString ( "status" );
-                                Log.e ("key",statusUser);
+                                String lu_ou_non= task.getResult ().getString ( "lu" );
+                                lu_non_lu.setText ( lu_ou_non );
                                 nom_utilisateur.setText(name_user+" "+prenom);
                                 Picasso.with(getApplicationContext()).load(image_profil).into(profil);
                                 if (statusUser.equals ( "online" )){
@@ -212,6 +215,18 @@ public class ChatMessageActivity extends AppCompatActivity {
                     if (diplayAllChat.getId_recepteur ().equals ( current_user )){
                         Intent chatOne =new Intent ( getApplicationContext (),MessageActivity.class );
                         chatOne.putExtra ( "id de l'utilisateur" ,diplayAllChat.getId_expediteur () );
+                        DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (diplayAllChat.getId_expediteur ()).collection("contacts").document (current_user);
+                        user.update("lu", "deja lu")
+                                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                    }
+                                });
                         startActivity ( chatOne );
                         finish ();
                     }else{
@@ -222,6 +237,7 @@ public class ChatMessageActivity extends AppCompatActivity {
                     }
                 }
             } );
+
         }
         @Override
         public int getLayout() {

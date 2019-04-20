@@ -275,6 +275,7 @@ public class MessageActivity extends AppCompatActivity {
         contact.setTempsMilli ( String.valueOf ( milli ) );
         contact.setNom_utilisateur (nom_utilisateur );
         contact.setDernier_message ( message );
+        contact.setLu ( "lu" );
         firebaseFirestore.collection ( "dernier_message" )
                 .document (expediteur).collection ( "contacts" )
                 .document (recepteur)
@@ -291,7 +292,18 @@ public class MessageActivity extends AppCompatActivity {
                 .document (recepteur).collection ( "contacts" )
                 .document (expediteur)
                 .set ( contact );
-
+        DocumentReference read_or_not = firebaseFirestore.collection("dernier_message" ).document (recepteur).collection("contacts").document (expediteur);
+        read_or_not.update("lu", "non lu")
+                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
         DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(user_id_message);
         user.update("message", "non_lu")
                 .addOnSuccessListener(new OnSuccessListener<Void> () {
