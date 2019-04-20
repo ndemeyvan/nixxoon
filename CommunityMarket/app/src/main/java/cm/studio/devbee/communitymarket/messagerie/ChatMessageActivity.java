@@ -188,7 +188,7 @@ public class ChatMessageActivity extends AppCompatActivity {
                                 image_profil =task.getResult ().getString ( "user_profil_image" );
                                 String statusUser= task.getResult ().getString ( "status" );
                                 String lu_ou_non= task.getResult ().getString ( "lu" );
-                                lu_non_lu.setText ( lu_ou_non );
+                                lu_non_lu.setText (  diplayAllChat.getLu () );
                                 nom_utilisateur.setText(name_user+" "+prenom);
                                 Picasso.with(getApplicationContext()).load(image_profil).into(profil);
                                 if (statusUser.equals ( "online" )){
@@ -233,6 +233,18 @@ public class ChatMessageActivity extends AppCompatActivity {
                         Intent chat =new Intent ( getApplicationContext (),MessageActivity.class );
                         chat.putExtra ( "id de l'utilisateur" ,diplayAllChat.getId_recepteur () );
                         startActivity ( chat );
+                        DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (diplayAllChat.getId_expediteur ()).collection("contacts").document (current_user);
+                        user.update("lu", "deja lu")
+                                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                    }
+                                });
                         finish ();
                     }
                 }

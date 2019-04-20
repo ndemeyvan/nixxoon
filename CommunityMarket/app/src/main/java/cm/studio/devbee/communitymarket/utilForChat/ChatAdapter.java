@@ -84,7 +84,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
                          image_profil =task.getResult ().getString ( "user_profil_image" );
-
                     }
                 }else {
                     String error=task.getException().getMessage();
