@@ -16,6 +16,7 @@
     <dimen name="choice_Logo_text_size">45sp</dimen>
     <dimen name="choice_button_top">200dp</dimen>
     <dimen name="choice_button_text_size">14dp</dimen>
+    <dimen name="choice_button_padding_top">10dp</dimen>
     <!-- profil activity. -->
     <dimen name="profil_user_name">24sp</dimen>
     <dimen name="profil_desc">18sp</dimen>
