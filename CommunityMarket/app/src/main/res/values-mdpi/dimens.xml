@@ -26,6 +26,7 @@
     <dimen name="general_phone">18sp</dimen>
     <dimen name="general_residence">18sp</dimen>
     <dimen name="general_image_weight">120dp</dimen>
+    <dimen name="general_image_end">140dp</dimen>
     <dimen name="general_image_height">120dp</dimen>
     <!-- vendeur activity. -->
     <dimen name="vendeur_user_name">24sp</dimen>
@@ -54,6 +55,25 @@
     <dimen name="post_item_image">40dp</dimen>
     !-- login activty post-->
     <dimen name="login_logo_margintop">96dp</dimen>
+    <!-- parametre profil activty post-->
+    <dimen name="parametre_actibity_image_w_n_h">120dp</dimen>
+    <dimen name="parametre_padding_edit_text">8dp</dimen>
+    <dimen name="parametre_image_button">30dp</dimen>
+
+    <!-- post activty final -->
+    <dimen name="post_actibity_final_float_button_top_margin">8dp</dimen>
+    <dimen name="post_padding_edit_text">8dp</dimen>
+    <dimen name="post_padding_edit_top">16dp</dimen>
+    <!-- profil activty  -->
+    <dimen name="profil_float_button_end">132dp</dimen>
+    <dimen name="profil_text_margin_top">24dp</dimen>
+    <dimen name="profil_text_size">30dp</dimen>
+    <dimen name="profil_text_bottom_residence_n_phone">30dp</dimen>
+    <!-- register activty  -->
+    <dimen name="register_text_float_button_end">25sp</dimen>
+    <!-- general activty  -->
+    <dimen name="general_image_w_n_h">120dp</dimen>
+    <dimen name="general_image_top">56dp</dimen>
 
 
 

@@ -62,9 +62,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/generalImageProfilUser"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="@dimen/general_image_w_n_h"
+        android:layout_height="@dimen/general_image_w_n_h"
+        android:layout_marginTop="@dimen/general_image_top"
         android:src="@drawable/boy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +151,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/second_button_background"
         android:fontFamily="@font/fugaz_one"
