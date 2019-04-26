@@ -64,9 +64,10 @@
         android:id="@+id/generalImageProfilUser"
         android:layout_width="@dimen/general_image_w_n_h"
         android:layout_height="@dimen/general_image_w_n_h"
-        android:layout_marginTop="@dimen/general_image_top"
+        android:layout_marginTop="40dp"
         android:src="@drawable/boy"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/general_toolbar" />
 
