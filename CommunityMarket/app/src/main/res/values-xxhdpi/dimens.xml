@@ -52,6 +52,9 @@
     <dimen name="post_item_prix">12sp</dimen>
     <dimen name="post_item_desc">14sp</dimen>
     <dimen name="post_item_image">40dp</dimen>
+    !-- login activty post-->
+    <dimen name="login_logo_margintop">96dp</dimen>
+
 
 
 
