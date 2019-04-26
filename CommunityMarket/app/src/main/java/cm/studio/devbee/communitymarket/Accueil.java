@@ -85,6 +85,7 @@ public class Accueil extends AppCompatActivity
     private ViewPager tabsviewpager;
     private static AsyncTask asyncTask;
     private static List<SearchModel> searchModelList;
+    private static ImageView profilbacck_image;
     private static WeakReference<Accueil> accueilWeakReference;
     private Menu menu;
 
@@ -97,6 +98,7 @@ public class Accueil extends AppCompatActivity
         NavigationView navigationView =findViewById ( R.id.nav_view );
         tabLayout=findViewById(R.id.tabslayout);
         tabsviewpager=findViewById(R.id.tabsview);
+        profilbacck_image=findViewById ( R.id.profilbacck_image );
         setupViewPager(tabsviewpager);
         tabLayout.setupWithViewPager(tabsviewpager);
         mAuth=FirebaseAuth.getInstance ();
@@ -143,8 +145,8 @@ public class Accueil extends AppCompatActivity
                     }
                 });
 
-        //navigationView.setNavigationItemSelectedListener(this);
-        //navigationView.getMenu().getItem(0).setChecked(true);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
         asyncTask=new AsyncTask();
         asyncTask.execute();
 
@@ -164,7 +166,6 @@ public class Accueil extends AppCompatActivity
         tabsAdapter.addFragment(new AccesoireFragment (),"accessoire");
         viewPager.setAdapter(tabsAdapter);
 
-
     }
     public void recup(){
 
@@ -178,7 +179,9 @@ public class Accueil extends AppCompatActivity
                         String prenomuser =task.getResult ().getString ("user_prenom");
                         drawer_user_name.setText ( nom_user + " " + prenomuser);
                         Log.d("cle",image_profil_user);
-                        Picasso.with ( getApplicationContext()).load ( image_profil_user ).transform(new CircleTransform()).placeholder(R.drawable.use).into ( acceuille_image );
+
+                        Picasso.with ( getApplicationContext()).load ( image_profil_user ).transform(new CircleTransform()).into ( acceuille_image );
+                       // Picasso.with ( getApplicationContext()).load ( image_profil_user ).placeholder(R.drawable.boy).into ( profilbacck_image );
                     }
                 }else{
 

@@ -286,6 +286,7 @@ public class MessageActivity extends AppCompatActivity {
         contact.setImage_profil (lien_profil_contact );
         contact.setId_expediteur ( current_user );
         contact.setTemps (randomKey );
+        contact.setLu ( "non lu" );
         contact.setTempsMilli ( String.valueOf ( milli ) );
         contact.setDernier_message ( message );
         firebaseFirestore.collection ( "dernier_message" )
@@ -424,8 +425,8 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         } );
-        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user);
-        user.update("message", "lu")
+        DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (user_id_message).collection("contacts").document (current_user);
+        user.update("lu", "lu")
                 .addOnSuccessListener(new OnSuccessListener<Void> () {
                     @Override
                     public void onSuccess(Void aVoid) {

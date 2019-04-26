@@ -156,17 +156,15 @@ public class ChatMessageActivity extends AppCompatActivity {
 
     public class ContactItem extends Item<ViewHolder> {
         private DiplayAllChat diplayAllChat;
-
         public ContactItem(DiplayAllChat diplayAllChat){
             this.diplayAllChat=diplayAllChat;
         }
-
         @Override
         public void bind(@NonNull ViewHolder viewHolder, int position) {
         final TextView lats_message=viewHolder.itemView.findViewById ( R.id.chat_last_message );
         final TextView nom_utilisateur=viewHolder.itemView.findViewById ( R.id.chat_user_name );
-       // final CircleImageView online =viewHolder.itemView.findViewById ( R.id.online );
-       // final CircleImageView offline=viewHolder.itemView.findViewById ( R.id.offline );
+       final CircleImageView online =viewHolder.itemView.findViewById ( R.id.online );
+       final CircleImageView offline=viewHolder.itemView.findViewById ( R.id.offline );
         final TextView lu_non_lu=viewHolder.itemView.findViewById ( R.id.lu_non );
             CardView chat_card = viewHolder.itemView.findViewById ( R.id.chat_card );
             TextView temps=viewHolder.itemView.findViewById ( R.id.chat_temps );
@@ -174,7 +172,9 @@ public class ChatMessageActivity extends AppCompatActivity {
             lats_message.setText ( diplayAllChat.getDernier_message () );
             nom_utilisateur.setText ( diplayAllChat.getNom_utilisateur () );
             temps.setText ( diplayAllChat.getTemps () );
-            lu_non_lu.setText (  diplayAllChat.getLu () );
+            if ( diplayAllChat.getLu ().equals ( "non lu" )){
+                lu_non_lu.setText ( "nvx msg" );
+            }
            if ( diplayAllChat.getId_recepteur ().equals ( current_user )){
                 firebaseFirestore=FirebaseFirestore.getInstance ();
                 MessageActivity message = new MessageActivity ();
@@ -187,17 +187,15 @@ public class ChatMessageActivity extends AppCompatActivity {
                                 String name_user= task.getResult ().getString ( "user_name" );
                                 image_profil =task.getResult ().getString ( "user_profil_image" );
                                 String statusUser= task.getResult ().getString ( "status" );
-                                String lu_ou_non= task.getResult ().getString ( "lu" );
-                                lu_non_lu.setText (  diplayAllChat.getLu () );
                                 nom_utilisateur.setText(name_user+" "+prenom);
                                 Picasso.with(getApplicationContext()).load(image_profil).into(profil);
-                                /*if (statusUser.equals ( "online" )){
+                                if (statusUser.equals ( "online" )){
                                     online.setVisibility ( View.VISIBLE );
                                     offline.setVisibility ( View.INVISIBLE );
                                 }else {
                                     online.setVisibility ( View.INVISIBLE );
                                     offline.setVisibility ( View.VISIBLE );
-                                }*/
+                                }
                             }
 
                         }else {
@@ -216,7 +214,7 @@ public class ChatMessageActivity extends AppCompatActivity {
                         Intent chatOne =new Intent ( getApplicationContext (),MessageActivity.class );
                         chatOne.putExtra ( "id de l'utilisateur" ,diplayAllChat.getId_expediteur () );
                         DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (diplayAllChat.getId_expediteur ()).collection("contacts").document (current_user);
-                        user.update("lu", "deja lu")
+                        user.update("lu", "lu")
                                 .addOnSuccessListener(new OnSuccessListener<Void> () {
                                     @Override
                                     public void onSuccess(Void aVoid) {
@@ -233,24 +231,13 @@ public class ChatMessageActivity extends AppCompatActivity {
                         Intent chat =new Intent ( getApplicationContext (),MessageActivity.class );
                         chat.putExtra ( "id de l'utilisateur" ,diplayAllChat.getId_recepteur () );
                         startActivity ( chat );
-                        DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (diplayAllChat.getId_expediteur ()).collection("contacts").document (current_user);
-                        user.update("lu", "deja lu")
-                                .addOnSuccessListener(new OnSuccessListener<Void> () {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                    }
-                                });
                         finish ();
                     }
                 }
             } );
 
         }
+
         @Override
         public int getLayout() {
             return R.layout.item_contact_chat;

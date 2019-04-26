@@ -6,10 +6,11 @@
     <color name="likegris">#747474</color>
     <color name="likerouge">#ff4336</color>
     <color name="doux">#FFEB3B</color>
-    <color name="colorPrimary">#fff</color>
+    <color name="colorPrimary">#ff4336</color>
     <color name="colorPrimaryDark">#000</color>
     <color name="black">#000</color>
     <color name="blanc">#ffffff</color>
     <color name="bleu">#3b5998</color>
     <color name="twitter">#00acee</color>
+    <color name="green">#05df29</color>
 </resources>
