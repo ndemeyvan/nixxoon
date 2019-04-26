@@ -10,6 +10,8 @@
     <dimen name="a_propos_text_size">20sp</dimen>
     <dimen name="a_propos_contacter_nous">18sp</dimen>
     <dimen name="a_propos_nuttoon_padding">68dp</dimen>
+    <dimen name="a_propos_button_size_text">30sp</dimen>
+    <dimen name="choice_button_top">200dp</dimen>
     <!-- choice activity. -->
     <dimen name="choice_Logo_margin_top">120dp</dimen>
     <dimen name="choice_Logo_text_size">39sp</dimen>

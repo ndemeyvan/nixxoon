@@ -161,7 +161,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="@dimen/profil_float_button_end"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/profil_float_button_bottom"
                 android:background="@drawable/background_message_button"
                 android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"

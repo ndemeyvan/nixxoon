@@ -9,10 +9,13 @@
     <dimen name="a_propos_margin_top">164dp</dimen>
     <dimen name="a_propos_text_size">20sp</dimen>
     <dimen name="a_propos_contacter_nous">18sp</dimen>
-    <dimen name="a_propos_nuttoon_padding">68dp</dimen>
+    <dimen name="a_propos_nuttoon_padding">140dp</dimen>
+    <dimen name="a_propos_button_size_text">14sp</dimen>
+    <dimen name="choice_button_top">200dp</dimen>
     <!-- choice activity. -->
     <dimen name="choice_Logo_margin_top">120dp</dimen>
-    <dimen name="choice_Logo_text_size">45sp</dimen>
+    <dimen name="choice_Logo_text_size">40sp</dimen>
+    <dimen name="choice_button_padding_top">15dp</dimen>
     <!-- profil activity. -->
     <dimen name="profil_user_name">24sp</dimen>
     <dimen name="profil_desc">18sp</dimen>
@@ -57,23 +60,26 @@
     <dimen name="login_logo_margintop">96dp</dimen>
     <!-- parametre profil activty post-->
     <dimen name="parametre_actibity_image_w_n_h">120dp</dimen>
-    <dimen name="parametre_padding_edit_text">8dp</dimen>
-    <dimen name="parametre_image_button">30dp</dimen>
+    <dimen name="parametre_padding_edit_text">16dp</dimen>
+    <dimen name="parametre_image_button">40dp</dimen>
 
     <!-- post activty final -->
-    <dimen name="post_actibity_final_float_button_top_margin">8dp</dimen>
-    <dimen name="post_padding_edit_text">8dp</dimen>
-    <dimen name="post_padding_edit_top">16dp</dimen>
+    <dimen name="post_actibity_final_float_button_top_margin">0dp</dimen>
+    <dimen name="post_padding_edit_text">16dp</dimen>
+    <dimen name="post_padding_edit_top">100dp</dimen>
+    <dimen name="post_padding_button_bottom">180dp</dimen>
     <!-- profil activty  -->
-    <dimen name="profil_float_button_end">132dp</dimen>
+    <dimen name="profil_float_button_end">140dp</dimen>
+    <dimen name="profil_float_button_bottom">80dp</dimen>
     <dimen name="profil_text_margin_top">24dp</dimen>
     <dimen name="profil_text_size">30dp</dimen>
-    <dimen name="profil_text_bottom_residence_n_phone">30dp</dimen>
+    <dimen name="profil_text_bottom_residence_n_phone">150dp</dimen>
     <!-- register activty  -->
     <dimen name="register_text_float_button_end">25sp</dimen>
+    <dimen name="register_text_margin_top">130dp</dimen>
     <!-- general activty  -->
     <dimen name="general_image_w_n_h">120dp</dimen>
-    <dimen name="general_image_top">56dp</dimen>
+    <dimen name="general_image_top">120dp</dimen>
 
 
 
