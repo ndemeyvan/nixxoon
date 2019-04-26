@@ -73,6 +73,8 @@
     <dimen name="profil_text_margin_top">24dp</dimen>
     <dimen name="profil_text_size">25dp</dimen>
     <dimen name="profil_text_bottom_residence_n_phone">120dp</dimen>
+    <dimen name="profil_float_button_bottom">120dp</dimen>
+
     <!-- register activty  -->
     <dimen name="register_text_float_button_end">25sp</dimen>
     <!-- general activty  -->

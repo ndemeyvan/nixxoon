@@ -159,7 +159,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="@dimen/general_image_end"
+                android:layout_marginEnd="156dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/background_message_button"
                 android:clickable="true"

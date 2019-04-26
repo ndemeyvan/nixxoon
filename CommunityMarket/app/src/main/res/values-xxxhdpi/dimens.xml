@@ -21,8 +21,8 @@
     <dimen name="profil_desc">18sp</dimen>
     <dimen name="profil_phone">18sp</dimen>
     <dimen name="profil_residence">18sp</dimen>
-    <dimen name="profil_image_weight">150dp</dimen>
-    <dimen name="profil_image_height">150dp</dimen>
+    <dimen name="profil_image_weight">180dp</dimen>
+    <dimen name="profil_image_height">180dp</dimen>
     <!-- general activity. -->
     <dimen name="general_user_name">24sp</dimen>
     <dimen name="general_desc">18sp</dimen>
