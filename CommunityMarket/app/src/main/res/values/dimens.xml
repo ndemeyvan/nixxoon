@@ -20,4 +20,39 @@
     <dimen name="profil_residence">18sp</dimen>
     <dimen name="profil_image_weight">120dp</dimen>
     <dimen name="profil_image_height">120dp</dimen>
+    <!-- general activity. -->
+    <dimen name="general_user_name">24sp</dimen>
+    <dimen name="general_desc">18sp</dimen>
+    <dimen name="general_phone">18sp</dimen>
+    <dimen name="general_residence">18sp</dimen>
+    <dimen name="general_image_weight">120dp</dimen>
+    <dimen name="general_image_height">120dp</dimen>
+    <!-- vendeur activity. -->
+    <dimen name="vendeur_user_name">24sp</dimen>
+    <dimen name="vendeur_desc">18sp</dimen>
+    <dimen name="vendeur_phone">18sp</dimen>
+    <dimen name="vendeur_residence">14sp</dimen>
+    <dimen name="vendeur_image_weight">120dp</dimen>
+    <dimen name="vendeur_image_height">120dp</dimen>
+    <!-- item layout principal-->
+    <dimen name="item_principal_image_dim_height_with">35dp</dimen>
+    <dimen name="item_principal_name">14sp</dimen>
+    <dimen name="item_principal_date">11sp</dimen>
+    <dimen name="item_principal_desc">14sp</dimen>
+    <dimen name="item_principal_prix">14sp</dimen>
+    <!-- item layout nvx-->
+    <dimen name="nvx_item_nvx_image_dim_height_with">35dp</dimen>
+    <dimen name="nvx_item_nvx_name">14sp</dimen>
+    <dimen name="nvx_item_nvx_date">11sp</dimen>
+    <dimen name="nvx_item_nvx_desc">14sp</dimen>
+    <dimen name="nvx_item_nvx_prix">14sp</dimen>
+    <dimen name="nvx_item_nvx_titre">12sp</dimen>
+    <dimen name="nvx_item_nvx_like_image">20sp</dimen>
+    <!-- item layout post-->
+    <dimen name="post_item_prix">12sp</dimen>
+    <dimen name="post_item_desc">14sp</dimen>
+    <dimen name="post_item_image">40dp</dimen>
+
+
+
 </resources>
