@@ -79,6 +79,7 @@
                 android:layout_marginTop="12dp"
                 android:ellipsize="end"
                 android:lines="3"
+                android:text="k;suvbiuvbere vehv erk lekrherlkjhv evberkhv elrhv erhbvlerjh"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.098"

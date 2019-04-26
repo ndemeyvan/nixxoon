@@ -245,7 +245,7 @@ public class HomeFragment extends Fragment {
                     //////////image deux
                     StringBuilder image2=new StringBuilder("");
                     image2.append(doc.get("imageTwo"));
-                    img1.setText(image.toString());
+                    img1.setText(image2.toString());
                     String lien2 = img1.getText().toString();
                     Picasso.with(getActivity()).load(lien2).into(imageTwo);
                     //////image trois
