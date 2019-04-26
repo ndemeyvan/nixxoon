@@ -21,8 +21,8 @@
     <dimen name="profil_desc">18sp</dimen>
     <dimen name="profil_phone">18sp</dimen>
     <dimen name="profil_residence">18sp</dimen>
-    <dimen name="profil_image_weight">120dp</dimen>
-    <dimen name="profil_image_height">120dp</dimen>
+    <dimen name="profil_image_weight">150dp</dimen>
+    <dimen name="profil_image_height">150dp</dimen>
     <!-- general activity. -->
     <dimen name="general_user_name">24sp</dimen>
     <dimen name="general_desc">18sp</dimen>
@@ -70,8 +70,8 @@
     <dimen name="post_padding_edit_top">100dp</dimen>
     <dimen name="post_padding_button_bottom">180dp</dimen>
     <!-- profil activty  -->
-    <dimen name="profil_float_button_end">140dp</dimen>
-    <dimen name="profil_float_button_bottom">80dp</dimen>
+    <dimen name="profil_float_button_end">130dp</dimen>
+    <dimen name="profil_float_button_bottom">10dp</dimen>
     <dimen name="profil_text_margin_top">24dp</dimen>
     <dimen name="profil_text_size">30dp</dimen>
     <dimen name="profil_text_bottom_residence_n_phone">150dp</dimen>
