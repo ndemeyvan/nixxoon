@@ -54,8 +54,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/circleImageView_profil"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="@dimen/profil_image_weight"
+                android:layout_height="@dimen/profil_image_height"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="50dp"
@@ -69,7 +69,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.094" />
+                app:layout_constraintVertical_bias="0.121" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -115,7 +115,7 @@
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-condensed"
                 android:textColor="@color/blanc"
-                android:textSize="18sp"
+                android:textSize="@dimen/profil_phone"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textView7"
                 app:layout_constraintEnd_toEndOf="@+id/textView7"
@@ -128,7 +128,7 @@
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-condensed"
                 android:textColor="@color/blanc"
-                android:textSize="18sp"
+                android:textSize="@dimen/profil_phone"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textView8"
                 app:layout_constraintEnd_toEndOf="@+id/textView8"
@@ -145,7 +145,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:lines="3"
                 android:textColor="@color/blanc"
-                android:textSize="18sp"
+                android:textSize="@dimen/profil_desc"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +166,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.246"
+                app:layout_constraintVertical_bias="0.268"
                 app:srcCompat="@drawable/ic_setting_profil" />
 
             <Button
@@ -193,7 +193,7 @@
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/fugaz_one"
                 android:textColor="@color/blanc"
-                android:textSize="24sp"
+                android:textSize="@dimen/profil_user_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/circleImageView_profil" />

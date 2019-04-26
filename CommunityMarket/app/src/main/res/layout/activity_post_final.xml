@@ -30,15 +30,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_background"
         android:elevation="1dp"
         android:ems="10"
         android:fontFamily="sans-serif-condensed"
         android:hint="nom du produit (25 caractere max)"
-        android:maxLength="25"
         android:inputType="textPersonName"
+        android:maxLength="25"
         android:padding="15dp"
         android:textColor="@color/blanc"
         android:textColorHint="@color/blanc"
@@ -96,7 +96,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/second_button_background"
-        android:fontFamily="@font/fugaz_one"
         android:text="mettre en vendre"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
@@ -120,7 +119,6 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/post_product_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageProduit" />
 
@@ -135,7 +133,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageProduit"
-        app:layout_constraintVertical_bias="0.382"
+        app:layout_constraintVertical_bias="0.373"
         app:srcCompat="@drawable/ic_ajouter" />
 
 

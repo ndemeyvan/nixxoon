@@ -5,5 +5,19 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-
+    <!-- a propos activity. -->
+    <dimen name="a_propos_margin_top">164dp</dimen>
+    <dimen name="a_propos_text_size">20sp</dimen>
+    <dimen name="a_propos_contacter_nous">18sp</dimen>
+    <dimen name="a_propos_nuttoon_padding">68dp</dimen>
+    <!-- choice activity. -->
+    <dimen name="choice_Logo_margin_top">120dp</dimen>
+    <dimen name="choice_Logo_text_size">45sp</dimen>
+    <!-- profil activity. -->
+    <dimen name="profil_user_name">24sp</dimen>
+    <dimen name="profil_desc">18sp</dimen>
+    <dimen name="profil_phone">18sp</dimen>
+    <dimen name="profil_residence">18sp</dimen>
+    <dimen name="profil_image_weight">120dp</dimen>
+    <dimen name="profil_image_height">120dp</dimen>
 </resources>
