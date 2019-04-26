@@ -73,10 +73,12 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                textView4.setText ( "Heureux de vous revoir ... " );
+                textView4.setText ( "Heureux de vous revoir ." );
                 login_progressBar.setVisibility ( View.VISIBLE );
                 String user_email=loginEdit.getText ().toString ();
+                textView4.setText ( "Heureux de vous revoir .." );
                 String user_password=registerEdit.getText ().toString ();
+                textView4.setText ( "Heureux de vous revoir ... " );
                 if (!TextUtils.isEmpty (user_email)&&!TextUtils.isEmpty(user_password)){
                         mAuth.signInWithEmailAndPassword ( user_email,user_password ).addOnCompleteListener ( new OnCompleteListener<AuthResult> () {
                             @Override
@@ -86,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                                     startActivity ( intent );
                                     finish ();
                                 }   else {
+                                    textView4.setText ( "c o n n e x i o n" );
                                     login_progressBar.setVisibility ( View.INVISIBLE );
                                     String error =task.getException ().getMessage ();
                                     Toast.makeText ( getApplicationContext(),error,Toast.LENGTH_LONG ).show ();

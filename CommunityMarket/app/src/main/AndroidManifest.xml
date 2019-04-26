@@ -95,7 +95,8 @@
         </service>
 
         <activity android:name=".postActivity.DetailActivityThree" />
-        <activity android:name=".postActivity.DetailActivityFour"></activity>
+        <activity android:name=".postActivity.DetailActivityFour" />
+        <activity android:name=".profile.VenteUtilisateurActivity"></activity>
     </application>
 
 </manifest>

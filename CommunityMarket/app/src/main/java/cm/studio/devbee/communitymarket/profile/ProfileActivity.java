@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -53,7 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
     private static FirebaseAuth mAuth;
     private static FirebaseFirestore firebaseFirestore;
     private static String current_user_id;
-    private static TextView nom;
+    private static TextView user_name;
     private static TextView telephone;
     private static TextView residence;
     private static TextView email;
@@ -67,7 +68,8 @@ public class ProfileActivity extends AppCompatActivity {
     private static List<ModelGridView> modelGridViewList;
     private static RecyclerView Recycler;
     private static ImageButton param_profil_button;
-    ImageView profilbacck_image;
+   private static ImageView profilbacck_image;
+    private static Button vente_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +77,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         profil_toolbar=findViewById(R.id.profil_de_la_toolbar);
         setSupportActionBar(profil_toolbar);
-        Recycler=findViewById(R.id.profilRecycler);
+        //Recycler=findViewById(R.id.profilRecycler);
         //////////////////
+        user_name=findViewById ( R.id.user_name );
         progressBar=findViewById(R.id.progressBar);
         mAuth=FirebaseAuth.getInstance();
         param_profil_button=findViewById ( R.id.param_profil );
@@ -89,6 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
         profilbacck_image=findViewById ( R.id.profilbacck_image );
         profileActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
+        vente_button=findViewById ( R.id.vente_button );
         modelGridViewList=new ArrayList<>();
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         profil_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -105,10 +109,18 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity ( gotoparam );
             }
         } );
-        gridViewAdapter=new ProfilAdapteur(modelGridViewList,getApplicationContext());
+        /*gridViewAdapter=new ProfilAdapteur(modelGridViewList,getApplicationContext());
         Recycler.setAdapter(gridViewAdapter);
-        Recycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        Recycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));*/
         asyncTask.execute();
+        vente_button.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent vendre=new Intent ( ProfileActivity.this ,VenteUtilisateurActivity.class);
+                startActivity ( vendre );
+                finish ();
+            }
+        } );
 
     }
 
@@ -137,6 +149,7 @@ public class ProfileActivity extends AppCompatActivity {
                         residence.setText ( residence_user );
                         email.setText ( email_user );
                         getSupportActionBar().setTitle( nom_user + " " + prenomuser);
+                        user_name.setText ( nom_user + " " + prenomuser );
                         Picasso.with ( getApplicationContext() ).load ( image_profil_user ).into ( profilbacck_image );
                         Picasso.with ( getApplicationContext() ).load ( image_profil_user ).transform(new CircleTransform()).placeholder(R.drawable.use).into ( profilImage );
                         progressBar.setVisibility(View.INVISIBLE);
@@ -147,7 +160,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         } );
     }
-    public void recyclerprofil(){
+   /* public void recyclerprofil(){
 
         Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
         firstQuery.addSnapshotListener(ProfileActivity.this,new EventListener<QuerySnapshot>() {
@@ -166,7 +179,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
     public class CircleTransform implements Transformation {
         @Override
         public Bitmap transform(Bitmap source) {
@@ -213,7 +226,7 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             recupererDonne();
-            recyclerprofil();
+           // recyclerprofil();
             return null;
         }
 
@@ -232,7 +245,7 @@ public class ProfileActivity extends AppCompatActivity {
         mAuth=null;
         firebaseFirestore=null;
         current_user_id=null;
-       nom=null;
+        user_name=null;
         telephone=null;
         residence=null;
         email=null;

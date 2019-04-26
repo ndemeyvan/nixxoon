@@ -32,6 +32,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!--
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/online"
                 android:layout_width="15dp"
@@ -53,7 +54,7 @@
                 app:civ_border_width="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/chat_message_image_profil"
                 app:layout_constraintEnd_toEndOf="@+id/chat_message_image_profil" />
-
+-->
             <TextView
                 android:id="@+id/chat_user_name"
                 android:layout_width="wrap_content"

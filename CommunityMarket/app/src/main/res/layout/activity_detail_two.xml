@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".postActivity.DetailActivityTwo">
+    tools:context=".postActivity.DetailActivityTwo"
+    android:background="@color/black">
     <ImageView
         android:id="@+id/detail_image_post"
         android:layout_width="0dp"
@@ -13,39 +14,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-         />
+        />
 
     <TextView
         android:id="@+id/detail_titre_produit"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="44dp"
         android:fontFamily="sans-serif-condensed"
         android:textColor="@color/orange"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/detail_image_post"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.242"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_user_name" />
 
     <TextView
         android:id="@+id/detail_prix_produit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-condensed"
-        android:textColor="@color/blanc"
+        android:textColor="@color/orange"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/detail_image_post"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_image_post" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/detail_image_du_profil"
@@ -85,7 +82,7 @@
         android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-condensed"
-        android:textColor="@color/black"
+        android:textColor="@color/blanc"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,8 +93,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_user_name">
 
@@ -110,7 +110,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/black"
+            android:textColor="@color/blanc"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/vendeur_button"
             app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +127,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-condensed"
-        android:textColor="@color/black"
+        android:textColor="@color/blanc"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/detail_user_name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +142,7 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/second_button_background"
         android:fontFamily="@font/fugaz_one"
-        android:text="supprimer ceci  des nouveautés"
+        android:text="supprimer"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
         android:textSize="16sp"
@@ -164,5 +164,7 @@
         app:layout_constraintBottom_toTopOf="@+id/detail_titre_produit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.341" />
+
 </android.support.constraint.ConstraintLayout>

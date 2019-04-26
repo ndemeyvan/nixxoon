@@ -46,7 +46,7 @@ public class ChatMessageActivity extends AppCompatActivity {
     private String image_profil;
     private String status;
     private DiplayAllChat diplayAllChat;
-    private  static  CircleImageView online_status_image;
+   // private  static  CircleImageView online_status_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class ChatMessageActivity extends AppCompatActivity {
         groupAdapter=new GroupAdapter ();
         firebaseFirestore=FirebaseFirestore.getInstance ();
         contatc_recyclerview.setAdapter ( groupAdapter );
-        online_status_image=findViewById ( R.id.online_status_image );
+       // online_status_image=findViewById ( R.id.online_status_image );
         recuperation ();
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         message_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -165,8 +165,8 @@ public class ChatMessageActivity extends AppCompatActivity {
         public void bind(@NonNull ViewHolder viewHolder, int position) {
         final TextView lats_message=viewHolder.itemView.findViewById ( R.id.chat_last_message );
         final TextView nom_utilisateur=viewHolder.itemView.findViewById ( R.id.chat_user_name );
-        final CircleImageView online =viewHolder.itemView.findViewById ( R.id.online );
-        final CircleImageView offline=viewHolder.itemView.findViewById ( R.id.offline );
+       // final CircleImageView online =viewHolder.itemView.findViewById ( R.id.online );
+       // final CircleImageView offline=viewHolder.itemView.findViewById ( R.id.offline );
         final TextView lu_non_lu=viewHolder.itemView.findViewById ( R.id.lu_non );
             CardView chat_card = viewHolder.itemView.findViewById ( R.id.chat_card );
             TextView temps=viewHolder.itemView.findViewById ( R.id.chat_temps );
@@ -191,13 +191,13 @@ public class ChatMessageActivity extends AppCompatActivity {
                                 lu_non_lu.setText (  diplayAllChat.getLu () );
                                 nom_utilisateur.setText(name_user+" "+prenom);
                                 Picasso.with(getApplicationContext()).load(image_profil).into(profil);
-                                if (statusUser.equals ( "online" )){
+                                /*if (statusUser.equals ( "online" )){
                                     online.setVisibility ( View.VISIBLE );
                                     offline.setVisibility ( View.INVISIBLE );
                                 }else {
                                     online.setVisibility ( View.INVISIBLE );
                                     offline.setVisibility ( View.VISIBLE );
-                                }
+                                }*/
                             }
 
                         }else {

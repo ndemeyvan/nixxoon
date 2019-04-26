@@ -1,6 +1,5 @@
 package cm.studio.devbee.communitymarket.login;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -43,7 +42,7 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
         password=findViewById ( R.id.password );
         confirm_password=findViewById ( R.id.password_register );
         enregister=findViewById ( R.id.button );
-        textView5=findViewById ( R.id.textView5 );
+        textView5=findViewById ( R.id.message_text );
         register_text=findViewById ( R.id.register_text );
         register_progressBar=findViewById ( R.id.register_progressBarRegister );
         mAuth = FirebaseAuth.getInstance();
@@ -64,10 +63,12 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
             @Override
             public void onClick(View v) {
                 register_progressBar.setVisibility ( View.VISIBLE );
-                textView5.setText ( "Bienvenue ... " );
+                textView5.setText ( "Bienvenue . " );
                 String user_email=email.getText ().toString ();
                 String user_password=password.getText ().toString ();
+                textView5.setText ( "Bienvenue .. " );
                 String user_confirm=confirm_password.getText ().toString ();
+                textView5.setText ( "Bienvenue ... " );
                if (!TextUtils.isEmpty (user_email)&&!TextUtils.isEmpty(user_password)&&!TextUtils.isEmpty(user_confirm)){
                    if (user_password.equals ( user_confirm )){
                        mAuth.createUserWithEmailAndPassword ( user_email,user_password ).addOnCompleteListener ( new OnCompleteListener<AuthResult> () {
@@ -78,6 +79,7 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
                                 startActivity ( intent );
                                 finish ();
                             }   else {
+                                textView5.setText ( "i n s c r i p t i o n " );
                                 register_progressBar.setVisibility ( View.INVISIBLE );
                                 String error =task.getException ().getMessage ();
                                 Toast.makeText ( getApplicationContext(),error,Toast.LENGTH_LONG ).show ();
