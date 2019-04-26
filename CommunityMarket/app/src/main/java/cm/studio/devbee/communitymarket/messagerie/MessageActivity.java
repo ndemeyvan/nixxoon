@@ -437,6 +437,21 @@ public class MessageActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
+        DocumentReference usertwo = firebaseFirestore.collection("dernier_message" ).document (current_user).collection("contacts").document (user_id_message);
+        usertwo.update("lu", "lu")
+                .addOnSuccessListener(new OnSuccessListener<Void> () {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+
+
+
 
     }
 
