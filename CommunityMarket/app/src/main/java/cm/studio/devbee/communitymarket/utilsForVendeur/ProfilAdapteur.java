@@ -108,11 +108,11 @@ public class ProfilAdapteur extends RecyclerView.Adapter<ProfilAdapteur.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             produit=itemView.findViewById(R.id.post_image_vendeur );
-            post_titre_produit_description=itemView.findViewById(R.id.post_titre_produit_descriptionl_vendeur);
+            //post_titre_produit_description=itemView.findViewById(R.id.post_titre_produit_descriptionl_vendeur);
             prix_post=itemView.findViewById(R.id.prix_postl_vendeur );
             post_image_profil=itemView.findViewById ( R.id.profil_vendeur );
             catrogies_name=itemView.findViewById(R.id.catrogies_name_vendeur );
-            nom_user=itemView.findViewById(R.id.nom_userl_vendeur);
+            //nom_user=itemView.findViewById(R.id.nom_userl_vendeur);
         }
         public void image_produit(String image){
             Picasso.with(context).load(image).into (produit );

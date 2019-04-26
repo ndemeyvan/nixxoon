@@ -91,13 +91,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewHolder
         TextView search_title;
         public viewHolder(@NonNull View itemView) {
             super ( itemView );
-            search_price=itemView.findViewById ( R.id.search_prix );
+            /*search_price=itemView.findViewById ( R.id.search_prix );
             utilisateur_search=itemView.findViewById ( R.id.utilisateur_search );
             search_user_name=itemView.findViewById ( R.id.search_usr_name );
             search_user_profil_image=itemView.findViewById ( R.id.search_profil_image );
             search_post_image=itemView.findViewById ( R.id.seacrh_image_post );
             search_description=itemView.findViewById ( R.id.search_description );
-            search_title=itemView.findViewById ( R.id.search_title );
+            search_title=itemView.findViewById ( R.id.search_title );*/
         }
         public void searchdata (String titre){
             search_title.setText ( titre );
