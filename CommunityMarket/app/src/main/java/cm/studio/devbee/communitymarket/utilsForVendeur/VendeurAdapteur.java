@@ -117,7 +117,7 @@ public class VendeurAdapteur extends RecyclerView.Adapter<VendeurAdapteur.ViewHo
             Picasso.with(context).load(image).into (produit );
         }
         public void nom_produit(String nom){
-            post_titre_produit_description.setText(nom);
+            //post_titre_produit_description.setText(nom);
         }
         public void prix_produit(String prix){
             prix_post.setText(prix);
@@ -129,7 +129,7 @@ public class VendeurAdapteur extends RecyclerView.Adapter<VendeurAdapteur.ViewHo
             catrogies_name.setText(cat);
         }
         public void setUser(String user){
-            nom_user.setText(user);
+//            nom_user.setText(user);
         }
 
     }
