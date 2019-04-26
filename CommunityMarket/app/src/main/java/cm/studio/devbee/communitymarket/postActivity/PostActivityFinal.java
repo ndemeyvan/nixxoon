@@ -177,7 +177,7 @@ public class PostActivityFinal extends AppCompatActivity {
                     compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] data = baos.toByteArray();
 
-                    UploadTask uploadTask=storageReference.child ( "image_des_produits_compresse" ).child ( random +".jpg" ).putBytes ( data );
+                    UploadTask uploadTask=storageReference.child ( "image_des_produits" ).child ( random +".jpg" ).putBytes ( data );
 
                     uploadTask.addOnFailureListener(new OnFailureListener () {
                         @Override

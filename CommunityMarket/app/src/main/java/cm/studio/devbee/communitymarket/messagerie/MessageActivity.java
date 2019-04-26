@@ -94,6 +94,7 @@ public class MessageActivity extends AppCompatActivity {
    private static ValueEventListener valueEventListener;
    private static ImageView image_de_discutions;
    String lien_image;
+    String image;
 
 
     @Override
@@ -130,6 +131,7 @@ public class MessageActivity extends AppCompatActivity {
                startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
             }
         });
+
         send_button.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
@@ -144,6 +146,7 @@ public class MessageActivity extends AppCompatActivity {
                          message_user_send.setText ( "" );
             }
         } );
+
 
         Calendar calendar=Calendar.getInstance ();
         SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
@@ -161,24 +164,39 @@ public class MessageActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
+
         firebaseFirestore.collection ( "sell_image" ).document ( user_id_message ).collection ( current_user ).document (user_id_message).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
-                        String image= task.getResult ().getString ( "image_en_vente" );
-                        Picasso.with ( MessageActivity.this ).load ( image ).placeholder ( R.drawable.imgg ).into ( image_de_discutions );
+                         image= task.getResult ().getString ( "image_en_vente" );
+                        Picasso.with ( MessageActivity.this ).load ( image ).into ( image_de_discutions );
                     }else{
-                        image_de_discutions.setImageResource ( R.drawable.imgg );
+
                     }
                 }else {
-
                     String error=task.getException().getMessage();
-
-
                 }
             }
         });
+
+        firebaseFirestore.collection ( "sell_image" ).document ( current_user ).collection ( user_id_message ).document (current_user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    if (task.getResult ().exists ()){
+                        image= task.getResult ().getString ( "image_en_vente" );
+                        Picasso.with ( MessageActivity.this ).load ( image ).into ( image_de_discutions );
+                    }else{
+
+                    }
+                }else {
+                    String error=task.getException().getMessage();
+                }
+            }
+        });
+
 
     }
 
@@ -328,78 +346,7 @@ public class MessageActivity extends AppCompatActivity {
         startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
     }
 
-    private void sendNotification() {
-        Toast.makeText(this, "Current Recipients is : user1@gmail.com ( Just For Demo )", Toast.LENGTH_SHORT).show();
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                int SDK_INT = android.os.Build.VERSION.SDK_INT;
-                if (SDK_INT > 8) {
-                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                            .permitAll().build();
-                    StrictMode.setThreadPolicy(policy);
-                    String send_email;
 
-                    //This is a Simple Logic to Send Notification different Device Programmatically....
-                    if (current_user.equals(current_user)) {
-                        send_email =user_id_message;
-                    } else {
-                        send_email =current_user;
-                    }
-
-                    try {
-                        String jsonResponse;
-                        URL url = new URL("https://onesignal.com/api/v1/notifications");
-                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                        con.setUseCaches(false);
-                        con.setDoOutput(true);
-                        con.setDoInput(true);
-
-                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                        con.setRequestProperty("Authorization", "Basic MmQxNjExZDktZjFkNi00MzFiLTgzZGQtOWZkMDEyYjYyZWE2");
-                        con.setRequestMethod("POST");
-
-                        String strJsonBody = "{"
-                                + "\"app_id\": \"0ee417cd-5789-427c-bea7-8bf2fc90eec1\","
-
-                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"user_id\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
-
-                                + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\"en\": \"English Message\"}"
-                                + "}";
-
-
-                        System.out.println("strJsonBody:\n" + strJsonBody);
-
-                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
-                        con.setFixedLengthStreamingMode(sendBytes.length);
-
-                        OutputStream outputStream = con.getOutputStream();
-                        outputStream.write(sendBytes);
-
-                        int httpResponse = con.getResponseCode();
-                        System.out.println("httpResponse: " + httpResponse);
-
-                        if (httpResponse >= HttpURLConnection.HTTP_OK
-                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
-                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
-                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-                            scanner.close();
-                        } else {
-                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
-                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-                            scanner.close();
-                        }
-                        System.out.println("jsonResponse:\n" + jsonResponse);
-
-                    } catch (Throwable t) {
-                        t.printStackTrace();
-                    }
-                }
-            }
-        });
-
-    }
 
     public void readMessage(final String monId, final String sonID, final String imageYrl){
        // modelChatList.clear();
@@ -425,6 +372,7 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         } );
+
         DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (user_id_message).collection("contacts").document (current_user);
         user.update("lu", "lu")
                 .addOnSuccessListener(new OnSuccessListener<Void> () {
@@ -449,9 +397,6 @@ public class MessageActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
-
-
-
 
     }
 

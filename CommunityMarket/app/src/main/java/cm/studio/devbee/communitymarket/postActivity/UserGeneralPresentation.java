@@ -107,6 +107,12 @@ public class UserGeneralPresentation extends AppCompatActivity {
 
                     }
                 } );
+                firebaseFirestore.collection ( "sell_image" ).document ( current_user ).collection ( current_user_id ).document (current_user).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                } );
                 DocumentReference user =  firebaseFirestore.collection ( "sell_image" ).document ( current_user_id ).collection ( current_user ).document (current_user_id);
                 user.update("image_en_vente", lien_image)
                         .addOnSuccessListener(new OnSuccessListener<Void> () {
