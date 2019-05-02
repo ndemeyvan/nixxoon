@@ -24,7 +24,7 @@
     <dimen name="profil_phone">18sp</dimen>
     <dimen name="profil_residence">18sp</dimen>
     <dimen name="profil_image_weight">120dp</dimen>
-    <dimen name="profil_image_height">120dp</dimen>
+    <dimen name="profil_image_height">900dp</dimen>
     <!-- general activity. -->
     <dimen name="general_user_name">24sp</dimen>
     <dimen name="general_desc">14sp</dimen>
@@ -43,7 +43,7 @@
     <dimen name="vendeur_phone">18sp</dimen>
     <dimen name="vendeur_residence">14sp</dimen>
     <dimen name="vendeur_image_weight">120dp</dimen>
-    <dimen name="vendeur_image_height">120dp</dimen>
+    <dimen name="vendeur_image_height">100dp</dimen>
     <!-- item layout principal-->
     <dimen name="item_principal_image_dim_height_with">35dp</dimen>
     <dimen name="item_principal_name">14sp</dimen>

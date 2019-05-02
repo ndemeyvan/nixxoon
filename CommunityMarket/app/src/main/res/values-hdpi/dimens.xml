@@ -44,8 +44,8 @@
     <dimen name="vendeur_desc">18sp</dimen>
     <dimen name="vendeur_phone">18sp</dimen>
     <dimen name="vendeur_residence">14sp</dimen>
-    <dimen name="vendeur_image_weight">130dp</dimen>
-    <dimen name="vendeur_image_height">130dp</dimen>
+    <dimen name="vendeur_image_weight">80dp</dimen>
+    <dimen name="vendeur_image_height">80dp</dimen>
     <!-- item layout principal-->
     <dimen name="item_principal_image_dim_height_with">35dp</dimen>
     <dimen name="item_principal_name">14sp</dimen>
@@ -73,7 +73,7 @@
     <dimen name="parametre_image_button">30dp</dimen>
     <!-- post activty final -->
     <dimen name="post_actibity_final_float_button_top_margin">60dp</dimen>
-    <dimen name="post_padding_edit_text">5dp</dimen>
+    <dimen name="post_padding_edit_text">15dp</dimen>
     <dimen name="post_padding_edit_top">16dp</dimen>
     <dimen name="post_padding_button_bottom">80dp</dimen>
     <dimen name="post_padding_margin_top">20dp</dimen>

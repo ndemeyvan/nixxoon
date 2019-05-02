@@ -52,8 +52,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/vendeur_image"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="@dimen/vendeur_image_height"
+                android:layout_height="@dimen/vendeur_image_height"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -61,69 +61,44 @@
                 android:src="@drawable/boy"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="90dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="@dimen/general_reisdence_bottom"
-                android:fontFamily="sans-serif-condensed"
-                android:text="reside a"
-                android:textColor="@color/blanc"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.848" />
-
-            <TextView
                 android:id="@+id/vendeur_residence"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-condensed"
-                android:text=""
+                android:text="xxxxxx"
+                android:textColor="@color/blanc"
                 android:textSize="@dimen/vendeur_residence"
-                android:textColor="@color/blanc"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textView14"
-                app:layout_constraintEnd_toEndOf="@+id/textView14"
-                app:layout_constraintStart_toStartOf="@+id/textView14" />
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="90dp"
-                android:layout_marginBottom="@dimen/general_reisdence_bottom"
-                android:fontFamily="sans-serif-condensed"
-                android:text="phone"
-                android:textColor="@color/blanc"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.848" />
+                app:layout_constraintVertical_bias="0.703" />
 
             <TextView
                 android:id="@+id/vendeur_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="70dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-condensed"
-                android:text=""
-                android:textSize="@dimen/vendeur_residence"
+                android:text="xxxxxx"
                 android:textColor="@color/blanc"
+                android:textSize="@dimen/vendeur_residence"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textView17"
-                app:layout_constraintEnd_toEndOf="@+id/textView17"
-                app:layout_constraintStart_toStartOf="@+id/textView17" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.709" />
 
             <TextView
                 android:id="@+id/vendeur_email"
@@ -162,6 +137,7 @@
                 android:layout_marginBottom="65dp"
                 android:background="@drawable/background_message_button"
                 android:clickable="true"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_messsage" />
