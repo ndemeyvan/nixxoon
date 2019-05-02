@@ -127,7 +127,6 @@ public class MessageActivity extends AppCompatActivity {
         message_recyclerview.setLayoutManager ( linearLayoutManager );
         nomEtImageProfil ();
         online_status=findViewById ( R.id.online_status_image );
-        message_progressbar.setVisibility(View.VISIBLE);
         offline_status=findViewById ( R.id.offline_status_image );
         mesage_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

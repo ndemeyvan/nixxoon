@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
-    <gradient android:startColor="#ff6e7f"  android:endColor="#bfe9ff"></gradient>
-    <corners android:radius="10dp"
-        android:topRightRadius="0dp"></corners>
+    <gradient android:startColor="#5c258d"  android:endColor="#4389a2"></gradient>
+
 </shape>
 <!--
 <shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
@@ -12,3 +11,16 @@
 </shape>
 
 -->
+    <!--
+   <shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient android:startColor="#ff6e7f"  android:endColor="#bfe9ff"></gradient>
+    <corners android:radius="10dp"
+        android:topRightRadius="0dp"></corners>
+</shape>
+    -->
+    <!--
+    <shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient android:startColor="#0f0c29" android:centerColor="#302b63"  android:endColor="#24243e"></gradient>
+
+</shape>
+       -->
