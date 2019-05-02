@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -33,9 +35,11 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.Accueil;
+import cm.studio.devbee.communitymarket.messagerie.ChatMessageActivity;
 import cm.studio.devbee.communitymarket.messagerie.MessageActivity;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
+import cm.studio.devbee.communitymarket.search.SearchActivity;
 import cm.studio.devbee.communitymarket.utilsForVendeur.VendeurAdapteur;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -68,7 +72,7 @@ public class VendeurActivity extends AppCompatActivity {
         vendeur_residence=findViewById(R.id.vendeur_residence);
         vendeur_phone=findViewById(R.id.vendeur_phone);
         vendeur_email=findViewById(R.id.vendeur_email);
-        message_button_vendeur=findViewById(R.id.sendMessage);
+       // message_button_vendeur=findViewById(R.id.sendMessage);
         vendeur_progressbar=findViewById(R.id.vendeur_progressbar);
         iddupost =getIntent().getExtras().getString("id du post");
         current_user_id =getIntent().getExtras().getString("id de l'utilisateur");
@@ -90,17 +94,35 @@ public class VendeurActivity extends AppCompatActivity {
         vendeurActivityWeakReference=new WeakReference<>(this);
         asyncTask=new AsyncTask();
         asyncTask.execute();
-        message_button_vendeur.setOnClickListener(new View.OnClickListener() {
+        /*message_button_vendeur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotochat= new Intent(getApplicationContext(),MessageActivity.class);
-                gotochat.putExtra("id de l'utilisateur",current_user_id);
-                startActivity ( gotochat );
+
 
             }
-        });
+        });*/
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater ().inflate ( R.menu.vendeur_menu, menu );
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId ();
+        if (id == R.id.message_vendeur) {
+            Intent gotochat= new Intent(getApplicationContext(),MessageActivity.class);
+            gotochat.putExtra("id de l'utilisateur",current_user_id);
+            startActivity ( gotochat );
+            return true;
+        }
+
+        return super.onOptionsItemSelected ( item );
+    }
+
     public void nomEtImageProfil(){
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -119,6 +141,7 @@ public class VendeurActivity extends AppCompatActivity {
                         Picasso.with(VendeurActivity.this).load(image_user).placeholder(R.drawable.use).into(profilbacck_image);
                         Picasso.with(VendeurActivity.this).load(image_user).placeholder(R.drawable.use).into(vendeur_image);
                         getSupportActionBar().setTitle(name_user+" "+prenom);
+                        vendeur_progressbar.setVisibility(View.INVISIBLE);
                     }
                 }else {
                     String error=task.getException().getMessage();
