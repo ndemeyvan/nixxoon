@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".postActivity.PostActivityFinal"
-    android:background="@color/colorPrimary">
+    android:background="@color/blanc">
     <android.support.v7.widget.Toolbar
         android:background="@color/black"
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_background"
         android:elevation="1dp"
@@ -62,7 +62,6 @@
         android:hint="description (300 caractere max)"
         android:inputType="textMultiLine"
         android:padding="@dimen/post_padding_edit_text"
-        android:maxLength="300"
         android:textSize="15sp"
         android:text=""
         android:textColor="@color/blanc"
@@ -103,6 +102,8 @@
         android:text="mettre en vendre"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -122,8 +123,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/post_product_name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageProduit" />
+        app:layout_constraintTop_toTopOf="@+id/imageProduit"
+        app:layout_constraintVertical_bias="0.315" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/post_new_button"
@@ -136,7 +139,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageProduit"
-        app:layout_constraintVertical_bias="0.41"
+        app:layout_constraintVertical_bias="0.361"
         app:srcCompat="@drawable/ic_ajouter" />
 
 

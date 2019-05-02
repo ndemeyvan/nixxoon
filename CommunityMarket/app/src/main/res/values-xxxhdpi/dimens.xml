@@ -6,14 +6,15 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <!-- a propos activity. -->
-    <dimen name="a_propos_margin_top">164dp</dimen>
+    <dimen name="a_propos_margin_top">130dp</dimen>
     <dimen name="a_propos_text_size">20sp</dimen>
-    <dimen name="a_propos_contacter_nous">18sp</dimen>
+    <dimen name="a_propos_contacter_nous">20sp</dimen>
     <dimen name="a_propos_nuttoon_padding">140dp</dimen>
     <dimen name="a_propos_button_size_text">14sp</dimen>
+    <dimen name="button_size_text">12sp</dimen>
     <!-- choice activity. -->
     <dimen name="choice_Logo_margin_top">120dp</dimen>
-    <dimen name="choice_Logo_text_size">40sp</dimen>
+    <dimen name="choice_Logo_text_size">50sp</dimen>
     <dimen name="choice_button_top">200dp</dimen>
     <dimen name="choice_button_padding_top">10dp</dimen>
     <!-- profil activity. -->
@@ -39,6 +40,7 @@
     <dimen name="vendeur_residence">14sp</dimen>
     <dimen name="vendeur_image_weight">120dp</dimen>
     <dimen name="vendeur_image_height">120dp</dimen>
+    <dimen name="activity_vendeur_end_image_button">150dp</dimen>
     <!-- item layout principal-->
     <dimen name="item_principal_image_dim_height_with">35dp</dimen>
     <dimen name="item_principal_name">14sp</dimen>
@@ -57,18 +59,21 @@
     <dimen name="post_item_prix">12sp</dimen>
     <dimen name="post_item_desc">14sp</dimen>
     <dimen name="post_item_image">40dp</dimen>
-    !-- login activty post-->
+    <!-- login activty post-->
     <dimen name="login_logo_margintop">96dp</dimen>
     <!-- parametre profil activty post-->
     <dimen name="parametre_actibity_image_w_n_h">120dp</dimen>
-    <dimen name="parametre_padding_edit_text">16dp</dimen>
+    <dimen name="parametre_padding_edit_text">18dp</dimen>
     <dimen name="parametre_image_button">40dp</dimen>
 
     <!-- post activty final -->
     <dimen name="post_actibity_final_float_button_top_margin">0dp</dimen>
-    <dimen name="post_padding_edit_text">16dp</dimen>
+    <dimen name="post_padding_edit_text">20dp</dimen>
     <dimen name="post_padding_edit_top">100dp</dimen>
-    <dimen name="post_padding_button_bottom">180dp</dimen>
+    <dimen name="post_padding_button_bottom">100dp</dimen>
+
+
+
     <!-- profil activty  -->
     <dimen name="profil_float_button_end">130dp</dimen>
     <dimen name="profil_float_button_bottom">10dp</dimen>

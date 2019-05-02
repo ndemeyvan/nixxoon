@@ -125,6 +125,7 @@
         android:elevation="3dp"
         android:text="m'enregistrer"
         android:textAllCaps="false"
+        android:textSize="17sp"
         android:textColor="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -139,10 +140,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/message_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/register_text"
@@ -152,7 +156,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/second_button_background"
-
+        android:textSize="17sp"
         android:elevation="3dp"
         android:text="me connecter"
         android:textAllCaps="false"

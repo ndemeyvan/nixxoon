@@ -79,6 +79,7 @@
         android:background="@drawable/button_background"
         android:text="contacter nous."
         android:textAllCaps="false"
+        android:textSize="@dimen/button_size_text"
         android:textColor="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

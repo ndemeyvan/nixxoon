@@ -11,6 +11,7 @@
     <dimen name="a_propos_contacter_nous">18sp</dimen>
     <dimen name="a_propos_nuttoon_padding">68dp</dimen>
     <dimen name="a_propos_button_size_text">30sp</dimen>
+    <dimen name="button_size_text">12sp</dimen>
 
     <!-- choice activity. -->
     <dimen name="choice_Logo_margin_top">120dp</dimen>
@@ -32,6 +33,9 @@
     <dimen name="general_image_weight">120dp</dimen>
     <dimen name="general_image_height">120dp</dimen>
     <dimen name="general_image_end">140dp</dimen>
+    <dimen name="general_image_w_n_h">120dp</dimen>
+    <dimen name="general_image_top">56dp</dimen>
+    <dimen name="general_button_margin_top">105dp</dimen>
     <!-- vendeur activity. -->
     <dimen name="vendeur_user_name">24sp</dimen>
     <dimen name="vendeur_desc">18sp</dimen>
@@ -61,25 +65,26 @@
     <dimen name="login_logo_margintop">96dp</dimen>
     <!-- parametre profil activty post-->
     <dimen name="parametre_actibity_image_w_n_h">120dp</dimen>
-    <dimen name="parametre_padding_edit_text">8dp</dimen>
-    <dimen name="parametre_image_button">30dp</dimen>
+    <dimen name="parametre_padding_edit_text">11dp</dimen>
+    <dimen name="parametre_image_button">40dp</dimen>
 
     <!-- post activty final -->
     <dimen name="post_actibity_final_float_button_top_margin">5dp</dimen>
-    <dimen name="post_padding_edit_text">8dp</dimen>
+    <dimen name="post_padding_edit_text">11dp</dimen>
     <dimen name="post_padding_edit_top">60dp</dimen>
+    <dimen name="post_padding_button_bottom">25dp</dimen>
     <!-- profil activty  -->
     <dimen name="profil_float_button_end">125dp</dimen>
     <dimen name="profil_text_margin_top">24dp</dimen>
     <dimen name="profil_text_size">25dp</dimen>
-    <dimen name="profil_text_bottom_residence_n_phone">120dp</dimen>
+    <dimen name="profil_text_bottom_residence_n_phone">75dp</dimen>
     <dimen name="profil_float_button_bottom">120dp</dimen>
 
     <!-- register activty  -->
     <dimen name="register_text_float_button_end">25sp</dimen>
+    <dimen name="register_text_margin_top">100dp</dimen>
     <!-- general activty  -->
-    <dimen name="general_image_w_n_h">120dp</dimen>
-    <dimen name="general_image_top">56dp</dimen>
+
 
 
 
