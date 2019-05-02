@@ -27,9 +27,10 @@
     </LinearLayout> -->
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
 
+        android:layout_height="50dp"
         android:background="@drawable/background_detail"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/user_message_to_send"
@@ -176,5 +177,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/background_detail" />
 
+    <ProgressBar
+        android:id="@+id/message_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/message_recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
 </android.support.constraint.ConstraintLayout>

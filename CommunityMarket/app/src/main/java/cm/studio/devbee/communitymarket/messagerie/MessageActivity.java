@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -89,12 +90,13 @@ public class MessageActivity extends AppCompatActivity {
     private static long time;
     private static  CircleImageView online_status;
     private static CircleImageView offline_status;
-   private static DatabaseReference reference;
-   private static ImageView image_en_fond;
-   private static ValueEventListener valueEventListener;
-   private static ImageView image_de_discutions;
-   String lien_image;
-    String image;
+    private static DatabaseReference reference;
+    private static ImageView image_en_fond;
+    private static ValueEventListener valueEventListener;
+    private static ImageView image_de_discutions;
+    private static  String lien_image;
+    private static  String image;
+    private static ProgressBar message_progressbar;
 
 
     @Override
@@ -106,6 +108,7 @@ public class MessageActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance ();
         mesage_toolbar=findViewById ( R.id.message_toolbar );
         setSupportActionBar ( mesage_toolbar );
+        message_progressbar=findViewById(R.id.message_progressbar);
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         intent=getIntent (  );
         modelChatList=new ArrayList<> (  );
@@ -124,6 +127,7 @@ public class MessageActivity extends AppCompatActivity {
         message_recyclerview.setLayoutManager ( linearLayoutManager );
         nomEtImageProfil ();
         online_status=findViewById ( R.id.online_status_image );
+        message_progressbar.setVisibility(View.VISIBLE);
         offline_status=findViewById ( R.id.offline_status_image );
         mesage_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -367,6 +371,7 @@ public class MessageActivity extends AppCompatActivity {
                 }
             }
 
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -397,6 +402,7 @@ public class MessageActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
+        message_progressbar.setVisibility(View.INVISIBLE);
 
     }
 

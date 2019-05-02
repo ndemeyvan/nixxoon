@@ -60,7 +60,8 @@ public class VendeurActivity extends AppCompatActivity {
     private static List<ModelGridView> modelGridViewList;
     private WeakReference<VendeurActivity> vendeurActivityWeakReference;
     private  AsyncTask asyncTask;
-    ImageView profilbacck_image;
+    private static ImageView profilbacck_image;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
