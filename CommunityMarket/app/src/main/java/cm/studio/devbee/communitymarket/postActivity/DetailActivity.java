@@ -102,6 +102,7 @@ public class DetailActivity extends AppCompatActivity {
     }
     public void supprime(){
         if (current_user_id.equals ( utilisateur_actuel )){
+            supprime_detail_button.setText ( "supprimer de cette categories ?");
             supprime_detail_button.setVisibility ( View.VISIBLE );
             supprime_detail_button.setEnabled ( true );
             supprime_detail_button.setVisibility ( View.VISIBLE );

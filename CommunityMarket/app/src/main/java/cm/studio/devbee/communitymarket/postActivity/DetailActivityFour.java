@@ -99,6 +99,7 @@ public class DetailActivityFour extends AppCompatActivity {
         if (current_user_id.equals ( utilisateur_actuel )){
             supprime_detail_button.setVisibility ( View.VISIBLE );
             supprime_detail_button.setEnabled ( true );
+            supprime_detail_button.setText ( "supprimer de votre profil ?");
             supprime_detail_button.setVisibility ( View.VISIBLE );
             supprime_detail_button.setOnClickListener ( new View.OnClickListener () {
                 @Override
