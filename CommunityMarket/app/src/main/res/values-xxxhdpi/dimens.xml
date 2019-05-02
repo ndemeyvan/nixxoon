@@ -26,13 +26,14 @@
     <dimen name="profil_image_height">180dp</dimen>
     <!-- general activity. -->
     <dimen name="general_user_name">24sp</dimen>
-    <dimen name="general_desc">18sp</dimen>
+    <dimen name="general_desc">16sp</dimen>
     <dimen name="general_phone">18sp</dimen>
     <dimen name="general_residence">18sp</dimen>
     <dimen name="general_image_weight">120dp</dimen>
     <dimen name="general_image_end">140dp</dimen>
     <dimen name="general_image_height">120dp</dimen>
     <dimen name="general_button_margin_top">160dp</dimen>
+    <dimen name="general_margin_top">140dp</dimen>
     <!-- vendeur activity. -->
     <dimen name="vendeur_user_name">24sp</dimen>
     <dimen name="vendeur_desc">18sp</dimen>

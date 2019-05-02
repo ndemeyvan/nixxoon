@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,7 +53,9 @@ import java.util.Random;
 
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.messagerie.ChatMessageActivity;
 import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
+import cm.studio.devbee.communitymarket.search.SearchActivity;
 import id.zelory.compressor.Compressor;
 
 public class PostActivityFinal extends AppCompatActivity {
@@ -99,6 +103,25 @@ public class PostActivityFinal extends AppCompatActivity {
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater ().inflate ( R.menu.menu_post_article, menu );
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId ();
+        if (id == R.id.send_article) {
+            progressBar_post.setVisibility ( View.VISIBLE );
+            vendreButton.setEnabled ( false );
+            prendreDonnerDevente ();
+            return true;
+        }
+        return super.onOptionsItemSelected ( item );
+    }
+
     public void setimage(){
         post_new_button.setOnClickListener ( new View.OnClickListener () {
             @Override

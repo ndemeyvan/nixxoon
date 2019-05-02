@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -45,7 +47,9 @@ import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.gridView_post.GridViewAdapter;
 import cm.studio.devbee.communitymarket.gridView_post.ModelGridView;
+import cm.studio.devbee.communitymarket.messagerie.ChatMessageActivity;
 import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
+import cm.studio.devbee.communitymarket.search.SearchActivity;
 import cm.studio.devbee.communitymarket.utilsForVendeur.ProfilAdapteur;
 import cm.studio.devbee.communitymarket.utilsForVendeur.VendeurAdapteur;
 import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
@@ -102,7 +106,7 @@ public class ProfileActivity extends AppCompatActivity {
                 finish ();
             }
         });
-        param_profil_button.setOnClickListener ( new View.OnClickListener () {
+        profilImage.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 Intent gotoparam=new Intent ( getApplicationContext (),ParametrePorfilActivity.class );
@@ -160,26 +164,24 @@ public class ProfileActivity extends AppCompatActivity {
             }
         } );
     }
-   /* public void recyclerprofil(){
 
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).orderBy ( "date_de_publication",Query.Direction.DESCENDING );
-        firstQuery.addSnapshotListener(ProfileActivity.this,new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
-                    if (doc.getType()==DocumentChange.Type.ADDED){
-                        String idupost=doc.getDocument ().getId ();
-                        ModelGridView modelGridView =doc.getDocument().toObject(ModelGridView.class).withId ( idupost );
-                        modelGridViewList.add(modelGridView);
-                        gridViewAdapter.notifyDataSetChanged();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater ().inflate ( R.menu.profile_menu, menu );
+        return true;
+    }
 
-                    }
-                }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId ();
+        if (id == R.id.account_setting) {
+            Intent gotoparam=new Intent ( getApplicationContext (),ParametrePorfilActivity.class );
+            startActivity ( gotoparam );
+            return true;
+        }
+        return super.onOptionsItemSelected ( item );
+    }
 
-            }
-        });
-
-    }*/
     public class CircleTransform implements Transformation {
         @Override
         public Bitmap transform(Bitmap source) {

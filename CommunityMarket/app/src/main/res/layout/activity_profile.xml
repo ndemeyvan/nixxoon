@@ -167,6 +167,7 @@
                 android:layout_marginBottom="@dimen/profil_float_button_bottom"
                 android:background="@drawable/background_message_button"
                 android:clickable="true"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
