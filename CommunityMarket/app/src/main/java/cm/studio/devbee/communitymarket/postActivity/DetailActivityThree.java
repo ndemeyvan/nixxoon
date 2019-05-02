@@ -1,7 +1,9 @@
 package cm.studio.devbee.communitymarket.postActivity;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -109,29 +111,49 @@ public class DetailActivityThree extends AppCompatActivity {
             supprime_detail_button.setOnClickListener ( new View.OnClickListener () {
                 @Override
                 public void onClick(View v) {
-                    ////////////////////////////////////////
-                    firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).document (iddupost).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.getResult ().exists ()){
-                                if (task.isSuccessful ()){
-                                    detail_progress.setVisibility ( View.VISIBLE );
-                                    firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).document (iddupost).delete ();
-                                    Toast.makeText ( getApplicationContext (),"supprimer",Toast.LENGTH_LONG ).show ();
-                                    Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
-                                    startActivity ( gtohome );
-                                    finish ();
-                                }else {
-                                    detail_progress.setVisibility ( View.INVISIBLE );
-                                    String error=task.getException ().getMessage ();
-                                    Toast.makeText ( getApplicationContext (),error,Toast.LENGTH_LONG ).show ();
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailActivityThree.this);
+                    alertDialogBuilder.setMessage("voulez vous vraiment supprimer ?");
+                    alertDialogBuilder.setPositiveButton("oui",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).document (iddupost).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if (task.getResult ().exists ()){
+                                                if (task.isSuccessful ()){
+                                                    detail_progress.setVisibility ( View.VISIBLE );
+                                                    firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).document (iddupost).delete ();
+                                                    Toast.makeText ( getApplicationContext (),"supprimer",Toast.LENGTH_LONG ).show ();
+                                                    Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
+                                                    startActivity ( gtohome );
+                                                    finish ();
+                                                }else {
+                                                    detail_progress.setVisibility ( View.INVISIBLE );
+                                                    String error=task.getException ().getMessage ();
+                                                    Toast.makeText ( getApplicationContext (),error,Toast.LENGTH_LONG ).show ();
 
+                                                }
+                                            }else {
+
+                                            }
+                                        }
+                                    } );
                                 }
-                            }else {
+                            });
 
-                            }
+                    alertDialogBuilder.setNegativeButton("non",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+
                         }
-                    } );
+                    });
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                    ////////////////////////////////////////
+
                     /////////////////////////////////////////////////
                 }
             } );
