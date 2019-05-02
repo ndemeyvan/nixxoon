@@ -27,12 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/background_detail"
-                    app:layout_constraintBottom_toBottomOf="@+id/viewFlipper" />
+
                 <ViewFlipper
                     android:id="@+id/viewFlipper"
                     android:layout_width="match_parent"
@@ -49,11 +44,13 @@
                         android:layout_height="200dp"
                         android:scaleType="centerCrop" />
 
+
                     <ImageView
                         android:id="@+id/imageSlideTwo"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:scaleType="centerCrop" />
+
 
                     <ImageView
                         android:id="@+id/imageSlideThree"
@@ -61,11 +58,13 @@
                         android:layout_height="200dp"
                         android:scaleType="centerCrop" />
 
+
                     <ImageView
                         android:id="@+id/imageSlideFour"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:scaleType="centerCrop" />
+
 
                 </ViewFlipper>
 
