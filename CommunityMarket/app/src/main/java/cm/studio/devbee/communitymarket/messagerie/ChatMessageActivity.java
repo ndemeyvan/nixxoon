@@ -63,7 +63,7 @@ public class ChatMessageActivity extends AppCompatActivity {
         groupAdapter=new GroupAdapter ();
         firebaseFirestore=FirebaseFirestore.getInstance ();
         contatc_recyclerview.setAdapter ( groupAdapter );
-       // online_status_image=findViewById ( R.id.online_status_image );
+       //online_status_image=findViewById ( R.id.online_status_image );
         recuperation ();
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         message_toolbar.setNavigationOnClickListener(new View.OnClickListener() {

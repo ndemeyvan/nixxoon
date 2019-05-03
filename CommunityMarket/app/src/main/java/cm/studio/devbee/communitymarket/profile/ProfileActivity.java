@@ -109,6 +109,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent gotoparam=new Intent ( getApplicationContext (),ParametrePorfilActivity.class );
                 startActivity ( gotoparam );
+                finish ();
             }
         } );
         /*gridViewAdapter=new ProfilAdapteur(modelGridViewList,getApplicationContext());
