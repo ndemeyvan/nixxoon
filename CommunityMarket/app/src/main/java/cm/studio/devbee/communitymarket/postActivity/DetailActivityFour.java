@@ -72,6 +72,7 @@ public class DetailActivityFour extends AppCompatActivity {
         date_de_publication=findViewById(R.id.date_de_publication);
         firebaseAuth=FirebaseAuth.getInstance();
         detail_progress=findViewById ( R.id.detail_progress );
+        toolbarDetail=findViewById(R.id.toolbarDetail);
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         detailActivityFourWeakReference=new WeakReference<>(this);
         vendeur_button.setEnabled ( false );

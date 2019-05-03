@@ -72,7 +72,7 @@ public class DetailActivityTwo extends AppCompatActivity {
         toolbarDetail=findViewById(R.id.toolbarDetail);
         setSupportActionBar(toolbarDetail);
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
-
+        toolbarDetail=findViewById(R.id.toolbarDetail);
         toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

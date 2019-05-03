@@ -65,14 +65,10 @@ public class DetailActivity extends AppCompatActivity {
         toolbarDetail=findViewById(R.id.toolbarDetail);
         setSupportActionBar(toolbarDetail);
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
-
         toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 finish ();
-
             }
         });
         firebaseAuth=FirebaseAuth.getInstance ();
@@ -85,6 +81,7 @@ public class DetailActivity extends AppCompatActivity {
         detail_prix_produit=findViewById(R.id.detail_prix_produit);
         detail_profil_image=findViewById(R.id.detail_image_du_profil);
         vendeur_button=findViewById(R.id.vendeur_button);
+
         detail_user_name=findViewById(R.id.detail_user_name);
         detail_description=findViewById(R.id.detail_description);
         date_de_publication=findViewById(R.id.date_de_publication);
