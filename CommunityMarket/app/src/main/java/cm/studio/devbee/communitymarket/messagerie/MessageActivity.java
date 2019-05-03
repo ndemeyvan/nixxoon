@@ -361,6 +361,7 @@ public class MessageActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed ();
         startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+        finish();
     }
 
 
