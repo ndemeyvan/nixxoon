@@ -228,10 +228,10 @@ public class HomeFragment extends Fragment {
                 }
             }
         } );
-         /*alertDialogBuilder = new AlertDialog.Builder(getActivity());
+         alertDialogBuilder = new AlertDialog.Builder(getActivity());
          alertDialogBuilder.setMessage("chargement");
          alertDialog = alertDialogBuilder.create();
-         alertDialog.show();*/
+         alertDialog.show();
 
         return v;
     }
@@ -339,7 +339,7 @@ public class HomeFragment extends Fragment {
                         CategoriesModelNouveaux categoriesModelChaussure =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesAdapteChaussureList.add(categoriesModelChaussure);
                         categoriesAdapteNouveaux.notifyDataSetChanged();
-
+                        alertDialog.cancel();
                     }
                 }
 

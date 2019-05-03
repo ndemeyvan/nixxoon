@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket.utilsForPostPrincipal;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -80,6 +81,7 @@ public class PrincipalAdapte extends RecyclerView.Adapter<PrincipalAdapte.ViewHo
                     gotoDetail.putExtra("id du post",idDuPost);
                     gotoDetail.putExtra("id de l'utilisateur",nom_id);
                     context.startActivity(gotoDetail);
+                    ((Activity)context).finish();
 
                 }
             });

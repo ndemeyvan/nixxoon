@@ -169,7 +169,7 @@ public class TshirtFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute ( aVoid );
-            progressDialog.dismiss();
+
         }
     }
 

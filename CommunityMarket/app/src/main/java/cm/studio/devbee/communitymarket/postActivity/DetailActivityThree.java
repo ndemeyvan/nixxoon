@@ -56,8 +56,7 @@ public class DetailActivityThree extends AppCompatActivity {
     private static ProgressBar detail_progress;
     private static Button supprime_detail_button;
     String lien_image;
-    AlertDialog.Builder alertDialogBuilder;
-    AlertDialog alertDialog;
+
     private static WeakReference<DetailActivityThree> detailActivityThreeWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +81,7 @@ public class DetailActivityThree extends AppCompatActivity {
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         detailActivityThreeWeakReference=new WeakReference<>(this);
         vendeur_button.setEnabled ( false );
-        alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
-        alertDialogBuilder.setMessage("chargement");
-        alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+
         asyncTask=new AsyncTask();
         asyncTask.execute();
 
@@ -197,7 +193,7 @@ public class DetailActivityThree extends AppCompatActivity {
                             lien_image=imageduproduit;
                             vendeur_button.setEnabled ( true );
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
-                            alertDialog.cancel();
+
                         }
                     }else {
                         String error=task.getException().getMessage();

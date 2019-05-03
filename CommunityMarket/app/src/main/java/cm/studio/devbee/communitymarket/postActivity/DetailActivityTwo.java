@@ -74,10 +74,6 @@ public class DetailActivityTwo extends AppCompatActivity {
         asyncTask.execute();
         detailActivityTwoWeakReference=new WeakReference<>(this);
         vendeur_button.setEnabled ( false );
-        alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
-        alertDialogBuilder.setMessage("chargement");
-        alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
         asyncTask=new AsyncTask ();
         asyncTask.execute();
     }
@@ -191,7 +187,6 @@ public class DetailActivityTwo extends AppCompatActivity {
                             lien_image=imageduproduit;
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
                             vendeur_button.setEnabled ( true );
-                            alertDialog.cancel();
                         }
                     }else {
                         String error=task.getException().getMessage();
@@ -222,6 +217,14 @@ public class DetailActivityTwo extends AppCompatActivity {
                 startActivity(vendeur);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent gotohome=new Intent(getApplicationContext(),Accueil.class);
+        startActivity(gotohome);
+        finish();
     }
 
     @Override

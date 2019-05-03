@@ -157,11 +157,6 @@ public class ChaussureFragment extends Fragment {
     public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-            progressDialog = new ProgressDialog (getActivity ());
-            progressDialog.setTitle("chargement"); // Setting Title
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-            progressDialog.show(); // Display Progress Dialog
-            progressDialog.setCancelable(false);
             super.onPreExecute ();
         }
 
@@ -175,7 +170,7 @@ public class ChaussureFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute ( aVoid );
-            progressDialog.dismiss();
+
         }
     }
     @Override
