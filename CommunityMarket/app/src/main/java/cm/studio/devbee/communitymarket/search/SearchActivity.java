@@ -118,7 +118,7 @@ public class SearchActivity extends AppCompatActivity {
                         listUsers.clear ();
                         for (DocumentSnapshot doc :task.getResult()) {
                             listUsers.clear ();
-                            UserModel searchModel = new UserModel(doc.getString("user_profil_image"),doc.getString("user_prenom"),doc.getString("id_utilisateur"),doc.getString("status"),doc.getString("search"));
+                            UserModel searchModel = new UserModel(doc.getString("user_profil_image"),doc.getString("user_prenom"),doc.getString("id_utilisateur"),doc.getString("status"),doc.getString("search"),doc.getString("user_name"));
                             if (!current_user.equals ( searchModel.getId_utilisateur () )) {
                                 listUsers.add ( searchModel );
                             }

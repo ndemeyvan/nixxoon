@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="@dimen/login_logo_margintop"
+        android:layout_marginTop="84dp"
         android:layout_marginEnd="8dp"
         android:text="c o n n e x i o n"
         android:textColor="@color/blanc"
@@ -58,7 +58,7 @@
         android:textStyle="bold"
         app:fontFamily="@font/fugaz_one"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -121,7 +121,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
@@ -147,7 +147,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/second_button_background"
+        android:background="@drawable/main_background"
         android:elevation="3dp"
         android:text="m'inscrire"
         android:textAllCaps="false"
