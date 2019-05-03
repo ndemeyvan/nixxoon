@@ -229,7 +229,7 @@ public class HomeFragment extends Fragment {
             }
         } );
          alertDialogBuilder = new AlertDialog.Builder(getActivity());
-         alertDialogBuilder.setMessage("chargement");
+         alertDialogBuilder.setMessage("chargement ...");
          alertDialog = alertDialogBuilder.create();
          alertDialog.show();
 
@@ -408,7 +408,6 @@ public class HomeFragment extends Fragment {
         firstQuery.addSnapshotListener(getActivity(),new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
