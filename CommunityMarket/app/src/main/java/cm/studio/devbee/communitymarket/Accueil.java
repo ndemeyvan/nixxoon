@@ -236,24 +236,26 @@ public class Accueil extends AppCompatActivity
         if (id == R.id.ic_user) {
             Intent intent = new Intent ( getApplicationContext(),ProfileActivity.class );
             startActivity ( intent );
+            finish ();
         } else if (id == R.id.ic_logout) {
-            OneSignal.setSubscription ( false );
             userstatus("offline");
             mAuth.getInstance().signOut();
             Intent intenttwo = new Intent ( getApplicationContext(),ChoiceActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP );
             startActivity ( intenttwo );
             finish ();
-
         }else if (id == R.id.setting) {
             Intent parametre=new Intent(getApplicationContext(),ParametrePorfilActivity.class);
             startActivity(parametre);
+            finish ();
         }
         else if (id == R.id.nous_contacter) {
             Intent nous_contacter=new Intent(getApplicationContext(),AproposActivity.class);
             startActivity(nous_contacter);
+            finish ();
         }else if(id==R.id.ic_message){
             Intent message=new Intent(getApplicationContext(),ChatMessageActivity.class);
             startActivity(message);
+            finish ();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById ( R.id.drawer_layout );
         drawer.closeDrawer ( GravityCompat.START );

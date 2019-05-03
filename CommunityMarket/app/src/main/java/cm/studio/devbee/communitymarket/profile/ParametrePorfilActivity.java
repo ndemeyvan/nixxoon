@@ -230,6 +230,13 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         } );
     }
     @Override
+    public void onBackPressed() {
+        super.onBackPressed ();
+        Intent gotoHome =new Intent ( getApplicationContext(),Accueil.class );
+        startActivity ( gotoHome );
+        finish ();
+    }
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult ( requestCode, resultCode, data );
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {

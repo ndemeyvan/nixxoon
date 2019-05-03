@@ -81,8 +81,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         profil_toolbar=findViewById(R.id.profil_de_la_toolbar);
         setSupportActionBar(profil_toolbar);
-        //Recycler=findViewById(R.id.profilRecycler);
-        //////////////////
         user_name=findViewById ( R.id.user_name );
         progressBar=findViewById(R.id.progressBar);
         mAuth=FirebaseAuth.getInstance();

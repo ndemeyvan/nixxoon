@@ -1,6 +1,7 @@
 
 package cm.studio.devbee.communitymarket.profile;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
@@ -59,7 +60,19 @@ public class VenteUtilisateurActivity extends AppCompatActivity {
         Recycler.setLayoutManager(new GridLayoutManager (getApplicationContext(),2));
         recyclerprofil();
 
-        getSupportActionBar ().setTitle ( "mes ventes" );
+        firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).addSnapshotListener ( new EventListener<QuerySnapshot> () {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if (!queryDocumentSnapshots.isEmpty ()){
+                    int i=queryDocumentSnapshots.size ();
+                    getSupportActionBar ().setTitle ( i +" en ligne " );
+
+                }else{
+                    getSupportActionBar ().setTitle ( " vous n'avez emis(e) aucune vente ." );
+                }
+            }
+        } );
+
 
     }
     public void recyclerprofil(){

@@ -33,6 +33,7 @@ import com.xwray.groupie.ViewHolder;
 import javax.annotation.Nullable;
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.profile.ProfileActivity;
 import cm.studio.devbee.communitymarket.utilForChat.DiplayAllChat;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -86,6 +87,13 @@ public class ChatMessageActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed ();
+        Intent gotoHome =new Intent ( getApplicationContext(),Accueil.class );
+        startActivity ( gotoHome );
+        finish ();
     }
 
     public  void recuperation(){
