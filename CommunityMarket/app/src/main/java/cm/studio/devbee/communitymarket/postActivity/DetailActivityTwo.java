@@ -76,8 +76,6 @@ public class DetailActivityTwo extends AppCompatActivity {
         toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
                 finish ();
 
             }
@@ -236,8 +234,8 @@ public class DetailActivityTwo extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent gotohome=new Intent(getApplicationContext(),Accueil.class);
-        startActivity(gotohome);
+        /*Intent gotohome=new Intent(getApplicationContext(),Accueil.class);
+        startActivity(gotohome);*/
         finish();
     }
 

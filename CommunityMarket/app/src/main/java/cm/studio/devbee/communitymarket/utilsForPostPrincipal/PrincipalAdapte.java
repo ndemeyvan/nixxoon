@@ -81,7 +81,7 @@ public class PrincipalAdapte extends RecyclerView.Adapter<PrincipalAdapte.ViewHo
                     gotoDetail.putExtra("id du post",idDuPost);
                     gotoDetail.putExtra("id de l'utilisateur",nom_id);
                     context.startActivity(gotoDetail);
-                    ((Activity)context).finish();
+                    //((Activity)context).finish();
 
                 }
             });
