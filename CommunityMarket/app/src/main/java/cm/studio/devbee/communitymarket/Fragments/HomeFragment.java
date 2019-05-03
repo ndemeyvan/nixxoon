@@ -1,8 +1,10 @@
 package cm.studio.devbee.communitymarket.Fragments;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -40,7 +42,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nullable;
+
+import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
 import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesAdapteNouveaux;
 import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouveaux;
@@ -103,6 +108,8 @@ public class HomeFragment extends Fragment {
     private static PrincipalAdapte principalAdapte;
     private RecyclerView principalRecyclerView;
     private static  String current_user;
+    private static AlertDialog.Builder alertDialogBuilder;
+    AlertDialog alertDialog;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -221,6 +228,11 @@ public class HomeFragment extends Fragment {
                 }
             }
         } );
+         alertDialogBuilder = new AlertDialog.Builder(getActivity());
+         alertDialogBuilder.setMessage("chargement");
+         alertDialog = alertDialogBuilder.create();
+         alertDialog.show();
+
         return v;
     }
 
@@ -302,10 +314,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for (DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
                         PrincipalModel principalAdaptemodel =doc.getDocument().toObject(PrincipalModel.class).withId ( idupost );
                       principalModelList.add(principalAdaptemodel);
+
                         principalAdapte.notifyDataSetChanged();
                     }
                 }
@@ -325,6 +339,7 @@ public class HomeFragment extends Fragment {
                         CategoriesModelNouveaux categoriesModelChaussure =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesAdapteChaussureList.add(categoriesModelChaussure);
                         categoriesAdapteNouveaux.notifyDataSetChanged();
+                        alertDialog.cancel();
                     }
                 }
 
@@ -524,11 +539,6 @@ public class HomeFragment extends Fragment {
     public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-            progressDialog = new ProgressDialog (getActivity ());
-            progressDialog.setTitle("chargement"); // Setting Title
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-            progressDialog.show(); // Display Progress Dialog
-            progressDialog.setCancelable(false);
             super.onPreExecute ();
         }
 

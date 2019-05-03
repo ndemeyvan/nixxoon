@@ -54,6 +54,8 @@ public class DetailActivity extends AppCompatActivity {
     private static ProgressBar detail_progress;
     private static Button supprime_detail_button;
     private static String lien_image;
+    AlertDialog.Builder alertDialogBuilder;
+    AlertDialog alertDialog;
     private static WeakReference<DetailActivity> detailActivityWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,10 @@ public class DetailActivity extends AppCompatActivity {
         detailActivityWeakReference=new WeakReference<>(this);
         vendeur_button.setEnabled ( false );
         asyncTask=new AsyncTask();
+        alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+        alertDialogBuilder.setMessage("chargement");
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
         asyncTask.execute();
 
     }
@@ -197,6 +203,7 @@ public class DetailActivity extends AppCompatActivity {
                             lien_image=imageduproduit;
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
                             vendeur_button.setEnabled ( true );
+                            alertDialog.cancel();
                         }
                     }else {
                         String error=task.getException().getMessage();

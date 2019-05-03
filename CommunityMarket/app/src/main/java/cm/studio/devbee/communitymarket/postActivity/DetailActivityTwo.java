@@ -46,6 +46,8 @@ public class DetailActivityTwo extends AppCompatActivity {
     private static Button supprime_detail_button;
     private static  String  categories;
     private static  String lien_image;
+    AlertDialog.Builder alertDialogBuilder;
+    AlertDialog alertDialog;
     private static WeakReference<DetailActivityTwo> detailActivityTwoWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,10 @@ public class DetailActivityTwo extends AppCompatActivity {
         asyncTask.execute();
         detailActivityTwoWeakReference=new WeakReference<>(this);
         vendeur_button.setEnabled ( false );
+        alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+        alertDialogBuilder.setMessage("chargement");
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
         asyncTask=new AsyncTask ();
         asyncTask.execute();
     }
@@ -185,6 +191,7 @@ public class DetailActivityTwo extends AppCompatActivity {
                             lien_image=imageduproduit;
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
                             vendeur_button.setEnabled ( true );
+                            alertDialog.cancel();
                         }
                     }else {
                         String error=task.getException().getMessage();
