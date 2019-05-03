@@ -8,6 +8,7 @@ public class UserModel extends PostId{
     private String user_profil_image;
     private String user_prenom;
     private String id_utilisateur;
+    private String user_name;
     private String status;
     private String search;
 
@@ -16,10 +17,11 @@ public class UserModel extends PostId{
 
     }
 
-    public UserModel(String user_profil_image, String user_prenom, String id_utilisateur, String status, String search) {
+    public UserModel(String user_profil_image, String user_prenom, String id_utilisateur, String user_name, String status, String search) {
         this.user_profil_image = user_profil_image;
         this.user_prenom = user_prenom;
         this.id_utilisateur = id_utilisateur;
+        this.user_name = user_name;
         this.status = status;
         this.search = search;
     }
@@ -46,6 +48,14 @@ public class UserModel extends PostId{
 
     public void setId_utilisateur(String id_utilisateur) {
         this.id_utilisateur = id_utilisateur;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
     public String getStatus() {

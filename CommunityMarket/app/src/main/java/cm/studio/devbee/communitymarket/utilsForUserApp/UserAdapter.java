@@ -78,11 +78,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull  final ViewHolder viewHolder, int i) {
        String nom_utilisateur=userModelList.get ( i ).getUser_prenom ();
+        String prenom_utilisateur=userModelList.get ( i ).getUser_name();
        String image =userModelList.get ( i ).getUser_profil_image ();
        final String nom=userModelList.get ( i ).getId_utilisateur ();
        String status=userModelList.get ( i ).getStatus ();
        viewHolder.setNom ( nom );
-       viewHolder.setNom ( nom_utilisateur );
+       viewHolder.setNom ( prenom_utilisateur+" "+nom_utilisateur );
        viewHolder.setimage ( image );
        viewHolder.profil_utilisateur.setOnClickListener ( new View.OnClickListener () {
            @Override

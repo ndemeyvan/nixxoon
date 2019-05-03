@@ -11,7 +11,7 @@
         android:layout_width="110dp"
         android:layout_height="110dp"
         app:cardCornerRadius="5dp"
-        app:cardBackgroundColor="@color/colorPrimaryDark">
+        app:cardBackgroundColor="@color/blanc">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="110dp"
@@ -39,7 +39,7 @@
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed"
                 android:lines="1"
-                android:textColor="@color/blanc"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

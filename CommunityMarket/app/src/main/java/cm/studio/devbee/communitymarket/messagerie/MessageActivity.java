@@ -1,10 +1,14 @@
 package cm.studio.devbee.communitymarket.messagerie;
 
+import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.StrictMode;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +16,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -39,6 +45,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 import com.xwray.groupie.GroupAdapter;
 
 import java.io.OutputStream;
@@ -53,7 +61,9 @@ import java.util.Map;
 import java.util.Scanner;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.SendNotif;
+import cm.studio.devbee.communitymarket.postActivity.PostActivityFinal;
 import cm.studio.devbee.communitymarket.postActivity.UserGeneralPresentation;
+import cm.studio.devbee.communitymarket.search.SearchActivity;
 import cm.studio.devbee.communitymarket.utilForChat.ChatAdapter;
 import cm.studio.devbee.communitymarket.utilForChat.DiplayAllChat;
 import cm.studio.devbee.communitymarket.utilForChat.ModelChat;
@@ -75,7 +85,7 @@ public class MessageActivity extends AppCompatActivity {
     private static Toolbar mesage_toolbar;
     private static ImageButton send_button;
     private static EditText message_user_send;
-    private static RecyclerView message_recyclerview;
+    private static RecyclerView message_recyclerview,media_recycler;
     private static List<ModelChat> modelChatListmodeChatList;
     private static GroupAdapter groupAdapter;
     private static UserModel userModel;
@@ -97,6 +107,9 @@ public class MessageActivity extends AppCompatActivity {
     private static  String lien_image;
     private static  String image;
     private static ProgressBar message_progressbar;
+    private static Uri mImageUri;
+
+
 
 
     @Override
@@ -128,6 +141,7 @@ public class MessageActivity extends AppCompatActivity {
         nomEtImageProfil ();
         online_status=findViewById ( R.id.online_status_image );
         offline_status=findViewById ( R.id.offline_status_image );
+
         mesage_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -405,13 +419,28 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater ().inflate ( R.menu.message_menu, menu );
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId ();
+        if (id == R.id.message_menu) {
+
+            return true;
+        }
+        return super.onOptionsItemSelected ( item );
+    }*/
+
 public void nomEtImageProfil(){
         firebaseFirestore.collection("mes donnees utilisateur").document(user_id_message).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
-
                         String prenom=task.getResult ().getString ( "user_prenom" );
                         String name_user= task.getResult ().getString ( "user_name" );
                         String image_user=task.getResult ().getString ( "user_profil_image" );
@@ -442,4 +471,8 @@ public void nomEtImageProfil(){
 
     }
 
+
 }
+
+
+

@@ -157,25 +157,20 @@
 
     </android.support.v7.widget.RecyclerView>
 
+
     <ImageView
         android:id="@+id/image_de_discutions"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:elevation="5dp"
         android:scaleType="centerCrop"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-       />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/image_de_discutions"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/background_detail" />
+
+
 
     <ProgressBar
         android:id="@+id/message_progressbar"
@@ -191,5 +186,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/image_de_discutions"
         app:layout_constraintVertical_bias="0.058" />
+
 
 </android.support.constraint.ConstraintLayout>

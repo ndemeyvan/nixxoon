@@ -182,9 +182,7 @@ public class PostActivityFinal extends AppCompatActivity {
     public void stocker(){
         Date date=new Date();
         SimpleDateFormat sdf= new SimpleDateFormat("d/MM/y H:mm:ss");
-
         final String date_avec_seconde=sdf.format(date);
-
                     File newImageFile= new File(mImageUri.getPath ());
                     try {
                         compressedImageFile = new Compressor(getApplicationContext())
