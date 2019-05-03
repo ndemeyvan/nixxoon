@@ -142,6 +142,14 @@ public class UserGeneralPresentation extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity ( new Intent ( getApplicationContext (),DetailActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+        finish ();
+    }
+
     public void nomEtImageProfil(){
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

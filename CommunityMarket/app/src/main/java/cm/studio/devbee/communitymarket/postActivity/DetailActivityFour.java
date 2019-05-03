@@ -235,12 +235,8 @@ public class DetailActivityFour extends AppCompatActivity {
                 Map<String, String> donnees_utilisateur = new HashMap<> ();
                 donnees_utilisateur.put ( "image_en_vente",lien_image);
                 startActivity(vendeur);
-                /* firebaseFirestore.collection ( "sell_image" ).document ( current_user_id ).collection ( utilisateur_actuel ).add ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<DocumentReference> () {
-                   @Override
-                   public void onComplete(@NonNull Task<DocumentReference> task) {
+                finish();
 
-                   }
-               } );*/
             }
         });
     }

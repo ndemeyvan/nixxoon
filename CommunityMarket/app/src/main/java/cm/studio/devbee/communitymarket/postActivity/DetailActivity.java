@@ -253,6 +253,7 @@ public class DetailActivity extends AppCompatActivity {
                 vendeur.putExtra("id de l'utilisateur",current_user_id);
                 vendeur.putExtra("image_en_vente",lien_image);
                 startActivity(vendeur);
+                finish();
             }
         });
     }
