@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -54,12 +55,26 @@ public class DetailActivity extends AppCompatActivity {
     private static ProgressBar detail_progress;
     private static Button supprime_detail_button;
     private static String lien_image;
+    private  static Toolbar toolbarDetail;
 
     private static WeakReference<DetailActivity> detailActivityWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        toolbarDetail=findViewById(R.id.toolbarDetail);
+        setSupportActionBar(toolbarDetail);
+        getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
+
+        toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                finish ();
+
+            }
+        });
         firebaseAuth=FirebaseAuth.getInstance ();
         utilisateur_actuel=firebaseAuth.getCurrentUser ().getUid ();
         firebaseFirestore=FirebaseFirestore.getInstance();
@@ -206,6 +221,7 @@ public class DetailActivity extends AppCompatActivity {
                             detail_description.setText(description);
                             date_de_publication.setText(datedepublication);
                             lien_image=imageduproduit;
+                            getSupportActionBar().setTitle(titreDuProduit);
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
                             vendeur_button.setEnabled ( true );
 

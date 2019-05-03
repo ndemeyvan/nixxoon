@@ -296,6 +296,7 @@ public class HomeFragment extends Fragment {
                     imagePubText.setText(imagePub.toString());
                     String lien = imagePubText.getText().toString();
                     Picasso.with(getActivity()).load(lien).into(imagePubFixe);
+                    alertDialog.cancel();
 
                 }
             }
@@ -339,7 +340,7 @@ public class HomeFragment extends Fragment {
                         CategoriesModelNouveaux categoriesModelChaussure =doc.getDocument().toObject(CategoriesModelNouveaux.class).withId ( idupost );
                         categoriesAdapteChaussureList.add(categoriesModelChaussure);
                         categoriesAdapteNouveaux.notifyDataSetChanged();
-                        alertDialog.cancel();
+
                     }
                 }
 

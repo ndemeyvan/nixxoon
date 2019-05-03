@@ -6,15 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".postActivity.DetailActivityFour"
     android:background="@color/black">
-    <ImageView
-        android:id="@+id/detail_image_post"
-        android:layout_width="0dp"
-        android:scaleType="centerCrop"
-        android:layout_height="200dp"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:titleTextColor="@color/black"></android.support.v7.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/detail_image_post"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarDetail" />
 
     <TextView
         android:id="@+id/detail_titre_produit"
@@ -49,7 +61,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="204dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/boy"
         app:layout_constraintEnd_toEndOf="parent"

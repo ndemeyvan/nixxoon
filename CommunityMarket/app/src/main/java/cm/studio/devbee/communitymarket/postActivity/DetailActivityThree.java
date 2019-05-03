@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -55,6 +56,7 @@ public class DetailActivityThree extends AppCompatActivity {
     private static AsyncTask asyncTask;
     private static ProgressBar detail_progress;
     private static Button supprime_detail_button;
+    private  static Toolbar toolbarDetail;
     String lien_image;
 
     private static WeakReference<DetailActivityThree> detailActivityThreeWeakReference;
@@ -77,6 +79,18 @@ public class DetailActivityThree extends AppCompatActivity {
         detail_description=findViewById(R.id.detail_description);
         date_de_publication=findViewById(R.id.date_de_publication);
         firebaseAuth=FirebaseAuth.getInstance();
+        setSupportActionBar(toolbarDetail);
+        getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
+
+        toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                finish ();
+
+            }
+        });
         detail_progress=findViewById ( R.id.detail_progress );
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         detailActivityThreeWeakReference=new WeakReference<>(this);
@@ -192,6 +206,7 @@ public class DetailActivityThree extends AppCompatActivity {
                             date_de_publication.setText(datedepublication);
                             lien_image=imageduproduit;
                             vendeur_button.setEnabled ( true );
+                            getSupportActionBar().setTitle(titreDuProduit);
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
 
                         }
@@ -233,6 +248,7 @@ public class DetailActivityThree extends AppCompatActivity {
             }
         });
     }
+
 
 
     @Override

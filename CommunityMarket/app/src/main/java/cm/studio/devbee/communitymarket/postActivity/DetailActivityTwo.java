@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -46,8 +47,7 @@ public class DetailActivityTwo extends AppCompatActivity {
     private static Button supprime_detail_button;
     private static  String  categories;
     private static  String lien_image;
-    AlertDialog.Builder alertDialogBuilder;
-    AlertDialog alertDialog;
+    private  static Toolbar toolbarDetail;
     private static WeakReference<DetailActivityTwo> detailActivityTwoWeakReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,19 @@ public class DetailActivityTwo extends AppCompatActivity {
         date_de_publication=findViewById(R.id.date_de_publication);
         firebaseAuth=FirebaseAuth.getInstance();
         detail_progress=findViewById ( R.id.detail_progress );
+        toolbarDetail=findViewById(R.id.toolbarDetail);
+        setSupportActionBar(toolbarDetail);
+        getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
+
+        toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                finish ();
+
+            }
+        });
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         asyncTask=new AsyncTask ();
         asyncTask.execute();
@@ -185,6 +198,7 @@ public class DetailActivityTwo extends AppCompatActivity {
                             detail_description.setText(description);
                             date_de_publication.setText(datedepublication);
                             lien_image=imageduproduit;
+                            getSupportActionBar().setTitle(titreDuProduit);
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
                             vendeur_button.setEnabled ( true );
                         }
