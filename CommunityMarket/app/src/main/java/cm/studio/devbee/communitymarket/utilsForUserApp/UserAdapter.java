@@ -9,12 +9,14 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,6 +87,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
        viewHolder.setNom ( nom );
        viewHolder.setNom ( prenom_utilisateur+" "+nom_utilisateur );
        viewHolder.setimage ( image );
+       viewHolder.user_container.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_scale_animation ) );
        viewHolder.profil_utilisateur.setOnClickListener ( new View.OnClickListener () {
            @Override
            public void onClick(View v) {
@@ -127,9 +130,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         CircleImageView online_image;
         CircleImageView offline_image;
         TextView status;
-
+        ConstraintLayout user_container;
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
+            user_container=itemView.findViewById ( R.id.user_container);
             nom_utilisateur=itemView.findViewById ( R.id.user_text_name );
             profil_utilisateur=itemView.findViewById ( R.id.user_image );
             textView=itemView.findViewById ( R.id.id_utilisateur_user );
