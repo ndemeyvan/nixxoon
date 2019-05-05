@@ -91,7 +91,10 @@ public class Accueil extends AppCompatActivity
     private static WeakReference<Accueil> accueilWeakReference;
     private Menu menu;
     private static AlertDialog.Builder alertDialogBuilder;
+    private static AlertDialog.Builder alertDialogBuilderTwo;
     AlertDialog alertDialog;
+    AlertDialog alertDialogTwo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,23 +209,23 @@ public class Accueil extends AppCompatActivity
             drawer.closeDrawer ( GravityCompat.START );
         } else {
             super.onBackPressed ();
-            alertDialogBuilder = new AlertDialog.Builder(getApplicationContext ());
-            alertDialogBuilder.setMessage("voulez vous quitter ?");
-            alertDialogBuilder.setPositiveButton ( "oui", new DialogInterface.OnClickListener () {
+           /* alertDialogBuilderTwo = new AlertDialog.Builder(getApplicationContext ());
+            alertDialogBuilderTwo.setMessage("voulez vous quitter ?");
+            alertDialogBuilderTwo.setPositiveButton ( "oui", new DialogInterface.OnClickListener () {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     finish ();
                 }
             } );
-            alertDialogBuilder.setNegativeButton ( "non", new DialogInterface.OnClickListener () {
+            alertDialogBuilderTwo.setNegativeButton ( "non", new DialogInterface.OnClickListener () {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
                 }
             } );
-            alertDialog = alertDialogBuilder.create();
-            alertDialog.setCancelable ( false );
-            alertDialog.show();
+            alertDialogTwo = alertDialogBuilderTwo.create();
+            alertDialogTwo.setCancelable ( false );
+            alertDialogTwo.;*/
         }
     }
 
