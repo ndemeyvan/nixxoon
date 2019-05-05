@@ -64,7 +64,7 @@
         android:id="@+id/generalImageProfilUser"
         android:layout_width="@dimen/general_image_w_n_h"
         android:layout_height="@dimen/general_image_w_n_h"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="7dp"
         android:src="@drawable/boy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

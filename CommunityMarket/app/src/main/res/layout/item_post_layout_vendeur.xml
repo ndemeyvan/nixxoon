@@ -7,6 +7,10 @@
     android:layout_marginTop="3dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:id="@+id/profil_container"></android.support.constraint.ConstraintLayout>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView3"

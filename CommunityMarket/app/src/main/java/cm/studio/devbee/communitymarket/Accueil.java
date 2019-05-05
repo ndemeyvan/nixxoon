@@ -218,10 +218,12 @@ public class Accueil extends AppCompatActivity
         if (id == R.id.search) {
             Intent gogotoSearch = new Intent(getApplicationContext(),SearchActivity.class);
             startActivity(gogotoSearch);
+            finish ();
             return true;
         }else if (id == R.id.message) {
             Intent gogotoSearch = new Intent(getApplicationContext(),ChatMessageActivity.class);
             startActivity(gogotoSearch);
+            finish ();
             return true;
         }
 
@@ -289,6 +291,7 @@ public class Accueil extends AppCompatActivity
             public void onClick(View v) {
                 Intent vaTopost =new Intent ( getApplicationContext(),PostActivity.class );
                 startActivity ( vaTopost );
+                finish ();
             }
         } );
     }

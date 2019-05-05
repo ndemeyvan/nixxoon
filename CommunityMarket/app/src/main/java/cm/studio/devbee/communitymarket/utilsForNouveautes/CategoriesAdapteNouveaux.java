@@ -8,10 +8,12 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,6 +85,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
         viewHolder.setPrix(nvxPrix);
         viewHolder.temps ( tempsdepub );
         viewHolder.nomproduit ( produinom );
+        viewHolder.container. setAnimation ( AnimationUtils. loadAnimation (context, R . anim . fade_transition_animation));
         viewHolder.imageDuproduit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -193,6 +196,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
         ImageView like;
         TextView likeCount;
         TextView categorieChoice;
+        ConstraintLayout container;
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
             description=itemView.findViewById ( R.id.nouveaux_description_du_produit );
@@ -201,6 +205,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
             image_profil=itemView.findViewById ( R.id.nouveaux_image_profile );
             liker=itemView.findViewById(R.id.nouveaux_nombre_de_like);
             imageDuproduit=itemView.findViewById(R.id.nouveaute_image);
+            container=itemView.findViewById ( R.id.container );
             nom_utilisateur=itemView.findViewById ( R.id.nouveaux_user_name );
             temps_de_la_pub=itemView.findViewById ( R.id.nouveaux_temps );
             like =itemView.findViewById ( R.id.like_image );

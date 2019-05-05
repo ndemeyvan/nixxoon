@@ -7,10 +7,12 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +63,7 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
     viewHolder.image_produit(produit_image);
     viewHolder.nom_produit(nom);
     viewHolder.setUser(nom_utilisateur);
+    viewHolder.post_layout_one.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_scale_animation ) );
     viewHolder.produit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +103,7 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
         TextView prix_post;
         TextView catrogies_name;
         TextView nom_user;
-
+        ConstraintLayout post_layout_one;
        public ViewHolder(@NonNull View itemView) {
            super(itemView);
            produit=itemView.findViewById(R.id.post_image_vendeur );
@@ -109,6 +112,7 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
            post_image_profil=itemView.findViewById ( R.id.profil_vendeur );
            catrogies_name=itemView.findViewById(R.id.catrogies_name_vendeur );
            nom_user=itemView.findViewById(R.id.nom_user);
+           post_layout_one=itemView.findViewById ( R.id.post_layout_one );
        }
        public void image_produit(String image){
            Picasso.with(context).load(image).into (produit );

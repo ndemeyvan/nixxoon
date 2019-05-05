@@ -7,10 +7,12 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,8 +65,9 @@ public class ProfilAdapteur extends RecyclerView.Adapter<ProfilAdapteur.ViewHold
         viewHolder.setCatrogies_name(categorie);
         viewHolder.prix_produit(prix_produit);
         viewHolder.image_produit(produit_image);
-       viewHolder.nom_produit(nom);
+        viewHolder.nom_produit(nom);
         viewHolder.setUser(nom_utilisateur);
+        viewHolder.profil_container.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_transition_animation ) );
         viewHolder.produit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +107,7 @@ public class ProfilAdapteur extends RecyclerView.Adapter<ProfilAdapteur.ViewHold
         TextView prix_post;
         TextView catrogies_name;
         TextView nom_user;
-
+        ConstraintLayout profil_container;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             produit=itemView.findViewById(R.id.post_image_vendeur );
@@ -113,6 +116,7 @@ public class ProfilAdapteur extends RecyclerView.Adapter<ProfilAdapteur.ViewHold
             post_image_profil=itemView.findViewById ( R.id.profil_vendeur );
             catrogies_name=itemView.findViewById(R.id.catrogies_name_vendeur );
             nom_user=itemView.findViewById(R.id.nom_user);
+            profil_container=itemView.findViewById ( R.id.profil_container );
         }
         public void image_produit(String image){
             Picasso.with(context).load(image).into (produit );

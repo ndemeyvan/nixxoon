@@ -7,125 +7,131 @@
     android:layout_marginTop="3dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:id="@+id/post_layout_one">
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView3"
+            android:layout_width="0dp"
+            android:layout_height="230dp"
+            android:elevation="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView3"
-        android:layout_width="0dp"
-        android:layout_height="230dp"
-        android:elevation="7dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <TextView
-                android:id="@+id/post_titre_produit_description"
-                android:layout_width="000dp"
-                android:layout_height="19dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif-condensed"
-                android:lines="1"
-                android:textColor="@color/black"
-                android:textSize="@dimen/post_item_desc"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/prix_postl_vendeur"
-                app:layout_constraintEnd_toStartOf="@+id/profil_vendeur"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_image_vendeur" />
-
-            <ImageView
-                android:id="@+id/profil_vendeur"
-                android:layout_width="@dimen/post_item_image"
-                android:layout_height="@dimen/post_item_image"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/boy"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_image_vendeur"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/prix_postl_vendeur"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="4dp"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif-condensed"
-                android:lines="1"
-                android:textColor="@color/orange"
-                android:textSize="@dimen/post_item_prix"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/profil_vendeur"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:id="@+id/post_image_vendeur"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/t_shirt"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/catrogies_name_vendeur"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/post_image_vendeur"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/nom_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="TextView"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/catrogies_name_vendeur"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/post_image_vendeur"
-                app:layout_constraintVertical_bias="0.0" />
+                android:layout_height="match_parent">
 
 
-            <!-- <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:alpha="0.6"
-                android:background="@color/black"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/post_image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"></LinearLayout>-->
+                <TextView
+                    android:id="@+id/post_titre_produit_description"
+                    android:layout_width="000dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-condensed"
+                    android:lines="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/post_item_desc"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/prix_postl_vendeur"
+                    app:layout_constraintEnd_toStartOf="@+id/profil_vendeur"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/post_image_vendeur" />
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+                <ImageView
+                    android:id="@+id/profil_vendeur"
+                    android:layout_width="@dimen/post_item_image"
+                    android:layout_height="@dimen/post_item_image"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/boy"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/post_image_vendeur"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/prix_postl_vendeur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-condensed"
+                    android:lines="1"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/post_item_prix"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/profil_vendeur"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/post_image_vendeur"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/t_shirt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/catrogies_name_vendeur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="TextView"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/post_image_vendeur"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/nom_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="TextView"
+                    android:textSize="8sp"
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/catrogies_name_vendeur"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/post_image_vendeur"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+                <!-- <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:alpha="0.6"
+                    android:background="@color/black"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/post_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"></LinearLayout>-->
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+    </android.support.constraint.ConstraintLayout>
+
 
 </android.support.constraint.ConstraintLayout>

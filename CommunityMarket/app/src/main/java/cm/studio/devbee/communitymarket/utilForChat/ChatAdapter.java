@@ -2,10 +2,12 @@ package cm.studio.devbee.communitymarket.utilForChat;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,18 +68,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         UserModel userModel=new UserModel (  );
         modelChat.setStatus ( userModel.getStatus () );
         String status=modelChatList.get ( i ).getStatus ();
-        /*if (ischat==true){
-            if (status.equals ( "online" )){
-                viewHolder.online_status.setVisibility ( View.VISIBLE );
-                viewHolder.offline_status.setVisibility ( View.INVISIBLE );
-            }else {
-                viewHolder.online_status.setVisibility ( View.INVISIBLE );
-                viewHolder.offline_status.setVisibility ( View.VISIBLE );
-            }
-        }else{
-            viewHolder.online_status.setVisibility ( View.INVISIBLE );
-            viewHolder.offline_status.setVisibility ( View.INVISIBLE );
-        }*/
+        viewHolder.right_constraint.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_scale_animation ) );
+        viewHolder.left_container.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_scale_animation ) );
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -117,13 +109,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         CircleImageView image;
         CircleImageView online_status;
         CircleImageView offline_status;
-
+        ConstraintLayout right_constraint;
+        ConstraintLayout left_container;
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
             message=itemView.findViewById ( R.id.show_message );
             image=itemView.findViewById ( R.id.chat_imag_item );
             online_status=itemView.findViewById ( R.id.online_status_image );
             offline_status=itemView.findViewById ( R.id.offline_status_image );
+            right_constraint=itemView.findViewById ( R.id.right_constraint );
+            left_container=itemView.findViewById ( R.id.left_container );
         }
     }
 
