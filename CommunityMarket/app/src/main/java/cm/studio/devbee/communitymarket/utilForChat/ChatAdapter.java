@@ -68,7 +68,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         UserModel userModel=new UserModel (  );
         modelChat.setStatus ( userModel.getStatus () );
         String status=modelChatList.get ( i ).getStatus ();
-        viewHolder.right_constraint.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_scale_animation ) );
+        //viewHolder.right_constraint.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_scale_animation ) );
         viewHolder.left_container.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_scale_animation ) );
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override
@@ -109,7 +109,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         CircleImageView image;
         CircleImageView online_status;
         CircleImageView offline_status;
-        ConstraintLayout right_constraint;
+       // ConstraintLayout right_constraint;
         ConstraintLayout left_container;
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
@@ -117,8 +117,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             image=itemView.findViewById ( R.id.chat_imag_item );
             online_status=itemView.findViewById ( R.id.online_status_image );
             offline_status=itemView.findViewById ( R.id.offline_status_image );
-            right_constraint=itemView.findViewById ( R.id.right_constraint );
-            left_container=itemView.findViewById ( R.id.left_container );
+            //right_constraint=itemView.findViewById ( R.id.the_constraint );
+            left_container=itemView.findViewById ( R.id.the_constraint );
         }
     }
 

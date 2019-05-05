@@ -85,7 +85,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
         viewHolder.setPrix(nvxPrix);
         viewHolder.temps ( tempsdepub );
         viewHolder.nomproduit ( produinom );
-        viewHolder.container. setAnimation ( AnimationUtils. loadAnimation (context, R . anim . fade_transition_animation));
+        viewHolder.container. setAnimation ( AnimationUtils. loadAnimation (context, R.anim.fade_transition_animation));
         viewHolder.imageDuproduit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

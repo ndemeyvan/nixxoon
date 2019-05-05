@@ -63,7 +63,7 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
     viewHolder.image_produit(produit_image);
     viewHolder.nom_produit(nom);
     viewHolder.setUser(nom_utilisateur);
-    viewHolder.post_layout_one.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_scale_animation ) );
+    viewHolder.post_layout_one.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_transition_animation ) );
     viewHolder.produit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

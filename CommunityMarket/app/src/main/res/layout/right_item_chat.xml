@@ -7,7 +7,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/right_constraint">
+        android:id="@+id/the_constraint">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/chat_imag_item"
             android:layout_width="40dp"

@@ -36,6 +36,7 @@ import javax.annotation.Nullable;
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.Fragments.HomeFragment;
 import cm.studio.devbee.communitymarket.R;
+import cm.studio.devbee.communitymarket.messagerie.MessageActivity;
 import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -79,18 +80,18 @@ public class DetailActivityThree extends AppCompatActivity {
         detail_description=findViewById(R.id.detail_description);
         date_de_publication=findViewById(R.id.date_de_publication);
         firebaseAuth=FirebaseAuth.getInstance();
+        toolbarDetail=findViewById(R.id.toolbarDetailThree);
         setSupportActionBar(toolbarDetail);
-        toolbarDetail=findViewById(R.id.toolbarDetail);
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
                 finish ();
 
             }
         });
+
         detail_progress=findViewById ( R.id.detail_progress );
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         detailActivityThreeWeakReference=new WeakReference<>(this);
@@ -110,6 +111,7 @@ public class DetailActivityThree extends AppCompatActivity {
                         String name_user= task.getResult ().getString ( "user_name" );
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         detail_user_name.setText(name_user+" "+prenom);
+                        vendeur_button.setText ( "ecrire a " +prenom);
                         Picasso.with(getApplicationContext()).load(image_user).into(detail_profil_image);
                     }
                 }else {
@@ -232,14 +234,14 @@ public class DetailActivityThree extends AppCompatActivity {
         vendeur_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent vendeur=new Intent(getApplicationContext(),UserGeneralPresentation.class);
+                Intent vendeur=new Intent(getApplicationContext(),MessageActivity.class);
                 vendeur.putExtra("id du post",iddupost);
                 vendeur.putExtra("id de l'utilisateur",current_user_id);
                 vendeur.putExtra("image_en_vente",lien_image);
                 Map<String, String> donnees_utilisateur = new HashMap<> ();
                 donnees_utilisateur.put ( "image_en_vente",lien_image);
                 startActivity(vendeur);
-               finish();
+                finish();
             }
         });
     }
