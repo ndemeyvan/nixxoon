@@ -221,7 +221,7 @@ public class DetailActivity extends AppCompatActivity {
                             getSupportActionBar().setTitle(titreDuProduit);
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
                             vendeur_button.setEnabled ( true );
-                            
+
 
                         }
                     }else {
