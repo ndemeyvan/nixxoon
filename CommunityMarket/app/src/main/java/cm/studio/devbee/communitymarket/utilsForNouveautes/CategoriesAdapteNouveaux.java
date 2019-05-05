@@ -95,7 +95,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
                     gotoDetail.putExtra("id_categories",categorie);
                     gotoDetail.putExtra("image_en_vente",imageproduit);
                     context.startActivity(gotoDetail);
-                    //((Activity)context).finish();
+                    ((Activity)context).finish();
 
                 }
             });
