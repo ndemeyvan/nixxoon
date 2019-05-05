@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".postActivity.PostActivity">
     <android.support.v7.widget.Toolbar
-        android:background="@color/black"
+        android:background="@color/blanc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/post_cat_toolbar"
-        app:titleTextColor="@color/blanc"/>
+        app:titleTextColor="@color/black"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/post_cat_recycler"
