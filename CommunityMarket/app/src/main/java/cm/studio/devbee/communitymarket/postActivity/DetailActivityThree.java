@@ -80,7 +80,7 @@ public class DetailActivityThree extends AppCompatActivity {
         detail_description=findViewById(R.id.detail_description);
         date_de_publication=findViewById(R.id.date_de_publication);
         firebaseAuth=FirebaseAuth.getInstance();
-        toolbarDetail=findViewById(R.id.toolbarDetailThree);
+        toolbarDetail=findViewById(R.id.toolbarDetail);
         setSupportActionBar(toolbarDetail);
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {

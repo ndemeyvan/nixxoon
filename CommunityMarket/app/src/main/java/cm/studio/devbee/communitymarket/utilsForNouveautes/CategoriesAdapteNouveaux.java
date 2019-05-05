@@ -89,7 +89,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
         viewHolder.imageDuproduit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent gotoDetail =new Intent(context,DetailActivity.class);
+                    Intent gotoDetail =new Intent(context,DetailActivityTwo.class);
                     gotoDetail.putExtra("id_post",idDuPost);
                     gotoDetail.putExtra("id_utilisateur",nom_id);
                     gotoDetail.putExtra("id_categories",categorie);
