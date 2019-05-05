@@ -65,10 +65,10 @@ public class VenteUtilisateurActivity extends AppCompatActivity {
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 if (!queryDocumentSnapshots.isEmpty ()){
                     int i=queryDocumentSnapshots.size ();
-                    getSupportActionBar ().setTitle ( i +" articles en ligne " );
+                    getSupportActionBar ().setTitle ( i +" articles en ventes " );
 
                 }else{
-                    getSupportActionBar ().setTitle ( " vous n'avez emis(e) aucune vente ." );
+                    getSupportActionBar ().setTitle ( " aucun article en ventes ." );
                 }
             }
         } );
