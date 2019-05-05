@@ -99,8 +99,8 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       /* Intent gotohome=new Intent(getApplicationContext(),Accueil.class);
-        startActivity(gotohome);*/
+       Intent gotohome=new Intent(getApplicationContext(),Accueil.class);
+        startActivity(gotohome);
         finish();
     }
 
@@ -174,14 +174,6 @@ public class DetailActivity extends AppCompatActivity {
                         AlertDialog alertDialog = alertDialogBuilder.create();
                         alertDialog.show();
 
-
-
-
-
-
-                    ////////////////////////////////////////
-
-                    /////////////////////////////////////////////////
                 }
             } );
         }else{
