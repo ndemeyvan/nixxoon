@@ -77,7 +77,7 @@ public class MessageActivity extends AppCompatActivity {
     private static TextView user_name;
     private static String randomKey;
     private static Intent intent ;
-    public static String user_id_message;
+    public static  String user_id_message;
     private static String user_categories_message;
     private static String id_du_post;
     private static String current_user;
@@ -207,6 +207,7 @@ public class MessageActivity extends AppCompatActivity {
                     if (task.getResult ().exists ()){
                         image= task.getResult ().getString ( "image_en_vente" );
                         Picasso.with ( MessageActivity.this ).load ( image ).into ( image_de_discutions );
+                        image_de_discutions.setAnimation ( AnimationUtils.loadAnimation ( getApplicationContext (),R.anim.fade_transition_animation ) );
                     }else{
 
                     }
@@ -460,8 +461,10 @@ public void nomEtImageProfil(){
                         }
                         readMessage ( current_user,user_id_message,lien_profil_contact );
                         user_name.setText(name_user+" "+prenom);
+                        user_name.setAnimation ( AnimationUtils.loadAnimation ( getApplicationContext (),R.anim.fade_transition_animation ) );
 //                        Picasso.with(getApplicationContext()).load(image_user).into(image_en_fond);
                         Picasso.with(getApplicationContext()).load(image_user).into(user_message_image);
+                        user_message_image.setAnimation ( AnimationUtils.loadAnimation ( getApplicationContext (),R.anim.fade_transition_animation ) );
 
                     }
                 }else {
