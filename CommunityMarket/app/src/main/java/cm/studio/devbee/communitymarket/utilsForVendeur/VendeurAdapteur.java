@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket.utilsForVendeur;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -76,6 +77,7 @@ public class VendeurAdapteur extends RecyclerView.Adapter<VendeurAdapteur.ViewHo
                 gotoDetail.putExtra("id de l'utilisateur",nom_utilisateur);
                 gotoDetail.putExtra("id_categories",categorie);
                 context.startActivity(gotoDetail);
+                ((Activity)context).finish();
             }
         });
         firebaseFirestore.collection("mes donnees utilisateur").document(nom_utilisateur).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
