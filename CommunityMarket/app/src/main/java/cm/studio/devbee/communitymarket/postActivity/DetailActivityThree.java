@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -59,6 +61,7 @@ public class DetailActivityThree extends AppCompatActivity {
     private static Button supprime_detail_button;
     private  static Toolbar toolbarDetail;
     String lien_image;
+    String current_user;
 
     private static WeakReference<DetailActivityThree> detailActivityThreeWeakReference;
     @Override
@@ -91,12 +94,10 @@ public class DetailActivityThree extends AppCompatActivity {
 
             }
         });
-
         detail_progress=findViewById ( R.id.detail_progress );
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         detailActivityThreeWeakReference=new WeakReference<>(this);
         vendeur_button.setEnabled ( false );
-
         asyncTask=new AsyncTask();
         asyncTask.execute();
 
@@ -240,6 +241,31 @@ public class DetailActivityThree extends AppCompatActivity {
                 vendeur.putExtra("image_en_vente",lien_image);
                 Map<String, String> donnees_utilisateur = new HashMap<> ();
                 donnees_utilisateur.put ( "image_en_vente",lien_image);
+               current_user=firebaseAuth.getCurrentUser ().getUid ();
+                firebaseFirestore.collection ( "sell_image" ).document ( current_user_id ).collection ( current_user ).document (current_user_id).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                } );
+                firebaseFirestore.collection ( "sell_image" ).document ( current_user ).collection ( current_user_id ).document (current_user).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                } );
+                DocumentReference user =  firebaseFirestore.collection ( "sell_image" ).document ( current_user ).collection ( current_user_id ).document (current_user);
+                user.update("image_en_vente", lien_image)
+                        .addOnSuccessListener(new OnSuccessListener<Void> () {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener () {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                            }
+                        });
                 startActivity(vendeur);
                 finish();
             }
