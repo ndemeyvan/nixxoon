@@ -77,7 +77,7 @@ public class VendeurAdapteur extends RecyclerView.Adapter<VendeurAdapteur.ViewHo
                 gotoDetail.putExtra("id de l'utilisateur",nom_utilisateur);
                 gotoDetail.putExtra("id_categories",categorie);
                 context.startActivity(gotoDetail);
-                ((Activity)context).finish();
+               // ((Activity)context).finish();
             }
         });
         firebaseFirestore.collection("mes donnees utilisateur").document(nom_utilisateur).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

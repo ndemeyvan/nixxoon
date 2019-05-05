@@ -118,6 +118,7 @@ public class VendeurActivity extends AppCompatActivity {
             Intent gotochat= new Intent(getApplicationContext(),MessageActivity.class);
             gotochat.putExtra("id de l'utilisateur",current_user_id);
             startActivity ( gotochat );
+            finish ();
             return true;
         }
 
@@ -190,6 +191,15 @@ public class VendeurActivity extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent gotohome=new Intent(getApplicationContext(),Accueil.class);
+        startActivity(gotohome);
+        finish();
+    }
+
 
     @Override
     protected void onDestroy() {
