@@ -56,8 +56,7 @@ public class DetailActivity extends AppCompatActivity {
     private static Button supprime_detail_button;
     private static String lien_image;
     private  static Toolbar toolbarDetail;
-    private static AlertDialog.Builder alertDialogBuilder;
-    AlertDialog alertDialog;
+
 
     private static WeakReference<DetailActivity> detailActivityWeakReference;
     @Override
@@ -92,11 +91,6 @@ public class DetailActivity extends AppCompatActivity {
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         detailActivityWeakReference=new WeakReference<>(this);
         vendeur_button.setEnabled ( false );
-        alertDialogBuilder = new AlertDialog.Builder(getApplicationContext ());
-        alertDialogBuilder.setMessage("chargement ...");
-        alertDialog = alertDialogBuilder.create();
-        alertDialog.setCancelable ( false );
-        alertDialog.show();
         asyncTask=new AsyncTask();
         asyncTask.execute();
 
@@ -227,7 +221,7 @@ public class DetailActivity extends AppCompatActivity {
                             getSupportActionBar().setTitle(titreDuProduit);
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
                             vendeur_button.setEnabled ( true );
-                            alertDialog.cancel();
+                            
 
                         }
                     }else {
