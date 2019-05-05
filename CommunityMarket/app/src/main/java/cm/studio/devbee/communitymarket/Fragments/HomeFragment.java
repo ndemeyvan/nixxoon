@@ -231,10 +231,13 @@ public class HomeFragment extends Fragment {
          alertDialogBuilder = new AlertDialog.Builder(getActivity());
          alertDialogBuilder.setMessage("chargement ...");
          alertDialog = alertDialogBuilder.create();
+         alertDialog.setCancelable ( false );
          alertDialog.show();
 
         return v;
     }
+
+
 
 
     public void uptdate(){
@@ -319,8 +322,7 @@ public class HomeFragment extends Fragment {
                     if (doc.getType()==DocumentChange.Type.ADDED){
                         String idupost=doc.getDocument ().getId ();
                         PrincipalModel principalAdaptemodel =doc.getDocument().toObject(PrincipalModel.class).withId ( idupost );
-                      principalModelList.add(principalAdaptemodel);
-
+                        principalModelList.add(principalAdaptemodel);
                         principalAdapte.notifyDataSetChanged();
                     }
                 }

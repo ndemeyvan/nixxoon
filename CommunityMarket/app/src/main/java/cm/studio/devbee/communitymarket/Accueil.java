@@ -1,7 +1,9 @@
 package cm.studio.devbee.communitymarket;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -88,6 +90,8 @@ public class Accueil extends AppCompatActivity
     private static ImageView profilbacck_image;
     private static WeakReference<Accueil> accueilWeakReference;
     private Menu menu;
+    private static AlertDialog.Builder alertDialogBuilder;
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,6 +206,23 @@ public class Accueil extends AppCompatActivity
             drawer.closeDrawer ( GravityCompat.START );
         } else {
             super.onBackPressed ();
+            alertDialogBuilder = new AlertDialog.Builder(getApplicationContext ());
+            alertDialogBuilder.setMessage("voulez vous quitter ?");
+            alertDialogBuilder.setPositiveButton ( "oui", new DialogInterface.OnClickListener () {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish ();
+                }
+            } );
+            alertDialogBuilder.setNegativeButton ( "non", new DialogInterface.OnClickListener () {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            } );
+            alertDialog = alertDialogBuilder.create();
+            alertDialog.setCancelable ( false );
+            alertDialog.show();
         }
     }
 
