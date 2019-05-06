@@ -400,9 +400,8 @@ public class MessageActivity extends AppCompatActivity {
             }
         } );
         DiplayAllChat chat=new DiplayAllChat();
-
         if (current_user.equals(id_recepteur)){
-            DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (user_id_message).collection("contacts").document (current_user);
+            /*DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (user_id_message).collection("contacts").document (current_user);
             user.update("lu", "lu")
                     .addOnSuccessListener(new OnSuccessListener<Void> () {
                         @Override
@@ -413,10 +412,23 @@ public class MessageActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                         }
-                    });
+                    });*/
 
             DocumentReference usertwo = firebaseFirestore.collection("dernier_message" ).document (current_user).collection("contacts").document (user_id_message);
             usertwo.update("lu", "lu")
+                    .addOnSuccessListener(new OnSuccessListener<Void> () {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                        }
+                    });
+        }else{
+            DocumentReference usertwo = firebaseFirestore.collection("dernier_message" ).document (current_user).collection("contacts").document (user_id_message);
+            usertwo.update("lu", "non lu")
                     .addOnSuccessListener(new OnSuccessListener<Void> () {
                         @Override
                         public void onSuccess(Void aVoid) {
