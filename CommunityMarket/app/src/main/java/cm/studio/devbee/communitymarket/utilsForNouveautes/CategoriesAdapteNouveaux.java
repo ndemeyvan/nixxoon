@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,7 +87,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
         viewHolder.temps ( tempsdepub );
         viewHolder.nomproduit ( produinom );
         viewHolder.container. setAnimation ( AnimationUtils. loadAnimation (context, R.anim.fade_transition_animation));
-        viewHolder.imageDuproduit.setOnClickListener(new View.OnClickListener() {
+        viewHolder.card_nvx.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent gotoDetail =new Intent(context,DetailActivityTwo.class);
@@ -197,6 +198,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
         TextView likeCount;
         TextView categorieChoice;
         ConstraintLayout container;
+        CardView card_nvx;
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
             description=itemView.findViewById ( R.id.nouveaux_description_du_produit );
@@ -209,6 +211,7 @@ public class  CategoriesAdapteNouveaux extends RecyclerView.Adapter<CategoriesAd
             nom_utilisateur=itemView.findViewById ( R.id.nouveaux_user_name );
             temps_de_la_pub=itemView.findViewById ( R.id.nouveaux_temps );
             like =itemView.findViewById ( R.id.like_image );
+            card_nvx=itemView.findViewById ( R.id.card_nvx );
             profil_utilisateur=itemView.findViewById ( R.id.nouveaux_image_profile );
             likeCount=itemView.findViewById ( R.id.nouveaux_nombre_de_like );
             categorieChoice=itemView.findViewById(R.id.categorieChoice);

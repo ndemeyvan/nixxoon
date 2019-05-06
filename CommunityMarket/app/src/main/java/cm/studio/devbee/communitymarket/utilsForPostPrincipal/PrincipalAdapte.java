@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,7 +78,7 @@ public class PrincipalAdapte extends RecyclerView.Adapter<PrincipalAdapte.ViewHo
         viewHolder.setPrix(nvxPrix);
         viewHolder.temps ( tempsdepub );
         viewHolder . nouveaux_container . setAnimation ( AnimationUtils. loadAnimation (context, R . anim . fade_transition_animation));
-        viewHolder.imageDuproduit.setOnClickListener(new View.OnClickListener() {
+        viewHolder.card_principal.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent gotoDetail =new Intent(context,DetailActivity.class);
@@ -122,6 +123,7 @@ public class PrincipalAdapte extends RecyclerView.Adapter<PrincipalAdapte.ViewHo
         TextView likeCount;
         TextView categorieChoice;
         ConstraintLayout nouveaux_container;
+        CardView card_principal;
         public ViewHolder(@NonNull View itemView) {
             super ( itemView );
             description=itemView.findViewById ( R.id.post_user_description );
@@ -131,6 +133,7 @@ public class PrincipalAdapte extends RecyclerView.Adapter<PrincipalAdapte.ViewHo
             temps_de_la_pub=itemView.findViewById ( R.id.post_userTemps );
             profil_utilisateur=itemView.findViewById ( R.id.postImageUtilisateur );
             nouveaux_container=itemView.findViewById ( R.id.nouveaux_container);
+            card_principal=itemView.findViewById ( R.id.card_principal );
         }
         public void setNom(final String desc){
             description.setText(desc);
