@@ -180,7 +180,7 @@ public class Accueil extends AppCompatActivity
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
-                Toast.makeText(getApplicationContext(),"erreur de banniere",Toast.LENGTH_LONG).show();
+                
             }
 
             @Override
