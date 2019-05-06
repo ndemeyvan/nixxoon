@@ -23,6 +23,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -58,7 +64,7 @@ import cm.studio.devbee.communitymarket.profile.ParametrePorfilActivity;
 import cm.studio.devbee.communitymarket.search.SearchActivity;
 import id.zelory.compressor.Compressor;
 
-public class PostActivityFinal extends AppCompatActivity {
+public class PostActivityFinal extends AppCompatActivity implements RewardedVideoAdListener {
     private static  final int MAX_LENGTH =100;
     private static Toolbar postfinaltoolbar;
     private static EditText nomProduit;
@@ -78,6 +84,7 @@ public class PostActivityFinal extends AppCompatActivity {
     private static AsyncTask asyncTask;
     private static WeakReference<PostActivityFinal> postActivityWeakReference;
     private static FloatingActionButton post_new_button;
+    private RewardedVideoAd mad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
@@ -106,10 +113,29 @@ public class PostActivityFinal extends AppCompatActivity {
         Toast.makeText ( getApplicationContext(),categoryName,Toast.LENGTH_LONG ).show ();
         asyncTask=new AsyncTask();
         asyncTask.execute();
+        ///////ads"ca-app-pub-3940256099942544~3347511713
+        ////my id : ca-app-pub-4353172129870258~6890094527
+        MobileAds.initialize(this,"ca-app-pub-3940256099942544~3347511713");
+        mad=MobileAds.getRewardedVideoAdInstance(this);
+        mad.setRewardedVideoAdListener(this);
+        loadRewardedVideo();
+
+        //ads
+
         postActivityWeakReference=new WeakReference<>(this);
 
 
     }
+
+    public void loadRewardedVideo(){
+        if (!mad.isLoaded()){
+            // ca-app-pub-3940256099942544/5224354917
+            // my pub id : ca-app-pub-4353172129870258/9670857450
+            mad.loadAd("ca-app-pub-3940256099942544/5224354917",new AdRequest.Builder().build());
+        }
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater ().inflate ( R.menu.menu_post_article, menu );
@@ -123,7 +149,11 @@ public class PostActivityFinal extends AppCompatActivity {
         if (id == R.id.send_article) {
             progressBar_post.setVisibility ( View.VISIBLE );
             vendreButton.setEnabled ( false );
-            prendreDonnerDevente ();
+            if (mad.isLoaded()) {
+                mad.show();
+            }
+            //prendreDonnerDevente ();
+
             return true;
         }
         return super.onOptionsItemSelected ( item );
@@ -295,6 +325,8 @@ public class PostActivityFinal extends AppCompatActivity {
 
 
     }
+
+
     public static String random(){
         Random generator = new Random();
         StringBuilder randomStringBuilder = new StringBuilder();
@@ -306,6 +338,84 @@ public class PostActivityFinal extends AppCompatActivity {
         }
         return randomStringBuilder.toString();
     }
+
+    @Override
+    public void onRewardedVideoAdLoaded() {
+
+    }
+
+    @Override
+    public void onRewardedVideoAdOpened() {
+
+    }
+
+    @Override
+    public void onRewardedVideoStarted() {
+
+    }
+
+    @Override
+    public void onRewardedVideoAdClosed() {
+
+        Toast.makeText(getApplicationContext(),"regardez la video jusqu'a la fin pour poster votre article",Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onRewarded(RewardItem rewardItem) {
+        loadRewardedVideo();
+        prendreDonnerDevente ();
+        Toast.makeText(getApplicationContext(),"merci d'avoir regarder la publicite ",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"votre article est en cour d'envoie ",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onRewardedVideoAdLeftApplication() {
+
+    }
+
+    @Override
+    public void onRewardedVideoAdFailedToLoad(int i) {
+
+    }
+
+    @Override
+    public void onRewardedVideoCompleted() {
+
+    }
+    public void userstatus(String status){
+        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user_id);
+        user.update("status", status)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
+    @Override
+    public void onResume() {
+        mad.resume(this);
+        super.onResume ();
+        userstatus("online");
+
+    }
+
+    @Override
+    public void onPause() {
+        mad.pause(this);
+        super.onPause ();
+        userstatus("offline");
+
+    }
+
+
+
     public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -359,6 +469,7 @@ public class PostActivityFinal extends AppCompatActivity {
             firebaseFirestore=null;;
             storageReference=null;
             firebaseAuth=null;
-            compressedImageFile=null;;
+            compressedImageFile=null;
+            mad.destroy(this);
     }
 }
