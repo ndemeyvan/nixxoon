@@ -26,6 +26,7 @@
         ads:layout_constraintStart_toStartOf="parent"
         ads:layout_constraintTop_toBottomOf="@+id/content_floating_action_btn"></com.google.android.gms.ads.AdView>
     <!-- my id ca-app-pub-4353172129870258/3649563954-->
+    <!-- pour eux id ca-app-pub-3940256099942544/6300978111-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/content_floating_action_btn"
