@@ -109,6 +109,7 @@ public class MessageActivity extends AppCompatActivity {
     private static  String image;
     private static ProgressBar message_progressbar;
     private static Uri mImageUri;
+    private static String id_recepteur;
 
 
 
@@ -130,6 +131,7 @@ public class MessageActivity extends AppCompatActivity {
         current_user=firebaseAuth.getCurrentUser ().getUid ();
         user_id_message=intent.getStringExtra ( "id de l'utilisateur" );
         lien_image=intent.getStringExtra ( "image_en_vente" );
+        id_recepteur=intent.getStringExtra ( "id_recepteur" );
         send_button=findViewById ( R.id.imageButton_to_send );
         message_user_send=findViewById ( R.id.user_message_to_send );
         message_recyclerview=findViewById ( R.id.message_recyclerView );
@@ -145,7 +147,6 @@ public class MessageActivity extends AppCompatActivity {
         mesage_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
                finish();
             }
         });
@@ -153,12 +154,11 @@ public class MessageActivity extends AppCompatActivity {
         send_button.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                //notify=true;
                 send_button.setAnimation ( AnimationUtils.loadAnimation ( getApplicationContext (),R.anim.fade_transition_animation ) );
                 String message =message_user_send.getText ().toString ();
                         if(!TextUtils.isEmpty ( message )){
                             sendmessage (current_user,user_id_message,message);
-                            //sendNotification();
+
                         }else{
                             Toast.makeText ( getApplicationContext (),"vous ne pouvez pas envoyer un message vide",Toast.LENGTH_LONG ).show ();
                         }
@@ -332,6 +332,7 @@ public class MessageActivity extends AppCompatActivity {
                 .document (recepteur).collection ( "contacts" )
                 .document (expediteur)
                 .set ( contact );
+
         DocumentReference read_or_not = firebaseFirestore.collection("dernier_message" ).document (recepteur).collection("contacts").document (expediteur);
         read_or_not.update("lu", "non lu")
                 .addOnSuccessListener(new OnSuccessListener<Void> () {
@@ -344,6 +345,7 @@ public class MessageActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
+
         DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(user_id_message);
         user.update("message", "non_lu")
                 .addOnSuccessListener(new OnSuccessListener<Void> () {
@@ -397,31 +399,39 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         } );
+        DiplayAllChat chat=new DiplayAllChat();
 
-        DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (user_id_message).collection("contacts").document (current_user);
-        user.update("lu", "lu")
-                .addOnSuccessListener(new OnSuccessListener<Void> () {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
-        DocumentReference usertwo = firebaseFirestore.collection("dernier_message" ).document (current_user).collection("contacts").document (user_id_message);
-        usertwo.update("lu", "lu")
-                .addOnSuccessListener(new OnSuccessListener<Void> () {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
+        if (current_user.equals(id_recepteur)){
+            DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (user_id_message).collection("contacts").document (current_user);
+            user.update("lu", "lu")
+                    .addOnSuccessListener(new OnSuccessListener<Void> () {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                        }
+                    });
+
+            DocumentReference usertwo = firebaseFirestore.collection("dernier_message" ).document (current_user).collection("contacts").document (user_id_message);
+            usertwo.update("lu", "lu")
+                    .addOnSuccessListener(new OnSuccessListener<Void> () {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                        }
+                    });
+        }
+
+
+
+
         message_progressbar.setVisibility(View.INVISIBLE);
 
     }

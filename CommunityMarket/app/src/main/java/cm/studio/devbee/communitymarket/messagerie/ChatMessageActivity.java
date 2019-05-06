@@ -176,6 +176,7 @@ public class ChatMessageActivity extends AppCompatActivity {
         final CircleImageView online =viewHolder.itemView.findViewById ( R.id.online );
         final CircleImageView offline=viewHolder.itemView.findViewById ( R.id.offline );
         final TextView lu_non_lu=viewHolder.itemView.findViewById ( R.id.lu_non );
+        TextView id_recepteur=viewHolder.itemView.findViewById(R.id.id_recepteur);
             ConstraintLayout chat_container=viewHolder.itemView.findViewById ( R.id.chat_container );
             chat_container.setAnimation ( AnimationUtils.loadAnimation ( getApplicationContext (),R.anim.fade_scale_animation ) );
             CardView chat_card = viewHolder.itemView.findViewById ( R.id.chat_card );
@@ -187,7 +188,10 @@ public class ChatMessageActivity extends AppCompatActivity {
             if ( diplayAllChat.getLu ().equals ( "non lu" )){
                 lu_non_lu.setText ( "nvx msg" );
             }
+            id_recepteur.setText(diplayAllChat.getId_recepteur());
+
            if ( diplayAllChat.getId_recepteur ().equals ( current_user )){
+
                 firebaseFirestore=FirebaseFirestore.getInstance ();
                 MessageActivity message = new MessageActivity ();
                firebaseFirestore.collection("mes donnees utilisateur").document(diplayAllChat.getId_expediteur ()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
@@ -225,6 +229,7 @@ public class ChatMessageActivity extends AppCompatActivity {
                     if (diplayAllChat.getId_recepteur ().equals ( current_user )){
                         Intent chatOne =new Intent ( getApplicationContext (),MessageActivity.class );
                         chatOne.putExtra ( "id de l'utilisateur" ,diplayAllChat.getId_expediteur () );
+                        chatOne.putExtra ( "id_recepteur" ,diplayAllChat.getId_recepteur());
                         DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (diplayAllChat.getId_expediteur ()).collection("contacts").document (current_user);
                         user.update("lu", "lu")
                                 .addOnSuccessListener(new OnSuccessListener<Void> () {
@@ -242,6 +247,7 @@ public class ChatMessageActivity extends AppCompatActivity {
                     }else{
                         Intent chat =new Intent ( getApplicationContext (),MessageActivity.class );
                         chat.putExtra ( "id de l'utilisateur" ,diplayAllChat.getId_recepteur () );
+                        chat.putExtra ( "id_recepteur" ,diplayAllChat.getId_recepteur());
                         startActivity ( chat );
                         //finish ();
                     }
