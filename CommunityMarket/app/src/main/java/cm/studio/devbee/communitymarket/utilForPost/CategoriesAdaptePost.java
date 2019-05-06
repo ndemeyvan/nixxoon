@@ -53,10 +53,10 @@ public class CategoriesAdaptePost extends RecyclerView.Adapter<CategoriesAdapteP
         viewHolder.choix_des_categories_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent categoryIntent=new Intent ( context,PostActivityFinal.class ).setFlags(FLAG_ACTIVITY_NEW_TASK);
+                Intent categoryIntent=new Intent ( context,PostActivityFinal.class ).setFlags ( FLAG_ACTIVITY_NEW_TASK );
                 categoryIntent.putExtra ( "categoryName",desc );
                 context.startActivity(categoryIntent);
-                //((Activity)context).finish();
+               // ((Activity)context).finish();
             }
         });
     }

@@ -136,8 +136,8 @@ public class DetailActivityFour extends AppCompatActivity {
                                                     detail_progress.setVisibility ( View.VISIBLE );
                                                     firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).document (iddupost).delete ();
                                                     Toast.makeText ( getApplicationContext (),"supprimer de votre mur",Toast.LENGTH_LONG ).show ();
-                                                    Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
-                                                    startActivity ( gtohome );
+                                                   /* Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
+                                                    startActivity ( gtohome );*/
                                                     finish ();
                                                 }else {
                                                     detail_progress.setVisibility ( View.INVISIBLE );
