@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket.utilForPost;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -70,6 +71,7 @@ public class CategoriesAdaptePost extends RecyclerView.Adapter<CategoriesAdapteP
                 public void onClick(View v) { Intent categoryIntent=new Intent ( itemView.getContext (),PostActivityFinal.class );
                    categoryIntent.putExtra ( "categoryName",name );
                    itemView.getContext ().startActivity ( categoryIntent );
+                    ((Activity)context).finish();
 
                 }
             } );

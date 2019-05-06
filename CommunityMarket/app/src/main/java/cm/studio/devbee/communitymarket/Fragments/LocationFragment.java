@@ -113,7 +113,7 @@ public class LocationFragment extends Fragment {
 
     public void RecyclerView(){
 
-        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "Chemises" ).orderBy ( "prix_du_produit",Query.Direction.ASCENDING );
+        Query firstQuery =firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "location" ).orderBy ( "prix_du_produit",Query.Direction.ASCENDING );
         firstQuery.addSnapshotListener(getActivity (),new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
