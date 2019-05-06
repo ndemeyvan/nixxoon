@@ -149,9 +149,18 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
         if (id == R.id.send_article) {
             progressBar_post.setVisibility ( View.VISIBLE );
             vendreButton.setEnabled ( false );
-            if (mad.isLoaded()) {
-                mad.show();
+            if (TextUtils.isEmpty ( nom_du_produit )&&TextUtils.isEmpty ( decription_du_produit )&&TextUtils.isEmpty ( prix_du_produit )&&mImageUri==null){
+                progressBar_post.setVisibility (View.INVISIBLE);
+                Toast.makeText ( getApplicationContext(),"Veuillez remplir tous les champs",Toast.LENGTH_LONG ).show ();
+
+            }else{
+
+                if (mad.isLoaded()) {
+                    mad.show();
+                }
+
             }
+
             //prendreDonnerDevente ();
 
             return true;
@@ -363,10 +372,10 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-        loadRewardedVideo();
         prendreDonnerDevente ();
         Toast.makeText(getApplicationContext(),"merci d'avoir regarder la publicite ",Toast.LENGTH_LONG).show();
         Toast.makeText(getApplicationContext(),"votre article est en cour d'envoie ",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Patientez svp",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -376,7 +385,8 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
 
     @Override
     public void onRewardedVideoAdFailedToLoad(int i) {
-
+        Toast.makeText(getApplicationContext(),"un probleme est survenu",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"verifier la qualite de votre connexion internet svp. ",Toast.LENGTH_LONG).show();
     }
 
     @Override
