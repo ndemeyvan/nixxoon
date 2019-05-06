@@ -73,7 +73,10 @@
         <activity android:name=".messagerie.ChatMessageActivity" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/slash">
+            android:theme="@style/AppTheme">
+            <!--
+            android:theme="@style/slash"
+            -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
