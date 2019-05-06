@@ -24,6 +24,8 @@ import java.util.List;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.postActivity.PostActivityFinal;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class CategoriesAdaptePost extends RecyclerView.Adapter<CategoriesAdaptePost.ViewHolder> {
     List<CategoriesModelPost> categoriesModelList;
     Context context;
@@ -37,16 +39,26 @@ public class CategoriesAdaptePost extends RecyclerView.Adapter<CategoriesAdapteP
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v=LayoutInflater.from ( viewGroup.getContext () ).inflate (R.layout.item_post_categorie ,viewGroup,false);
+        viewGroup.getContext();
         return new ViewHolder ( v );
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         //viewHolder.categories_text.setText ( categoriesModelList.get ( i ).getPost_titre_categories () );
-        String desc =categoriesModelList.get ( i).getPost_titre_categories ();
+        final String desc =categoriesModelList.get ( i).getPost_titre_categories ();
         viewHolder.choix_des_categories_container.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_scale_animation ) );
         viewHolder.image_categories.setImageResource ( categoriesModelList.get ( i ).getPost_image_categories () );
         viewHolder.setNom ( desc );
+        viewHolder.choix_des_categories_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent categoryIntent=new Intent ( context,PostActivityFinal.class ).setFlags(FLAG_ACTIVITY_NEW_TASK);
+                categoryIntent.putExtra ( "categoryName",desc );
+                context.startActivity(categoryIntent);
+                //((Activity)context).finish();
+            }
+        });
     }
 
     @Override
@@ -66,15 +78,6 @@ public class CategoriesAdaptePost extends RecyclerView.Adapter<CategoriesAdapteP
         }
         public void setNom(final String name){
             categories_text.setText ( name );
-            itemView.setOnClickListener ( new View.OnClickListener () {
-                @Override
-                public void onClick(View v) { Intent categoryIntent=new Intent ( itemView.getContext (),PostActivityFinal.class );
-                   categoryIntent.putExtra ( "categoryName",name );
-                   itemView.getContext ().startActivity ( categoryIntent );
-                    ((Activity)context).finish();
-
-                }
-            } );
 
         }
 

@@ -114,7 +114,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="N O U V E A U X"
+                    android:text="A C T U E L L E M E N T"
                     android:textColor="@color/blanc"
                     android:textSize="20sp"
                     android:textStyle="bold"

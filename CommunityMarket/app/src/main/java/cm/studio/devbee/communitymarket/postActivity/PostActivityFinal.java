@@ -327,38 +327,38 @@ public class PostActivityFinal extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed ();
-        Intent intent=new Intent ( getApplicationContext (),PostActivity.class );
-        startActivity ( intent );
-        finish ();
+            super.onBackPressed ();
+            Intent intent=new Intent ( getApplicationContext (),PostActivity.class );
+            startActivity ( intent );
+            finish ();
     }
 
 
 
     @Override
     protected void onDestroy() {
-        asyncTask.cancel(true);
-        super.onDestroy();
-        asyncTask.cancel(true);
-        postfinaltoolbar=null;;
-        nomProduit=null;;
-        descriptionProduit=null;;
-        prixPorduit=null;;
-        imageProduit=null;;
-         categoryName=null;
-         nom_du_produit=null;
-        decription_du_produit=null;
-        prix_du_produit=null;
-        saveCurrentTime=null;
-        saveCurrentDate=null;;
-         vendreButton=null;;
-         progressBar_post=null;;
-         mImageUri=null;;
-        randomKey=null;;
-        current_user_id=null;
-         firebaseFirestore=null;;
-        storageReference=null;;
-        firebaseAuth=null;;
-       compressedImageFile=null;;
+            asyncTask.cancel(true);
+            super.onDestroy();
+            asyncTask.cancel(true);
+            postfinaltoolbar=null;;
+            nomProduit=null;;
+            descriptionProduit=null;;
+            prixPorduit=null;;
+            imageProduit=null;;
+            categoryName=null;
+            nom_du_produit=null;
+            decription_du_produit=null;
+            prix_du_produit=null;
+            saveCurrentTime=null;
+            saveCurrentDate=null;;
+            vendreButton=null;;
+            progressBar_post=null;;
+            mImageUri=null;;
+            randomKey=null;;
+            current_user_id=null;
+            firebaseFirestore=null;;
+            storageReference=null;
+            firebaseAuth=null;
+            compressedImageFile=null;;
     }
 }
