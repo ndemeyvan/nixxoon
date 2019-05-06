@@ -147,7 +147,9 @@ public class MessageActivity extends AppCompatActivity {
         mesage_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               finish();
+                Intent gotochatlist=new Intent(getApplicationContext(),ChatMessageActivity.class);
+                startActivity(gotochatlist);
+                finish();
             }
         });
 
@@ -366,7 +368,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed ();
-        //startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+        startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
         finish();
     }
 
