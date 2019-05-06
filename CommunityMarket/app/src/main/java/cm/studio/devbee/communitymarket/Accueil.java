@@ -101,6 +101,7 @@ public class Accueil extends AppCompatActivity
     AlertDialog alertDialog;
     AlertDialog alertDialogTwo;
     private AdView mAdView;
+    String name;
 
 
     @Override
@@ -166,21 +167,22 @@ public class Accueil extends AppCompatActivity
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        name= (String) drawer_user_name.getText();
         mAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
+
+                Toast.makeText(getApplicationContext(), name +" merci de cliquer sur la pub pour soutemir l'appli",Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
+                Toast.makeText(getApplicationContext(),"erreur de banniere",Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
+                Toast.makeText(getApplicationContext(),"merci de soutemir l'appli " + name,Toast.LENGTH_LONG).show();
             }
 
             @Override
