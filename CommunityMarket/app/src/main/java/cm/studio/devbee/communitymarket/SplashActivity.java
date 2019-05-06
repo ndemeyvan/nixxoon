@@ -14,10 +14,16 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        SystemClock.sleep(3000);
-        Intent gotochoice= new Intent(getApplicationContext(),ChoiceActivity.class);
-        startActivity(gotochoice);
-        finish();
+        new Handler (  ).postDelayed ( new Runnable () {
+            @Override
+            public void run() {
+                Intent gotochoice= new Intent(getApplicationContext(),ChoiceActivity.class);
+                startActivity(gotochoice);
+                finish();
+            }
+        }, 3000 );
+        //SystemClock.sleep(3000);
+
 
     }
 }
