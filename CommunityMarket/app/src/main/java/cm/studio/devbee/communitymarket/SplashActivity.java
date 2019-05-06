@@ -18,8 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler (  ).postDelayed ( new Runnable () {
             @Override
             public void run() {
-                Toast.makeText ( getApplicationContext (),"chargement du magasin",Toast.LENGTH_LONG ).show ();
-                Intent gotochoice= new Intent(getApplicationContext(),ChoiceActivity.class);
+               Intent gotochoice= new Intent(getApplicationContext(),ChoiceActivity.class);
                 startActivity(gotochoice);
                 finish();
             }
