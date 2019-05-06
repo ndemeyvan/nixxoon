@@ -118,7 +118,7 @@ public class VendeurActivity extends AppCompatActivity {
             Intent gotochat= new Intent(getApplicationContext(),MessageActivity.class);
             gotochat.putExtra("id de l'utilisateur",current_user_id);
             startActivity ( gotochat );
-            finish ();
+            //finish ();
             return true;
         }
 
