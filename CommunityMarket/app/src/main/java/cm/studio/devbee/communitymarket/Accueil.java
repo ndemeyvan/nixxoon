@@ -180,7 +180,7 @@ public class Accueil extends AppCompatActivity
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
-                
+
             }
 
             @Override

@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -17,6 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler (  ).postDelayed ( new Runnable () {
             @Override
             public void run() {
+                Toast.makeText ( getApplicationContext (),"chargement du magasin",Toast.LENGTH_LONG ).show ();
                 Intent gotochoice= new Intent(getApplicationContext(),ChoiceActivity.class);
                 startActivity(gotochoice);
                 finish();
