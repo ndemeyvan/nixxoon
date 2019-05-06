@@ -50,7 +50,7 @@ public class VenteUtilisateurActivity extends AppCompatActivity {
         profil_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity ( new Intent ( getApplicationContext (),ProfileActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                startActivity ( new Intent ( getApplicationContext (),ProfileActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
                 finish ();
             }
         });
@@ -97,8 +97,8 @@ public class VenteUtilisateurActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed ();
-        /*Intent gotoHome =new Intent ( VenteUtilisateurActivity.this,ProfileActivity.class );
-        startActivity ( gotoHome );*/
+        Intent gotoHome =new Intent ( VenteUtilisateurActivity.this,ProfileActivity.class );
+        startActivity ( gotoHome );
         finish ();
     }
 }

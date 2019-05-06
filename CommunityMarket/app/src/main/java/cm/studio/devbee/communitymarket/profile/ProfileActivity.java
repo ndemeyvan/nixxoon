@@ -108,7 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent gotoparam=new Intent ( getApplicationContext (),ParametrePorfilActivity.class );
-                //startActivity ( gotoparam );
+                startActivity ( gotoparam );
                 finish ();
             }
         } );
