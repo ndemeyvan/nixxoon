@@ -89,7 +89,7 @@ public class DetailActivityThree extends AppCompatActivity {
         toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                //startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
                 finish ();
 
             }
@@ -102,6 +102,13 @@ public class DetailActivityThree extends AppCompatActivity {
         asyncTask.execute();
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed ();
+        finish ();
+    }
+
     public void nomEtImageProfil(){
         firebaseFirestore.collection("mes donnees utilisateur").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -267,7 +274,7 @@ public class DetailActivityThree extends AppCompatActivity {
                             }
                         });
                 startActivity(vendeur);
-                finish();
+                //finish();
             }
         });
     }
