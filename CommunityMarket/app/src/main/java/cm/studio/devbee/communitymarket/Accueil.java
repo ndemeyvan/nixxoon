@@ -202,9 +202,9 @@ public class Accueil extends AppCompatActivity
         //interticiel mob
         //my id ca-app-pub-4353172129870258~6890094527
         //my key ca-app-pub-4353172129870258/6369018645
-        MobileAds.initialize(this,"ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this,"ca-app-pub-4353172129870258~6890094527");
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-4353172129870258/6369018645");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         mInterstitialAd.show();
         mInterstitialAd.setAdListener(new AdListener() {
