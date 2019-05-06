@@ -166,7 +166,7 @@ public class Accueil extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
         // my id ca-app-pub-4353172129870258~6890094527
         // leur id ca-app-pub-3940256099942544~3347511713
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this, "ca-app-pub-4353172129870258~6890094527");
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
