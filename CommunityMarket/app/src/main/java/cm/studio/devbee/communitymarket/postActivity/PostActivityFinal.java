@@ -115,7 +115,7 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
         asyncTask.execute();
         ///////ads"ca-app-pub-3940256099942544~3347511713
         ////my id : ca-app-pub-4353172129870258~6890094527
-        MobileAds.initialize(this,"ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this,"ca-app-pub-4353172129870258~6890094527");
         mad=MobileAds.getRewardedVideoAdInstance(this);
         mad.setRewardedVideoAdListener(this);
         loadRewardedVideo();
@@ -131,7 +131,7 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
         if (!mad.isLoaded()){
             // ca-app-pub-3940256099942544/5224354917
             // my pub id : ca-app-pub-4353172129870258/9670857450
-            mad.loadAd("ca-app-pub-3940256099942544/5224354917",new AdRequest.Builder().build());
+            mad.loadAd("ca-app-pub-4353172129870258/9670857450",new AdRequest.Builder().build());
         }
     }
 
@@ -149,19 +149,18 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
         if (id == R.id.send_article) {
             progressBar_post.setVisibility ( View.VISIBLE );
             vendreButton.setEnabled ( false );
+            prendreDonnerDevente ();
             if (TextUtils.isEmpty ( nom_du_produit )&&TextUtils.isEmpty ( decription_du_produit )&&TextUtils.isEmpty ( prix_du_produit )&&mImageUri==null){
                 progressBar_post.setVisibility (View.INVISIBLE);
                 Toast.makeText ( getApplicationContext(),"Veuillez remplir tous les champs",Toast.LENGTH_LONG ).show ();
 
             }else{
-
                 if (mad.isLoaded()) {
                     mad.show();
                 }
-
             }
 
-            //prendreDonnerDevente ();
+
 
             return true;
         }
@@ -372,7 +371,6 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-        prendreDonnerDevente ();
         Toast.makeText(getApplicationContext(),"merci d'avoir regarder la publicite ",Toast.LENGTH_LONG).show();
         Toast.makeText(getApplicationContext(),"votre article est en cour d'envoie ",Toast.LENGTH_LONG).show();
         Toast.makeText(getApplicationContext(),"Patientez svp",Toast.LENGTH_LONG).show();
