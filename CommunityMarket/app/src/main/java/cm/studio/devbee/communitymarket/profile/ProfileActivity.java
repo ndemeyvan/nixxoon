@@ -100,7 +100,7 @@ public class ProfileActivity extends AppCompatActivity {
         profil_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                //startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
                 finish ();
             }
         });
@@ -121,7 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent vendre=new Intent ( ProfileActivity.this ,VenteUtilisateurActivity.class);
                 startActivity ( vendre );
-                finish ();
+                //finish ();
             }
         } );
 
@@ -130,8 +130,8 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed ();
-        Intent gotoHome =new Intent ( ProfileActivity.this,Accueil.class );
-        startActivity ( gotoHome );
+        /*Intent gotoHome =new Intent ( ProfileActivity.this,Accueil.class );
+        startActivity ( gotoHome );*/
         finish ();
     }
 

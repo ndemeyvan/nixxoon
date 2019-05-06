@@ -86,7 +86,7 @@ public class SearchActivity extends AppCompatActivity {
         toolbarSearch.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity ( new Intent( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                //startActivity ( new Intent( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
                 finish ();
             }
         });
@@ -108,6 +108,13 @@ public class SearchActivity extends AppCompatActivity {
         } );
 
 
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed ();
+        /*Intent gotoHome =new Intent ( getApplicationContext(),Accueil.class );
+        startActivity ( gotoHome );*/
+        finish ();
     }
 
     private void search(final String s) {

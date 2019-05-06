@@ -242,12 +242,12 @@ public class Accueil extends AppCompatActivity
         if (id == R.id.search) {
             Intent gogotoSearch = new Intent(getApplicationContext(),SearchActivity.class);
             startActivity(gogotoSearch);
-            finish ();
+            //finish ();
             return true;
         }else if (id == R.id.message) {
             Intent gogotoSearch = new Intent(getApplicationContext(),ChatMessageActivity.class);
             startActivity(gogotoSearch);
-            finish ();
+            //finish ();
             return true;
         }
 
@@ -262,7 +262,7 @@ public class Accueil extends AppCompatActivity
         if (id == R.id.ic_user) {
             Intent intent = new Intent ( getApplicationContext(),ProfileActivity.class );
             startActivity ( intent );
-            finish ();
+            //finish ();
         } else if (id == R.id.ic_logout) {
             userstatus("offline");
             mAuth.getInstance().signOut();
@@ -272,16 +272,16 @@ public class Accueil extends AppCompatActivity
         }else if (id == R.id.setting) {
             Intent parametre=new Intent(getApplicationContext(),ParametrePorfilActivity.class);
             startActivity(parametre);
-            finish ();
+            //finish ();
         }
         else if (id == R.id.nous_contacter) {
             Intent nous_contacter=new Intent(getApplicationContext(),AproposActivity.class);
             startActivity(nous_contacter);
-            finish ();
+           // finish ();
         }else if(id==R.id.ic_message){
             Intent message=new Intent(getApplicationContext(),ChatMessageActivity.class);
             startActivity(message);
-            finish ();
+            //finish ();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById ( R.id.drawer_layout );
         drawer.closeDrawer ( GravityCompat.START );
@@ -315,7 +315,7 @@ public class Accueil extends AppCompatActivity
             public void onClick(View v) {
                 Intent vaTopost =new Intent ( getApplicationContext(),PostActivity.class );
                 startActivity ( vaTopost );
-                finish ();
+                //finish ();
             }
         } );
     }
@@ -455,12 +455,12 @@ public class Accueil extends AppCompatActivity
         asyncTask.cancel(true);
         mAuth=null;
         firebaseFirestore=null;
-       acceuille_image=null;
-       drawer_user_name=null;
-       content_floating_action_btn=null;
-      tabLayout=null;
-      tabsviewpager=null;
-      accueilWeakReference=null;
+        acceuille_image=null;
+        drawer_user_name=null;
+        content_floating_action_btn=null;
+        tabLayout=null;
+        tabsviewpager=null;
+        accueilWeakReference=null;
     }
 }
 

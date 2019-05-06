@@ -82,7 +82,12 @@ public class DetailActivity extends AppCompatActivity {
         detail_prix_produit=findViewById(R.id.detail_prix_produit);
         detail_profil_image=findViewById(R.id.detail_image_du_profil);
         vendeur_button=findViewById(R.id.vendeur_button);
-
+        toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish ();
+            }
+        });
         detail_user_name=findViewById(R.id.detail_user_name);
         detail_description=findViewById(R.id.detail_description);
         date_de_publication=findViewById(R.id.date_de_publication);
@@ -99,8 +104,8 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       Intent gotohome=new Intent(getApplicationContext(),Accueil.class);
-        startActivity(gotohome);
+        /*Intent gotohome=new Intent(getApplicationContext(),Accueil.class);
+        startActivity(gotohome);*/
         finish();
     }
 
@@ -243,7 +248,7 @@ public class DetailActivity extends AppCompatActivity {
                 vendeur.putExtra("id de l'utilisateur",current_user_id);
                 vendeur.putExtra("image_en_vente",lien_image);
                 startActivity(vendeur);
-                finish();
+                //finish();
             }
         });
     }

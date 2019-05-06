@@ -241,7 +241,6 @@ public class HomeFragment extends Fragment {
 
 
     public void uptdate(){
-
         DocumentReference user = firebaseFirestore.collection("sliders").document("images");
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

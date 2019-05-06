@@ -71,11 +71,11 @@ public class UserGeneralPresentation extends AppCompatActivity {
         last_seen=findViewById(R.id.general_last_view);
         firebaseAuth=FirebaseAuth.getInstance ();
         general_last_seen=findViewById ( R.id.general_last_view );
-        //getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
+        getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         toolbargeneral.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity ( new Intent ( getApplicationContext (),DetailActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                //startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
                 finish ();
             }
         });
@@ -126,7 +126,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
                             }
                         });
                 startActivity(gotoMessage);
-                finish();
+                //finish();
 
             }
         } );
@@ -138,7 +138,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
                 gotoDetail.putExtra("id de l'utilisateur",current_user_id);
                 gotoDetail.putExtra("id_categories",categorie);
                 startActivity(gotoDetail);
-                finish();
+                //finish();
             }
         });
     }
@@ -146,7 +146,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity ( new Intent ( getApplicationContext (),DetailActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+        //startActivity ( new Intent ( getApplicationContext (),DetailActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
         finish ();
     }
 

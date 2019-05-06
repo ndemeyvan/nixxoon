@@ -232,8 +232,8 @@ public class ParametrePorfilActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed ();
-        Intent gotoHome =new Intent ( getApplicationContext(),Accueil.class );
-        startActivity ( gotoHome );
+        /*Intent gotoHome =new Intent ( getApplicationContext(),Accueil.class );
+        startActivity ( gotoHome );*/
         finish ();
     }
     @Override

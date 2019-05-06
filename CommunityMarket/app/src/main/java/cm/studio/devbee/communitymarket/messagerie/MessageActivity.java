@@ -142,11 +142,11 @@ public class MessageActivity extends AppCompatActivity {
         nomEtImageProfil ();
         online_status=findViewById ( R.id.online_status_image );
         offline_status=findViewById ( R.id.offline_status_image );
-
         mesage_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+               //startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+               finish();
             }
         });
 
@@ -165,6 +165,7 @@ public class MessageActivity extends AppCompatActivity {
                          message_user_send.setText ( "" );
             }
         } );
+
 
 
         Calendar calendar=Calendar.getInstance ();
@@ -363,9 +364,11 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed ();
-        startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+        //startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
         finish();
     }
+
+
 
 
 

@@ -77,7 +77,6 @@ public class DetailActivityTwo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish ();
-
             }
         });
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
@@ -235,8 +234,8 @@ public class DetailActivityTwo extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent gotohome=new Intent(getApplicationContext(),Accueil.class);
-        startActivity(gotohome);
+        /*Intent gotohome=new Intent(getApplicationContext(),Accueil.class);
+        startActivity(gotohome);*/
         finish();
     }
 

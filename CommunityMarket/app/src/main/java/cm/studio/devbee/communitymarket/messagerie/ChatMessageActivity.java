@@ -71,7 +71,7 @@ public class ChatMessageActivity extends AppCompatActivity {
         message_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                //startActivity ( new Intent ( getApplicationContext (),Accueil.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
                 finish ();
             }
         });
@@ -93,8 +93,8 @@ public class ChatMessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed ();
-        Intent gotoHome =new Intent ( getApplicationContext(),Accueil.class );
-        startActivity ( gotoHome );
+        /*Intent gotoHome =new Intent ( getApplicationContext(),Accueil.class );
+        startActivity ( gotoHome );*/
         finish ();
     }
 
@@ -238,12 +238,12 @@ public class ChatMessageActivity extends AppCompatActivity {
                                     }
                                 });
                         startActivity ( chatOne );
-                        finish ();
+                        //finish ();
                     }else{
                         Intent chat =new Intent ( getApplicationContext (),MessageActivity.class );
                         chat.putExtra ( "id de l'utilisateur" ,diplayAllChat.getId_recepteur () );
                         startActivity ( chat );
-                        finish ();
+                        //finish ();
                     }
                 }
             } );
