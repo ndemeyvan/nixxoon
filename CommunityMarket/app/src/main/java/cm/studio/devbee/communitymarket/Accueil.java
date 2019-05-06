@@ -60,6 +60,7 @@ import cm.studio.devbee.communitymarket.Fragments.ChemiseFragment;
 import cm.studio.devbee.communitymarket.Fragments.CulloteFragment;
 import cm.studio.devbee.communitymarket.Fragments.HomeFragment;
 import cm.studio.devbee.communitymarket.Fragments.JupesFragment;
+import cm.studio.devbee.communitymarket.Fragments.LocationFragment;
 import cm.studio.devbee.communitymarket.Fragments.PantalonFragment;
 import cm.studio.devbee.communitymarket.Fragments.PullFragment;
 import cm.studio.devbee.communitymarket.Fragments.RobeFragment;
@@ -171,6 +172,7 @@ public class Accueil extends AppCompatActivity
         tabsAdapter.addFragment(new ChemiseFragment (),"chemises");
         tabsAdapter.addFragment(new RobeFragment (),"robes");
         tabsAdapter.addFragment(new AccesoireFragment (),"accessoire");
+        tabsAdapter.addFragment(new LocationFragment(),"location");
         viewPager.setAdapter(tabsAdapter);
 
     }
@@ -315,7 +317,7 @@ public class Accueil extends AppCompatActivity
             public void onClick(View v) {
                 Intent vaTopost =new Intent ( getApplicationContext(),PostActivity.class );
                 startActivity ( vaTopost );
-                //finish ();
+                finish ();
             }
         } );
     }

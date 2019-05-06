@@ -130,7 +130,7 @@ public class DetailActivityTwo extends AppCompatActivity {
                                                     firebaseFirestore.collection ( "publication" ).document ("categories").collection ( categories ).document (iddupost).delete ();
                                                     Toast.makeText ( getApplicationContext (),"supprimer des "+categories,Toast.LENGTH_LONG ).show ();
                                                     Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
-                                                    startActivity ( gtohome );
+                                                    //startActivity ( gtohome );
                                                     finish ();
                                                 }else {
                                                     detail_progress.setVisibility ( View.INVISIBLE );
@@ -226,7 +226,7 @@ public class DetailActivityTwo extends AppCompatActivity {
                 vendeur.putExtra("id de l'utilisateur",current_user_id);
                 vendeur.putExtra("image_en_vente",lien_image);
                 startActivity(vendeur);
-                finish();
+                //finish();
             }
         });
     }

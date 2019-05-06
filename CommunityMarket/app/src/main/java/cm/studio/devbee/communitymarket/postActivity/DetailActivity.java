@@ -152,7 +152,7 @@ public class DetailActivity extends AppCompatActivity {
                                                                 firebaseFirestore.collection ( "publication" ).document ("categories").collection ( "nouveaux" ).document (iddupost).delete ();
                                                                 Toast.makeText ( getApplicationContext (),"supprimer des nouveautés",Toast.LENGTH_LONG ).show ();
                                                                 Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
-                                                                startActivity ( gtohome );
+                                                                //startActivity ( gtohome );
                                                                 finish ();
                                                             }else {
                                                                 detail_progress.setVisibility ( View.INVISIBLE );

@@ -87,6 +87,13 @@ public class PostActivityFinal extends AppCompatActivity {
         firebaseFirestore=FirebaseFirestore.getInstance ();
         current_user_id=firebaseAuth.getCurrentUser ().getUid ();
         postfinaltoolbar=findViewById ( R.id.final_toolbar );
+        postfinaltoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity ( new Intent ( getApplicationContext (),PostActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
+                finish ();
+            }
+        });
         imageProduit=findViewById ( R.id.imageProduit );
         nomProduit=findViewById ( R.id.post_product_name );
         post_new_button=findViewById ( R.id.post_new_button );
@@ -318,6 +325,14 @@ public class PostActivityFinal extends AppCompatActivity {
 
         }
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed ();
+        Intent intent=new Intent ( getApplicationContext (),PostActivity.class );
+        startActivity ( intent );
+        finish ();
+    }
+
 
 
     @Override
