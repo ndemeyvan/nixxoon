@@ -9,6 +9,7 @@ import android.os.StrictMode;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -60,6 +61,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import cm.studio.devbee.communitymarket.MessageService;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.SendNotif;
 import cm.studio.devbee.communitymarket.postActivity.PostActivityFinal;
@@ -153,6 +156,9 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+        stopService(gotohome);
+
         send_button.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
@@ -219,6 +225,7 @@ public class MessageActivity extends AppCompatActivity {
                 }
             }
         });
+        userstatus("online");
 
 
     }
@@ -368,6 +375,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed ();
+        userstatus("offline");
         startActivity ( new Intent ( getApplicationContext (),ChatMessageActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP ) );
         finish();
     }
@@ -401,7 +409,6 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         } );
-        DiplayAllChat chat=new DiplayAllChat();
         if (current_user.equals(id_recepteur)){
             /*DocumentReference user = firebaseFirestore.collection("dernier_message" ).document (user_id_message).collection("contacts").document (current_user);
             user.update("lu", "lu")
@@ -443,12 +450,12 @@ public class MessageActivity extends AppCompatActivity {
                     });
         }
 
-
-
-
         message_progressbar.setVisibility(View.INVISIBLE);
 
     }
+
+
+
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {

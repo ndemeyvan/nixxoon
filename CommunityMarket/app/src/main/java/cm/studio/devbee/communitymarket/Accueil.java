@@ -2,17 +2,21 @@ package cm.studio.devbee.communitymarket;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
@@ -136,11 +140,18 @@ public class Accueil extends AppCompatActivity
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful ()){
                     String message= task.getResult ().getString ( "message" );
-
                     if (message.equals ( "non_lu" )){
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
-                        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
-                        startService(gotohome);
+                        NotificationManagerCompat notificationManagerCompat=NotificationManagerCompat.from(getApplicationContext());
+                        NotificationCompat.Builder builder= new NotificationCompat.Builder(getApplicationContext());
+                        builder.setContentTitle("nouveaux message");
+                        builder.setSmallIcon(R.drawable.ic_action_message);
+                        Intent gotohome= new Intent(getApplicationContext(),ChatMessageActivity.class);
+                        PendingIntent pendingIntent= PendingIntent.getActivity(getApplicationContext(),1,gotohome,0);
+                        builder.setContentIntent(pendingIntent);
+                        builder.setAutoCancel(true);
+                        builder.setColor(Color.BLACK);
+                        notificationManagerCompat.notify(1,builder.build());
                     }else{
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
                     }
@@ -366,6 +377,8 @@ public class Accueil extends AppCompatActivity
                     String message= task.getResult ().getString ( "message" );
 
                     if (message.equals ( "non_lu" )){
+                        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+                        startService(gotohome);
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
                     }else{
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
@@ -411,6 +424,8 @@ public class Accueil extends AppCompatActivity
                     String message= task.getResult ().getString ( "message" );
 
                     if (message.equals ( "non_lu" )){
+                        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+                        startService(gotohome);
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
                     }else{
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
@@ -430,6 +445,8 @@ public class Accueil extends AppCompatActivity
                 if (task.isSuccessful ()){
                     String message= task.getResult ().getString ( "message" );
                     if (message.equals ( "non_lu" )){
+                        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+                        startService(gotohome);
                     }else{
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
                     }

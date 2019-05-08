@@ -31,10 +31,7 @@ public class MessageService extends Service {
         builder.setContentIntent(pendingIntent);
         builder.setAutoCancel(true);
         builder.setColor(Color.BLACK);
-        builder.setContentText("vous avez recu un ou plusieur messages ... veillez y repondre svp.");
         notificationManagerCompat.notify(1,builder.build());
-
-
 
     }
 
