@@ -61,8 +61,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
-import cm.studio.devbee.communitymarket.MessageService;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.SendNotif;
 import cm.studio.devbee.communitymarket.postActivity.PostActivityFinal;
@@ -156,8 +154,6 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
-        stopService(gotohome);
 
         send_button.setOnClickListener ( new View.OnClickListener () {
             @Override

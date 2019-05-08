@@ -96,7 +96,7 @@ public class DetailActivity extends AppCompatActivity {
         detail_progress=findViewById ( R.id.detail_progress );
         supprime_detail_button=findViewById ( R.id.supprime_detail_button );
         detailActivityWeakReference=new WeakReference<>(this);
-        vendeur_button.setEnabled ( false );
+        vendeur_button.setEnabled(true);
         asyncTask=new AsyncTask();
         asyncTask.execute();
 
@@ -247,6 +247,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
     public void vendeurActivity(){
+
         vendeur_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

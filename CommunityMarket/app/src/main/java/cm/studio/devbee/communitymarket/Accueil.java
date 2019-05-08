@@ -239,7 +239,6 @@ public class Accueil extends AppCompatActivity implements NavigationView.OnNavig
             }
         });
 
-
             asyncTask=new AsyncTask();
             asyncTask.execute();
 
@@ -370,8 +369,8 @@ public class Accueil extends AppCompatActivity implements NavigationView.OnNavig
                         String message= task.getResult ().getString ( "message" );
 
                         if (message.equals ( "non_lu" )){
-                            Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
-                            startService(gotohome);
+                            /*Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+                            startService(gotohome);*/
                             menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
                         }else{
                             menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
@@ -526,8 +525,6 @@ public class Accueil extends AppCompatActivity implements NavigationView.OnNavig
             asyncTask.cancel(true);
             super.onDestroy();
             userstatus("offline");
-            Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
-            startService(gotohome);
             asyncTask.cancel(true);
             mAuth=null;
             firebaseFirestore=null;

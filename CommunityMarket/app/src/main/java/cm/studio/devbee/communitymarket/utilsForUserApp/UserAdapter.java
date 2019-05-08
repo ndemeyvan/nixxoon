@@ -87,7 +87,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
        viewHolder.setNom ( nom );
        viewHolder.setNom ( prenom_utilisateur+" "+nom_utilisateur );
        viewHolder.setimage ( image );
-       viewHolder.user_container.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_scale_animation ) );
+       viewHolder.user_container.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_transition_animation ) );
        viewHolder.profil_utilisateur.setOnClickListener ( new View.OnClickListener () {
            @Override
            public void onClick(View v) {
