@@ -1,9 +1,11 @@
 package cm.studio.devbee.communitymarket;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -203,15 +205,15 @@ public class Accueil extends AppCompatActivity
                 // to the app after tapping on an ad.
             }
         });
-        //interticiel mob
-        //my id ca-app-pub-4353172129870258~6890094527
-        //my key ca-app-pub-4353172129870258/6369018645
-        MobileAds.initialize(this,"ca-app-pub-4353172129870258~6890094527");
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-4353172129870258/6369018645");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        mInterstitialAd.show();
-        mInterstitialAd.setAdListener(new AdListener() {
+            //interticiel mob
+            //my id ca-app-pub-4353172129870258~6890094527
+            //my key ca-app-pub-4353172129870258/6369018645
+            MobileAds.initialize(this,"ca-app-pub-4353172129870258~6890094527");
+            mInterstitialAd = new InterstitialAd(this);
+            mInterstitialAd.setAdUnitId("ca-app-pub-4353172129870258/6369018645");
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            mInterstitialAd.show();
+            mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
                 // Code to be executed when an ad finishes loading.
@@ -237,6 +239,7 @@ public class Accueil extends AppCompatActivity
                 // Code to be executed when when the interstitial ad is closed.
             }
         });
+
 
         asyncTask=new AsyncTask();
         asyncTask.execute();

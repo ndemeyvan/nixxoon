@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -47,6 +48,7 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
         register_progressBar=findViewById ( R.id.register_progressBarRegister );
         mAuth = FirebaseAuth.getInstance();
         registerActivityWeakReference=new WeakReference<>(this);
+        textView5.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
         asyncTask=new AsyncTask();
         asyncTask.execute();
         register_text.setOnClickListener ( new View.OnClickListener () {
