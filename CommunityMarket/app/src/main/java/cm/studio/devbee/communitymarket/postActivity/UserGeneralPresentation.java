@@ -173,6 +173,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
                         button_voir.setText("voir les ventes de "+prenom);
                         button_message.setText("ecrire a "+prenom);
                         detail_user.setText(user_mail);
+                        detail_user.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_scale_animation));
                         button_message.setEnabled ( true );
                         button_voir.setEnabled ( true );
                         user_general_progress.setVisibility ( View.INVISIBLE );
