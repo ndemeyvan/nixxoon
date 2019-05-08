@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -165,6 +166,7 @@ public class UserGeneralPresentation extends AppCompatActivity {
                         general_last_seen.setText ( derniere_conection );
                         residence.setText(residence_user);
                         user_name.setText(name_user+" "+prenom);
+                        user_name.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
                         Picasso.with(UserGeneralPresentation.this).load(image_user).placeholder(R.drawable.boy).into(profilImage);
                         Picasso.with(UserGeneralPresentation.this).load(image_user).into(backgroundgeneral);
                         getSupportActionBar().setTitle(name_user+" "+prenom);

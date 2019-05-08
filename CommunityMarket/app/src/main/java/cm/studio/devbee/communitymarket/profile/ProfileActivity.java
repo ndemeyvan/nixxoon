@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -153,6 +154,7 @@ public class ProfileActivity extends AppCompatActivity {
                         email.setText ( email_user );
                         getSupportActionBar().setTitle( nom_user + " " + prenomuser);
                         user_name.setText ( nom_user + " " + prenomuser );
+                        user_name.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
                         Picasso.with ( getApplicationContext() ).load ( image_profil_user ).into ( profilbacck_image );
                         Picasso.with ( getApplicationContext() ).load ( image_profil_user ).transform(new CircleTransform()).placeholder(R.drawable.use).into ( profilImage );
                         progressBar.setVisibility(View.INVISIBLE);
