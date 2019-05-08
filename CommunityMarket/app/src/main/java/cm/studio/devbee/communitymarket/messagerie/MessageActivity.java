@@ -277,9 +277,9 @@ public class MessageActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        userstatus("online");
+        userstatus("offline");
         super.onDestroy ();
-        userstatus("online");
+        userstatus("offline");
         Calendar calendar=Calendar.getInstance ();
         SimpleDateFormat currentDate=new SimpleDateFormat (" dd MMM yyyy" );
         String saveCurrentDate=currentDate.format ( calendar.getTime () );
@@ -510,6 +510,7 @@ public void nomEtImageProfil(){
         });
 
     }
+
 
 
 }

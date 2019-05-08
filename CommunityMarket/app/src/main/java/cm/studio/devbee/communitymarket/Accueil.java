@@ -141,17 +141,8 @@ public class Accueil extends AppCompatActivity
                 if (task.isSuccessful ()){
                     String message= task.getResult ().getString ( "message" );
                     if (message.equals ( "non_lu" )){
-                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
-                        NotificationManagerCompat notificationManagerCompat=NotificationManagerCompat.from(getApplicationContext());
-                        NotificationCompat.Builder builder= new NotificationCompat.Builder(getApplicationContext());
-                        builder.setContentTitle("nouveaux message");
-                        builder.setSmallIcon(R.drawable.ic_action_message);
-                        Intent gotohome= new Intent(getApplicationContext(),ChatMessageActivity.class);
-                        PendingIntent pendingIntent= PendingIntent.getActivity(getApplicationContext(),1,gotohome,0);
-                        builder.setContentIntent(pendingIntent);
-                        builder.setAutoCancel(true);
-                        builder.setColor(Color.BLACK);
-                        notificationManagerCompat.notify(1,builder.build());
+                        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+                        startService(gotohome);
                     }else{
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
                     }

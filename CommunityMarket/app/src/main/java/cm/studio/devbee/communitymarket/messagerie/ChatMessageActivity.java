@@ -161,7 +161,7 @@ public class ChatMessageActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy ();
-        userstatus("online");
+        userstatus("offline");
     }
 
     public class ContactItem extends Item<ViewHolder> {

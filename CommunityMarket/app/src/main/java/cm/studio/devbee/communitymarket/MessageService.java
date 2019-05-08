@@ -24,7 +24,7 @@ public class MessageService extends Service {
 
         NotificationManagerCompat notificationManagerCompat=NotificationManagerCompat.from(getApplicationContext());
         NotificationCompat.Builder builder= new NotificationCompat.Builder(getApplicationContext());
-        builder.setContentTitle("vous avez un nouveaux message");
+        builder.setContentTitle("nouveaux message");
         builder.setSmallIcon(R.drawable.ic_action_message);
         Intent gotohome= new Intent(getApplicationContext(),ChatMessageActivity.class);
         PendingIntent pendingIntent= PendingIntent.getActivity(getApplicationContext(),1,gotohome,0);
