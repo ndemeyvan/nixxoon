@@ -88,28 +88,27 @@ import cm.studio.devbee.communitymarket.utilsForNouveautes.CategoriesModelNouvea
 import cm.studio.devbee.communitymarket.utilsforsearch.SearchAdapter;
 import cm.studio.devbee.communitymarket.utilsforsearch.SearchModel;
 
-public class Accueil extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore firebaseFirestore;
-    private String current_user_id;
-    private ImageView acceuille_image;
-    private TextView drawer_user_name;
-    private FloatingActionButton content_floating_action_btn;
-    private TabLayout tabLayout;
-    private ViewPager tabsviewpager;
-    private static AsyncTask asyncTask;
-    private static List<SearchModel> searchModelList;
-    private static ImageView profilbacck_image;
-    private static WeakReference<Accueil> accueilWeakReference;
-    private Menu menu;
-    private static AlertDialog.Builder alertDialogBuilder;
-    private static AlertDialog.Builder alertDialogBuilderTwo;
-    AlertDialog alertDialog;
-    AlertDialog alertDialogTwo;
-    private AdView mAdView;
-    private InterstitialAd mInterstitialAd;
-    String name;
+public class Accueil extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+        private FirebaseAuth mAuth;
+        private FirebaseFirestore firebaseFirestore;
+        private String current_user_id;
+        private ImageView acceuille_image;
+        private TextView drawer_user_name;
+        private FloatingActionButton content_floating_action_btn;
+        private TabLayout tabLayout;
+        private ViewPager tabsviewpager;
+        private static AsyncTask asyncTask;
+        private static List<SearchModel> searchModelList;
+        private static ImageView profilbacck_image;
+        private static WeakReference<Accueil> accueilWeakReference;
+        private Menu menu;
+        private static AlertDialog.Builder alertDialogBuilder;
+        private static AlertDialog.Builder alertDialogBuilderTwo;
+        AlertDialog alertDialog;
+        AlertDialog alertDialogTwo;
+        private AdView mAdView;
+        private InterstitialAd mInterstitialAd;
+        String name;
 
 
     @Override
@@ -143,8 +142,8 @@ public class Accueil extends AppCompatActivity
                 if (task.isSuccessful ()){
                     String message= task.getResult ().getString ( "message" );
                     if (message.equals ( "non_lu" )){
-                        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
-                        startService(gotohome);
+                        /*Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+                        startService(gotohome);*/
                     }else{
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
                     }
@@ -241,49 +240,49 @@ public class Accueil extends AppCompatActivity
         });
 
 
-        asyncTask=new AsyncTask();
-        asyncTask.execute();
+            asyncTask=new AsyncTask();
+            asyncTask.execute();
 
     }
 
     public void setupViewPager(ViewPager viewPager){
-        TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
-        tabsAdapter.addFragment(new HomeFragment(),"Decouvrir");
-        tabsAdapter.addFragment(new TshirtFragment(),"T_shirts");
-        tabsAdapter.addFragment(new PullFragment () ,"Pulls");
-        tabsAdapter.addFragment(new JupesFragment () ,"jupes");
-        tabsAdapter.addFragment(new ChaussureFragment (),"chaussures");
-        tabsAdapter.addFragment(new PantalonFragment (),"pantalons");
-        tabsAdapter.addFragment(new CulloteFragment (),"cullotes");
-        tabsAdapter.addFragment(new ChemiseFragment (),"chemises");
-        tabsAdapter.addFragment(new RobeFragment (),"robes");
-        tabsAdapter.addFragment(new AccesoireFragment (),"accessoire");
-        tabsAdapter.addFragment(new LocationFragment(),"location");
-        viewPager.setAdapter(tabsAdapter);
+            TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
+            tabsAdapter.addFragment(new HomeFragment(),"Decouvrir");
+            tabsAdapter.addFragment(new TshirtFragment(),"T_shirts");
+            tabsAdapter.addFragment(new PullFragment () ,"Pulls");
+            tabsAdapter.addFragment(new JupesFragment () ,"jupes");
+            tabsAdapter.addFragment(new ChaussureFragment (),"chaussures");
+            tabsAdapter.addFragment(new PantalonFragment (),"pantalons");
+            tabsAdapter.addFragment(new CulloteFragment (),"cullotes");
+            tabsAdapter.addFragment(new ChemiseFragment (),"chemises");
+            tabsAdapter.addFragment(new RobeFragment (),"robes");
+            tabsAdapter.addFragment(new AccesoireFragment (),"accessoire");
+            tabsAdapter.addFragment(new LocationFragment(),"location");
+            viewPager.setAdapter(tabsAdapter);
 
     }
     public void recup(){
 
-        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful ()){
-                    if (task.getResult ().exists ()){
-                        String image_profil_user =task.getResult ().getString ("user_profil_image");
-                        String nom_user = task.getResult ().getString ("user_name");
-                        String prenomuser =task.getResult ().getString ("user_prenom");
-                        drawer_user_name.setText ( nom_user + " " + prenomuser);
-                        Log.d("cle",image_profil_user);
+            firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful ()){
+                        if (task.getResult ().exists ()){
+                            String image_profil_user =task.getResult ().getString ("user_profil_image");
+                            String nom_user = task.getResult ().getString ("user_name");
+                            String prenomuser =task.getResult ().getString ("user_prenom");
+                            drawer_user_name.setText ( nom_user + " " + prenomuser);
+                            Log.d("cle",image_profil_user);
 
-                        Picasso.with ( getApplicationContext()).load ( image_profil_user ).transform(new CircleTransform()).into ( acceuille_image );
-                       // Picasso.with ( getApplicationContext()).load ( image_profil_user ).placeholder(R.drawable.boy).into ( profilbacck_image );
+                            Picasso.with ( getApplicationContext()).load ( image_profil_user ).transform(new CircleTransform()).into ( acceuille_image );
+                           // Picasso.with ( getApplicationContext()).load ( image_profil_user ).placeholder(R.drawable.boy).into ( profilbacck_image );
+                        }
+                    }else{
+
+
                     }
-                }else{
-
-
                 }
-            }
-        } );
+            } );
     }
 
 
@@ -292,212 +291,78 @@ public class Accueil extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById ( R.id.drawer_layout );
-        if (drawer.isDrawerOpen ( GravityCompat.START )) {
-            drawer.closeDrawer ( GravityCompat.START );
-        } else {
-            super.onBackPressed ();
-        }
+            DrawerLayout drawer = (DrawerLayout) findViewById ( R.id.drawer_layout );
+            if (drawer.isDrawerOpen ( GravityCompat.START )) {
+                drawer.closeDrawer ( GravityCompat.START );
+            } else {
+                super.onBackPressed ();
+            }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater ().inflate ( R.menu.accueil, menu );
-        this.menu = menu;
-        return true;
+            getMenuInflater ().inflate ( R.menu.accueil, menu );
+            this.menu = menu;
+            return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId ();
-        if (id == R.id.search) {
-            Intent gogotoSearch = new Intent(getApplicationContext(),SearchActivity.class);
-            startActivity(gogotoSearch);
-            //finish ();
-            return true;
-        }else if (id == R.id.message) {
-            Intent gogotoSearch = new Intent(getApplicationContext(),ChatMessageActivity.class);
-            startActivity(gogotoSearch);
-            //finish ();
-            return true;
-        }
+            int id = item.getItemId ();
+            if (id == R.id.search) {
+                Intent gogotoSearch = new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(gogotoSearch);
+                //finish ();
+                return true;
+            }else if (id == R.id.message) {
+                Intent gogotoSearch = new Intent(getApplicationContext(),ChatMessageActivity.class);
+                startActivity(gogotoSearch);
+                //finish ();
+                return true;
+            }
 
-        return super.onOptionsItemSelected ( item );
+            return super.onOptionsItemSelected ( item );
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId ();
+            int id = item.getItemId ();
 
-        if (id == R.id.ic_user) {
-            Intent intent = new Intent ( getApplicationContext(),ProfileActivity.class );
-            startActivity ( intent );
-            //finish ();
-        } else if (id == R.id.ic_logout) {
-            userstatus("offline");
-            mAuth.getInstance().signOut();
-            Intent intenttwo = new Intent ( getApplicationContext(),ChoiceActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-            startActivity ( intenttwo );
-            finish ();
-        }else if (id == R.id.setting) {
-            Intent parametre=new Intent(getApplicationContext(),ParametrePorfilActivity.class);
-            startActivity(parametre);
-            //finish ();
-        }
-        else if (id == R.id.nous_contacter) {
-            Intent nous_contacter=new Intent(getApplicationContext(),AproposActivity.class);
-            startActivity(nous_contacter);
-           // finish ();
-        }else if(id==R.id.ic_message){
-            Intent message=new Intent(getApplicationContext(),ChatMessageActivity.class);
-            startActivity(message);
-            //finish ();
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById ( R.id.drawer_layout );
-        drawer.closeDrawer ( GravityCompat.START );
-        return true;
-        //nous_contacter
+            if (id == R.id.ic_user) {
+                Intent intent = new Intent ( getApplicationContext(),ProfileActivity.class );
+                startActivity ( intent );
+                //finish ();
+            } else if (id == R.id.ic_logout) {
+                userstatus("offline");
+                mAuth.getInstance().signOut();
+                Intent intenttwo = new Intent ( getApplicationContext(),ChoiceActivity.class ).setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                startActivity ( intenttwo );
+                finish ();
+            }else if (id == R.id.setting) {
+                Intent parametre=new Intent(getApplicationContext(),ParametrePorfilActivity.class);
+                startActivity(parametre);
+                //finish ();
+            }
+            else if (id == R.id.nous_contacter) {
+                Intent nous_contacter=new Intent(getApplicationContext(),AproposActivity.class);
+                startActivity(nous_contacter);
+               // finish ();
+            }else if(id==R.id.ic_message){
+                Intent message=new Intent(getApplicationContext(),ChatMessageActivity.class);
+                startActivity(message);
+                //finish ();
+            }
+            DrawerLayout drawer = (DrawerLayout) findViewById ( R.id.drawer_layout );
+            drawer.closeDrawer ( GravityCompat.START );
+            return true;
+            //nous_contacter
     }
 
     @Override
     protected void onStart() {
-        super.onStart();
-        recup();
-        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful ()){
-                    String message= task.getResult ().getString ( "message" );
-
-                    if (message.equals ( "non_lu" )){
-                        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
-                        startService(gotohome);
-                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
-                    }else{
-                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
-                    }
-                }
-            }
-        } );
-    }
-    public void vaTopost(){
-        content_floating_action_btn=findViewById ( R.id.content_floating_action_btn );
-        content_floating_action_btn.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                Intent vaTopost =new Intent ( getApplicationContext(),PostActivity.class );
-                startActivity ( vaTopost );
-                finish ();
-            }
-        } );
-    }
-    public void userstatus(String status){
-        DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user_id);
-        user.update("status", status)
-                .addOnSuccessListener(new OnSuccessListener<Void> () {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume ();
-        userstatus("online");
-        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful ()){
-                    String message= task.getResult ().getString ( "message" );
-
-                    if (message.equals ( "non_lu" )){
-                        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
-                        startService(gotohome);
-                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
-                    }else{
-                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
-                    }
-                }
-            }
-        } );
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause ();
-        userstatus("offline");
-        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful ()){
-                    String message= task.getResult ().getString ( "message" );
-                    if (message.equals ( "non_lu" )){
-                        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
-                        startService(gotohome);
-                    }else{
-                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
-                    }
-                }
-            }
-        } );
-    }
-
-
-
-
-    public class CircleTransform implements Transformation {
-        @Override
-        public Bitmap transform(Bitmap source) {
-            int size = Math.min(source.getWidth(), source.getHeight());
-
-            int x = (source.getWidth() - size) / 2;
-            int y = (source.getHeight() - size) / 2;
-
-            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
-            if (squaredBitmap != source) {
-                source.recycle();
-            }
-
-            Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
-
-            Canvas canvas = new Canvas(bitmap);
-            Paint paint = new Paint();
-            BitmapShader shader = new BitmapShader(squaredBitmap,
-                    BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
-            paint.setShader(shader);
-            paint.setAntiAlias(true);
-
-            float r = size / 2f;
-            canvas.drawCircle(r, r, r, paint);
-
-            squaredBitmap.recycle();
-            return bitmap;
-        }
-
-        @Override
-        public String key() {
-            return "circle";
-        }
-
-
-    }
-    public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute ();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
+            super.onStart();
             recup();
-            vaTopost ();
             firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -505,6 +370,8 @@ public class Accueil extends AppCompatActivity
                         String message= task.getResult ().getString ( "message" );
 
                         if (message.equals ( "non_lu" )){
+                            Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+                            startService(gotohome);
                             menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
                         }else{
                             menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
@@ -512,33 +379,164 @@ public class Accueil extends AppCompatActivity
                     }
                 }
             } );
-            return null;
-        }
+    }
+    public void vaTopost(){
+            content_floating_action_btn=findViewById ( R.id.content_floating_action_btn );
+            content_floating_action_btn.setOnClickListener ( new View.OnClickListener () {
+                @Override
+                public void onClick(View v) {
+                    Intent vaTopost =new Intent ( getApplicationContext(),PostActivity.class );
+                    startActivity ( vaTopost );
+                    finish ();
+                }
+            } );
+    }
+    public void userstatus(String status){
+            DocumentReference user = firebaseFirestore.collection("mes donnees utilisateur" ).document(current_user_id);
+            user.update("status", status)
+                    .addOnSuccessListener(new OnSuccessListener<Void> () {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                        }
+                    });
+    }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute ( aVoid );
+    @Override
+    public void onResume() {
+            super.onResume ();
+            userstatus("online");
+            firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful ()){
+                        String message= task.getResult ().getString ( "message" );
 
-        }
+                        if (message.equals ( "non_lu" )){
+                           /* Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+                            startService(gotohome);*/
+                            menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
+                        }else{
+                            menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
+                        }
+                    }
+                }
+            } );
+    }
+
+    @Override
+    public void onPause() {
+            super.onPause ();
+            userstatus("offline");
+            firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful ()){
+                        String message= task.getResult ().getString ( "message" );
+                        if (message.equals ( "non_lu" )){
+                            /*Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+                            startService(gotohome);*/
+                        }else{
+                            menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
+                        }
+                    }
+                }
+            } );
+    }
+
+
+
+
+    public class CircleTransform implements Transformation {
+            @Override
+            public Bitmap transform(Bitmap source) {
+                int size = Math.min(source.getWidth(), source.getHeight());
+
+                int x = (source.getWidth() - size) / 2;
+                int y = (source.getHeight() - size) / 2;
+
+                Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+                if (squaredBitmap != source) {
+                    source.recycle();
+                }
+
+                Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
+
+                Canvas canvas = new Canvas(bitmap);
+                Paint paint = new Paint();
+                BitmapShader shader = new BitmapShader(squaredBitmap,
+                        BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+                paint.setShader(shader);
+                paint.setAntiAlias(true);
+
+                float r = size / 2f;
+                canvas.drawCircle(r, r, r, paint);
+
+                squaredBitmap.recycle();
+                return bitmap;
+            }
+
+            @Override
+            public String key() {
+                return "circle";
+            }
+
+
+    }
+    public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute ();
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                recup();
+                vaTopost ();
+                firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful ()){
+                            String message= task.getResult ().getString ( "message" );
+                            if (message.equals ( "non_lu" )){
+                                menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
+                            }else{
+                                menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
+                            }
+                        }
+                    }
+                } );
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute ( aVoid );
+
+            }
     }
 
     @Override
     protected void onDestroy() {
-        userstatus("offline");
-        asyncTask.cancel(true);
-        super.onDestroy();
-        userstatus("offline");
-        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
-        startService(gotohome);
-        asyncTask.cancel(true);
-        mAuth=null;
-        firebaseFirestore=null;
-        acceuille_image=null;
-        drawer_user_name=null;
-        content_floating_action_btn=null;
-        tabLayout=null;
-        tabsviewpager=null;
-        accueilWeakReference=null;
+            userstatus("offline");
+            asyncTask.cancel(true);
+            super.onDestroy();
+            userstatus("offline");
+            Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+            startService(gotohome);
+            asyncTask.cancel(true);
+            mAuth=null;
+            firebaseFirestore=null;
+            acceuille_image=null;
+            drawer_user_name=null;
+            content_floating_action_btn=null;
+            tabLayout=null;
+            tabsviewpager=null;
+            accueilWeakReference=null;
     }
 }
 
