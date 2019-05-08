@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -98,6 +99,8 @@ public class DetailActivityTwo extends AppCompatActivity {
                         String image_user=task.getResult ().getString ( "user_profil_image" );
                         detail_user_name.setText(name_user+" "+prenom);
                         Picasso.with(getApplicationContext()).load(image_user).into(detail_profil_image);
+                        detail_profil_image.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
+                        detail_user_name.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
                     }
                 }else {
                     String error=task.getException().getMessage();
@@ -198,6 +201,10 @@ public class DetailActivityTwo extends AppCompatActivity {
                             getSupportActionBar().setTitle(titreDuProduit);
                             Picasso.with(getApplicationContext()).load(imageduproduit).into(detail_image_post);
                             vendeur_button.setEnabled ( true );
+                            detail_prix_produit.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
+                            date_de_publication.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
+                            detail_image_post.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
+                            detail_description.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
                         }
                     }else {
                         String error=task.getException().getMessage();

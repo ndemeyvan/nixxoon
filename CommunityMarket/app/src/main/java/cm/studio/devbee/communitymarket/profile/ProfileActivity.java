@@ -155,6 +155,7 @@ public class ProfileActivity extends AppCompatActivity {
                         getSupportActionBar().setTitle( nom_user + " " + prenomuser);
                         user_name.setText ( nom_user + " " + prenomuser );
                         user_name.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
+                        email.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_scale_animation));
                         Picasso.with ( getApplicationContext() ).load ( image_profil_user ).into ( profilbacck_image );
                         Picasso.with ( getApplicationContext() ).load ( image_profil_user ).transform(new CircleTransform()).placeholder(R.drawable.use).into ( profilImage );
                         progressBar.setVisibility(View.INVISIBLE);
