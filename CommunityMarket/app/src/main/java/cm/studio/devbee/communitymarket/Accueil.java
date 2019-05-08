@@ -139,6 +139,8 @@ public class Accueil extends AppCompatActivity
 
                     if (message.equals ( "non_lu" )){
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
+                        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+                        startService(gotohome);
                     }else{
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
                     }
@@ -290,23 +292,6 @@ public class Accueil extends AppCompatActivity
             drawer.closeDrawer ( GravityCompat.START );
         } else {
             super.onBackPressed ();
-           /* alertDialogBuilderTwo = new AlertDialog.Builder(getApplicationContext ());
-            alertDialogBuilderTwo.setMessage("voulez vous quitter ?");
-            alertDialogBuilderTwo.setPositiveButton ( "oui", new DialogInterface.OnClickListener () {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish ();
-                }
-            } );
-            alertDialogBuilderTwo.setNegativeButton ( "non", new DialogInterface.OnClickListener () {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            } );
-            alertDialogTwo = alertDialogBuilderTwo.create();
-            alertDialogTwo.setCancelable ( false );
-            alertDialogTwo.;*/
         }
     }
 
@@ -444,9 +429,7 @@ public class Accueil extends AppCompatActivity
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful ()){
                     String message= task.getResult ().getString ( "message" );
-
                     if (message.equals ( "non_lu" )){
-                        menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.mail));
                     }else{
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(getApplicationContext (), R.drawable.ic_message_non_lu));
                     }
@@ -454,6 +437,7 @@ public class Accueil extends AppCompatActivity
             }
         } );
     }
+
 
 
 
@@ -533,6 +517,8 @@ public class Accueil extends AppCompatActivity
         asyncTask.cancel(true);
         super.onDestroy();
         userstatus("offline");
+        Intent gotohome= new Intent(getApplicationContext(),MessageService.class);
+        startService(gotohome);
         asyncTask.cancel(true);
         mAuth=null;
         firebaseFirestore=null;

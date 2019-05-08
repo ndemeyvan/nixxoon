@@ -9,8 +9,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -19,13 +20,12 @@
         android:largeHeap="true"
         android:noHistory="true"
         android:roundIcon="@mipmap/ic_launcher_logo_two"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
         android:screenOrientation="portrait"
-        >
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4353172129870258~6890094527"/>
+            android:value="ca-app-pub-4353172129870258~6890094527" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -48,8 +48,9 @@
         </activity>
         <activity android:name=".ChoiceActivity" />
         <activity android:name=".login.LoginActivity" />
-        <activity android:name=".login.RegisterActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".login.RegisterActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Accueil"
             android:label="@string/title_activity_accueil"
@@ -77,9 +78,8 @@
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppTheme">
-            <!--
-            android:theme="@style/slash"
-            -->
+
+            <!-- android:theme="@style/slash" -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -90,6 +90,26 @@
         <activity android:name=".postActivity.DetailActivityFour" />
         <activity android:name=".profile.VenteUtilisateurActivity" />
 
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".postActivity.MapsActivity"
+            android:label="@string/title_activity_maps" />
+
+        <service
+            android:name=".MessageService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
