@@ -234,7 +234,7 @@ public class HomeFragment extends Fragment {
          alertDialog.setCancelable ( false );
          alertDialog.show();
 
-        return v;
+         return v;
     }
 
 
@@ -526,16 +526,20 @@ public class HomeFragment extends Fragment {
                 });
     }
 
+
     @Override
     public void onResume() {
         super.onResume ();
         userstatus("online");
+
     }
+
 
     @Override
     public void onPause() {
         super.onPause ();
         userstatus("offline");
+
     }
 
     public class AsyncTask extends android.os.AsyncTask<Void, Void, Void> {
@@ -575,39 +579,39 @@ public class HomeFragment extends Fragment {
         userstatus ( "false" );
         super.onDestroy();
         userstatus ( "false" );
-       firebaseFirestore=null;
+        firebaseFirestore=null;
         imageFour=null;
         imageThree=null;
         imageTwo=null;
         imageOne=null;
-      img1=null;
-      img2=null;
-      img3=null;
-      img4=null;
+        img1=null;
+        img2=null;
+        img3=null;
+        img4=null;
         content_progresbar=null;
-      content_recyclerView=null;
+        content_recyclerView=null;
         categoriesAdapte=null;
-       categoriesModelList=null;
+        categoriesModelList=null;
          categoriesAdapteNouveaux=null;
-        nouveauxRecyclerView=null;
-        chaussureRecyclerView=null;
-        jupesRecyclerView=null;
-        categoriesAdapteChaussureList=null;
+         nouveauxRecyclerView=null;
+         chaussureRecyclerView=null;
+         jupesRecyclerView=null;
+         categoriesAdapteChaussureList=null;
          categoriesModelJupeList=null;
-        user_recyclerView=null;
-        userAdapter=null;
+         user_recyclerView=null;
+         userAdapter=null;
         //////////tshirt
          tshirtRecycler=null;
         //////chargement
-     lastVisible=null;
-       recyclerpull=null;
-       categoriesModelPullList=null;
+        lastVisible=null;
+        recyclerpull=null;
+        categoriesModelPullList=null;
         ////accesoire
-         categoriesModelAccessoireList=null;
-       recycleraccessoire=null;
+        categoriesModelAccessoireList=null;
+        recycleraccessoire=null;
         /////pubfixe
         imagePubFixe=null;
-          imagePubText=null;
+        imagePubText=null;
         //cullote
           recyclercullote=null;
         categoriesModelCulloteList=null;
@@ -615,13 +619,13 @@ public class HomeFragment extends Fragment {
           recyclerpantalons=null;
         categoriesModelPantalonsList=null;
         ///chemise
-     recyclerchemise=null;
-       categoriesModelChemiseList=null;
+        recyclerchemise=null;
+        categoriesModelChemiseList=null;
         ///robe
         categoriesModelRobeList=null;
-         recyclerrobe=null;
-          progressDialog=null;
-       v=null;
+        recyclerrobe=null;
+        progressDialog=null;
+        v=null;
         firebaseAuth=null;
 
 

@@ -101,6 +101,17 @@ public class DetailActivityThree extends AppCompatActivity {
         vendeur_button.setEnabled ( false );
         asyncTask=new AsyncTask();
         asyncTask.execute();
+        firebaseFirestore.collection ( "publication" ).document ("categories").collection (current_user_id ).document (iddupost).addSnapshotListener ( this,new EventListener<DocumentSnapshot> () {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (!documentSnapshot.exists ()){
+                    Toast.makeText ( DetailActivityThree.this, "cet article a été rétiré de la vente", Toast.LENGTH_SHORT ).show ();
+
+                }else {
+
+                }
+            }
+        } );
 
     }
 

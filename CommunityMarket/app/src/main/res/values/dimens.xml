@@ -74,7 +74,7 @@
     <dimen name="post_item_image">40dp</dimen>
     <!-- login activty post-->
     <dimen name="login_logo_margintop">96dp</dimen>
-    <dimen name="login_padding_edit_text">8dp</dimen>
+    <dimen name="login_padding_edit_text">15dp</dimen>
 
 
 

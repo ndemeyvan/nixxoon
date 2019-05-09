@@ -20,12 +20,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.annotation.Nullable;
 
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
@@ -93,6 +97,17 @@ public class DetailActivityFour extends AppCompatActivity {
 
         asyncTask= new AsyncTask ();
         asyncTask.execute();
+        firebaseFirestore.collection ( "publication" ).document ("categories").collection (current_user_id ).document (iddupost).addSnapshotListener ( this,new EventListener<DocumentSnapshot> () {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (!documentSnapshot.exists ()){
+                    Toast.makeText ( DetailActivityFour.this, "cet article a été rétiré de la vente", Toast.LENGTH_SHORT ).show ();
+
+                }else {
+
+                }
+            }
+        } );
 
     }
     public void nomEtImageProfil(){

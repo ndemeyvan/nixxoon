@@ -161,7 +161,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/vendeur_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="@+id/vendeur_button" />
+        app:layout_constraintStart_toStartOf="@+id/vendeur_button"
+        tools:text="supprimer des nouveautés ?" />
 
     <ProgressBar
         android:id="@+id/detail_progress"

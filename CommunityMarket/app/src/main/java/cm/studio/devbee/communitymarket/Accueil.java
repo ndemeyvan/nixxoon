@@ -405,10 +405,13 @@ public class Accueil extends AppCompatActivity implements NavigationView.OnNavig
                     });
     }
 
+
+
     @Override
     public void onResume() {
             super.onResume ();
-            userstatus("online");
+            recup();
+            vaTopost ();
             firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot> () {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {

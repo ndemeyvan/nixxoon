@@ -1,5 +1,6 @@
 package cm.studio.devbee.communitymarket.postActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -99,6 +100,17 @@ public class DetailActivity extends AppCompatActivity {
         vendeur_button.setEnabled(true);
         asyncTask=new AsyncTask();
         asyncTask.execute();
+        firebaseFirestore.collection ( "publication" ).document ("categories").collection ("nouveaux" ).document (iddupost).addSnapshotListener ( this,new EventListener<DocumentSnapshot> () {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (!documentSnapshot.exists ()){
+                    Toast.makeText ( DetailActivity.this, "cet article a été rétiré de la vente", Toast.LENGTH_SHORT ).show ();
+
+                }else {
+
+                }
+            }
+        } );
 
     }
 
@@ -134,7 +146,7 @@ public class DetailActivity extends AppCompatActivity {
     }
     public void supprime(){
         if (current_user_id.equals ( utilisateur_actuel )){
-            supprime_detail_button.setText ( "supprimer de cette categories ?");
+           // supprime_detail_button.setText ( "supprimer de cette categories ?");
             supprime_detail_button.setVisibility ( View.VISIBLE );
             supprime_detail_button.setEnabled ( true );
             supprime_detail_button.setVisibility ( View.VISIBLE );
@@ -189,6 +201,8 @@ public class DetailActivity extends AppCompatActivity {
             vendeur_button.setVisibility ( View.VISIBLE );
             supprime_detail_button.setVisibility ( View.INVISIBLE );
         }
+
+
     }
 
 
@@ -237,6 +251,7 @@ public class DetailActivity extends AppCompatActivity {
             vendeurActivity();
             nomEtImageProfil();
             supprime ();
+
             return null;
         }
 
