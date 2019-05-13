@@ -84,6 +84,9 @@ public class ChoiceActivity extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext (),"Activer internet",Toast.LENGTH_LONG).show();
         }
+
+
+        image_de_choix.animate().scaleX(2).scaleY(2).setDuration(5000).start();
     }
 
     private void facebookSignIn() {
@@ -103,7 +106,8 @@ public class ChoiceActivity extends AppCompatActivity {
 
             }
         });
-        image_de_choix.animate().scaleX(2).scaleY(2).setDuration(6000).start();
+
+
 
     }
 
