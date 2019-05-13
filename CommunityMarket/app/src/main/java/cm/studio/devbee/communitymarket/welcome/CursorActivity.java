@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -104,6 +105,7 @@ public class CursorActivity extends AppCompatActivity {
                 }
             }
         });
+        Toast.makeText(getApplicationContext(),"glisser de la droite vers la gauche",Toast.LENGTH_LONG).show();
     }
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
