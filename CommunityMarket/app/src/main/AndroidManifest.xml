@@ -114,7 +114,9 @@
         <activity
             android:name=".postActivity.ScrollingActivityDetailOne"
             android:label="@string/title_activity_scrolling_detail_one"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".welcome.WelcomeActivity" />
+        <activity android:name=".welcome.CursorActivity"></activity>
     </application>
 
 </manifest>

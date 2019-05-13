@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import cm.studio.devbee.communitymarket.welcome.CursorActivity;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler (  ).postDelayed ( new Runnable () {
             @Override
             public void run() {
-               Intent gotochoice= new Intent(getApplicationContext(),ChoiceActivity.class);
+               Intent gotochoice= new Intent(getApplicationContext(),CursorActivity.class);
                 startActivity(gotochoice);
                 finish();
             }

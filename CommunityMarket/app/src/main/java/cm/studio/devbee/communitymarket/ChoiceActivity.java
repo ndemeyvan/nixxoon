@@ -83,13 +83,15 @@ public class ChoiceActivity extends AppCompatActivity {
             finish();
         }
 
-        if(CheckNetwork.isInternetAvailable(getApplicationContext ())) //returns true if internet available
-        {
+        if(CheckNetwork.isInternetAvailable(getApplicationContext ())){//returns true if internet available{
 
         }
-        else
-        {
-            Toast.makeText(getApplicationContext (),"Activer internet",Toast.LENGTH_LONG).show();
+        else{
+
+            Toast.makeText(getApplicationContext (),"Veillez Activer votre connexion internet",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext (),"vous ne pouvez pas utiliser Open market sans connexion internet",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext (),"Veillez Activer votre connexion internet",Toast.LENGTH_LONG).show();
+            finish();
         }
 
         //image_de_choix.animate().scaleX(2).scaleY(2).setDuration(2000).start();
