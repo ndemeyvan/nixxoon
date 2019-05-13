@@ -62,7 +62,7 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
     viewHolder.prix_produit(prix_produit);
     viewHolder.image_produit(produit_image);
     viewHolder.nom_produit(nom);
-    viewHolder.setUser(nom_utilisateur);
+   // viewHolder.setUser(nom_utilisateur);
     viewHolder.post_layout_one.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_transition_animation ) );
     viewHolder.produit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +81,12 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
                         String image_user=task.getResult ().getString ( "user_profil_image" );
+                        String user_nom=task.getResult ().getString ( "user_name" );
+                        String user_prenom=task.getResult ().getString ( "user_prenom" );
+                        viewHolder.nom_user.setText(user_nom+" "+user_prenom);
+                        if (firebaseAuth.getCurrentUser().getUid()==nom_utilisateur){
+                            viewHolder.nom_user.setText(" ");
+                        }
                         viewHolder.profil_post ( image_user );
                     }
                 }else {
@@ -129,9 +135,9 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
         public void setCatrogies_name(String cat){
             catrogies_name.setText(cat);
         }
-        public void setUser(String user){
+       /* public void setUser(String user){
             nom_user.setText(user);
-        }
+        }*/
 
    }
     public class CircleTransform implements Transformation {

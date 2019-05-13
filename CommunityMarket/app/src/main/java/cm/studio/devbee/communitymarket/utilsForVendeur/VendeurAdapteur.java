@@ -86,6 +86,9 @@ public class VendeurAdapteur extends RecyclerView.Adapter<VendeurAdapteur.ViewHo
                 if (task.isSuccessful()){
                     if (task.getResult ().exists ()){
                         String image_user=task.getResult ().getString ( "user_profil_image" );
+                        String user_nom=task.getResult ().getString ( "user_name" );
+                        String user_prenom=task.getResult ().getString ( "user_prenom" );
+                        viewHolder.nom_user.setText(user_nom+" "+user_prenom);
                         viewHolder.profil_post ( image_user );
                     }
                 }else {

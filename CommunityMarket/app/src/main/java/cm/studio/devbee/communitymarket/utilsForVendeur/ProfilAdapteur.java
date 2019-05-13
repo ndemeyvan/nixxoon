@@ -66,7 +66,7 @@ public class ProfilAdapteur extends RecyclerView.Adapter<ProfilAdapteur.ViewHold
         viewHolder.prix_produit(prix_produit);
         viewHolder.image_produit(produit_image);
         viewHolder.nom_produit(nom);
-        viewHolder.setUser(nom_utilisateur);
+        //viewHolder.setUser(nom_utilisateur);
         viewHolder.profil_container.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_transition_animation ) );
         viewHolder.produit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,9 +133,9 @@ public class ProfilAdapteur extends RecyclerView.Adapter<ProfilAdapteur.ViewHold
         public void setCatrogies_name(String cat){
             catrogies_name.setText(cat);
         }
-        public void setUser(String user){
+        /*public void setUser(String user){
          nom_user.setText(user);
-        }
+        }*/
 
     }
     public class CircleTransform implements Transformation {

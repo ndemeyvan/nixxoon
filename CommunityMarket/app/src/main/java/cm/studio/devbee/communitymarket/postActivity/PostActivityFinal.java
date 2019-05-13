@@ -94,6 +94,7 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
         firebaseFirestore=FirebaseFirestore.getInstance ();
         current_user_id=firebaseAuth.getCurrentUser ().getUid ();
         postfinaltoolbar=findViewById ( R.id.final_toolbar );
+        setSupportActionBar(postfinaltoolbar);
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         postfinaltoolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
