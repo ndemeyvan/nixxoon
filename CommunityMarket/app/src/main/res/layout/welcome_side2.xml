@@ -33,7 +33,6 @@
         android:id="@+id/textView5"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
         android:layout_marginTop="264dp"
         android:fontFamily="sans-serif"
         android:text="faites connaitre votre boutique grace a notre publicite"
@@ -48,8 +47,9 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:layout_width="310dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="7dp"
         android:fontFamily="sans-serif"
         android:paddingLeft="@dimen/desc_padding"
         android:paddingRight="@dimen/desc_padding"
