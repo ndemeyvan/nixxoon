@@ -383,8 +383,8 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
 
     @Override
     public void onRewardedVideoAdFailedToLoad(int i) {
-        Toast.makeText(getApplicationContext(),"un probleme est survenu",Toast.LENGTH_LONG).show();
-        Toast.makeText(getApplicationContext(),"verifier la qualite de votre connexion internet svp. ",Toast.LENGTH_LONG).show();
+        /*Toast.makeText(getApplicationContext(),"un probleme est survenu",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"verifier la qualite de votre connexion internet svp. ",Toast.LENGTH_LONG).show();*/
     }
 
     @Override

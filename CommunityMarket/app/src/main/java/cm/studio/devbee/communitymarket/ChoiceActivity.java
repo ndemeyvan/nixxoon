@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -55,11 +57,16 @@ public class ChoiceActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         gotoRegister=findViewById ( R.id.gotoRegister );
         facebook_button=findViewById(R.id.facebook_button);
-        image_de_choix=findViewById(R.id.image_de_choix);
+        //image_de_choix=findViewById(R.id.image_de_choix);
         choiceActivityWeakReference=new WeakReference<>(this);
         login ();
         register ();
         printkey();
+        ConstraintLayout constraintLayout=findViewById(R.id.layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
         callbackManager=CallbackManager.Factory.create();
         facebook_button.setReadPermissions("email");
         facebook_button.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +92,7 @@ public class ChoiceActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext (),"Activer internet",Toast.LENGTH_LONG).show();
         }
 
-
-        image_de_choix.animate().scaleX(2).scaleY(2).setDuration(5000).start();
+        //image_de_choix.animate().scaleX(2).scaleY(2).setDuration(2000).start();
     }
 
     private void facebookSignIn() {

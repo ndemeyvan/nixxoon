@@ -97,7 +97,7 @@ public class DetailActivityFour extends AppCompatActivity {
 
         asyncTask= new AsyncTask ();
         asyncTask.execute();
-        firebaseFirestore.collection ( "publication" ).document ("categories").collection (current_user_id ).document (iddupost).addSnapshotListener ( this,new EventListener<DocumentSnapshot> () {
+        firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection (current_user_id ).document (iddupost).addSnapshotListener ( this,new EventListener<DocumentSnapshot> () {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 if (!documentSnapshot.exists ()){

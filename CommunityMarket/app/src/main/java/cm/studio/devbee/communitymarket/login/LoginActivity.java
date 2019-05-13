@@ -2,7 +2,9 @@ package cm.studio.devbee.communitymarket.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -49,6 +51,11 @@ public class LoginActivity extends AppCompatActivity {
         textView4=findViewById ( R.id.text_connexion );
         login_progressBar=findViewById ( R.id.login_progressBar );
         home=findViewById(R.id.home);
+        ConstraintLayout constraintLayout=findViewById(R.id.layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
         mAuth = FirebaseAuth.getInstance();
         asyncTask=new AsyncTask();
         asyncTask.execute();

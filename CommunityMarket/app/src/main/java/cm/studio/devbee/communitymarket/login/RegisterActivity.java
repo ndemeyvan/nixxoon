@@ -1,7 +1,9 @@
 package cm.studio.devbee.communitymarket.login;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -48,6 +50,11 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
         register_progressBar=findViewById ( R.id.register_progressBarRegister );
         mAuth = FirebaseAuth.getInstance();
         registerActivityWeakReference=new WeakReference<>(this);
+        ConstraintLayout constraintLayout=findViewById(R.id.layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
         textView5.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
         asyncTask=new AsyncTask();
         asyncTask.execute();

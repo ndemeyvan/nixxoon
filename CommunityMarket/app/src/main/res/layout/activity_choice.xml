@@ -5,22 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChoiceActivity"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/gradient_list"
+    android:id="@+id/layout">
     <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >-->
-    <ImageView
+    <!--<ImageView
         android:id="@+id/image_de_choix"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/chemise"
+        android:src="@drawable/gradient_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--</LinearLayout>-->
+  </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/linearLayout"

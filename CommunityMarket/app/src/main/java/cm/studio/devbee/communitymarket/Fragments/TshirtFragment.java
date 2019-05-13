@@ -2,8 +2,10 @@ package cm.studio.devbee.communitymarket.Fragments;
 
 
 import android.app.ProgressDialog;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -80,6 +82,11 @@ public class TshirtFragment extends Fragment {
         firebaseAuth=FirebaseAuth.getInstance ();
         curent_user=firebaseAuth.getCurrentUser ().getUid ();
         tshirtFragmentWeakReference=new WeakReference<>(this);
+        ConstraintLayout constraintLayout=v.findViewById(R.id.layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
 
         return v;
     }

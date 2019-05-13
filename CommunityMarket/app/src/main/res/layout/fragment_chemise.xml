@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.ChemiseFragment"
-    android:background="@drawable/main_background">
+    android:id="@+id/layout"
+    android:background="@drawable/gradient_list">
 
     <ImageView
         android:id="@+id/pubImag_chemise"

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.TshirtFragment"
-    android:background="@drawable/main_background">
+    android:id="@+id/layout"
+    android:background="@drawable/gradient_list">
 
     <ImageView
         android:id="@+id/pubImag_tshire"
