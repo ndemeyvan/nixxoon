@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="264dp"
         android:fontFamily="sans-serif"
-        android:text="Vendez vos vetements sans stress"
+        android:text="Vendez vos vetements sans stress ."
         android:textAlignment="textStart"
         android:textColor="@android:color/white"
         android:textSize="@dimen/slide_title"

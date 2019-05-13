@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="264dp"
         android:fontFamily="sans-serif"
-        android:text="faites connaitre votre boutique grace a notre publicite"
+        android:text="Faites connaitre votre boutique ."
         android:textAlignment="textStart"
         android:textColor="@android:color/white"
         android:textSize="@dimen/slide_title"
