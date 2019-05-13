@@ -83,11 +83,13 @@ public class LocationFragment extends Fragment {
         firebaseAuth=FirebaseAuth.getInstance ();
         curent_user=firebaseAuth.getCurrentUser ().getUid ();
         chemiseFragmentWeakReference=new WeakReference<> ( this );
-        ConstraintLayout constraintLayout=v.findViewById(R.id.layout);
+
+/*        ConstraintLayout constraintLayout=v.findViewById(R.id.layout);
         AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
-        animationDrawable.start();
+        animationDrawable.start();*/
+
         return v;
     }
 

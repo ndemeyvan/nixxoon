@@ -7,11 +7,11 @@
     tools:context=".postActivity.PostActivityFinal"
    android:background="@drawable/main_background">
     <android.support.v7.widget.Toolbar
-        android:background="@color/black"
+        android:background="@color/blanc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleTextColor="@color/blanc"
-        app:title="info sur le produit"
+        app:titleTextColor="@color/black"
+        app:title="info sur votre vente"
         android:id="@+id/final_toolbar"/>
 
 

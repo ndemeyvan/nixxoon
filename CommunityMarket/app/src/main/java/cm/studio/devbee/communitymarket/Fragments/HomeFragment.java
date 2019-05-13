@@ -235,6 +235,7 @@ public class HomeFragment extends Fragment {
          alertDialog = alertDialogBuilder.create();
          alertDialog.setCancelable ( false );
          alertDialog.show();
+
         ConstraintLayout constraintLayout=v.findViewById(R.id.layout);
         AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
