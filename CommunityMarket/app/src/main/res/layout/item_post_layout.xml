@@ -67,7 +67,7 @@
                     android:fontFamily="sans-serif-condensed"
                     android:lines="1"
                     android:textColor="@color/orange"
-                    android:textSize="@dimen/post_item_prix"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/profil_vendeur"

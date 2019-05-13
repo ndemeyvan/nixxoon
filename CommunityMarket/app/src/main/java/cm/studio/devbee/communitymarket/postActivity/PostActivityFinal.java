@@ -3,11 +3,13 @@ package cm.studio.devbee.communitymarket.postActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -121,7 +123,11 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
         mad=MobileAds.getRewardedVideoAdInstance(this);
         mad.setRewardedVideoAdListener(this);
         loadRewardedVideo();
-
+        ConstraintLayout constraintLayout=findViewById(R.id.layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
         //ads
 
         postActivityWeakReference=new WeakReference<>(this);

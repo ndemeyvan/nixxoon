@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout"
     tools:context=".postActivity.PostActivityFinal"
-   android:background="@drawable/main_background">
+   android:background="@drawable/gradient_list">
     <android.support.v7.widget.Toolbar
         android:background="@color/blanc"
         android:layout_width="match_parent"
