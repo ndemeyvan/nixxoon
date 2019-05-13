@@ -44,6 +44,7 @@ public class ChoiceActivity extends AppCompatActivity {
         private static LoginButton facebook_button;
         private static FirebaseAuth firebaseAuth;
         private static   CallbackManager callbackManager;
+        private static ImageView image_de_choix;
 
 
     @Override
@@ -54,6 +55,7 @@ public class ChoiceActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         gotoRegister=findViewById ( R.id.gotoRegister );
         facebook_button=findViewById(R.id.facebook_button);
+        image_de_choix=findViewById(R.id.image_de_choix);
         choiceActivityWeakReference=new WeakReference<>(this);
         login ();
         register ();
@@ -101,6 +103,7 @@ public class ChoiceActivity extends AppCompatActivity {
 
             }
         });
+        image_de_choix.animate().scaleX(2).scaleY(2).setDuration(6000).start();
 
     }
 

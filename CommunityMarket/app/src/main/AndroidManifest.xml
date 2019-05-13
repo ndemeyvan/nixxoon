@@ -23,7 +23,6 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-4353172129870258~6890094527" />
@@ -110,7 +109,12 @@
         <service
             android:name=".MessageService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity
+            android:name=".postActivity.ScrollingActivityDetailOne"
+            android:label="@string/title_activity_scrolling_detail_one"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

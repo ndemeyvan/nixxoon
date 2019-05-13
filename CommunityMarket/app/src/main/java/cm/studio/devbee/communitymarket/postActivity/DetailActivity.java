@@ -221,8 +221,6 @@ public class DetailActivity extends AppCompatActivity {
                         if (task.getResult ().exists ()){
                             String postLike= task.getResult ().getString ( "user_name" );
                             String image_user=task.getResult ().getString ( "user_profil_image" );
-
-                            ////sockelerie a faire after
                             String titreDuProduit=task.getResult().getString("nom_du_produit");
                             String description= task.getResult ().getString ( "decription_du_produit" );
                             String imageduproduit=task.getResult ().getString ( "image_du_produit" );
@@ -230,7 +228,6 @@ public class DetailActivity extends AppCompatActivity {
                             String datedepublication=task.getResult ().getString ( "date_de_publication" );
                             detail_post_titre_produit.setText(titreDuProduit);
                             detail_prix_produit.setText(prixduproduit);
-                            detail_description.setText(description);
                             date_de_publication.setText(datedepublication);
                             lien_image=imageduproduit;
                             getSupportActionBar().setTitle(titreDuProduit);
@@ -240,6 +237,7 @@ public class DetailActivity extends AppCompatActivity {
                             date_de_publication.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
                             detail_image_post.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
                             detail_description.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_transition_animation));
+                            detail_description.setText(description);
 
                         }
                     }else {
@@ -288,7 +286,6 @@ public class DetailActivity extends AppCompatActivity {
          detail_post_titre_produit=null;
         detail_profil_image=null;
         vendeur_button=null;
-
         detail_prix_produit=null;
          detail_description=null;
         date_de_publication=null;

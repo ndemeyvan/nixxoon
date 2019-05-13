@@ -101,7 +101,7 @@ public class DetailActivityFour extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 if (!documentSnapshot.exists ()){
-                    Toast.makeText ( DetailActivityFour.this, "cet article a été rétiré de la vente", Toast.LENGTH_SHORT ).show ();
+                    Toast.makeText ( DetailActivityFour.this, "cet article a été rétiré de vos la vente", Toast.LENGTH_SHORT ).show ();
 
                 }else {
 
