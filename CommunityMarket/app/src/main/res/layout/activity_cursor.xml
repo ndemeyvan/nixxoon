@@ -37,7 +37,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="0dp"
         android:background="@null"
-        android:fontFamily="@font/caveat"
+        android:fontFamily="sans-serif"
         android:text="next"
         android:textColor="@color/blanc"
         android:textSize="18sp" />
@@ -53,7 +53,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="2dp"
         android:background="@null"
-        android:fontFamily="@font/caveat"
+        android:fontFamily="sans-serif"
         android:text="skip"
         android:textColor="@color/blanc"
         android:textSize="18sp"
