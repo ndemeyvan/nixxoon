@@ -33,8 +33,8 @@
         android:id="@+id/textView5"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="188dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="264dp"
         android:text="faites connaitre votre boutique grace a notre publicite"
         android:textAlignment="textStart"
         android:textColor="@android:color/white"
@@ -47,9 +47,9 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:layout_width="350dp"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="60dp"
         android:paddingLeft="@dimen/desc_padding"
         android:paddingRight="@dimen/desc_padding"
@@ -58,8 +58,12 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/slide_desc"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         tools:ignore="MissingConstraints" />
 
 
 </android.support.constraint.ConstraintLayout>
+
+
+

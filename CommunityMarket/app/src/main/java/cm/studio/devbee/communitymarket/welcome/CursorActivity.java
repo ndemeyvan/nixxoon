@@ -47,8 +47,8 @@ public class CursorActivity extends AppCompatActivity {
         }
         prefManager = new PrefManager(this);
         if (!prefManager.isFirstTimeLaunch()) {
-            launchHomeScreen();
-            finish();
+            //launchHomeScreen();
+            //finish();
         }
 
         // Making notification bar transparent
@@ -85,7 +85,7 @@ public class CursorActivity extends AppCompatActivity {
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchHomeScreen();
+                //launchHomeScreen();
             }
         });
 
@@ -99,7 +99,7 @@ public class CursorActivity extends AppCompatActivity {
                     // move to next screen
                     viewPager.setCurrentItem(current);
                 } else {
-                    launchHomeScreen();
+                    //launchHomeScreen();
                 }
             }
         });
@@ -126,11 +126,11 @@ public class CursorActivity extends AppCompatActivity {
         return viewPager.getCurrentItem() + i;
     }
 
-    private void launchHomeScreen() {
+    /*private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
         startActivity(new Intent(this, ChoiceActivity.class));
         finish();
-    }
+    }*/
 
     //  viewpager change listener
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -144,10 +144,26 @@ public class CursorActivity extends AppCompatActivity {
                 // last page. make button text to GOT IT
                 btnNext.setText("start");
                 btnSkip.setVisibility(View.GONE);
+                btnNext.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent gotochoiceLoginType=new Intent(getApplicationContext(),ChoiceActivity.class);
+                        startActivity(gotochoiceLoginType);
+                        finish();
+                    }
+                });
             } else {
                 // still pages are left
                 btnNext.setText("next");
                 btnSkip.setVisibility(View.VISIBLE);
+                btnSkip.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent gotochoiceLoginType=new Intent(getApplicationContext(),ChoiceActivity.class);
+                        startActivity(gotochoiceLoginType);
+                        finish();
+                    }
+                });
             }
         }
         @Override

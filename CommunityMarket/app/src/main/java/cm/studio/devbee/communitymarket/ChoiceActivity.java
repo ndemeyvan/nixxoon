@@ -76,12 +76,12 @@ public class ChoiceActivity extends AppCompatActivity {
             }
         });
         firebaseAuth=FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser() != null) {
+        /*if (firebaseAuth.getCurrentUser() != null) {
             // User is signed in (getCurrentUser() will be null if not signed in)
             Intent intent = new Intent(getApplicationContext(), Accueil.class);
             startActivity(intent);
             finish();
-        }
+        }*/
 
         if(CheckNetwork.isInternetAvailable(getApplicationContext ())){//returns true if internet available{
 
