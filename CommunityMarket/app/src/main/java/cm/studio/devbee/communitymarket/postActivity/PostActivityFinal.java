@@ -129,6 +129,7 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
         //ads
+        Toast.makeText(getApplicationContext(),"remplissez les information a propos de votre vente",Toast.LENGTH_LONG).show();
 
         postActivityWeakReference=new WeakReference<>(this);
 
