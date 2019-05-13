@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.design.animation.AnimationUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -144,6 +145,7 @@ public class CursorActivity extends AppCompatActivity {
                 // last page. make button text to GOT IT
                 btnNext.setText("start");
                 btnSkip.setVisibility(View.GONE);
+                btnNext. setAnimation ( android.view.animation.AnimationUtils. loadAnimation (getApplicationContext(), R.anim.fade_transition_animation));
                 btnNext.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
