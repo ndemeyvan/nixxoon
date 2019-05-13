@@ -92,7 +92,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
-        android:fontFamily="sans-serif-condensed"
+        android:fontFamily="@font/caveat"
         android:textColor="@color/blanc"
         android:textSize="22sp"
         android:textStyle="bold"

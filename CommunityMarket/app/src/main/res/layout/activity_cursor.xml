@@ -37,8 +37,10 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="0dp"
         android:background="@null"
+        android:fontFamily="@font/caveat"
         android:text="next"
-        android:textColor="@color/blanc" />
+        android:textColor="@color/blanc"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btn_skip"
@@ -51,8 +53,11 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="2dp"
         android:background="@null"
+        android:fontFamily="@font/caveat"
         android:text="skip"
-        android:textColor="@color/blanc" />
+        android:textColor="@color/blanc"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

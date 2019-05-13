@@ -104,15 +104,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="@dimen/choice_Logo_margin_top"
+        android:layout_marginTop="112dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/caveat"
-        android:text="E d u e n e "
+        android:text="Open Market"
         android:textColor="@color/blanc"
         android:textSize="@dimen/choice_Logo_text_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
