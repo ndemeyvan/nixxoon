@@ -37,6 +37,7 @@ public class CursorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cursor);
+        firebaseAuth=FirebaseAuth.getInstance();
         // Checking for first time launch - before calling setContentView()
         if (firebaseAuth.getCurrentUser() != null) {
             // User is signed in (getCurrentUser() will be null if not signed in)
@@ -55,7 +56,7 @@ public class CursorActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
 
-        setContentView(R.layout.activity_welcome);
+        //setContentView(R.layout.activity_welcome);
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
