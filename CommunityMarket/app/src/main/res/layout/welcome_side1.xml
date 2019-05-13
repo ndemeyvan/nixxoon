@@ -56,7 +56,7 @@
         android:fontFamily="sans-serif"
         android:paddingLeft="@dimen/desc_padding"
         android:paddingRight="@dimen/desc_padding"
-        android:text="grace a Open Market , vendez gratuitement et facilement vos produits partout au cameroun."
+        android:text="Grace a Open Market , vendez gratuitement et facilement vos produits partout au cameroun."
         android:textAlignment="textStart"
         android:textColor="@android:color/white"
         android:textSize="@dimen/slide_desc"

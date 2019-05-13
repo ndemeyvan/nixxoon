@@ -52,7 +52,7 @@
         android:fontFamily="sans-serif"
         android:paddingLeft="@dimen/desc_padding"
         android:paddingRight="@dimen/desc_padding"
-        android:text="l'application dispose d'enplacement cible pour vous pemettre de vous mettre en valeur et de faire connaitre vos articles."
+        android:text="L'application dispose d'enplacement cible pour vous pemettre de vous mettre en valeur et de faire connaitre vos articles."
         android:textAlignment="textStart"
         android:textColor="@android:color/white"
         android:textSize="@dimen/slide_desc"

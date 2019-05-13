@@ -53,7 +53,7 @@
         android:fontFamily="sans-serif"
         android:paddingLeft="@dimen/desc_padding"
         android:paddingRight="@dimen/desc_padding"
-        android:text="inscrivez vous et decouvrer des d'articles de qualités vendu par d'autres utilisateur de la plateforme , negocier directement avec eux  et faite de bonne affaire sans payer de frais."
+        android:text="Inscrivez vous et decouvrer des d'articles de qualités vendu par d'autres utilisateur de la plateforme , negocier directement avec eux  et faite de bonne affaire sans payer de frais."
         android:textAlignment="textStart"
         android:textColor="@android:color/white"
         android:textSize="@dimen/slide_desc"
