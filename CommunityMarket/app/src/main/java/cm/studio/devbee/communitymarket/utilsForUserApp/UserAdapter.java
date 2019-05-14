@@ -84,7 +84,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
        String image =userModelList.get ( i ).getUser_profil_image ();
        final String nom=userModelList.get ( i ).getId_utilisateur ();
        String status=userModelList.get ( i ).getStatus ();
-       viewHolder.setNom ( nom );
+       //viewHolder.setNom ( nom );
        viewHolder.setNom ( prenom_utilisateur+" "+nom_utilisateur );
        viewHolder.setimage ( image );
        viewHolder.user_container.setAnimation ( AnimationUtils.loadAnimation ( context,R.anim.fade_transition_animation ) );
