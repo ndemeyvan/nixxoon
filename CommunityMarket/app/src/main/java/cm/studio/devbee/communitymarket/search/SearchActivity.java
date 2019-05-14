@@ -2,8 +2,10 @@ package cm.studio.devbee.communitymarket.search;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -106,6 +108,11 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         } );
+        ConstraintLayout constraintLayout=findViewById(R.id.layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
 
 
     }
