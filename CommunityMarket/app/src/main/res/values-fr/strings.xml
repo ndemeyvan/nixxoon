@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Open Market</string>
     <string name="title_activity_accueil">Accueil</string>
@@ -99,4 +100,6 @@
     <string name="accessoire">accessoire</string>
     <string name="location">location</string>
     <string name="enregister">m\'enregistrer</string>
+
+
 </resources>
