@@ -160,6 +160,7 @@ public class CursorActivity extends AppCompatActivity {
             } else {
                 // still pages are left
                 btnNext.setText(getString(R.string.passer));
+                btnNext.setVisibility(View.INVISIBLE);
                 btnSkip.setVisibility(View.VISIBLE);
                 btnSkip.setOnClickListener(new View.OnClickListener() {
                     @Override

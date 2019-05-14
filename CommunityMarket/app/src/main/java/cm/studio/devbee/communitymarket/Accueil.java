@@ -242,6 +242,23 @@ public class Accueil extends AppCompatActivity implements NavigationView.OnNavig
             asyncTask=new AsyncTask();
             asyncTask.execute();
 
+        firebaseFirestore.collection ( "mes donnees utilisateur" ).document (current_user_id).get ().addOnCompleteListener ( new OnCompleteListener<DocumentSnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (!task.isSuccessful ()){
+                    if (task.getResult ().exists ()){
+                       Intent gotoparam=new Intent(getApplicationContext(),ParametrePorfilActivity.class);
+                       startService(gotoparam);
+                       //finish();
+                    }
+                }else{
+
+
+                }
+            }
+        } );
+
     }
 
     public void setupViewPager(ViewPager viewPager){
@@ -271,7 +288,7 @@ public class Accueil extends AppCompatActivity implements NavigationView.OnNavig
                             String nom_user = task.getResult ().getString ("user_name");
                             String prenomuser =task.getResult ().getString ("user_prenom");
                             drawer_user_name.setText ( nom_user + " " + prenomuser);
-                            Log.d("cle",image_profil_user);
+                            
 
                             Picasso.with ( getApplicationContext()).load ( image_profil_user ).transform(new CircleTransform()).into ( acceuille_image );
                            // Picasso.with ( getApplicationContext()).load ( image_profil_user ).placeholder(R.drawable.boy).into ( profilbacck_image );

@@ -167,18 +167,12 @@ public class MessageActivity extends AppCompatActivity {
                             notification.put ( "message",message);
                             notification.put("from",current_user);
 
-                            firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user ).set ( notification ).addOnCompleteListener ( new OnCompleteListener<Void> () {
+                            firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( user_id_message ).collection("notification").add ( notification ).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful ()) {
-                                        //Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
-                                    } else {
-                                        String error = task.getException ().getMessage ();
-                                        Toast.makeText ( getApplicationContext (), error, Toast.LENGTH_LONG ).show ();
+                                public void onSuccess(DocumentReference documentReference) {
 
-                                    }
                                 }
-                            } );
+                            });
 
                         }else{
                             Toast.makeText ( getApplicationContext (),getString(R.string.message_vide),Toast.LENGTH_LONG ).show ();

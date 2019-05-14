@@ -124,7 +124,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_background"
         android:elevation="3dp"
-        android:text="@string/register_button_connect"
+        android:text="@string/enregister"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
         android:textSize="17sp"
@@ -140,15 +140,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="324dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.757" />
+        app:layout_constraintTop_toBottomOf="@+id/password_register" />
 
     <Button
         android:id="@+id/register_text"
