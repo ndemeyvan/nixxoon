@@ -43,6 +43,7 @@ import cm.studio.devbee.communitymarket.postActivity.DetailActivity;
 import cm.studio.devbee.communitymarket.postActivity.DetailActivityTwo;
 import cm.studio.devbee.communitymarket.postActivity.UserGeneralPresentation;
 import cm.studio.devbee.communitymarket.profile.ProfileActivity;
+import cm.studio.devbee.communitymarket.vendeurContact.VendeurActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
@@ -96,7 +97,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                   Intent gotogneral=new Intent ( context,ProfileActivity.class );
                   context.startActivity ( gotogneral );
               }else {
-                  Intent gotogneral=new Intent ( context,UserGeneralPresentation.class );
+                  Intent gotogneral=new Intent ( context,VendeurActivity.class );
                   gotogneral.putExtra ( "id de l'utilisateur",nom );
                   context.startActivity ( gotogneral );
               }
