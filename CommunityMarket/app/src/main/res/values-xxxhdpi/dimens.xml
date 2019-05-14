@@ -92,9 +92,14 @@
     <dimen name="dots_height">30dp</dimen>
     <dimen name="dots_margin_bottom">20dp</dimen>
     <dimen name="img_width_height">120dp</dimen>
-    <dimen name="slide_title">30dp</dimen>
+    <dimen name="slide_title">40dp</dimen>
     <dimen name="slide_desc">16dp</dimen>
     <dimen name="desc_padding">40dp</dimen>
+    <dimen name="desc_margingTop">264dp</dimen>
+    <dimen name="desc_marginend">62dp</dimen>
+    <dimen name="desc_widh">400dp</dimen>
+
+
 
 
 </resources>

@@ -35,9 +35,9 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="310dp"
+        android:layout_width="@dimen/desc_widh"
         android:layout_height="wrap_content"
-        android:layout_marginTop="264dp"
+        android:layout_marginTop="@dimen/desc_margingTop"
         android:fontFamily="sans-serif"
         android:text="Vendez vos vetements sans stress ."
         android:textAlignment="textStart"
@@ -52,7 +52,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="@dimen/desc_marginend"
         android:fontFamily="sans-serif"
         android:paddingLeft="@dimen/desc_padding"
         android:paddingRight="@dimen/desc_padding"
