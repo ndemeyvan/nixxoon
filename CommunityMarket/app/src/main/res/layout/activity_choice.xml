@@ -47,7 +47,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_background"
         android:elevation="3dp"
-        android:text="se connecter via email"
+        android:text="@string/string_choice_email"
         android:textAllCaps="false"
         android:paddingTop="@dimen/choice_button_padding_top"
         android:paddingBottom="@dimen/choice_button_padding_top"
@@ -88,7 +88,7 @@
         android:fontFamily="sans-serif-condensed"
         android:paddingTop="@dimen/choice_button_padding_top"
         android:paddingBottom="@dimen/choice_button_padding_top"
-        android:text="s'enregistrer"
+        android:text="@string/choice_enregistrer"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
@@ -97,7 +97,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="HardcodedText,MissingConstraints" />
 
     <TextView
         android:id="@+id/textView2"

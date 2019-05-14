@@ -157,7 +157,7 @@ public class PullFragment extends Fragment {
         }).addOnFailureListener(new OnFailureListener () {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(),"erreur lors du chargement du slider",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),getString(R.string.erreur_slider),Toast.LENGTH_LONG).show();
             }
         });
     }

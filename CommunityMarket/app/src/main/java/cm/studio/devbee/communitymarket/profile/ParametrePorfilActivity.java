@@ -177,7 +177,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
                         } );
                         ////////fin de l'nvoie
                     } else {
-                        Toast.makeText ( getApplicationContext (), "remplir tous les champs svp", Toast.LENGTH_LONG ).show ();
+                        Toast.makeText ( getApplicationContext (), getString(R.string.renplir_tous), Toast.LENGTH_LONG ).show ();
                         parametre_progressbar.setVisibility ( View.INVISIBLE );
                     }
                 }else{
@@ -205,13 +205,13 @@ public class ParametrePorfilActivity extends AppCompatActivity {
         donnees_utilisateur.put ( "user_prenom",user_premon.toUpperCase().charAt(0)+""+user_premon.substring(1, user_premon.length()));
         donnees_utilisateur.put ( "user_telephone", user_telephone );
         donnees_utilisateur.put ( "user_residence", user_residence );
-        donnees_utilisateur.put ( "user_mail", user_email );
-        donnees_utilisateur.put ( "user_profil_image", downloadUri.toString () );
+        donnees_utilisateur.put ( "user_mail",user_email);
+        donnees_utilisateur.put ( "user_profil_image",downloadUri.toString ());
         donnees_utilisateur.put ( "id_utilisateur", current_user_id);
         donnees_utilisateur.put ( "status","online" );
-        donnees_utilisateur.put ( "search",user_name.toLowerCase() );
+        donnees_utilisateur.put ( "search",user_name.toLowerCase());
         donnees_utilisateur.put ( "message","lu" );
-        donnees_utilisateur.put ( "derniere_conection",randomKey );
+        donnees_utilisateur.put ( "derniere_conection",randomKey);
 
         firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user_id ).set ( donnees_utilisateur ).addOnCompleteListener ( new OnCompleteListener<Void> () {
             @Override
@@ -220,7 +220,7 @@ public class ParametrePorfilActivity extends AppCompatActivity {
                     Intent intent = new Intent ( getApplicationContext (), Accueil.class );
                     startActivity ( intent );
                     finish ();
-                    Toast.makeText ( getApplicationContext (), "compte enregistre", Toast.LENGTH_LONG ).show ();
+                    Toast.makeText ( getApplicationContext (), getString(R.string.param_compte_enregister), Toast.LENGTH_LONG ).show ();
                 } else {
                     String error = task.getException ().getMessage ();
                     Toast.makeText ( getApplicationContext (), error, Toast.LENGTH_LONG ).show ();

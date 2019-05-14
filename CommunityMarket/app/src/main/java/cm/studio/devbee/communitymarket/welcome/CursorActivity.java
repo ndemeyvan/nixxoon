@@ -105,7 +105,7 @@ public class CursorActivity extends AppCompatActivity {
                 }
             }
         });
-        Toast.makeText(getApplicationContext(),"glisser de la droite vers la gauche",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),getString(R.string.glisser),Toast.LENGTH_LONG).show();
     }
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
@@ -145,7 +145,7 @@ public class CursorActivity extends AppCompatActivity {
             // changing the next button text 'NEXT' / 'GOT IT'
             if (position == layouts.length - 1) {
                 // last page. make button text to GOT IT
-                btnNext.setText("start");
+                btnNext.setText(getString(R.string.commencer));
                 btnSkip.setVisibility(View.GONE);
                 btnNext. setAnimation ( android.view.animation.AnimationUtils. loadAnimation (getApplicationContext(), R.anim.fade_transition_animation));
                 btnNext.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +158,7 @@ public class CursorActivity extends AppCompatActivity {
                 });
             } else {
                 // still pages are left
-                btnNext.setText("next");
+                btnNext.setText(getString(R.string.passer));
                 btnSkip.setVisibility(View.VISIBLE);
                 btnSkip.setOnClickListener(new View.OnClickListener() {
                     @Override

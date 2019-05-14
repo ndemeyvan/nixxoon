@@ -129,7 +129,7 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
         //ads
-        Toast.makeText(getApplicationContext(),"remplissez les information a propos de votre vente",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),getString(R.string.post_remplisser_les_info),Toast.LENGTH_LONG).show();
 
         postActivityWeakReference=new WeakReference<>(this);
 
@@ -161,7 +161,7 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
             prendreDonnerDevente ();
             if (TextUtils.isEmpty ( nom_du_produit )&&TextUtils.isEmpty ( decription_du_produit )&&TextUtils.isEmpty ( prix_du_produit )&&mImageUri==null){
                 progressBar_post.setVisibility (View.INVISIBLE);
-                Toast.makeText ( getApplicationContext(),"Veuillez remplir tous les champs",Toast.LENGTH_LONG ).show ();
+                Toast.makeText ( getApplicationContext(),getString(R.string.renplir_tous),Toast.LENGTH_LONG ).show ();
 
             }else{
                 if (mad.isLoaded()) {
@@ -230,7 +230,7 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
             stocker();
         }else{
             progressBar_post.setVisibility (View.INVISIBLE);
-            Toast.makeText ( getApplicationContext(),"Veuillez remplir tous les champs",Toast.LENGTH_LONG ).show ();
+            Toast.makeText ( getApplicationContext(),getString(R.string.renplir_tous),Toast.LENGTH_LONG ).show ();
         }
     }
     public void stocker(){
@@ -257,7 +257,7 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
                     uploadTask.addOnFailureListener(new OnFailureListener () {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
-                            Toast.makeText ( getApplicationContext(),"un probleme est survenue,reessayer plus tard svp" ,Toast.LENGTH_LONG).show ();
+                            Toast.makeText ( getApplicationContext(),getString(R.string.essai_after),Toast.LENGTH_LONG).show ();
                         }
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot> () {
                         @Override
@@ -374,15 +374,14 @@ public class PostActivityFinal extends AppCompatActivity implements RewardedVide
     @Override
     public void onRewardedVideoAdClosed() {
 
-        Toast.makeText(getApplicationContext(),"regardez la video jusqu'a la fin pour poster votre article",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),getString(R.string.see_video),Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-        Toast.makeText(getApplicationContext(),"merci d'avoir regarder la publicite ",Toast.LENGTH_LONG).show();
-        Toast.makeText(getApplicationContext(),"votre article est en cour d'envoie ",Toast.LENGTH_LONG).show();
-        Toast.makeText(getApplicationContext(),"Patientez svp",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),getString(R.string.video_seen_thank),Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),getString(R.string.wait),Toast.LENGTH_LONG).show();
     }
 
     @Override

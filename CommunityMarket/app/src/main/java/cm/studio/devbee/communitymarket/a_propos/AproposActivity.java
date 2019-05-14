@@ -23,7 +23,7 @@ public class AproposActivity extends AppCompatActivity {
         call_button=findViewById ( R.id.call_button );
         aporpos_toolbar=findViewById(R.id.aporpos_toolbar);
         setSupportActionBar(aporpos_toolbar);
-        getSupportActionBar().setTitle("publiciter");
+        getSupportActionBar().setTitle(getString(R.string.publicite));
         aproposActivityWeakReference=new WeakReference<>(this);
         call_button.setOnClickListener ( new View.OnClickListener () {
             @Override

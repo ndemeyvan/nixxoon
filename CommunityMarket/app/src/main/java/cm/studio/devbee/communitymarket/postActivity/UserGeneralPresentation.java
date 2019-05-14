@@ -170,8 +170,8 @@ public class UserGeneralPresentation extends AppCompatActivity {
                         Picasso.with(UserGeneralPresentation.this).load(image_user).placeholder(R.drawable.boy).into(profilImage);
                         Picasso.with(UserGeneralPresentation.this).load(image_user).into(backgroundgeneral);
                         getSupportActionBar().setTitle(name_user+" "+prenom);
-                        button_voir.setText("voir les ventes de "+prenom);
-                        button_message.setText("ecrire a "+prenom);
+                        button_voir.setText(getString(R.string.voir_vente_de)+" "+prenom);
+                        button_message.setText(getString(R.string.ecrire_a)+" "+prenom);
                         detail_user.setText(user_mail);
                         detail_user.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_scale_animation));
                         button_message.setEnabled ( true );

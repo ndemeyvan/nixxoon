@@ -82,12 +82,11 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                textView4.setText ( "Heureux de vous revoir ." );
+                textView4.setText ( getString(R.string.login_heureux_de_vous_revoir) );
                 login_progressBar.setVisibility ( View.VISIBLE );
                 String user_email=loginEdit.getText ().toString ();
-                textView4.setText ( "Heureux de vous revoir .." );
+                textView4.setText ( getString(R.string.login_heureux_de_vous_revoir));
                 String user_password=registerEdit.getText ().toString ();
-                textView4.setText ( "Heureux de vous revoir ... " );
                 if (!TextUtils.isEmpty (user_email)&&!TextUtils.isEmpty(user_password)){
                         mAuth.signInWithEmailAndPassword ( user_email,user_password ).addOnCompleteListener ( new OnCompleteListener<AuthResult> () {
                             @Override
@@ -107,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 }else{
                     login_progressBar.setVisibility ( View.INVISIBLE );
-                    Toast.makeText ( getApplicationContext(),"Veuillez remplir tous les champs svp !!",Toast.LENGTH_LONG ).show ();
+                    Toast.makeText ( getApplicationContext(),getString(R.string.renplir_tous),Toast.LENGTH_LONG ).show ();
                     }
             }
         }

@@ -24,7 +24,7 @@
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:padding="@dimen/post_padding_edit_text"
-        android:hint="Touche ici ..."
+        android:hint="@string/search_activity_text"
         android:inputType="textPersonName"
         android:textColor="@color/blanc"
         android:textColorHint="@color/blanc"

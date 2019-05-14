@@ -17,7 +17,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/slider_description"/>
 
     <LinearLayout
 
@@ -37,9 +38,10 @@
         android:id="@+id/textView5"
         android:layout_width="@dimen/desc_widh"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="@dimen/desc_margingTop"
         android:fontFamily="sans-serif"
-        android:text="Vendez vos vetements sans stress ."
+        android:text="@string/titre_slider1"
         android:textAlignment="textStart"
         android:textColor="@android:color/white"
         android:textSize="@dimen/slide_title"
@@ -52,11 +54,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
         android:layout_marginEnd="@dimen/desc_marginend"
         android:fontFamily="sans-serif"
         android:paddingLeft="@dimen/desc_padding"
         android:paddingRight="@dimen/desc_padding"
-        android:text="Grace a Open Market , vendez gratuitement et facilement vos produits partout au cameroun."
+        android:text="@string/description_titre_slider1"
         android:textAlignment="textStart"
         android:textColor="@android:color/white"
         android:textSize="@dimen/slide_desc"

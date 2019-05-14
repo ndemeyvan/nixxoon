@@ -11,95 +11,95 @@
     <string name="facebook_app_id">425428758001662</string>
     <string name="fb_login_protocol_scheme">fb425428758001662</string>
     <string name="title_activity_scrolling_one">ScrollingActivityOne</string>
-    <string name="large_text">
-        "Material is the metaphor.\n\n"
-
-        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
-        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
-        "technologically advanced and open to imagination and magic.\n"
-        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
-        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
-        "flexibility of the material creates new affordances that supercede those in the physical "
-        "world, without breaking the rules of physics.\n"
-        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
-        "interact, and exist in space and in relation to each other. Realistic lighting shows "
-        "seams, divides space, and indicates moving parts.\n\n"
-
-        "Bold, graphic, intentional.\n\n"
-
-        "The foundational elements of print based design typography, grids, space, scale, color, "
-        "and use of imagery guide visual treatments. These elements do far more than please the "
-        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
-        "imagery, large scale typography, and intentional white space create a bold and graphic "
-        "interface that immerse the user in the experience.\n"
-        "An emphasis on user actions makes core functionality immediately apparent and provides "
-        "waypoints for the user.\n\n"
-
-        "Motion provides meaning.\n\n"
-
-        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
-        "inflection points that initiate motion, transforming the whole design.\n"
-        "All action takes place in a single environment. Objects are presented to the user without "
-        "breaking the continuity of experience even as they transform and reorganize.\n"
-        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
-        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
-
-        "3D world.\n\n"
-
-        "The material environment is a 3D space, which means all objects have x, y, and z "
-        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
-        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
-        "position along the z-axis and has a standard 1dp thickness.\n"
-        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
-        "emulated by manipulating the y-axis.\n\n"
-
-        "Light and shadow.\n\n"
-
-        "Within the material environment, virtual lights illuminate the scene. Key lights create "
-        "directional shadows, while ambient light creates soft shadows from all angles.\n"
-        "Shadows in the material environment are cast by these two light sources. In Android "
-        "development, shadows occur when light sources are blocked by sheets of material at "
-        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
-        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
-
-        "Resting elevation.\n\n"
-
-        "All material objects, regardless of size, have a resting elevation, or default elevation "
-        "that does not change. If an object changes elevation, it should return to its resting "
-        "elevation as soon as possible.\n\n"
-
-        "Component elevations.\n\n"
-
-        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
-        "does not vary from 6dp in one app to 16dp in another app).\n"
-        "Components may have different resting elevations across platforms, depending on the depth "
-        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
-
-        "Responsive elevation and dynamic elevation offsets.\n\n"
-
-        "Some component types have responsive elevation, meaning they change elevation in response "
-        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
-        "changes are consistently implemented using dynamic elevation offsets.\n"
-        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
-        "to the component’s resting state. They ensure that elevation changes are consistent "
-        "across actions and component types. For example, all components that lift on press have "
-        "the same elevation change relative to their resting elevation.\n"
-        "Once the input event is completed or cancelled, the component will return to its resting "
-        "elevation.\n\n"
-
-        "Avoiding elevation interference.\n\n"
-
-        "Components with responsive elevations may encounter other components as they move between "
-        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
-        "through other material, components avoid interfering with one another any number of ways, "
-        "whether on a per component basis or using the entire app layout.\n"
-        "On a component level, components can move or be removed before they cause interference. "
-        "For example, a floating action button (FAB) can disappear or move off screen before a "
-        "user picks up a card, or it can move if a snackbar appears.\n"
-        "On the layout level, design your app layout to minimize opportunities for interference. "
-        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
-        "when a user tries to pick up one of cards.\n\n"
-    </string>
-    <string name="title_activity_maps">Map</string>
+    <string name="slider_description">image de fond pour le slider d\'accueil</string>
+    <string name="tost_erreur_de_connexion">Veillez Activer votre connexion internet,vous ne pouvez pas utiliser Open market sans connexion internet</string>
+    <string name="title_activity_maps">Map</string>Vendez vos vetements sans stress .
+    <string name="string">Map</string>
     <string name="title_activity_scrolling_detail_one">ScrollingActivityDetailOne</string>
+    <string name="description_titre_slider1">Grace a Open Market , vendez gratuitement et facilement vos produits partout au cameroun.</string>
+    <string name="titre_slider1">Vendez vos vetements sans stress .</string>
+    <string name="titre_slider2">Faites connaitre votre boutique .</string>
+    <string name="slider_description_slider2">L\'application dispose d\'enplacement cible pour vous pemettre de vous mettre en valeur et de faire connaitre vos articles.</string>
+    <string name="titre_slider3">contacter,negocier avec d\'autres et faites de bonne affaire .</string>
+    <string name="description_slider3">Inscrivez vous et decouvrer des d\'articles de qualités vendu par d\'autres utilisateur de la plateforme , negocier directement avec eux  et faite de bonne affaire sans payer de frais.</string>
+    <string name="apropos_grand_titre">Besoin de mettre vos produits en avant sur votre application prefere ?</string>
+    <string name="a_propos_sous_titre">Contacter nous via appel ou whatsapp . Cliquez ici bas.</string>
+    <string name="a_propos_button">contacter nous.</string>
+    <string name="string_choice_email">se connecter via email</string>
+    <string name="choice_enregistrer">s\'enregistrer</string>
+    <string name="cursor_next">suivant</string>
+    <string name="passer">passer</string>
+    <string name="detail_supprimer">supprimer</string>
+    <string name="detail_contacter">contacter le vendeur</string>
+    <string name="login_edittext_email">votre email</string>
+    <string name="login_password">mot de passe</string>
+    <string name="login_button_connexion">connexion</string>
+    <string name="login_enregister_button">m\'inscrire</string>
+    <string name="login_text_other_connexion">vous n\'avez pas de compte ?</string>
+    <string name="message_activity_send_editext">entrer votre message ici</string>
+    <string name="parametre_edit_nom">nom</string>
+    <string name="parametre_prenom">prenom</string>
+    <string name="parametre_residence">residence(exple:Douala/akwa.../16 caracteres)</string>
+    <string name="parametre_decription">D\'ecris toi en quelque mots (250 caractere)</string>
+    <string name="parametre_button">enregistrer</string>
+    <string name="produc_name">nom du produit (25 caractere max)</string>
+    <string name="post_description">description (300 caractere max)</string>
+    <string name="post_prix">prix ( la valeur est le fcfa )</string>
+    <string name="post_info_sur_vente">info sur votre vente</string>
+    <string name="profil_voir_article">voir vos articles</string>
+    <string name="profil_reside">reside a</string>
+    <string name="register_login">votre email</string>
+    <string name="register_password">mot de passe</string>
+    <string name="register_confirm_password">confirmation du mot de passe</string>
+    <string name="register_button_connect">confirmation du mot de passe</string>
+    <string name="register_other_connect_button">me connecter</string>
+    <string name="register_text">j\'ai deja un compte</string>
+    <string name="search_activity_text">Touche ici ...</string>
+    <string name="user_general_reside">reside a</string>
+    <string name="user_general_derniere_connexion">Derniere activite</string>
+    <string name="item_general">prix :</string>
+    <string name="nom_de_categorie">nom de categorie</string>
+    <string name="publicite">publicite</string>
+    <string name="erreur_slider">erreur lors du chargement du slider</string>
+    <string name="login_heureux_de_vous_revoir">heureux de vous revoir ...</string>
+    <string name="renplir_tous">renplir tous les chanps</string>
+    <string name="bienvenu">Bienvenue</string>
+    <string name="erreur_de_mot_de_passe">les mots de passe ne correspondent pas !!!</string>
+    <string name="message_vide">vous ne pouvez pas envoyer un message vide</string>
+    <string name="vente_retire">cet article a été rétiré de la vente</string>
+    <string name="voulez_vous_supprimer">voulez vous vraiment supprimer ?</string>
+    <string name="supprimer_desnvx">supprime des nouveaux</string>
+    <string name="supprimmer_des">supprime ?</string>
+    <string name="choix_de_categorie">choix de categories</string>
+    <string name="post_remplisser_les_info">remplissez les information a propos de votre vente</string>
+    <string name="essai_after">un probleme est survenue,reessayer plus tard svp</string>
+    <string name="see_video">regardez la video jusqu\'a la fin pour poster votre article</string>
+    <string name="video_seen_thank">merci d\'avoir regarder la publicite ,votre article est en cour d\'envoie</string>
+    <string name="wait">patienter</string>
+    <string name="voir_vente_de">voir les ventes de</string>
+    <string name="ecrire_a">ecrire a </string>
+    <string name="param_compte_enregister">compte enregistre </string>
+    <string name="article_en_vente">articles en ventes</string>
+    <string name="no_article">aucun article en vente</string>
+    <string name="glisser">glisser de la droite vers la gauche</string>
+    <string name="commencer">commencer</string>
+    <string name="soutenir">merci de cliquer sur la pub pour soutemir l\'appli</string>
+    <string name="soutiens_effectif">merci de soutemir l\'appli</string>
+    <string name="redirection">vous serez rediriger a l\'acceuil dans quelques seconde</string>
+
+    <string name="Decouvrir">Decouvrir</string>
+    <string name="T_shirts">T_shirts</string>
+    <string name="Pulls">Pulls</string>
+    <string name="jupes">jupes</string>
+    <string name="chaussures">chaussures</string>
+    <string name="pantalons">pantalons</string>
+    <string name="cullotes">cullotes</string>
+    <string name="chemises">chemises</string>
+    <string name="robes">robes</string>
+    <string name="accessoire">accessoire</string>
+    <string name="location">location</string>
+
+
+
+
 </resources>

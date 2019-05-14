@@ -88,9 +88,7 @@ public class ChoiceActivity extends AppCompatActivity {
         }
         else{
 
-            Toast.makeText(getApplicationContext (),"Veillez Activer votre connexion internet",Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext (),"vous ne pouvez pas utiliser Open market sans connexion internet",Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext (),"Veillez Activer votre connexion internet",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext (),getString(R.string.tost_erreur_de_connexion),Toast.LENGTH_LONG).show();
             finish();
         }
 
@@ -120,8 +118,8 @@ public class ChoiceActivity extends AppCompatActivity {
     }
 
     private void handleFacebookAccesToken(AccessToken loginResult) {
-        Toast.makeText(getApplicationContext(),"bienvenu",Toast.LENGTH_LONG).show();
-        Toast.makeText(getApplicationContext(),"vous serez rediriger a l'acceuil dans quelques seconde",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),getString(R.string.bienvenu),Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),getString(R.string.redirection),Toast.LENGTH_LONG).show();
         AuthCredential authCredential=FacebookAuthProvider.getCredential(loginResult.getToken());
         firebaseAuth.signInWithCredential(authCredential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
@@ -191,7 +189,7 @@ public class ChoiceActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         gotoLogin=null;
-      gotoRegister=null;
-         devant=null;
+        gotoRegister=null;
+        devant=null;
     }
 }

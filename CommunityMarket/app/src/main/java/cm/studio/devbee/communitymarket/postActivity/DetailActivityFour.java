@@ -101,7 +101,7 @@ public class DetailActivityFour extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 if (!documentSnapshot.exists ()){
-                    Toast.makeText ( DetailActivityFour.this, "cet article a été rétiré de vos la vente", Toast.LENGTH_SHORT ).show ();
+                    Toast.makeText ( DetailActivityFour.this, getString(R.string.vente_retire), Toast.LENGTH_SHORT ).show ();
 
                 }else {
 
@@ -142,7 +142,7 @@ public class DetailActivityFour extends AppCompatActivity {
                 public void onClick(View v) {
 
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailActivityFour.this);
-                    alertDialogBuilder.setMessage("voulez vous vraiment supprimer ?");
+                    alertDialogBuilder.setMessage(getString(R.string.voulez_vous_supprimer));
                     alertDialogBuilder.setPositiveButton("oui",
                             new DialogInterface.OnClickListener() {
                                 @Override
@@ -154,7 +154,7 @@ public class DetailActivityFour extends AppCompatActivity {
                                                 if (task.isSuccessful ()){
                                                     detail_progress.setVisibility ( View.VISIBLE );
                                                     firebaseFirestore.collection ( "publication" ).document ("post utilisateur").collection ( current_user_id ).document (iddupost).delete ();
-                                                    Toast.makeText ( getApplicationContext (),"supprimer de votre mur",Toast.LENGTH_LONG ).show ();
+                                                    //Toast.makeText ( getApplicationContext (),"supprimer de votre mur",Toast.LENGTH_LONG ).show ();
                                                    /* Intent gtohome=new Intent ( getApplicationContext (),Accueil.class );
                                                     startActivity ( gtohome );*/
                                                     finish ();

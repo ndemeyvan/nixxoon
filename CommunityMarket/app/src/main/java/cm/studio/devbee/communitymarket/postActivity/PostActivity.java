@@ -29,7 +29,7 @@ public class PostActivity extends AppCompatActivity {
         setContentView ( R.layout.activity_post );
         toolbar_post=findViewById ( R.id.post_cat_toolbar );
         setSupportActionBar ( toolbar_post );
-        getSupportActionBar ().setTitle ( "choisissez une categorie" );
+        getSupportActionBar ().setTitle ( getString(R.string.choix_de_categorie));
         getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
         toolbar_post.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

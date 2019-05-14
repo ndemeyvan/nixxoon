@@ -37,7 +37,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-condensed"
-        android:text="categorie_name"
+        android:text="@string/nom_de_categorie"
         android:textColor="@color/blanc"
         android:textSize="24sp"
         android:textStyle="bold"

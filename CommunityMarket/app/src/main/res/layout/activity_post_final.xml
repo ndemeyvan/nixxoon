@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:titleTextColor="@color/black"
-        app:title="info sur votre vente"
+        app:title="@string/post_info_sur_vente"
         android:id="@+id/final_toolbar"/>
 
 
@@ -37,7 +37,7 @@
         android:elevation="1dp"
         android:ems="10"
         android:fontFamily="sans-serif-condensed"
-        android:hint="nom du produit (25 caractere max)"
+        android:hint="@string/produc_name"
         android:inputType="textPersonName"
         android:maxLength="25"
         android:padding="@dimen/post_padding_edit_text"
@@ -60,7 +60,7 @@
         android:elevation="1dp"
         android:ems="10"
         android:fontFamily="sans-serif-condensed"
-        android:hint="description (300 caractere max)"
+        android:hint="@string/post_description"
         android:inputType="textMultiLine"
         android:padding="@dimen/post_padding_edit_text"
         android:textSize="14sp"
@@ -82,7 +82,7 @@
         android:elevation="1dp"
         android:ems="10"
         android:fontFamily="sans-serif-condensed"
-        android:hint="prix ( la valeur est le fcfa )"
+        android:hint="@string/post_prix"
         android:inputType="number"
         android:padding="@dimen/post_padding_edit_text"
         android:textColor="@color/colorAccent"
@@ -90,7 +90,8 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_product_description" />
+        app:layout_constraintTop_toBottomOf="@+id/post_product_description"
+        tools:ignore="LabelFor" />
 
     <Button
         android:id="@+id/post_button"

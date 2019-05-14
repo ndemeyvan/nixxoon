@@ -61,6 +61,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
 import cm.studio.devbee.communitymarket.SendNotif;
 import cm.studio.devbee.communitymarket.postActivity.PostActivityFinal;
@@ -162,9 +164,25 @@ public class MessageActivity extends AppCompatActivity {
                 String message =message_user_send.getText ().toString ();
                         if(!TextUtils.isEmpty ( message )){
                             sendmessage (current_user,user_id_message,message);
+                            Map<String, String> notification = new HashMap<> ();
+                            notification.put ( "message",message);
+                            notification.put("from",current_user);
+
+                            firebaseFirestore.collection ( "mes donnees utilisateur" ).document ( current_user ).set ( notification ).addOnCompleteListener ( new OnCompleteListener<Void> () {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful ()) {
+                                        //Toast.makeText ( getApplicationContext (), "message envoye", Toast.LENGTH_LONG ).show ();
+                                    } else {
+                                        String error = task.getException ().getMessage ();
+                                        Toast.makeText ( getApplicationContext (), error, Toast.LENGTH_LONG ).show ();
+
+                                    }
+                                }
+                            } );
 
                         }else{
-                            Toast.makeText ( getApplicationContext (),"vous ne pouvez pas envoyer un message vide",Toast.LENGTH_LONG ).show ();
+                            Toast.makeText ( getApplicationContext (),getString(R.string.message_vide),Toast.LENGTH_LONG ).show ();
                         }
                          message_user_send.setText ( "" );
             }

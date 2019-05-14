@@ -72,12 +72,10 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
             @Override
             public void onClick(View v) {
                 register_progressBar.setVisibility ( View.VISIBLE );
-                textView5.setText ( "Bienvenue . " );
+                textView5.setText ( getString(R.string.bienvenu));
                 String user_email=email.getText ().toString ();
                 String user_password=password.getText ().toString ();
-                textView5.setText ( "Bienvenue .. " );
                 String user_confirm=confirm_password.getText ().toString ();
-                textView5.setText ( "Bienvenue ... " );
                if (!TextUtils.isEmpty (user_email)&&!TextUtils.isEmpty(user_password)&&!TextUtils.isEmpty(user_confirm)){
                    if (user_password.equals ( user_confirm )){
                        mAuth.createUserWithEmailAndPassword ( user_email,user_password ).addOnCompleteListener ( new OnCompleteListener<AuthResult> () {
@@ -96,11 +94,11 @@ private WeakReference<RegisterActivity> registerActivityWeakReference;
                            }
                        } );
                    }else{
-                     Toast.makeText ( getApplicationContext(),"les mots de passe ne correspondent pas !!!",Toast.LENGTH_LONG ).show ();
+                     Toast.makeText ( getApplicationContext(),getString(R.string.erreur_de_mot_de_passe),Toast.LENGTH_LONG ).show ();
                    }
                }else{
                    register_progressBar.setVisibility ( View.INVISIBLE );
-                    Toast.makeText ( getApplicationContext(),"Veuillez remplir tous les champs svp !!",Toast.LENGTH_LONG ).show ();
+                    Toast.makeText ( getApplicationContext(),getString(R.string.renplir_tous),Toast.LENGTH_LONG ).show ();
                }
 
             }

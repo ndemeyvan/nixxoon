@@ -78,12 +78,13 @@
         android:background="@drawable/main_background"
         android:elevation="3dp"
         android:fontFamily="@font/fugaz_one"
-        android:text="contacter le vendeur"
+        android:text="@string/detail_contacter"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/detail_user_name"
@@ -153,7 +154,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/main_background"
-        android:text="supprimer"
+        android:text="@string/detail_supprimer"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
         android:textSize="16sp"
