@@ -87,7 +87,7 @@
     <string name="soutiens_effectif">merci de soutemir l\'appli</string>
     <string name="redirection">vous serez rediriger a l\'acceuil dans quelques seconde</string>
 
-    <string name="Decouvrir">Decouvrir</string>
+    <string name="decouvrir">Decouvrir</string>
     <string name="T_shirts">T_shirts</string>
     <string name="Pulls">Pulls</string>
     <string name="jupes">jupes</string>
@@ -99,4 +99,13 @@
     <string name="accessoire">accessoire</string>
     <string name="location">location</string>
     <string name="enregister">m\'enregistrer</string>
+    <string name="actu">A C T U E L L E M E N T</string>
+    <string name="shoes">C H A U S S U R E S</string>
+    <string name="skrit">J U P E S</string>
+    <string name="users">U T I L I S A T E U R S</string>
+    <string name="acces">A C C E S S O I R E</string>
+    <string name="cullo">C U L O T T E S</string>
+    <string name="pan">P A N T A L O N S</string>
+    <string name="chem">C H E M I S E S</string>
+    <string name="rob">R O B E S</string>
 </resources>

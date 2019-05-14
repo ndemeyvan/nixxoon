@@ -90,9 +90,8 @@ thank you for watching the advertisement, your article is in court of sends</str
     <string name="soutenir">please click on the ad to support the app</string>
     <string name="soutiens_effectif">thank you for supporting the app</string>
     <string name="redirection">you will be redirected to the home in a few seconds</string>
-
-    <string name="Decouvrir">Discover</string>
-    <string name="T_shirts">T_shirts</string>
+    <string name="decouvrir">Discover</string>
+    <string name="T_shirts">t_shirts</string>
     <string name="Pulls">Pulls</string>
     <string name="jupes">skirts</string>
     <string name="chaussures">shoes</string>
@@ -103,6 +102,16 @@ thank you for watching the advertisement, your article is in court of sends</str
     <string name="accessoire">accessory</string>
     <string name="location">location</string>
     <string name="enregister">register</string>
+
+    <string name="actu">N O W</string>
+    <string name="shoes">S H O E S</string>
+    <string name="skrit">S K I R T S</string>
+    <string name="users">U S E R S</string>
+    <string name="acces">A C C E S S O R Y</string>
+    <string name="cullo">P A N T I E S</string>
+    <string name="pan">P A N T S</string>
+    <string name="chem">S H I R T S</string>
+    <string name="rob">D R E S S E S</string>
 
 
 </resources>

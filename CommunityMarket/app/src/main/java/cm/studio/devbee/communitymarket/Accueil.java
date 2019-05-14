@@ -262,18 +262,18 @@ public class Accueil extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     public void setupViewPager(ViewPager viewPager){
-            TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
-            tabsAdapter.addFragment(new HomeFragment(),"Decouvrir");
-            tabsAdapter.addFragment(new TshirtFragment(),"T_shirts");
-            tabsAdapter.addFragment(new PullFragment () ,"Pulls");
-            tabsAdapter.addFragment(new JupesFragment () ,"jupes");
-            tabsAdapter.addFragment(new ChaussureFragment (),"chaussures");
-            tabsAdapter.addFragment(new PantalonFragment (),"pantalons");
-            tabsAdapter.addFragment(new CulloteFragment (),"cullotes");
-            tabsAdapter.addFragment(new ChemiseFragment (),"chemises");
-            tabsAdapter.addFragment(new RobeFragment (),"robes");
-            tabsAdapter.addFragment(new AccesoireFragment (),"accessoire");
-            tabsAdapter.addFragment(new LocationFragment(),"location");
+        TabsAdapter tabsAdapter=new TabsAdapter(getSupportFragmentManager());
+        tabsAdapter.addFragment(new HomeFragment(),getString(R.string.decouvrir));
+        tabsAdapter.addFragment(new TshirtFragment(),getString(R.string.T_shirts));
+        tabsAdapter.addFragment(new PullFragment () ,getString(R.string.Pulls));
+        tabsAdapter.addFragment(new JupesFragment () ,getString(R.string.jupes));
+        tabsAdapter.addFragment(new ChaussureFragment (),getString(R.string.chaussures));
+        tabsAdapter.addFragment(new PantalonFragment (),getString(R.string.pantalons));
+        tabsAdapter.addFragment(new CulloteFragment (),getString(R.string.cullotes));
+        tabsAdapter.addFragment(new ChemiseFragment (),getString(R.string.chemises));
+        tabsAdapter.addFragment(new RobeFragment (),getString(R.string.robes));
+        tabsAdapter.addFragment(new AccesoireFragment (),getString(R.string.accessoire));
+        tabsAdapter.addFragment(new LocationFragment(),getString(R.string.location));
             viewPager.setAdapter(tabsAdapter);
 
     }

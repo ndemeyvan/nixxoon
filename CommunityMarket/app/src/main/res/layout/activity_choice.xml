@@ -70,7 +70,7 @@
         android:paddingTop="@dimen/choice_button_padding_top"
         android:paddingBottom="@dimen/choice_button_padding_top"
         android:textSize="@dimen/choice_button_text_size"
-        android:text="s'enregistrer"
+        android:text="@string/enregister"
         android:textAllCaps="false"
         android:textColor="@color/blanc"
         app:layout_constraintEnd_toEndOf="parent"
