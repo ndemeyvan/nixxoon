@@ -111,5 +111,10 @@
     <string name="chem">C H E M I S E S</string>
     <string name="rob">R O B E S</string>
 
+    <string name="profil_drawer">profile</string>
+    <string name="message_drawer">message</string>
+    <string name="parametre_draw">parametre</string>
+    <string name="publicite_drawer">publicite</string>
+
 
 </resources>

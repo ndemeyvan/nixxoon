@@ -11,21 +11,21 @@
         <item
             android:id="@+id/ic_user"
             android:icon="@drawable/ic_user"
-            android:title="profil" />
+            android:title="@string/profil_drawer" />
 
 
         <item
             android:id="@+id/ic_message"
-            android:icon="@drawable/ic_conversatiion"
-            android:title="message" />
+            android:icon="@drawable/ic_message_non_lu"
+            android:title="@string/message_drawer" />
         <item
             android:id="@+id/setting"
             android:icon="@drawable/ic_setting"
-            android:title="parametre" />
+            android:title="@string/parametre_draw" />
         <item
             android:id="@+id/nous_contacter"
             android:icon="@drawable/ic_info"
-            android:title="publicite" />
+            android:title="@string/publicite_drawer" />
         <item
             android:id="@+id/ic_logout"
             android:icon="@drawable/ic_out"

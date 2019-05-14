@@ -108,4 +108,8 @@
     <string name="pan">P A N T A L O N S</string>
     <string name="chem">C H E M I S E S</string>
     <string name="rob">R O B E S</string>
+    <string name="profil_drawer">profil</string>
+    <string name="message_drawer">message</string>
+    <string name="parametre_draw">parametre</string>
+    <string name="publicite_drawer">publicite</string>
 </resources>
