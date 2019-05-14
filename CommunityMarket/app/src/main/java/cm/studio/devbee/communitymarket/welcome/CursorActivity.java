@@ -145,6 +145,7 @@ public class CursorActivity extends AppCompatActivity {
             // changing the next button text 'NEXT' / 'GOT IT'
             if (position == layouts.length - 1) {
                 // last page. make button text to GOT IT
+                btnNext.setVisibility(View.VISIBLE);
                 btnNext.setText(getString(R.string.commencer));
                 btnSkip.setVisibility(View.GONE);
                 btnNext. setAnimation ( android.view.animation.AnimationUtils. loadAnimation (getApplicationContext(), R.anim.fade_transition_animation));

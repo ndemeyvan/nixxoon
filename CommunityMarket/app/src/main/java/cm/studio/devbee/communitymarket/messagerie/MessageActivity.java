@@ -64,7 +64,6 @@ import java.util.Scanner;
 
 import cm.studio.devbee.communitymarket.Accueil;
 import cm.studio.devbee.communitymarket.R;
-import cm.studio.devbee.communitymarket.SendNotif;
 import cm.studio.devbee.communitymarket.postActivity.PostActivityFinal;
 import cm.studio.devbee.communitymarket.postActivity.UserGeneralPresentation;
 import cm.studio.devbee.communitymarket.search.SearchActivity;

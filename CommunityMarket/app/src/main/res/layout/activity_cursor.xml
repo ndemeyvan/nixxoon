@@ -40,7 +40,8 @@
         android:fontFamily="sans-serif"
         android:text="@string/cursor_next"
         android:textColor="@color/blanc"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/btn_skip"
