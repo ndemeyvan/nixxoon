@@ -55,7 +55,7 @@
     <string name="register_confirm_password">Password Confirmation</string>
     <string name="register_other_connect_button">og in</string>
     <string name="register_text">I already have an account</string>
-    <string name="search_activity_text">Touch here ...</string>
+    <string name="search_activity_text">Key here ... to search for a user</string>
     <string name="user_general_reside">reside at</string>
     <string name="user_general_derniere_connexion">Last activity</string>
     <string name="item_general">price:</string>

@@ -55,7 +55,7 @@
     <string name="register_button_connect">confirmation du mot de passe</string>
     <string name="register_other_connect_button">me connecter</string>
     <string name="register_text">j\'ai deja un compte</string>
-    <string name="search_activity_text">Touche ici ...</string>
+    <string name="search_activity_text">Touche ici ... pour rechercher un utilisateur</string>
     <string name="user_general_reside">reside a</string>
     <string name="user_general_derniere_connexion">Derniere activite</string>
     <string name="item_general">prix :</string>
