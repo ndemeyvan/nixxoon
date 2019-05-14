@@ -61,7 +61,7 @@
     !-- login activty post-->
     <dimen name="login_logo_margintop">96dp</dimen>
     <!-- parametre profil activty post-->
-    <dimen name="parametre_actibity_image_w_n_h">120dp</dimen>
+    <dimen name="parametre_actibity_image_w_n_h">140dp</dimen>
     <dimen name="parametre_padding_edit_text">8dp</dimen>
     <dimen name="parametre_image_button">30dp</dimen>
 
