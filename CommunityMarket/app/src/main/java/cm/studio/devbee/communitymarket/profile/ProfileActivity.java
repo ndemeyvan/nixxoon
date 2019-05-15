@@ -105,14 +105,14 @@ public class ProfileActivity extends AppCompatActivity {
                 finish ();
             }
         });
-        profilImage.setOnClickListener ( new View.OnClickListener () {
+        /*profilImage.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 Intent gotoparam=new Intent ( getApplicationContext (),ParametrePorfilActivity.class );
                 startActivity ( gotoparam );
                 finish ();
             }
-        } );
+        } );*/
         /*gridViewAdapter=new ProfilAdapteur(modelGridViewList,getApplicationContext());
         Recycler.setAdapter(gridViewAdapter);
         Recycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));*/
