@@ -167,13 +167,13 @@ public class ProfileActivity extends AppCompatActivity {
         } );
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater ().inflate ( R.menu.profile_menu, menu );
         return true;
-    }
+    }*/
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId ();
         if (id == R.id.account_setting) {
@@ -182,7 +182,7 @@ public class ProfileActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected ( item );
-    }
+    }*/
 
     public class CircleTransform implements Transformation {
         @Override
