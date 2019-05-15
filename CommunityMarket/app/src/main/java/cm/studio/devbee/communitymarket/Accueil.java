@@ -358,7 +358,7 @@ public class Accueil extends AppCompatActivity implements NavigationView.OnNavig
             }else if (id == R.id.setting) {
                 Intent parametre=new Intent(getApplicationContext(),ParametrePorfilActivity.class);
                 startActivity(parametre);
-                //finish ();
+                finish ();
             }
             else if (id == R.id.nous_contacter) {
                 Intent nous_contacter=new Intent(getApplicationContext(),AproposActivity.class);
